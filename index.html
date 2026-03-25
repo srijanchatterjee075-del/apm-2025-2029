@@ -46,8 +46,15 @@
             border: 2px dashed var(--accent); border-radius: 10px; 
         }
 
-        .item-card { background: #252525; padding: 10px; border-radius: 8px; margin-top: 10px; }
+        .item-card { background: #252525; padding: 10px; border-radius: 8px; margin-top: 10px; position: relative; }
         .item-card img { max-width: 100%; border-radius: 5px; margin-top: 5px; }
+
+        /* Hide delete buttons by default */
+        .del-btn { 
+            display: none; 
+            width: 40px; 
+            background: #ff4d4d;
+        }
 
         /* Fixed Mobile Chatbot */
         #chatbot { 
@@ -71,7 +78,10 @@
 
 <div id="adminDashboard">
     <h3>🛠 Admin Tools</h3>
+    <label>Change Profile Picture:</label>
     <input type="file" id="dpUpload" accept="image/*">
+    
+    <label>Post Update:</label>
     <select id="secSelect">
         <option value="notice">Important Notice</option>
         <option value="announcement">Announcement</option>
@@ -99,6 +109,7 @@
 
 <script>
 const PASS = "apmarya81120252026chatt9476gcetts";
+let isAdmin = false; // Track if current session is admin
 
 // Load Data
 window.onload = () => {
@@ -112,14 +123,23 @@ window.onload = () => {
 };
 
 function askPass() {
-    if(prompt("Password:") === PASS) document.getElementById("adminDashboard").style.display="block";
+    if(prompt("Password:") === PASS) {
+        isAdmin = true;
+        document.getElementById("adminDashboard").style.display = "block";
+        
+        // Show all hidden delete buttons
+        document.querySelectorAll('.del-btn').forEach(btn => {
+            btn.style.display = "block";
+        });
+    } else {
+        alert("Incorrect Password!");
+    }
 }
 
 // Profile Pic + Compression
 document.getElementById("dpUpload").onchange = function() {
     const reader = new FileReader();
     reader.onload = (e) => {
-        // Resize image to save space
         const img = new Image();
         img.src = e.target.result;
         img.onload = () => {
@@ -141,6 +161,8 @@ function publish() {
     const f = document.getElementById("fileIn").files[0];
     const id = Date.now();
 
+    if(t.trim() === "" && !f) return alert("Please enter text or choose a file.");
+
     if(f) {
         const reader = new FileReader();
         reader.onload = (e) => save(s, t, e.target.result, id);
@@ -148,6 +170,10 @@ function publish() {
     } else {
         save(s, t, null, id);
     }
+    
+    // Clear inputs
+    document.getElementById("textIn").value = "";
+    document.getElementById("fileIn").value = "";
 }
 
 function save(s, t, f, id) {
@@ -157,7 +183,7 @@ function save(s, t, f, id) {
         localStorage.setItem("apm_"+s, JSON.stringify(data));
         render(s, t, f, id);
     } catch(e) {
-        alert("Memory Full! Try a smaller image.");
+        alert("Memory Full! Try a smaller image or delete old items.");
     }
 }
 
@@ -166,13 +192,24 @@ function render(s, t, f, id) {
     div.className = "item-card";
     div.id = id;
     div.innerHTML = `<p>${t}</p>${f ? `<img src="${f}">` : ''}`;
+    
     const btn = document.createElement("button");
-    btn.textContent = "🗑"; btn.style.width="40px";
+    btn.textContent = "🗑"; 
+    btn.className = "del-btn"; // Class used to toggle visibility
+
+    // If admin is already logged in, show delete buttons on newly published items
+    if(isAdmin) {
+        btn.style.display = "block";
+    }
+
     btn.onclick = () => {
+        if(!isAdmin) return alert("Unauthorized!"); // Failsafe check
+        
         div.remove();
-        let list = JSON.parse(localStorage.getItem("apm_"+s));
+        let list = JSON.parse(localStorage.getItem("apm_"+s)) || [];
         localStorage.setItem("apm_"+s, JSON.stringify(list.filter(i => i.id !== id)));
     };
+    
     div.appendChild(btn);
     document.getElementById(s).prepend(div);
 }
