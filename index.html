@@ -70,7 +70,6 @@ font-weight:bold;
 height:200px;
 overflow:auto;
 padding:10px;
-font-size:14px;
 text-align:left;
 }
 
@@ -138,7 +137,7 @@ width:75%;
 
 <!-- Chatbot -->
 <div id="chatbot">
-<div id="chatHeader">🤖 Study Chatbot</div>
+<div id="chatHeader">🤖 Chatbot</div>
 <div id="chatMessages"></div>
 <input id="chatInput">
 <button onclick="ask()">Send</button>
@@ -221,7 +220,7 @@ reader.readAsDataURL(file);
 
 }
 
-/* DP Upload */
+/* Profile Picture Upload */
 document.getElementById("dpUpload").addEventListener("change",function(){
 const file=this.files[0];
 if(file){
@@ -233,11 +232,10 @@ reader.readAsDataURL(file);
 }
 });
 
-/* Chatbot Logic */
-
+/* Chatbot - Always Google Search */
 function ask(){
 
-let input=document.getElementById("chatInput").value.toLowerCase();
+let input=document.getElementById("chatInput").value;
 let chat=document.getElementById("chatMessages");
 
 let userMsg=document.createElement("div");
@@ -245,33 +243,12 @@ userMsg.textContent="You: "+input;
 chat.appendChild(userMsg);
 
 let reply=document.createElement("div");
-
-let greetings=["hi","hello","hey","thanks","thank you"];
-
-let studyWords=[
-"study","exam","physics","math","engineering",
-"formula","electrical","notes","question","problem"
-];
-
-let isGreeting=greetings.some(word => input.includes(word));
-let isStudy=studyWords.some(word => input.includes(word));
-
-if(isGreeting){
-reply.textContent="Hello 👋";
-}
-
-else if(isStudy){
-reply.textContent="Searching answer on Google...";
-window.open("https://www.google.com/search?q="+input);
-}
-
-else{
-reply.textContent="Sorry I can't answer.";
-}
-
+reply.textContent="Searching on Google... If you have any more doubt contact to our respected crs";
 chat.appendChild(reply);
-chat.scrollTop=chat.scrollHeight;
 
+window.open("https://www.google.com/search?q="+input);
+
+chat.scrollTop=chat.scrollHeight;
 document.getElementById("chatInput").value="";
 }
 
