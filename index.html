@@ -1,335 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>APM 2025-2029</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APM 2025-2029 | Persistent Portal</title>
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --accent: #ee82ee;
+            --bg: #0a0a0a;
+            --card: #1a1a1a;
+        }
 
-<style>
-*{box-sizing:border-box;}
+        body {
+            background: var(--bg);
+            color: white;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding-bottom: 80px;
+        }
 
-body{
-margin:0;
-font-family:Arial, sans-serif;
-background:#0b0b0b;
-color:white;
-}
+        /* Navigation */
+        header {
+            background: var(--primary);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-/* Header */
-header{
-background:#8a2be2;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:14px 18px;
-font-size:22px;
-font-weight:bold;
-position:sticky;
-top:0;
-z-index:1000;
-}
+        .menu-dots { cursor: pointer; font-size: 30px; font-weight: bold; }
 
-.menu{
-cursor:pointer;
-font-size:26px;
-}
+        /* Profile Area */
+        #profileSection { text-align: center; padding: 20px; }
+        #profilePic {
+            width: 100px; height: 100px; border-radius: 50%;
+            border: 3px solid var(--primary); object-fit: cover;
+        }
 
-/* Container */
-.container{
-max-width:900px;
-margin:auto;
-padding:15px;
-}
+        /* Secret Admin Dashboard */
+        #adminDashboard {
+            display: none;
+            background: #1a1a1a;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid var(--accent);
+        }
 
-/* Profile */
-#profile{
-text-align:center;
-padding:20px 10px;
-}
+        /* Content Styles */
+        .section { max-width: 800px; margin: 20px auto; padding: 15px; background: var(--card); border-radius: 10px; }
+        h2 { color: var(--accent); border-bottom: 1px solid #333; padding-bottom: 5px; }
 
-#dp{
-width:110px;
-height:110px;
-border-radius:50%;
-border:4px solid #8a2be2;
-object-fit:cover;
-background:#222;
-box-shadow:0 0 15px #8a2be2;
-}
+        input, select, button {
+            padding: 12px; margin: 5px 0; width: 100%; box-sizing: border-box;
+            border-radius: 8px; border: 1px solid #333; background: #000; color: white;
+        }
 
-/* Mobile */
-@media(max-width:600px){
-#dp{width:85px;height:85px;}
-header{font-size:18px;}
-}
+        button { background: var(--primary); border: none; font-weight: bold; cursor: pointer; }
+        button:hover { background: var(--accent); color: black; }
 
-/* Sections */
-.section{
-background:#1a1a1a;
-padding:15px;
-margin-top:20px;
-border-radius:10px;
-}
-
-.section h2{
-margin-top:0;
-color:#d18cff;
-}
-
-/* Card */
-.card{
-background:#222;
-padding:12px;
-margin-top:12px;
-border-radius:8px;
-animation:fade .3s ease;
-}
-
-@keyframes fade{
-from{opacity:0;transform:translateY(10px);}
-to{opacity:1;}
-}
-
-.card img{
-width:100%;
-border-radius:6px;
-margin-top:8px;
-}
-
-.card a{
-color:#d18cff;
-display:block;
-margin-top:6px;
-}
-
-/* Inputs */
-input,select{
-width:100%;
-padding:10px;
-margin-top:8px;
-border-radius:6px;
-border:none;
-background:#000;
-color:white;
-}
-
-button{
-background:#8a2be2;
-border:none;
-padding:8px 12px;
-color:white;
-border-radius:6px;
-margin-top:8px;
-cursor:pointer;
-}
-
-.delete{
-background:red;
-}
-
-/* Admin */
-#admin{
-display:none;
-background:#111;
-padding:15px;
-margin-top:15px;
-border-radius:10px;
-}
-</style>
+        .item-card { background: #222; padding: 15px; border-radius: 8px; margin: 10px 0; position: relative; }
+        .delete-btn { width: auto; background: #d00; padding: 5px 10px; font-size: 11px; margin-top: 10px; }
+        
+        /* Chatbot */
+        #chatbot {
+            position: fixed; bottom: 20px; right: 20px; width: 260px;
+            background: #111; border: 2px solid var(--primary); border-radius: 15px; overflow: hidden;
+        }
+        #chatHeader { background: var(--primary); padding: 10px; font-weight: bold; }
+        #chatMessages { height: 120px; overflow-y: auto; padding: 10px; font-size: 13px; text-align: left; }
+        .chat-row { display: flex; padding: 5px; }
+        #chatInput { margin: 0; border-radius: 5px 0 0 5px; }
+    </style>
 </head>
-
 <body>
 
 <header>
-APM 2025-2029
-<div class="menu" onclick="adminLogin()">⋮</div>
+    <span>APM 2025-2029</span>
+    <div class="menu-dots" onclick="openAdmin()">⋮</div>
 </header>
 
-<div class="container">
-
-<!-- Profile -->
-<div id="profile">
-<img id="dp" src="https://via.placeholder.com/150">
+<div id="profileSection">
+    <img id="profilePic" src="https://via.placeholder.com/100" alt="Admin">
 </div>
 
-<!-- Admin Panel -->
-<div id="admin">
-<h2>Admin Panel</h2>
-
-<label>Change DP</label>
-<input type="file" id="dpUpload" accept="image/*">
-
-<label>Select Section</label>
-<select id="section">
-<option value="notice">Important Notice</option>
-<option value="announcement">Announcement</option>
-<option value="study">Study Material</option>
-<option value="practical">Practical</option>
-</select>
-
-<input type="text" id="text" placeholder="Write text">
-<input type="file" id="file">
-
-<button onclick="upload()">Upload</button>
+<div id="adminDashboard">
+    <h3>⚙️ Admin Dashboard</h3>
+    <label>Update Profile Picture:</label>
+    <input type="file" id="dpUpload" accept="image/*">
+    <hr>
+    <label>Post to Section:</label>
+    <select id="sectionSelect">
+        <option value="notice">Important Notice</option>
+        <option value="announcement">Announcement</option>
+        <option value="study">Study Material</option>
+        <option value="practical">Practical</option>
+    </select>
+    <input type="text" id="textInput" placeholder="Enter text content...">
+    <button onclick="publishContent()">Post & Save</button>
+    <button onclick="document.getElementById('adminDashboard').style.display='none'" style="background:#444">Lock</button>
 </div>
 
-<!-- Sections -->
-<div class="section">
-<h2>Important Notice</h2>
-<div id="notice"></div>
-</div>
+<div class="section"><h2>📢 Important Notice</h2><div id="notice"></div></div>
+<div class="section"><h2>📣 Announcement</h2><div id="announcement"></div></div>
+<div class="section"><h2>📚 Study Material</h2><div id="study"></div></div>
+<div class="section"><h2>🔬 Practical</h2><div id="practical"></div></div>
 
-<div class="section">
-<h2>Announcement</h2>
-<div id="announcement"></div>
-</div>
-
-<div class="section">
-<h2>Study Material</h2>
-<div id="study"></div>
-</div>
-
-<div class="section">
-<h2>Practical</h2>
-<div id="practical"></div>
-</div>
-
+<div id="chatbot">
+    <div id="chatHeader">🤖 Search Assistant</div>
+    <div id="chatMessages"><div>Ask me anything, I'll search Google!</div></div>
+    <div class="chat-row">
+        <input type="text" id="chatInput" placeholder="Search...">
+        <button onclick="googleSearch()" style="width:60px">Go</button>
+    </div>
 </div>
 
 <script>
+const PASS = "apmarya81120252026chatt9476gcetts";
 
-const PASS="apmarya81120252026chatt9476gcetts";
+// --- CORE LOGIC: LOAD SAVED DATA ---
+window.onload = () => {
+    // Load Profile Pic
+    const savedPic = localStorage.getItem("apm_pic");
+    if(savedPic) document.getElementById("profilePic").src = savedPic;
 
-/* Admin login */
-function adminLogin(){
-let p=prompt("Enter admin password");
-if(p===PASS){
-document.getElementById("admin").style.display="block";
-}else{
-alert("Wrong password");
-}
-}
-
-/* Load saved data */
-window.onload=function(){
-loadDP();
-loadPosts();
-}
-
-/* Save DP */
-function loadDP(){
-let saved=localStorage.getItem("dpImage");
-if(saved) document.getElementById("dp").src=saved;
-}
-
-document.getElementById("dpUpload").onchange=function(){
-let file=this.files[0];
-let reader=new FileReader();
-reader.onload=e=>{
-localStorage.setItem("dpImage",e.target.result);
-document.getElementById("dp").src=e.target.result;
+    // Load Section Content
+    const sections = ['notice', 'announcement', 'study', 'practical'];
+    sections.forEach(s => {
+        const data = JSON.parse(localStorage.getItem(`apm_data_${s}`)) || [];
+        data.forEach(item => renderItem(s, item.text, item.id));
+    });
 };
-reader.readAsDataURL(file);
+
+// --- ADMIN ACCESS ---
+function openAdmin() {
+    if (prompt("Enter Password:") === PASS) {
+        document.getElementById("adminDashboard").style.display = "block";
+        window.scrollTo(0,0);
+    } else {
+        alert("Denied.");
+    }
 }
 
-/* Upload content */
-function upload(){
-let section=document.getElementById("section").value;
-let text=document.getElementById("text").value;
-let file=document.getElementById("file").files[0];
-
-let reader=new FileReader();
-
-if(file){
-reader.onload=e=>{
-savePost(section,text,e.target.result,file.type);
+// --- PROFILE UPDATE ---
+document.getElementById("dpUpload").onchange = function() {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        document.getElementById("profilePic").src = e.target.result;
+        localStorage.setItem("apm_pic", e.target.result);
+    };
+    reader.readAsDataURL(this.files[0]);
 };
-reader.readAsDataURL(file);
-}else{
-savePost(section,text,null,null);
+
+// --- PUBLISH & SAVE ---
+function publishContent() {
+    const section = document.getElementById("sectionSelect").value;
+    const text = document.getElementById("textInput").value;
+    if(!text) return;
+
+    const id = Date.now(); // Unique ID for deleting
+    
+    // Save to LocalStorage
+    const data = JSON.parse(localStorage.getItem(`apm_data_${section}`)) || [];
+    data.push({ id, text });
+    localStorage.setItem(`apm_data_${section}`, JSON.stringify(data));
+
+    // Update Webpage instantly
+    renderItem(section, text, id);
+    document.getElementById("textInput").value = "";
 }
 
-document.getElementById("text").value="";
-document.getElementById("file").value="";
+// --- RENDER CONTENT TO UI ---
+function renderItem(section, text, id) {
+    const container = document.getElementById(section);
+    const div = document.createElement("div");
+    div.className = "item-card";
+    div.id = `item-${id}`;
+    div.innerHTML = `<p>${text}</p>`;
+
+    // Only show delete button if Admin is logged in (simplified for this demo)
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "Delete";
+    delBtn.className = "delete-btn";
+    delBtn.onclick = () => deleteItem(section, id);
+    
+    div.appendChild(delBtn);
+    container.prepend(div);
 }
 
-/* Save post */
-function savePost(section,text,fileData,type){
-
-let posts=JSON.parse(localStorage.getItem("posts")||"[]");
-
-posts.unshift({
-section,
-text,
-file:fileData,
-type
-});
-
-localStorage.setItem("posts",JSON.stringify(posts));
-renderPosts();
+// --- DELETE LOGIC ---
+function deleteItem(section, id) {
+    // Remove from UI
+    document.getElementById(`item-${id}`).remove();
+    
+    // Remove from LocalStorage
+    let data = JSON.parse(localStorage.getItem(`apm_data_${section}`));
+    data = data.filter(item => item.id !== id);
+    localStorage.setItem(`apm_data_${section}`, JSON.stringify(data));
 }
 
-/* Load posts */
-function loadPosts(){
-renderPosts();
+// --- GOOGLE CHATBOT ---
+function googleSearch() {
+    const q = document.getElementById("chatInput").value;
+    if(!q) return;
+    
+    const chat = document.getElementById("chatMessages");
+    chat.innerHTML += `<div style="color:violet"><b>You:</b> ${q}</div>`;
+    
+    window.open(`https://www.google.com/search?q=${encodeURIComponent(q)}`, "_blank");
+    document.getElementById("chatInput").value = "";
 }
 
-/* Render posts */
-function renderPosts(){
-
-document.getElementById("notice").innerHTML="";
-document.getElementById("announcement").innerHTML="";
-document.getElementById("study").innerHTML="";
-document.getElementById("practical").innerHTML="";
-
-let posts=JSON.parse(localStorage.getItem("posts")||"[]");
-
-posts.forEach((post,i)=>{
-
-let card=document.createElement("div");
-card.className="card";
-
-if(post.text){
-let p=document.createElement("p");
-p.textContent=post.text;
-card.appendChild(p);
-}
-
-if(post.file){
-if(post.type.startsWith("image")){
-let img=document.createElement("img");
-img.src=post.file;
-card.appendChild(img);
-}else{
-let link=document.createElement("a");
-link.href=post.file;
-link.target="_blank";
-link.textContent="Open File";
-card.appendChild(link);
-}
-}
-
-let del=document.createElement("button");
-del.textContent="Delete";
-del.className="delete";
-del.onclick=()=>deletePost(i);
-
-card.appendChild(del);
-
-document.getElementById(post.section).appendChild(card);
-
-});
-
-}
-
-/* Delete post */
-function deletePost(index){
-let posts=JSON.parse(localStorage.getItem("posts"));
-posts.splice(index,1);
-localStorage.setItem("posts",JSON.stringify(posts));
-renderPosts();
-}
-
+// Press Enter to Search
+document.getElementById("chatInput").onkeydown = (e) => { if(e.key === "Enter") googleSearch(); };
 </script>
 
 </body>
