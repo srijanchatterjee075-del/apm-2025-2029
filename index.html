@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>APM 2025-2029</title>
 
 <style>
+*{box-sizing:border-box;}
+
 body{
 margin:0;
 font-family:Arial, sans-serif;
-background:#0a0a0a;
+background:#0b0b0b;
 color:white;
 }
 
@@ -39,7 +41,7 @@ margin:auto;
 padding:15px;
 }
 
-/* Profile section */
+/* Profile */
 #profile{
 text-align:center;
 padding:20px 10px;
@@ -52,18 +54,13 @@ border-radius:50%;
 border:4px solid #8a2be2;
 object-fit:cover;
 background:#222;
-box-shadow:0 0 12px #8a2be2;
+box-shadow:0 0 15px #8a2be2;
 }
 
-/* Mobile fix */
-@media (max-width:600px){
-#dp{
-width:90px;
-height:90px;
-}
-header{
-font-size:18px;
-}
+/* Mobile */
+@media(max-width:600px){
+#dp{width:85px;height:85px;}
+header{font-size:18px;}
 }
 
 /* Sections */
@@ -75,16 +72,34 @@ border-radius:10px;
 }
 
 .section h2{
-color:#ee82ee;
 margin-top:0;
+color:#d18cff;
 }
 
-/* Cards */
+/* Card */
 .card{
 background:#222;
 padding:12px;
-margin-top:10px;
+margin-top:12px;
 border-radius:8px;
+animation:fade .3s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;}
+}
+
+.card img{
+width:100%;
+border-radius:6px;
+margin-top:8px;
+}
+
+.card a{
+color:#d18cff;
+display:block;
+margin-top:6px;
 }
 
 /* Inputs */
@@ -100,67 +115,25 @@ color:white;
 
 button{
 background:#8a2be2;
-color:white;
 border:none;
 padding:8px 12px;
+color:white;
 border-radius:6px;
-cursor:pointer;
 margin-top:8px;
-}
-
-button:hover{
-background:#a64dff;
+cursor:pointer;
 }
 
 .delete{
 background:red;
 }
 
-/* Admin Panel */
+/* Admin */
 #admin{
 display:none;
 background:#111;
 padding:15px;
 margin-top:15px;
 border-radius:10px;
-}
-
-/* Chatbot */
-#chatbot{
-position:fixed;
-bottom:20px;
-right:20px;
-width:250px;
-background:#111;
-border:2px solid #8a2be2;
-border-radius:12px;
-overflow:hidden;
-}
-
-#chatHeader{
-background:#8a2be2;
-padding:8px;
-font-weight:bold;
-}
-
-#chatBox{
-height:120px;
-overflow:auto;
-padding:8px;
-font-size:13px;
-}
-
-.chatRow{
-display:flex;
-}
-
-#chatInput{
-flex:1;
-border-radius:0;
-}
-
-#chatBtn{
-width:60px;
 }
 </style>
 </head>
@@ -176,7 +149,7 @@ APM 2025-2029
 
 <!-- Profile -->
 <div id="profile">
-<img id="dp" src="https://via.placeholder.com/110">
+<img id="dp" src="https://via.placeholder.com/150">
 </div>
 
 <!-- Admin Panel -->
@@ -184,7 +157,7 @@ APM 2025-2029
 <h2>Admin Panel</h2>
 
 <label>Change DP</label>
-<input type="file" id="dpUpload">
+<input type="file" id="dpUpload" accept="image/*">
 
 <label>Select Section</label>
 <select id="section">
@@ -194,12 +167,13 @@ APM 2025-2029
 <option value="practical">Practical</option>
 </select>
 
-<input type="text" id="text" placeholder="Write message">
+<input type="text" id="text" placeholder="Write text">
 <input type="file" id="file">
 
 <button onclick="upload()">Upload</button>
 </div>
 
+<!-- Sections -->
 <div class="section">
 <h2>Important Notice</h2>
 <div id="notice"></div>
@@ -222,21 +196,11 @@ APM 2025-2029
 
 </div>
 
-<!-- Chatbot -->
-<div id="chatbot">
-<div id="chatHeader">Search Bot</div>
-<div id="chatBox"></div>
-<div class="chatRow">
-<input id="chatInput">
-<button id="chatBtn" onclick="search()">Go</button>
-</div>
-</div>
-
 <script>
 
 const PASS="apmarya81120252026chatt9476gcetts";
 
-/* Admin Login */
+/* Admin login */
 function adminLogin(){
 let p=prompt("Enter admin password");
 if(p===PASS){
@@ -246,92 +210,125 @@ alert("Wrong password");
 }
 }
 
-/* Load saved DP */
+/* Load saved data */
 window.onload=function(){
+loadDP();
+loadPosts();
+}
+
+/* Save DP */
+function loadDP(){
 let saved=localStorage.getItem("dpImage");
-if(saved){
-document.getElementById("dp").src=saved;
-}
+if(saved) document.getElementById("dp").src=saved;
 }
 
-/* Change DP */
 document.getElementById("dpUpload").onchange=function(){
+let file=this.files[0];
 let reader=new FileReader();
 reader.onload=e=>{
-document.getElementById("dp").src=e.target.result;
 localStorage.setItem("dpImage",e.target.result);
-};
-reader.readAsDataURL(this.files[0]);
-}
-
-/* Upload content */
-function upload(){
-let sec=document.getElementById("section").value;
-let text=document.getElementById("text").value;
-let file=document.getElementById("file").files[0];
-
-let container=document.getElementById(sec);
-
-let card=document.createElement("div");
-card.className="card";
-
-if(text){
-let p=document.createElement("p");
-p.textContent=text;
-card.appendChild(p);
-}
-
-if(file){
-let reader=new FileReader();
-reader.onload=e=>{
-if(file.type.startsWith("image")){
-let img=document.createElement("img");
-img.src=e.target.result;
-img.style.width="100%";
-card.appendChild(img);
-}else{
-let link=document.createElement("a");
-link.href=e.target.result;
-link.target="_blank";
-link.textContent="Open File";
-link.style.color="violet";
-card.appendChild(link);
-}
+document.getElementById("dp").src=e.target.result;
 };
 reader.readAsDataURL(file);
 }
 
-let del=document.createElement("button");
-del.textContent="Delete";
-del.className="delete";
-del.onclick=()=>card.remove();
+/* Upload content */
+function upload(){
+let section=document.getElementById("section").value;
+let text=document.getElementById("text").value;
+let file=document.getElementById("file").files[0];
 
-card.appendChild(del);
-container.prepend(card);
+let reader=new FileReader();
+
+if(file){
+reader.onload=e=>{
+savePost(section,text,e.target.result,file.type);
+};
+reader.readAsDataURL(file);
+}else{
+savePost(section,text,null,null);
+}
 
 document.getElementById("text").value="";
 document.getElementById("file").value="";
 }
 
-/* Chatbot Google Search */
-function search(){
-let q=document.getElementById("chatInput").value;
-if(!q) return;
+/* Save post */
+function savePost(section,text,fileData,type){
 
-let chat=document.getElementById("chatBox");
+let posts=JSON.parse(localStorage.getItem("posts")||"[]");
 
-chat.innerHTML+=`<div>You: ${q}</div>`;
-chat.innerHTML+=`<div style="color:violet">Searching...</div>`;
+posts.unshift({
+section,
+text,
+file:fileData,
+type
+});
 
-window.open("https://www.google.com/search?q="+encodeURIComponent(q));
-
-document.getElementById("chatInput").value="";
-chat.scrollTop=chat.scrollHeight;
+localStorage.setItem("posts",JSON.stringify(posts));
+renderPosts();
 }
 
-document.getElementById("chatInput").addEventListener("keypress",function(e){
-if(e.key==="Enter") search();
+/* Load posts */
+function loadPosts(){
+renderPosts();
+}
+
+/* Render posts */
+function renderPosts(){
+
+document.getElementById("notice").innerHTML="";
+document.getElementById("announcement").innerHTML="";
+document.getElementById("study").innerHTML="";
+document.getElementById("practical").innerHTML="";
+
+let posts=JSON.parse(localStorage.getItem("posts")||"[]");
+
+posts.forEach((post,i)=>{
+
+let card=document.createElement("div");
+card.className="card";
+
+if(post.text){
+let p=document.createElement("p");
+p.textContent=post.text;
+card.appendChild(p);
+}
+
+if(post.file){
+if(post.type.startsWith("image")){
+let img=document.createElement("img");
+img.src=post.file;
+card.appendChild(img);
+}else{
+let link=document.createElement("a");
+link.href=post.file;
+link.target="_blank";
+link.textContent="Open File";
+card.appendChild(link);
+}
+}
+
+let del=document.createElement("button");
+del.textContent="Delete";
+del.className="delete";
+del.onclick=()=>deletePost(i);
+
+card.appendChild(del);
+
+document.getElementById(post.section).appendChild(card);
+
 });
+
+}
+
+/* Delete post */
+function deletePost(index){
+let posts=JSON.parse(localStorage.getItem("posts"));
+posts.splice(index,1);
+localStorage.setItem("posts",JSON.stringify(posts));
+renderPosts();
+}
 
 </script>
 
