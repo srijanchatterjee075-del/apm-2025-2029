@@ -3,186 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>APM Pro | Ultra-Fast</title>
+    <title>APM Portal | Admin Pro</title>
     <style>
-        :root { 
-            --primary: #8a2be2; --accent: #ee82ee; --bg: #050505; 
-            --card: #121212; --text: #e0e0e0; 
-        }
-        
-        /* Optimization: Use system fonts for instant loading */
-        * { box-sizing: border-box; font-family: -apple-system, system-ui, sans-serif; }
-        
-        body { 
-            background: var(--bg); color: var(--text); margin: 0; 
-            padding-bottom: 70px; line-height: 1.6;
-        }
+        :root { --primary: #8a2be2; --bg: #0a0a0a; --card: #161616; --red: #ff3131; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: var(--bg); color: white; margin: 0; padding-bottom: 100px; }
 
-        /* Performance: Hardware accelerated transitions */
-        .smooth { transition: all 0.2s ease-in-out; will-change: transform; }
+        /* Header & Profile */
+        header { background: var(--primary); padding: 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        #profileArea { text-align: center; padding: 20px; }
+        #dp { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; background: #222; }
 
-        header { 
-            background: var(--primary); padding: 12px 20px; 
-            display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
+        /* Admin Panel */
+        #adminPanel { display: none; background: #1a1a1a; margin: 15px; padding: 15px; border: 2px dashed var(--primary); border-radius: 12px; }
+        input, select, button { width: 100%; padding: 12px; margin: 5px 0; border-radius: 8px; border: 1px solid #333; background: #000; color: white; font-size: 16px; }
+        button { background: var(--primary); font-weight: bold; cursor: pointer; border: none; }
 
-        .container { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 15px; padding: 15px; max-width: 1200px; margin: 0 auto; 
-        }
+        /* Content Grid */
+        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; padding: 15px; }
+        .section { background: var(--card); padding: 15px; border-radius: 12px; border-top: 3px solid var(--primary); min-height: 150px; }
+        .section h4 { margin: 0 0 15px 0; color: var(--primary); text-transform: uppercase; font-size: 14px; }
 
-        .section { 
-            background: var(--card); padding: 18px; border-radius: 12px; 
-            border-top: 3px solid var(--primary);
-        }
+        /* Item Styling */
+        .item { background: #222; padding: 12px; border-radius: 8px; margin-bottom: 10px; position: relative; border: 1px solid #333; }
+        .new-tag { color: var(--red); font-weight: bold; font-size: 12px; margin-left: 8px; text-transform: uppercase; }
+        .item a { color: #00d4ff; text-decoration: none; word-break: break-all; display: block; margin-top: 5px; font-size: 14px; }
+        .del-btn { background: var(--red); width: auto; padding: 4px 10px; font-size: 11px; margin-top: 8px; }
 
-        /* --- AI CHATBOT (Optimized) --- */
-        #chatWin {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: #0f0f0f; border-top: 2px solid var(--primary);
-            height: 60px; z-index: 2000; display: flex; flex-direction: column;
-        }
-        #chatWin.expanded { height: 75vh; }
-
-        .chat-bar { padding: 15px; display: flex; justify-content: space-between; cursor: pointer; }
-        #chatLogs { flex: 1; overflow-y: auto; padding: 15px; display: none; }
-        .chat-input { display: flex; padding: 10px; background: #000; gap: 10px; }
-        
-        input#userInput { 
-            flex: 1; background: #1a1a1a; border: 1px solid #333; 
-            color: white; border-radius: 20px; padding: 10px 15px; font-size: 16px;
-        }
-
-        /* Speed: CSS-only loading spinner */
-        .loader { border: 3px solid #333; border-top: 3px solid var(--accent); border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .msg { margin-bottom: 12px; padding: 10px 14px; border-radius: 15px; font-size: 14px; max-width: 85%; }
-        .u { background: var(--primary); align-self: flex-end; margin-left: auto; }
-        .b { background: #222; border: 1px solid #333; }
-
-        #adminBox { display: none; padding: 20px; background: #111; border-bottom: 2px solid var(--accent); }
+        /* Fixed Search Box */
+        #searchBox { position: fixed; bottom: 0; left: 0; right: 0; background: #000; padding: 15px; border-top: 2px solid var(--primary); }
+        .search-flex { display: flex; gap: 8px; max-width: 600px; margin: 0 auto; }
     </style>
 </head>
 <body>
 
 <header>
-    <span style="font-weight: 800; letter-spacing: 1px;">APM 2026</span>
-    <div onclick="unlock()" style="cursor:pointer; font-size: 20px;">⚙️</div>
+    <strong>APM PORTAL 2026</strong>
+    <div onclick="checkAdmin()" style="cursor:pointer; font-size: 20px;">⚙️</div>
 </header>
 
-<div id="adminBox">
-    <input type="text" id="postIn" placeholder="Quick Update...">
-    <button onclick="savePost()" style="width:100%; padding:10px; background:var(--primary); color:white; border:none; border-radius:8px;">Publish</button>
+<div id="profileArea">
+    <img id="dp" src="https://via.placeholder.com/100">
+</div>
+
+<div id="adminPanel">
+    <h3 style="margin-top:0">🛠 Admin Tools</h3>
+    <label>Change Profile Picture:</label>
+    <input type="file" id="dpFile" accept="image/*">
+    <hr style="border:0.5px solid #333; margin:15px 0;">
+    <select id="sec">
+        <option value="notices">Important Notice</option>
+        <option value="announcements">Announcement</option>
+        <option value="study">Study Material</option>
+        <option value="practicals">Practical</option>
+    </select>
+    <input type="text" id="txt" placeholder="Enter Title/Text">
+    <input type="url" id="link" placeholder="Paste Link (URL) here">
+    <button onclick="upload()">Upload to Website</button>
 </div>
 
 <div class="container">
-    <div class="section">
-        <h4 style="margin:0 0 10px 0; color:var(--accent)">Live Notices</h4>
-        <div id="feed">Checking for updates...</div>
-    </div>
+    <div class="section"><h4>Important Notice</h4><div id="notices"></div></div>
+    <div class="section"><h4>Announcement</h4><div id="announcements"></div></div>
+    <div class="section"><h4>Study Material</h4><div id="study"></div></div>
+    <div class="section"><h4>Practical</h4><div id="practicals"></div></div>
 </div>
 
-<div id="chatWin" class="smooth">
-    <div class="chat-bar" onclick="toggleChat()">
-        <span id="botStatus">✨ Safe AI Active</span>
-        <span>Toggle</span>
-    </div>
-    <div id="chatLogs">
-        <div class="msg b">Ask me anything! I will provide accurate Google-sourced info while staying safe.</div>
-    </div>
-    <div class="chat-input">
-        <input type="text" id="userInput" placeholder="Ask a question..." autocomplete="off">
-        <button onclick="askAI()" style="background:var(--primary); border:none; color:white; padding:0 15px; border-radius:20px;">Go</button>
-    </div>
+<div id="searchBox">
+    <form class="search-flex" action="https://www.google.com/search" method="GET" target="_blank">
+        <input type="text" name="q" placeholder="Search Google..." required style="margin:0; flex:1;">
+        <button type="submit" style="width:70px; margin:0;">Search</button>
+    </form>
 </div>
 
 <script>
-const ADMIN_KEY = "apmarya81120252026chatt9476gcetts";
-const SENSITIVE = ["politics", "religion", "god", "harm", "kill", "war", "modi", "hate"];
+const KEY = "apmarya81120252026chatt9476gcetts";
+let isAdmin = false;
 
-// Performance: Fast LocalStorage retrieval
-function updateFeed() {
-    const feed = document.getElementById('feed');
-    const data = JSON.parse(localStorage.getItem('apm_posts') || '[]');
-    feed.innerHTML = data.length ? '' : 'No new updates.';
-    data.reverse().forEach(p => {
-        const item = document.createElement('div');
-        item.style.padding = "10px 0; border-bottom: 1px solid #222";
-        item.innerHTML = `<b>•</b> ${p}`;
-        feed.appendChild(item);
+window.onload = () => {
+    const savedDp = localStorage.getItem('apm_dp');
+    if(savedDp) document.getElementById('dp').src = savedDp;
+    loadContent();
+};
+
+function checkAdmin() {
+    if(prompt("Admin Password:") === KEY) {
+        isAdmin = true;
+        document.getElementById('adminPanel').style.display = 'block';
+        loadContent(); // Refresh to show delete buttons
+    }
+}
+
+// Handle DP Upload
+document.getElementById('dpFile').onchange = function() {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        localStorage.setItem('apm_dp', e.target.result);
+        document.getElementById('dp').src = e.target.result;
+    };
+    reader.readAsDataURL(this.files[0]);
+};
+
+function upload() {
+    const section = document.getElementById('sec').value;
+    const text = document.getElementById('txt').value;
+    const url = document.getElementById('link').value;
+    if(!text) return alert("Please enter text");
+
+    const newItem = {
+        id: Date.now(),
+        text: text,
+        url: url,
+        time: Date.now()
+    };
+
+    const data = JSON.parse(localStorage.getItem('apm_'+section) || '[]');
+    data.push(newItem);
+    localStorage.setItem('apm_'+section, JSON.stringify(data));
+    
+    document.getElementById('txt').value = '';
+    document.getElementById('link').value = '';
+    loadContent();
+}
+
+function loadContent() {
+    ['notices', 'announcements', 'study', 'practicals'].forEach(s => {
+        const box = document.getElementById(s);
+        box.innerHTML = '';
+        const items = JSON.parse(localStorage.getItem('apm_'+s) || '[]');
+        
+        items.reverse().forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'item';
+            
+            // "NEW" Badge Logic (If less than 24 hours old)
+            const isNew = (Date.now() - item.time) < (24 * 60 * 60 * 1000);
+            const newTag = isNew ? '<span class="new-tag">NEW</span>' : '';
+
+            div.innerHTML = `<div><b>${item.text}</b>${newTag}</div>`;
+            if(item.url) div.innerHTML += `<a href="${item.url}" target="_blank">🔗 View Link</a>`;
+
+            if(isAdmin) {
+                const del = document.createElement('button');
+                del.className = 'del-btn';
+                del.innerText = '🗑 Delete';
+                del.onclick = () => {
+                    const filtered = items.filter(i => i.id !== item.id);
+                    localStorage.setItem('apm_'+s, JSON.stringify(filtered));
+                    loadContent();
+                };
+                div.appendChild(del);
+            }
+            box.appendChild(div);
+        });
     });
 }
-
-function unlock() {
-    if(prompt("Code:") === ADMIN_KEY) document.getElementById('adminBox').style.display = 'block';
-}
-
-function savePost() {
-    const val = document.getElementById('postIn').value;
-    if(!val) return;
-    const data = JSON.parse(localStorage.getItem('apm_posts') || '[]');
-    data.push(val);
-    localStorage.setItem('apm_posts', JSON.stringify(data));
-    document.getElementById('postIn').value = '';
-    updateFeed();
-}
-
-// Optimized AI Logic
-function toggleChat() {
-    const win = document.getElementById('chatWin');
-    const logs = document.getElementById('chatLogs');
-    win.classList.toggle('expanded');
-    logs.style.display = win.classList.contains('expanded') ? 'block' : 'none';
-}
-
-function askAI() {
-    const input = document.getElementById('userInput');
-    const query = input.value.trim();
-    if(!query) return;
-
-    addMsg(query, 'u');
-    input.value = '';
-
-    // Step 1: Instant Safety Filter
-    const isUnsafe = SENSITIVE.some(word => query.toLowerCase().includes(word));
-    if(isUnsafe) {
-        setTimeout(() => addMsg("⚠️ Policy: I cannot discuss politics, religion, or harmful topics.", 'b'), 400);
-        return;
-    }
-
-    // Step 2: Accurate Search Logic
-    const loaderId = "ld-" + Date.now();
-    addMsg(`<span class="loader"></span> Analyzing Google data...`, 'b', loaderId);
-
-    setTimeout(() => {
-        document.getElementById(loaderId).remove();
-        const searchLink = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-        addMsg(`Accuracy Check Complete. Verified results for "<b>${query}</b>" are available via Google Search:`, 'b');
-        
-        const linkBox = document.createElement('div');
-        linkBox.className = "msg b";
-        linkBox.style.border = "1px solid var(--accent)";
-        linkBox.innerHTML = `<a href="${searchLink}" target="_blank" style="color:var(--accent); text-decoration:none;">🚀 Open Google Results</a>`;
-        document.getElementById('chatLogs').appendChild(linkBox);
-        
-        const logs = document.getElementById('chatLogs');
-        logs.scrollTop = logs.scrollHeight;
-    }, 1000);
-}
-
-function addMsg(text, type, id = null) {
-    const logs = document.getElementById('chatLogs');
-    const d = document.createElement('div');
-    d.className = `msg ${type}`;
-    if(id) d.id = id;
-    d.innerHTML = text;
-    logs.appendChild(d);
-    logs.scrollTop = logs.scrollHeight;
-}
-
-window.onload = updateFeed;
 </script>
+
 </body>
 </html>
