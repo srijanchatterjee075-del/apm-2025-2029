@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APM 2025-2029</title>
 
@@ -10,157 +11,270 @@ background:black;
 color:white;
 font-family:Arial;
 margin:0;
+padding:0;
+text-align:center;
 }
 
+/* Heading */
 header{
 background:violet;
-padding:20px;
-text-align:center;
+color:white;
+padding:15px;
 font-size:28px;
 font-weight:bold;
 }
 
+/* Sections */
 .section{
-padding:20px;
-border-bottom:1px solid gray;
-}
-
-.chatbot{
-position:fixed;
-right:20px;
-bottom:20px;
-background:#222;
+margin:20px;
 padding:15px;
-border-radius:50%;
-cursor:pointer;
+border:1px solid violet;
+border-radius:10px;
 }
 
-.chatbox{
+/* Profile Picture */
+#profileBox{
 position:fixed;
+top:20px;
 right:20px;
-bottom:80px;
-background:#111;
-width:300px;
-display:none;
-padding:10px;
 }
 
-img{
-max-width:200px;
+#profilePic{
+width:80px;
+height:80px;
+border-radius:50%;
+border:3px solid violet;
+object-fit:cover;
+background:black;
+}
+
+/* Chatbot */
+#chatbot{
+position:fixed;
+bottom:20px;
+right:20px;
+width:260px;
+background:#111;
+border:1px solid violet;
+border-radius:10px;
+}
+
+#chatHeader{
+background:violet;
+padding:10px;
+font-weight:bold;
+}
+
+#chatMessages{
+height:200px;
+overflow:auto;
+padding:10px;
+font-size:14px;
+}
+
+#chatInput{
+width:80%;
+}
+
+button{
+margin:5px;
+padding:5px 10px;
 }
 </style>
 </head>
 
 <body>
 
-<header>APM 2025 - 2029</header>
+<header>APM 2025-2029</header>
 
-<div class="section">
-<h2>1. Important Notice</h2>
-<div id="notice"></div>
+<!-- Profile DP -->
+<div id="profileBox">
+<img id="profilePic">
+<br>
+<input type="file" id="dpUpload" accept="image/*">
 </div>
 
+<!-- Admin Upload -->
 <div class="section">
-<h2>2. Announcement</h2>
-<div id="announce"></div>
-</div>
+<h2>Admin Upload</h2>
+<input type="password" id="pass" placeholder="Enter Password">
+<br><br>
 
-<div class="section">
-<h2>3. Study Material</h2>
-<div id="study"></div>
-</div>
-
-<div class="section">
-<h2>4. Practical</h2>
-<div id="practical"></div>
-</div>
-
-<h3 style="padding:20px">Admin Upload</h3>
-<div style="padding:20px">
-<input type="password" id="pass" placeholder="Password">
-<input type="file" id="file">
-<textarea id="text" placeholder="Enter text"></textarea>
-
-<select id="section">
+<select id="sectionSelect">
 <option value="notice">Important Notice</option>
-<option value="announce">Announcement</option>
+<option value="announcement">Announcement</option>
 <option value="study">Study Material</option>
 <option value="practical">Practical</option>
 </select>
 
+<br><br>
+
+<input type="text" id="textInput" placeholder="Write text">
+<br><br>
+<input type="file" id="fileInput">
+<br><br>
+
 <button onclick="upload()">Upload</button>
 </div>
 
-<div class="chatbox" id="chatbox">
-<div id="chatlog"></div>
-<input id="q">
+<!-- Sections -->
+<div class="section">
+<h2>Important Notice</h2>
+<div id="notice"></div>
+</div>
+
+<div class="section">
+<h2>Announcement</h2>
+<div id="announcement"></div>
+</div>
+
+<div class="section">
+<h2>Study Material</h2>
+<div id="study"></div>
+</div>
+
+<div class="section">
+<h2>Practical</h2>
+<div id="practical"></div>
+</div>
+
+<!-- Chatbot -->
+<div id="chatbot">
+<div id="chatHeader">🤖 Chat Bot</div>
+<div id="chatMessages"></div>
+<input id="chatInput">
 <button onclick="ask()">Send</button>
 </div>
 
-<div class="chatbot" onclick="toggle()">🤖</div>
-
 <script>
-const adminPassword="apmarya81120252026chatt9476gcetts";
 
+const password="apmarya81120252026chatt9476gcetts";
+
+/* Upload System */
 function upload(){
-let pass=document.getElementById("pass").value;
 
-if(pass!==adminPassword){
-alert("Only admin can upload");
+let pass=document.getElementById("pass").value;
+if(pass!==password){
+alert("Wrong password");
 return;
 }
 
-let section=document.getElementById("section").value;
-let file=document.getElementById("file").files[0];
-let text=document.getElementById("text").value;
+let section=document.getElementById("sectionSelect").value;
+let text=document.getElementById("textInput").value;
+let file=document.getElementById("fileInput").files[0];
 
 if(text){
 let p=document.createElement("p");
 p.textContent=text;
+
+let del=document.createElement("button");
+del.textContent="Delete";
+del.onclick=function(){
+p.remove();
+del.remove();
+};
+
 document.getElementById(section).appendChild(p);
+document.getElementById(section).appendChild(del);
 }
 
 if(file){
 let reader=new FileReader();
+
 reader.onload=function(e){
 
-if(file.type.includes("image")){
+if(file.type.startsWith("image")){
 let img=document.createElement("img");
 img.src=e.target.result;
+img.width=200;
+
+let del=document.createElement("button");
+del.textContent="Delete";
+del.onclick=function(){
+img.remove();
+del.remove();
+};
+
 document.getElementById(section).appendChild(img);
+document.getElementById(section).appendChild(del);
 }
+
 else if(file.type==="application/pdf"){
 let a=document.createElement("a");
 a.href=e.target.result;
-a.target="_blank";
 a.textContent="Open PDF";
+a.target="_blank";
+
+let del=document.createElement("button");
+del.textContent="Delete";
+del.onclick=function(){
+a.remove();
+del.remove();
+};
+
 document.getElementById(section).appendChild(a);
+document.getElementById(section).appendChild(del);
 }
 
 };
+
 reader.readAsDataURL(file);
 }
+
 }
 
-function toggle(){
-let c=document.getElementById("chatbox");
-c.style.display=c.style.display==="block"?"none":"block";
+/* Profile Picture Upload */
+document.getElementById("dpUpload").addEventListener("change",function(){
+const file=this.files[0];
+if(file){
+const reader=new FileReader();
+reader.onload=function(e){
+document.getElementById("profilePic").src=e.target.result;
 }
+reader.readAsDataURL(file);
+}
+});
 
+/* Chatbot */
 function ask(){
-let q=document.getElementById("q").value.toLowerCase();
-let bad=["kill","suicide","religion","politics","attack"];
 
-for(let w of bad){
-if(q.includes(w)){
-chatlog.innerHTML+="<p>Sorry I cant answer</p>";
-return;
+let input=document.getElementById("chatInput").value.toLowerCase();
+let chat=document.getElementById("chatMessages");
+
+let msg=document.createElement("div");
+msg.textContent="You: "+input;
+chat.appendChild(msg);
+
+let reply=document.createElement("div");
+
+if(
+input.includes("kill") ||
+input.includes("suicide") ||
+input.includes("religion") ||
+input.includes("politics") ||
+input.includes("violence")
+){
+reply.textContent="Sorry I can't answer.";
 }
+else if(
+input.includes("study") ||
+input.includes("exam") ||
+input.includes("engineering") ||
+input.includes("physics") ||
+input.includes("math")
+){
+reply.textContent="Searching on Google... If you have any more doubt contact to our respected crs.";
+}
+else{
+reply.textContent="Sorry I can't answer.";
 }
 
-window.open("https://www.google.com/search?q="+q);
-chatlog.innerHTML+="<p>Searching... if you have any more doubt contact to our respected crs</p>";
+chat.appendChild(reply);
+
+chat.scrollTop=chat.scrollHeight;
+
 }
+
 </script>
 
 </body>
