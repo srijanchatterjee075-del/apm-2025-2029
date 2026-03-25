@@ -3,225 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>APM 2025-2029 | Mobile Pro</title>
+    <title>APM 2025-2029 | AI Pro</title>
     <style>
         :root { 
             --primary: #8a2be2; 
             --accent: #ee82ee; 
             --bg: #0a0a0a; 
             --card: #1a1a1a; 
+            --chat-bg: #121212;
         }
         
-        * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        
-        body { 
-            background: var(--bg); 
-            color: white; 
-            margin: 0; 
-            padding-bottom: 80px; /* Space for the fixed bottom search bar */
-            overflow-x: hidden; /* Prevents side-scrolling */
-        }
+        * { box-sizing: border-box; font-family: -apple-system, sans-serif; }
+        body { background: var(--bg); color: white; margin: 0; padding-bottom: 70px; }
 
+        /* Header */
         header { 
-            background: var(--primary); 
-            padding: 12px 15px; 
+            background: var(--primary); padding: 15px; 
             display: flex; justify-content: space-between; align-items: center;
             position: sticky; top: 0; z-index: 1000;
         }
 
-        #profileSection { text-align: center; padding: 20px 0; }
-        #profilePic { 
-            width: 90px; height: 90px; border-radius: 50%; 
-            border: 3px solid var(--primary); object-fit: cover; 
+        /* Container */
+        .container { display: flex; flex-direction: column; gap: 15px; padding: 15px; }
+        .section { background: var(--card); padding: 15px; border-radius: 12px; border-left: 4px solid var(--primary); }
+
+        /* --- AI CHATBOT UI --- */
+        #chatContainer {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: var(--chat-bg);
+            border-top: 2px solid var(--primary);
+            transition: height 0.3s ease;
+            height: 60px; /* Closed state */
+            z-index: 2000;
+            display: flex; flex-direction: column;
         }
 
-        /* Mobile-First Container */
-        .container { 
-            display: flex;
-            flex-direction: column; /* Stacks items vertically on mobile */
-            gap: 15px;
-            padding: 10px;
-            width: 100%;
+        #chatContainer.open { height: 70vh; } /* Open state (70% of screen) */
+
+        .chat-header {
+            padding: 15px; background: #1a1a1a;
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; font-weight: bold; color: var(--accent);
         }
 
-        .section { 
-            background: var(--card); 
-            padding: 15px; 
-            border-radius: 12px; 
-            border-left: 4px solid var(--primary);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        #chatBody {
+            flex: 1; overflow-y: auto; padding: 15px;
+            display: none; flex-direction: column; gap: 10px;
         }
 
-        .section h4 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--accent); }
+        .msg { padding: 10px 15px; border-radius: 15px; max-width: 80% ; font-size: 14px; line-height: 1.4; }
+        .user-msg { background: var(--primary); align-self: flex-end; border-bottom-right-radius: 2px; }
+        .bot-msg { background: #333; align-self: flex-start; border-bottom-left-radius: 2px; }
 
-        /* Mobile Inputs: Large enough to tap easily */
-        input, select, button { 
-            width: 100%; 
-            height: 48px; /* Standard mobile tap target height */
-            margin: 6px 0; 
-            border-radius: 10px; 
-            border: 1px solid #333; 
-            background: #000; 
-            color: white; 
-            font-size: 16px; /* 16px prevents automatic zoom on iPhone */
+        .chat-input-area {
+            display: flex; padding: 10px; gap: 8px; background: #000;
         }
 
-        button { background: var(--primary); border: none; font-weight: bold; }
-        
-        #adminDashboard { 
-            display: none; background: #1a1a1a; margin: 10px; padding: 15px; 
-            border: 2px dashed var(--accent); border-radius: 12px; 
+        #chatIn { 
+            flex: 1; height: 40px; background: #222; border: 1px solid #444; 
+            color: white; border-radius: 20px; padding: 0 15px; font-size: 16px;
         }
 
-        .item-card { 
-            background: #252525; padding: 12px; border-radius: 8px; 
-            margin-top: 10px; border: 1px solid #333;
-        }
-        
-        .item-card img { 
-            width: 100%; /* Images fill the card width */
-            height: auto; 
-            border-radius: 6px; 
-            margin-top: 8px; 
+        #sendBtn { 
+            width: 60px; height: 40px; background: var(--primary); 
+            border: none; border-radius: 20px; color: white; font-weight: bold;
         }
 
-        /* Fixed Bottom Search */
-        #chatbot { 
-            position: fixed; bottom: 0; left: 0; right: 0; 
-            background: #000; padding: 10px; 
-            border-top: 1px solid var(--primary);
-            z-index: 1001;
-        }
-        
-        .chat-row { display: flex; gap: 5px; }
-        #chatIn { flex: 1; margin: 0; }
-        #goBtn { width: 60px; margin: 0; }
-
-        /* Desktop Adjustment */
-        @media (min-width: 768px) {
-            .container {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 900px;
-                margin: 0 auto;
-            }
-        }
+        /* Admin Dashboard Hidden */
+        #adminDashboard { display: none; background: #1a1a1a; margin: 10px; padding: 15px; border: 2px dashed var(--accent); border-radius: 12px; }
+        .item-card { background: #252525; padding: 10px; border-radius: 8px; margin-top: 10px; }
+        .item-card img { width: 100%; border-radius: 5px; }
     </style>
 </head>
 <body>
 
 <header>
-    <span style="font-weight:bold; letter-spacing:1px;">APM 2025-2029</span>
-    <div onclick="askPass()" style="font-size:28px; cursor:pointer; width:40px; text-align:right;">⋮</div>
+    <strong>APM 2025-2029</strong>
+    <div onclick="askPass()" style="cursor:pointer; font-size: 24px;">⋮</div>
 </header>
 
-<div id="profileSection">
-    <img id="profilePic" src="https://via.placeholder.com/90">
-</div>
-
 <div id="adminDashboard">
-    <h3 style="margin:0 0 10px 0; font-size:16px;">Admin Settings</h3>
-    <input type="file" id="dpUpload" accept="image/*">
-    <select id="secSelect">
-        <option value="notice">Notice</option>
-        <option value="announcement">Announcement</option>
-        <option value="study">Study</option>
-        <option value="practical">Practical</option>
-    </select>
-    <input type="text" id="textIn" placeholder="Type update...">
-    <input type="file" id="fileIn" accept="image/*">
+    <input type="text" id="textIn" placeholder="Post update...">
     <button onclick="publish()">Update Page</button>
 </div>
 
 <div class="container">
     <div class="section"><h4>📢 Notice</h4><div id="notice"></div></div>
-    <div class="section"><h4>📣 Announcement</h4><div id="announcement"></div></div>
     <div class="section"><h4>📚 Study</h4><div id="study"></div></div>
-    <div class="section"><h4>🔬 Practical</h4><div id="practical"></div></div>
 </div>
 
-<div id="chatbot">
-    <div class="chat-row">
-        <input type="text" id="chatIn" placeholder="Search Google...">
-        <button id="goBtn" onclick="doSearch()">Go</button>
+<div id="chatContainer">
+    <div class="chat-header" onclick="toggleChat()">
+        <span>✨ APM AI Assistant</span>
+        <span id="chevron">▲</span>
+    </div>
+    
+    <div id="chatBody">
+        <div class="msg bot-msg">Hello! I am the APM AI. How can I help you today?</div>
+    </div>
+
+    <div class="chat-input-area">
+        <input type="text" id="chatIn" placeholder="Ask me anything...">
+        <button id="sendBtn" onclick="sendMessage()">Send</button>
     </div>
 </div>
 
 <script>
 const PASS = "apmarya81120252026chatt9476gcetts";
 
-window.onload = () => {
-    const pic = localStorage.getItem("apm_p");
-    if(pic) document.getElementById("profilePic").src = pic;
-    refreshData();
-};
-
-function askPass() {
-    if(prompt("Admin Password:") === PASS) {
-        document.getElementById("adminDashboard").style.display = "block";
-        refreshData();
+// CHAT LOGIC
+function toggleChat() {
+    const container = document.getElementById('chatContainer');
+    const body = document.getElementById('chatBody');
+    const chevron = document.getElementById('chevron');
+    
+    container.classList.toggle('open');
+    if(container.classList.contains('open')) {
+        body.style.display = 'flex';
+        chevron.innerText = '▼';
+    } else {
+        body.style.display = 'none';
+        chevron.innerText = '▲';
     }
 }
 
-function refreshData() {
-    ['notice', 'announcement', 'study', 'practical'].forEach(s => {
-        document.getElementById(s).innerHTML = '';
-        const saved = JSON.parse(localStorage.getItem("apm_"+s)) || [];
-        saved.forEach(item => render(s, item.t, item.f, item.id));
-    });
+async function sendMessage() {
+    const input = document.getElementById('chatIn');
+    const body = document.getElementById('chatBody');
+    const val = input.value.trim();
+
+    if(!val) return;
+
+    // 1. Add User Message
+    addMessage(val, 'user-msg');
+    input.value = '';
+
+    // 2. Show Typing...
+    const typingId = "typing-" + Date.now();
+    addMessage("Thinking...", 'bot-msg', typingId);
+
+    // 3. Simulated AI Response (You can connect a real API here)
+    setTimeout(() => {
+        document.getElementById(typingId).remove();
+        const response = getAIResponse(val);
+        addMessage(response, 'bot-msg');
+        body.scrollTop = body.scrollHeight; // Auto-scroll
+    }, 1000);
+}
+
+function addMessage(text, className, id = '') {
+    const body = document.getElementById('chatBody');
+    const div = document.createElement('div');
+    div.className = `msg ${className}`;
+    if(id) div.id = id;
+    div.innerText = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+}
+
+function getAIResponse(query) {
+    query = query.toLowerCase();
+    if(query.includes("hello") || query.includes("hi")) return "Hello! Welcome to the APM Portal.";
+    if(query.includes("exam")) return "Check the Notice section for the latest exam dates.";
+    if(query.includes("who made")) return "This portal was developed for APM 2025-2029.";
+    if(query.includes("study")) return "You can find PDF materials in the Study section.";
+    
+    // Default: Search Fallback
+    return "I'm still learning! You can also find more info on Google: https://google.com/search?q=" + encodeURIComponent(query);
+}
+
+// ADMIN LOGIC (Simplified)
+function askPass() {
+    if(prompt("Admin Password:") === PASS) document.getElementById("adminDashboard").style.display="block";
 }
 
 function publish() {
-    const s = document.getElementById("secSelect").value;
     const t = document.getElementById("textIn").value;
-    const f = document.getElementById("fileIn").files[0];
-    const id = Date.now();
-
-    if(f) {
-        const reader = new FileReader();
-        reader.onload = (e) => save(s, t, e.target.result, id);
-        reader.readAsDataURL(f);
-    } else {
-        save(s, t, null, id);
+    if(t) {
+        const div = document.createElement("div");
+        div.className = "item-card";
+        div.innerText = t;
+        document.getElementById("notice").prepend(div);
+        document.getElementById("textIn").value = "";
     }
-}
-
-function save(s, t, f, id) {
-    const data = JSON.parse(localStorage.getItem("apm_"+s)) || [];
-    data.push({id, t, f});
-    localStorage.setItem("apm_"+s, JSON.stringify(data));
-    render(s, t, f, id);
-    document.getElementById("textIn").value = "";
-    document.getElementById("fileIn").value = "";
-}
-
-function render(s, t, f, id) {
-    const div = document.createElement("div");
-    div.className = "item-card";
-    div.innerHTML = `<p style="margin:0;">${t}</p>${f ? `<img src="${f}">` : ''}`;
-    
-    // Only show delete button if admin is logged in
-    if(document.getElementById("adminDashboard").style.display === "block") {
-        const del = document.createElement("button");
-        del.textContent = "Delete";
-        del.style.background = "#ff4444";
-        del.style.height = "35px";
-        del.style.marginTop = "10px";
-        del.onclick = () => {
-            div.remove();
-            let list = JSON.parse(localStorage.getItem("apm_"+s));
-            localStorage.setItem("apm_"+s, JSON.stringify(list.filter(i => i.id !== id)));
-        };
-        div.appendChild(del);
-    }
-    
-    document.getElementById(s).prepend(div);
-}
-
-function doSearch() {
-    const q = document.getElementById("chatIn").value;
-    if(q) window.open("https://www.google.com/search?q="+encodeURIComponent(q));
 }
 </script>
+
 </body>
 </html>
