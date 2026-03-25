@@ -1,227 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>APM 25-29 | Mobile Pro</title>
-    <style>
-        :root { --primary: #8a2be2; --bg: #0a0a0a; --card: #161616; --red: #ff3131; }
-        * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; }
-        body { background: var(--bg); color: white; margin: 0; padding-bottom: 110px; -webkit-font-smoothing: antialiased; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APM 25-29 | Mobile Pro</title>
 
-        /* Header & Profile */
-        header { 
-            background: var(--primary); padding: 15px 20px; 
-            display: flex; justify-content: space-between; align-items: center; 
-            position: sticky; top: 0; z-index: 100; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-        #profileArea { text-align: center; padding: 25px 10px; }
-        #dp { 
-            width: 100px; height: 100px; border-radius: 50%; 
-            border: 3px solid var(--primary); object-fit: cover; 
-            background: #222; box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
-        }
+<style>
+:root {
+  --primary: #8a2be2;
+  --bg: #0a0a0a;
+  --card: #161616;
+  --red: #ff3131;
+}
 
-        /* Admin Panel */
-        #adminPanel { 
-            display: none; background: #1a1a1a; margin: 15px; padding: 20px; 
-            border: 2px dashed var(--primary); border-radius: 15px; 
-        }
-        input, select, button { 
-            width: 100%; padding: 12px; margin: 8px 0; 
-            border-radius: 10px; border: 1px solid #333; 
-            background: #000; color: white; font-size: 16px; 
-        }
-        button { background: var(--primary); font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
-        button:active { opacity: 0.8; transform: scale(0.98); }
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
 
-        /* Content Layout */
-        .container { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 20px; padding: 15px; max-width: 1200px; margin: 0 auto; 
-        }
-        .section { 
-            background: var(--card); padding: 18px; border-radius: 15px; 
-            border-top: 4px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
-        .section h4 { margin: 0 0 15px 0; color: var(--primary); text-transform: uppercase; font-size: 13px; letter-spacing: 1px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: white;
+  padding-bottom: 140px;
+}
 
-        /* Item Cards */
-        .item { 
-            background: #222; padding: 14px; border-radius: 10px; 
-            margin-bottom: 12px; position: relative; border: 1px solid #333; 
-        }
-        .new-tag { 
-            color: var(--red); font-weight: 900; font-size: 11px; 
-            margin-left: 8px; vertical-align: middle;
-        }
-        .item a { 
-            color: #00d4ff; text-decoration: none; word-break: break-all; 
-            display: inline-block; margin-top: 8px; font-size: 14px; font-weight: 500;
-        }
-        .del-btn { background: var(--red); width: auto; padding: 5px 12px; font-size: 12px; margin-top: 10px; border-radius: 6px; }
+header {
+  background: var(--primary);
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-        /* Fixed Search Box */
-        #searchBox { 
-            position: fixed; bottom: 0; left: 0; right: 0; 
-            background: #000; padding: 15px; border-top: 2px solid var(--primary); 
-            z-index: 1000;
-        }
-        .search-flex { display: flex; gap: 10px; max-width: 600px; margin: 0 auto; }
-    </style>
+#profileArea {
+  text-align: center;
+  padding: 20px;
+}
+
+#dp {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary);
+}
+
+#adminPanel {
+  display: none;
+  margin: 15px;
+  padding: 15px;
+  background: #1a1a1a;
+  border-radius: 10px;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: none;
+  background: #000;
+  color: white;
+}
+
+button {
+  background: var(--primary);
+  font-weight: bold;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  padding: 10px;
+}
+
+.section {
+  background: var(--card);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.item {
+  background: #222;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.item a {
+  color: #00d4ff;
+  display: block;
+  margin-top: 5px;
+}
+
+.del-btn {
+  background: var(--red);
+  margin-top: 8px;
+}
+
+.new-tag {
+  color: var(--red);
+  font-size: 11px;
+  margin-left: 5px;
+}
+
+#searchBox {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: black;
+  padding: 10px;
+}
+
+.search-flex {
+  display: flex;
+  gap: 10px;
+}
+
+.search-flex input {
+  flex: 1;
+}
+</style>
 </head>
+
 <body>
 
 <header>
-    <strong style="font-size: 1.1rem; letter-spacing: 0.5px;">APM 25-29</strong>
-    <div onclick="checkAdmin()" style="cursor:pointer; font-size: 24px; padding: 5px;">⋮</div>
+  <strong>APM 25-29</strong>
+  <div onclick="checkAdmin()">⋮</div>
 </header>
 
 <div id="profileArea">
-    <img id="dp" src="https://via.placeholder.com/100" alt="Profile">
+  <img id="dp" src="https://via.placeholder.com/100">
 </div>
 
 <div id="adminPanel">
-    <h3 style="margin-top:0; color: var(--primary);">⚙️ Admin Dashboard</h3>
-    <label style="font-size: 14px; color: #888;">Update Profile Photo:</label>
-    <input type="file" id="dpFile" accept="image/*">
-    <hr style="border:0.5px solid #333; margin:20px 0;">
-    
-    <label style="font-size: 14px; color: #888;">Select Category:</label>
-    <select id="sec">
-        <option value="notices">Important Notice</option>
-        <option value="announcements">Announcement</option>
-        <option value="study">Study Material</option>
-        <option value="practicals">Practical</option>
-    </select>
-    <input type="text" id="txt" placeholder="Title or Description">
-    <input type="url" id="link" placeholder="Link URL (Optional)">
-    <button onclick="upload()">Publish to Portal</button>
+  <input type="file" id="dpFile" accept="image/*">
+  <select id="sec">
+    <option value="notices">Notice</option>
+    <option value="announcements">Announcement</option>
+    <option value="study">Study</option>
+    <option value="practicals">Practical</option>
+  </select>
+  <input id="txt" placeholder="Text">
+  <input id="link" placeholder="Link">
+  <button onclick="upload()">Upload</button>
 </div>
 
 <div class="container">
-    <div class="section"><h4>📢 Important Notice</h4><div id="notices"></div></div>
-    <div class="section"><h4>📣 Announcement</h4><div id="announcements"></div></div>
-    <div class="section"><h4>📚 Study Material</h4><div id="study"></div></div>
-    <div class="section"><h4>🔬 Practical</h4><div id="practicals"></div></div>
+  <div class="section"><h4>Notices</h4><div id="notices"></div></div>
+  <div class="section"><h4>Announcements</h4><div id="announcements"></div></div>
+  <div class="section"><h4>Study</h4><div id="study"></div></div>
+  <div class="section"><h4>Practical</h4><div id="practicals"></div></div>
 </div>
 
 <div id="searchBox">
-    <form class="search-flex" action="https://www.google.com/search" method="GET" target="_blank">
-        <input type="text" name="q" placeholder="Search Google..." required style="margin:0; flex:1; border-radius: 25px;">
-        <button type="submit" style="width:80px; margin:0; border-radius: 25px;">Go</button>
-    </form>
+  <form class="search-flex" action="https://google.com/search" target="_blank">
+    <input name="q" placeholder="Search">
+    <button>Go</button>
+  </form>
 </div>
 
 <script>
-const KEY = "apmarya81120252026chatt9476gcetts";
+const KEY = "admin123";
 let isAdmin = false;
 
-// Initialize Site
 window.onload = () => {
-    const savedDp = localStorage.getItem('apm_dp');
-    if(savedDp) document.getElementById('dp').src = savedDp;
-    loadContent();
+  load();
 };
 
 function checkAdmin() {
-    if(prompt("Enter Admin Access Key:") === KEY) {
-        isAdmin = true;
-        document.getElementById('adminPanel').style.display = 'block';
-        document.getElementById('adminPanel').scrollIntoView({behavior: 'smooth'});
-        loadContent(); // Refresh to show delete buttons
-    } else {
-        alert("Incorrect Key.");
-    }
+  const pass = prompt("Enter key");
+  if(pass === KEY) {
+    isAdmin = true;
+    document.getElementById('adminPanel').style.display = 'block';
+    load();
+  }
 }
 
-// Admin DP Change
 document.getElementById('dpFile').onchange = function() {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        // Image compression for localStorage efficiency
-        const img = new Image();
-        img.src = e.target.result;
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = 200; canvas.height = 200;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, 200, 200);
-            const compressed = canvas.toDataURL('image/jpeg', 0.7);
-            localStorage.setItem('apm_dp', compressed);
-            document.getElementById('dp').src = compressed;
-        };
-    };
-    reader.readAsDataURL(this.files[0]);
+  const file = this.files[0];
+  if(!file) return;
+  if(file.size > 2 * 1024 * 1024) {
+    alert("Max 2MB"); return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    localStorage.setItem('dp', e.target.result);
+    document.getElementById('dp').src = e.target.result;
+  };
+  reader.readAsDataURL(file);
 };
 
 function upload() {
-    const section = document.getElementById('sec').value;
-    const text = document.getElementById('txt').value;
-    const url = document.getElementById('link').value;
-    
-    if(!text) return alert("Text field cannot be empty.");
+  const s = sec.value;
+  const t = txt.value;
+  if(!t) return;
 
-    const newItem = {
-        id: Date.now(),
-        text: text,
-        url: url,
-        time: Date.now()
-    };
+  const data = JSON.parse(localStorage.getItem(s) || '[]');
+  data.push({id: Date.now(), text: t, link: link.value});
+  localStorage.setItem(s, JSON.stringify(data));
 
-    const data = JSON.parse(localStorage.getItem('apm_'+section) || '[]');
-    data.push(newItem);
-    localStorage.setItem('apm_'+section, JSON.stringify(data));
-    
-    // Clear inputs
-    document.getElementById('txt').value = '';
-    document.getElementById('link').value = '';
-    loadContent();
+  txt.value = '';
+  link.value = '';
+  load();
 }
 
-function loadContent() {
-    const categories = ['notices', 'announcements', 'study', 'practicals'];
-    categories.forEach(s => {
-        const box = document.getElementById(s);
-        box.innerHTML = '';
-        const items = JSON.parse(localStorage.getItem('apm_'+s) || '[]');
-        
-        // Show newest first
-        items.sort((a,b) => b.id - a.id).forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'item';
-            
-            // Auto "NEW" tag logic (24 hour window)
-            const isNew = (Date.now() - item.time) < (24 * 60 * 60 * 1000);
-            const newTag = isNew ? '<span class="new-tag">NEW</span>' : '';
+function load() {
+  ['notices','announcements','study','practicals'].forEach(s => {
+    const box = document.getElementById(s);
+    box.innerHTML = '';
 
-            div.innerHTML = `<div><span style="font-weight:600;">${item.text}</span>${newTag}</div>`;
-            
-            if(item.url) {
-                div.innerHTML += `<a href="${item.url}" target="_blank">🔗 Access Link</a>`;
-            }
+    const data = JSON.parse(localStorage.getItem(s) || '[]');
 
-            if(isAdmin) {
-                const del = document.createElement('button');
-                del.className = 'del-btn';
-                del.innerText = '🗑 Delete Post';
-                del.onclick = () => {
-                    if(confirm("Confirm Delete?")) {
-                        const filtered = items.filter(i => i.id !== item.id);
-                        localStorage.setItem('apm_'+s, JSON.stringify(filtered));
-                        loadContent();
-                    }
-                };
-                div.appendChild(del);
-            }
-            box.appendChild(div);
-        });
-        
-        if(items.length === 0) {
-            box.innerHTML = '<p style="color:#555; font-size:13px; font-style:italic;">No updates yet.</p>';
-        }
+    data.reverse().forEach(item => {
+      const d = document.createElement('div');
+      d.className = 'item';
+      d.innerHTML = item.text;
+
+      if(item.link) {
+        d.innerHTML += `<a href="${item.link}" target="_blank">Open</a>`;
+      }
+
+      if(isAdmin) {
+        const b = document.createElement('button');
+        b.innerText = 'Delete';
+        b.className = 'del-btn';
+        b.onclick = () => {
+          const filtered = data.filter(i => i.id !== item.id);
+          localStorage.setItem(s, JSON.stringify(filtered));
+          load();
+        };
+        d.appendChild(b);
+      }
+
+      box.appendChild(d);
     });
+  });
+
+  const dp = localStorage.getItem('dp');
+  if(dp) document.getElementById('dp').src = dp;
 }
 </script>
 
