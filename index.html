@@ -1,116 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>APM 2025-2029 | Mobile Pro</title>
-    <style>
-        :root { 
-            --primary: #8a2be2; 
-            --accent: #ee82ee; 
-            --bg: #0a0a0a; 
-            --card: #1a1a1a; 
-            --delete: #ff4444;
-        }
-        
-        * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
-        body { background: var(--bg); color: white; margin: 0; padding-bottom: 120px; -webkit-font-smoothing: antialiased; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APM 2025-2029</title>
 
-        /* Header */
-        header { 
-            background: var(--primary); 
-            padding: 15px 5%; 
-            display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
+<style>
+:root { 
+    --primary: #8a2be2; 
+    --accent: #ee82ee; 
+    --bg: #0a0a0a; 
+    --card: #1a1a1a; 
+    --delete: #ff4444;
+}
 
-        /* Profile Area */
-        #profileSection { text-align: center; padding: 30px 10px; }
-        #profilePic { 
-            width: 110px; height: 110px; border-radius: 50%; 
-            border: 4px solid var(--primary); object-fit: cover;
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
-        }
+* { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 
-        /* Improved Responsive Grid for Laptop/Mobile */
-        .container { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 20px; 
-            padding: 15px; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
+body { 
+    margin: 0; 
+    background: var(--bg); 
+    color: white; 
+    padding-bottom: 140px;
+}
 
-        .section { 
-            background: var(--card); 
-            padding: 20px; 
-            border-radius: 15px; 
-            border-left: 5px solid var(--primary);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-        }
+/* HEADER */
+header { 
+    background: var(--primary); 
+    padding: 15px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    position: sticky; 
+    top: 0; 
+    z-index: 1000;
+}
 
-        .section h4 { margin-top: 0; color: #ccc; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
-        
-        /* Mobile-Friendly Inputs */
-        input, select, button { 
-            width: 100%; padding: 12px; margin: 8px 0; 
-            border-radius: 10px; border: 1px solid #333; 
-            background: #000; color: white; font-size: 16px; 
-        }
+/* PROFILE */
+#profileSection {
+    display: flex;
+    justify-content: center;
+    padding: 25px 10px;
+}
 
-        button { background: var(--primary); border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        button:active { opacity: 0.7; }
-        
-        /* Admin Dashboard */
-        #adminDashboard { 
-            display: none; background: #151515; margin: 20px auto; padding: 20px; 
-            border: 2px dashed var(--accent); border-radius: 15px; max-width: 600px;
-        }
+#profilePic { 
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; 
+    border: 4px solid var(--primary); 
+    object-fit: cover;
+}
 
-        .item-card { 
-            background: #252525; padding: 15px; border-radius: 10px; 
-            margin-top: 15px; border-bottom: 2px solid #333;
-        }
-        .item-card img { max-width: 100%; border-radius: 8px; margin: 10px 0; display: block; }
-        .del-btn { background: var(--delete); width: auto; padding: 5px 15px; font-size: 14px; margin-top: 10px; }
+/* GRID */
+.container { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+    gap: 15px; 
+    padding: 10px; 
+}
 
-        /* Fixed Mobile Search Bar */
-        #chatbot { 
-            position: fixed; bottom: 0; right: 0; left: 0; 
-            background: #111; border-top: 2px solid var(--primary); padding: 10px;
-            z-index: 2000;
-        }
-        .chat-row { display: flex; gap: 8px; max-width: 800px; margin: 0 auto; }
-        #chatIn { margin: 0; flex: 1; border: 1px solid var(--primary); }
-    </style>
+.section { 
+    background: var(--card); 
+    padding: 15px; 
+    border-radius: 15px; 
+    border-left: 4px solid var(--primary);
+}
+
+.section h4 { 
+    margin-top: 0; 
+    color: #ccc; 
+}
+
+/* INPUTS */
+input, select, button { 
+    width: 100%; 
+    padding: 12px; 
+    margin: 8px 0; 
+    border-radius: 10px; 
+    border: 1px solid #333; 
+    background: #000; 
+    color: white; 
+    font-size: 16px; 
+}
+
+button { 
+    background: var(--primary); 
+    border: none; 
+    cursor: pointer; 
+}
+
+button:active { opacity: 0.7; }
+
+/* ADMIN */
+#adminDashboard { 
+    display: none; 
+    background: #151515; 
+    margin: 15px auto; 
+    padding: 15px; 
+    border-radius: 15px; 
+    width: 95%;
+}
+
+/* CARDS */
+.item-card { 
+    background: #252525; 
+    padding: 10px; 
+    border-radius: 10px; 
+    margin-top: 10px; 
+}
+
+.item-card img { 
+    width: 100%; 
+    border-radius: 8px; 
+    margin-top: 8px; 
+}
+
+.del-btn { 
+    background: var(--delete); 
+    margin-top: 8px; 
+}
+
+/* SEARCH BAR */
+#chatbot { 
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    background: #111; 
+    padding: 10px;
+    border-top: 2px solid var(--primary);
+}
+
+.chat-row { 
+    display: flex; 
+    gap: 8px; 
+}
+
+#chatIn { flex: 1; }
+
+/* MOBILE FIX */
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
+
 <body>
 
 <header>
-    <strong style="font-size: 1.2rem;">APM 2025-2029</strong>
-    <div onclick="askPass()" style="font-size:24px; cursor:pointer; padding: 5px;">⋮</div>
+    <strong>APM 2025-2029</strong>
+    <div onclick="askPass()" style="font-size:22px; cursor:pointer;">⋮</div>
 </header>
 
 <div id="profileSection">
-    <img id="profilePic" src="https://via.placeholder.com/110">
+    <img id="profilePic" src="https://via.placeholder.com/100">
 </div>
 
 <div id="adminDashboard">
-    <h3 style="margin-top:0">🛠 Admin Control Panel</h3>
-    <label>Change Profile Picture:</label>
+    <h3>Admin Panel</h3>
+
     <input type="file" id="dpUpload" accept="image/*">
-    <hr style="border: 0.5px solid #333; margin: 15px 0;">
+
     <select id="secSelect">
-        <option value="notice">📢 Important Notice</option>
-        <option value="announcement">📣 Announcement</option>
-        <option value="study">📚 Study Material</option>
-        <option value="practical">🔬 Practical</option>
+        <option value="notice">Notice</option>
+        <option value="announcement">Announcement</option>
+        <option value="study">Study</option>
+        <option value="practical">Practical</option>
     </select>
+
     <input type="text" id="textIn" placeholder="Write something...">
     <input type="file" id="fileIn" accept="image/*">
-    <button onclick="publish()">Update Page</button>
+
+    <button onclick="publish()">Post</button>
 </div>
 
 <div class="container">
@@ -123,7 +185,7 @@
 <div id="chatbot">
     <div class="chat-row">
         <input type="text" id="chatIn" placeholder="Search Google...">
-        <button onclick="doSearch()" style="width:80px">Go</button>
+        <button onclick="doSearch()">Go</button>
     </div>
 </div>
 
@@ -132,94 +194,72 @@ const PASS = "apmarya81120252026chatt9476gcetts";
 
 window.onload = () => {
     const pic = localStorage.getItem("apm_p");
-    if(pic) document.getElementById("profilePic").src = pic;
+    if(pic) profilePic.src = pic;
     refreshUI();
 };
 
 function askPass() {
-    if(prompt("Enter Admin Password:") === PASS) {
-        document.getElementById("adminDashboard").style.display = "block";
-        refreshUI(); // Reload to show delete buttons
-        window.scrollTo(0, 0);
-    } else {
-        alert("Access Denied.");
-    }
+    if(prompt("Enter Password") === PASS) {
+        adminDashboard.style.display = "block";
+        refreshUI();
+        window.scrollTo(0,0);
+    } else alert("Wrong Password");
 }
 
 function refreshUI() {
-    const sections = ['notice', 'announcement', 'study', 'practical'];
-    sections.forEach(s => {
-        const target = document.getElementById(s);
-        target.innerHTML = '';
-        const saved = JSON.parse(localStorage.getItem("apm_"+s)) || [];
-        saved.forEach(item => render(s, item.t, item.f, item.id));
+    ["notice","announcement","study","practical"].forEach(s => {
+        const data = JSON.parse(localStorage.getItem("apm_"+s)) || [];
+        document.getElementById(s).innerHTML = "";
+        data.forEach(i => render(s,i.t,i.f,i.id));
     });
 }
 
-document.getElementById("dpUpload").onchange = function() {
+dpUpload.onchange = function() {
     const reader = new FileReader();
-    reader.onload = (e) => {
-        const img = new Image();
-        img.src = e.target.result;
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = 200; canvas.height = 200;
-            ctx.drawImage(img, 0, 0, 200, 200);
-            const smallPic = canvas.toDataURL('image/jpeg', 0.8);
-            document.getElementById("profilePic").src = smallPic;
-            localStorage.setItem("apm_p", smallPic);
-        };
+    reader.onload = e => {
+        profilePic.src = e.target.result;
+        localStorage.setItem("apm_p", e.target.result);
     };
     reader.readAsDataURL(this.files[0]);
 };
 
 function publish() {
-    const s = document.getElementById("secSelect").value;
-    const t = document.getElementById("textIn").value;
-    const f = document.getElementById("fileIn").files[0];
+    const s = secSelect.value;
+    const t = textIn.value;
+    const f = fileIn.files[0];
     const id = Date.now();
 
-    if(!t && !f) return alert("Please add text or an image.");
+    if(!t && !f) return alert("Add something");
 
-    if(f) {
-        const reader = new FileReader();
-        reader.onload = (e) => save(s, t, e.target.result, id);
-        reader.readAsDataURL(f);
-    } else {
-        save(s, t, null, id);
-    }
+    if(f){
+        const r = new FileReader();
+        r.onload = e => save(s,t,e.target.result,id);
+        r.readAsDataURL(f);
+    } else save(s,t,null,id);
 }
 
-function save(s, t, f, id) {
-    try {
-        const data = JSON.parse(localStorage.getItem("apm_"+s)) || [];
-        data.push({id, t, f});
-        localStorage.setItem("apm_"+s, JSON.stringify(data));
-        render(s, t, f, id);
-        document.getElementById("textIn").value = "";
-        document.getElementById("fileIn").value = "";
-    } catch(e) {
-        alert("Storage Full! Use smaller images.");
-    }
+function save(s,t,f,id){
+    const data = JSON.parse(localStorage.getItem("apm_"+s)) || [];
+    data.push({id,t,f});
+    localStorage.setItem("apm_"+s, JSON.stringify(data));
+    render(s,t,f,id);
+    textIn.value = "";
+    fileIn.value = "";
 }
 
-function render(s, t, f, id) {
+function render(s,t,f,id){
     const div = document.createElement("div");
     div.className = "item-card";
-    div.innerHTML = `<p style="margin:0; line-height:1.5;">${t}</p>${f ? `<img src="${f}">` : ''}`;
+    div.innerHTML = `<p>${t}</p>${f ? `<img src="${f}">` : ""}`;
 
-    // Admin-Only Delete Check
-    if(document.getElementById("adminDashboard").style.display === "block") {
+    if(adminDashboard.style.display === "block"){
         const btn = document.createElement("button");
-        btn.innerHTML = "🗑 Delete";
+        btn.innerText = "Delete";
         btn.className = "del-btn";
         btn.onclick = () => {
-            if(confirm("Permanently delete this?")) {
-                div.remove();
-                let list = JSON.parse(localStorage.getItem("apm_"+s));
-                localStorage.setItem("apm_"+s, JSON.stringify(list.filter(i => i.id !== id)));
-            }
+            div.remove();
+            let data = JSON.parse(localStorage.getItem("apm_"+s));
+            localStorage.setItem("apm_"+s, JSON.stringify(data.filter(i=>i.id!==id)));
         };
         div.appendChild(btn);
     }
@@ -227,8 +267,8 @@ function render(s, t, f, id) {
     document.getElementById(s).prepend(div);
 }
 
-function doSearch() {
-    const q = document.getElementById("chatIn").value;
+function doSearch(){
+    const q = chatIn.value;
     if(q) window.open("https://www.google.com/search?q="+encodeURIComponent(q));
 }
 </script>
