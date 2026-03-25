@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APM 2025-2029</title>
+
+<style>
+body{
+background:black;
+color:white;
+font-family:Arial;
+margin:0;
+}
+
+header{
+background:violet;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.section{
+padding:20px;
+border-bottom:1px solid gray;
+}
+
+.chatbot{
+position:fixed;
+right:20px;
+bottom:20px;
+background:#222;
+padding:15px;
+border-radius:50%;
+cursor:pointer;
+}
+
+.chatbox{
+position:fixed;
+right:20px;
+bottom:80px;
+background:#111;
+width:300px;
+display:none;
+padding:10px;
+}
+
+img{
+max-width:200px;
+}
+</style>
+</head>
+
+<body>
+
+<header>APM 2025 - 2029</header>
+
+<div class="section">
+<h2>1. Important Notice</h2>
+<div id="notice"></div>
+</div>
+
+<div class="section">
+<h2>2. Announcement</h2>
+<div id="announce"></div>
+</div>
+
+<div class="section">
+<h2>3. Study Material</h2>
+<div id="study"></div>
+</div>
+
+<div class="section">
+<h2>4. Practical</h2>
+<div id="practical"></div>
+</div>
+
+<h3 style="padding:20px">Admin Upload</h3>
+<div style="padding:20px">
+<input type="password" id="pass" placeholder="Password">
+<input type="file" id="file">
+<textarea id="text" placeholder="Enter text"></textarea>
+
+<select id="section">
+<option value="notice">Important Notice</option>
+<option value="announce">Announcement</option>
+<option value="study">Study Material</option>
+<option value="practical">Practical</option>
+</select>
+
+<button onclick="upload()">Upload</button>
+</div>
+
+<div class="chatbox" id="chatbox">
+<div id="chatlog"></div>
+<input id="q">
+<button onclick="ask()">Send</button>
+</div>
+
+<div class="chatbot" onclick="toggle()">🤖</div>
+
+<script>
+const adminPassword="apmarya81120252026chatt9476gcetts";
+
+function upload(){
+let pass=document.getElementById("pass").value;
+
+if(pass!==adminPassword){
+alert("Only admin can upload");
+return;
+}
+
+let section=document.getElementById("section").value;
+let file=document.getElementById("file").files[0];
+let text=document.getElementById("text").value;
+
+if(text){
+let p=document.createElement("p");
+p.textContent=text;
+document.getElementById(section).appendChild(p);
+}
+
+if(file){
+let reader=new FileReader();
+reader.onload=function(e){
+
+if(file.type.includes("image")){
+let img=document.createElement("img");
+img.src=e.target.result;
+document.getElementById(section).appendChild(img);
+}
+else if(file.type==="application/pdf"){
+let a=document.createElement("a");
+a.href=e.target.result;
+a.target="_blank";
+a.textContent="Open PDF";
+document.getElementById(section).appendChild(a);
+}
+
+};
+reader.readAsDataURL(file);
+}
+}
+
+function toggle(){
+let c=document.getElementById("chatbox");
+c.style.display=c.style.display==="block"?"none":"block";
+}
+
+function ask(){
+let q=document.getElementById("q").value.toLowerCase();
+let bad=["kill","suicide","religion","politics","attack"];
+
+for(let w of bad){
+if(q.includes(w)){
+chatlog.innerHTML+="<p>Sorry I cant answer</p>";
+return;
+}
+}
+
+window.open("https://www.google.com/search?q="+q);
+chatlog.innerHTML+="<p>Searching... if you have any more doubt contact to our respected crs</p>";
+}
+</script>
+
+</body>
+</html>
