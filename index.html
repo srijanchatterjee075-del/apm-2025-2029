@@ -2,23 +2,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>APM 2025-2029</title>
 
 <style>
 body{
 margin:0;
 font-family:Arial, sans-serif;
-background:#0b0b0b;
+background:#0a0a0a;
 color:white;
 }
 
+/* Header */
 header{
 background:#8a2be2;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:12px 20px;
+padding:14px 18px;
 font-size:22px;
 font-weight:bold;
 position:sticky;
@@ -31,12 +32,41 @@ cursor:pointer;
 font-size:26px;
 }
 
+/* Container */
 .container{
 max-width:900px;
 margin:auto;
 padding:15px;
 }
 
+/* Profile section */
+#profile{
+text-align:center;
+padding:20px 10px;
+}
+
+#dp{
+width:110px;
+height:110px;
+border-radius:50%;
+border:4px solid #8a2be2;
+object-fit:cover;
+background:#222;
+box-shadow:0 0 12px #8a2be2;
+}
+
+/* Mobile fix */
+@media (max-width:600px){
+#dp{
+width:90px;
+height:90px;
+}
+header{
+font-size:18px;
+}
+}
+
+/* Sections */
 .section{
 background:#1a1a1a;
 padding:15px;
@@ -49,6 +79,7 @@ color:#ee82ee;
 margin-top:0;
 }
 
+/* Cards */
 .card{
 background:#222;
 padding:12px;
@@ -56,19 +87,25 @@ margin-top:10px;
 border-radius:8px;
 }
 
-img{
-max-width:100%;
+/* Inputs */
+input,select{
+width:100%;
+padding:10px;
+margin-top:8px;
 border-radius:6px;
+border:none;
+background:#000;
+color:white;
 }
 
 button{
 background:#8a2be2;
 color:white;
 border:none;
-padding:8px 14px;
+padding:8px 12px;
 border-radius:6px;
 cursor:pointer;
-margin-top:6px;
+margin-top:8px;
 }
 
 button:hover{
@@ -79,35 +116,12 @@ background:#a64dff;
 background:red;
 }
 
-input,select{
-width:100%;
-padding:10px;
-margin-top:6px;
-border-radius:6px;
-border:none;
-background:#000;
-color:white;
-}
-
-#profile{
-text-align:center;
-padding:20px;
-}
-
-#profile img{
-width:100px;
-height:100px;
-border-radius:50%;
-border:3px solid #8a2be2;
-object-fit:cover;
-}
-
-/* Admin panel */
-#adminPanel{
+/* Admin Panel */
+#admin{
 display:none;
 background:#111;
-padding:20px;
-margin-top:20px;
+padding:15px;
+margin-top:15px;
 border-radius:10px;
 }
 
@@ -116,10 +130,11 @@ border-radius:10px;
 position:fixed;
 bottom:20px;
 right:20px;
-width:260px;
+width:250px;
 background:#111;
 border:2px solid #8a2be2;
 border-radius:12px;
+overflow:hidden;
 }
 
 #chatHeader{
@@ -128,7 +143,7 @@ padding:8px;
 font-weight:bold;
 }
 
-#chatMessages{
+#chatBox{
 height:120px;
 overflow:auto;
 padding:8px;
@@ -154,16 +169,18 @@ width:60px;
 
 <header>
 APM 2025-2029
-<div class="menu" onclick="login()">⋮</div>
+<div class="menu" onclick="adminLogin()">⋮</div>
 </header>
 
 <div class="container">
 
+<!-- Profile -->
 <div id="profile">
-<img id="dp" src="https://via.placeholder.com/100">
+<img id="dp" src="https://via.placeholder.com/110">
 </div>
 
-<div id="adminPanel">
+<!-- Admin Panel -->
+<div id="admin">
 <h2>Admin Panel</h2>
 
 <label>Change DP</label>
@@ -205,9 +222,10 @@ APM 2025-2029
 
 </div>
 
+<!-- Chatbot -->
 <div id="chatbot">
 <div id="chatHeader">Search Bot</div>
-<div id="chatMessages"></div>
+<div id="chatBox"></div>
 <div class="chatRow">
 <input id="chatInput">
 <button id="chatBtn" onclick="search()">Go</button>
@@ -216,31 +234,44 @@ APM 2025-2029
 
 <script>
 
-const PASSWORD="apmarya81120252026chatt9476gcetts";
+const PASS="apmarya81120252026chatt9476gcetts";
 
-function login(){
+/* Admin Login */
+function adminLogin(){
 let p=prompt("Enter admin password");
-if(p===PASSWORD){
-document.getElementById("adminPanel").style.display="block";
+if(p===PASS){
+document.getElementById("admin").style.display="block";
 }else{
 alert("Wrong password");
 }
 }
 
+/* Load saved DP */
+window.onload=function(){
+let saved=localStorage.getItem("dpImage");
+if(saved){
+document.getElementById("dp").src=saved;
+}
+}
+
+/* Change DP */
 document.getElementById("dpUpload").onchange=function(){
 let reader=new FileReader();
 reader.onload=e=>{
 document.getElementById("dp").src=e.target.result;
+localStorage.setItem("dpImage",e.target.result);
 };
 reader.readAsDataURL(this.files[0]);
-};
+}
 
+/* Upload content */
 function upload(){
 let sec=document.getElementById("section").value;
 let text=document.getElementById("text").value;
 let file=document.getElementById("file").files[0];
 
 let container=document.getElementById(sec);
+
 let card=document.createElement("div");
 card.className="card";
 
@@ -252,22 +283,21 @@ card.appendChild(p);
 
 if(file){
 let reader=new FileReader();
-
 reader.onload=e=>{
 if(file.type.startsWith("image")){
 let img=document.createElement("img");
 img.src=e.target.result;
+img.style.width="100%";
 card.appendChild(img);
 }else{
-let a=document.createElement("a");
-a.href=e.target.result;
-a.target="_blank";
-a.textContent="Open File";
-a.style.color="violet";
-card.appendChild(a);
+let link=document.createElement("a");
+link.href=e.target.result;
+link.target="_blank";
+link.textContent="Open File";
+link.style.color="violet";
+card.appendChild(link);
 }
 };
-
 reader.readAsDataURL(file);
 }
 
@@ -283,15 +313,15 @@ document.getElementById("text").value="";
 document.getElementById("file").value="";
 }
 
+/* Chatbot Google Search */
 function search(){
 let q=document.getElementById("chatInput").value;
-
 if(!q) return;
 
-let chat=document.getElementById("chatMessages");
+let chat=document.getElementById("chatBox");
 
 chat.innerHTML+=`<div>You: ${q}</div>`;
-chat.innerHTML+=`<div style="color:violet">Searching Google...</div>`;
+chat.innerHTML+=`<div style="color:violet">Searching...</div>`;
 
 window.open("https://www.google.com/search?q="+encodeURIComponent(q));
 
