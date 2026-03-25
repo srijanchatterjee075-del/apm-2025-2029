@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APM 2025-2029 | Secure Portal</title>
+    <title>APM 2025-2029 | Secure Hub</title>
     <style>
         :root {
             --primary: #8a2be2;
@@ -16,16 +16,16 @@
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            padding-bottom: 50px;
+            padding-bottom: 80px;
         }
 
-        /* Header & Menu */
+        /* Top Navigation */
         header {
             background: var(--primary);
             padding: 15px 20px;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             display: flex;
             justify-content: space-between;
@@ -33,123 +33,140 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .menu-dots {
             cursor: pointer;
-            font-size: 28px;
+            font-size: 30px;
             padding: 0 10px;
-            transition: 0.3s;
+            line-height: 1;
         }
 
-        .menu-dots:hover { color: var(--bg); }
-
-        /* Profile Box */
-        #profileArea {
+        /* Profile Display */
+        #headerProfile {
             text-align: center;
-            padding: 20px;
+            padding: 30px 10px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
         }
 
         #profilePic {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            border: 3px solid var(--primary);
+            border: 4px solid var(--bg);
             object-fit: cover;
             background: #222;
+            box-shadow: 0 0 15px var(--primary);
         }
 
-        /* Admin Dashboard (Hidden by Default) */
+        /* Secret Admin Dashboard */
         #adminDashboard {
-            display: none; /* Controlled by JS */
-            background: #222;
+            display: none;
+            background: #1a1a1a;
             margin: 20px;
-            padding: 20px;
+            padding: 25px;
             border-radius: 15px;
-            border: 2px dashed var(--primary);
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 20px rgba(238, 130, 238, 0.2);
         }
 
-        /* UI Elements */
+        .admin-tool {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        /* Layout & Content */
         .section {
-            max-width: 900px;
+            max-width: 850px;
             margin: 20px auto;
             padding: 20px;
             background: var(--card);
-            border-radius: 10px;
+            border-radius: 12px;
+            text-align: left;
         }
 
-        h2 { color: var(--accent); border-bottom: 1px solid #333; }
+        h2 { color: var(--accent); font-size: 1.2rem; border-left: 4px solid var(--primary); padding-left: 10px; }
 
         input, select, button {
-            padding: 10px;
-            margin: 5px;
-            border-radius: 5px;
-            border: 1px solid #444;
-            background: #111;
+            padding: 12px;
+            margin: 8px 0;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #000;
             color: white;
         }
 
         button {
             background: var(--primary);
             border: none;
-            cursor: pointer;
             font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-        button:hover { background: var(--accent); }
+        button:hover { background: var(--accent); color: black; }
 
-        .delete-btn { background: #ff4444; font-size: 12px; margin-top: 5px; }
+        .delete-btn { background: #d00; width: auto; padding: 5px 15px; font-size: 12px; }
 
         /* Chatbot */
         #chatbot {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 280px;
+            width: 260px;
             background: #111;
             border: 2px solid var(--primary);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,1);
         }
 
-        #chatHeader { background: var(--primary); padding: 10px; font-weight: bold; }
-        #chatMessages { height: 150px; overflow-y: auto; padding: 10px; font-size: 14px; text-align: left;}
-        .chat-input-area { display: flex; padding: 5px; }
-        #chatInput { flex: 1; }
+        #chatHeader { background: var(--primary); padding: 10px; font-weight: bold; font-size: 14px; }
+        #chatMessages { height: 120px; overflow-y: auto; padding: 10px; font-size: 13px; border-bottom: 1px solid #222; }
+        .chat-input-row { display: flex; padding: 5px; background: #000; }
+        #chatInput { margin: 0; border-radius: 5px 0 0 5px; }
+        #chatBtn { width: 60px; margin: 0; border-radius: 0 5px 5px 0; }
 
-        img.content-img { max-width: 100%; border-radius: 8px; margin-top: 10px; }
+        .item-card { background: #222; padding: 15px; border-radius: 8px; margin: 10px 0; }
+        .content-img { max-width: 100%; border-radius: 5px; margin: 10px 0; }
     </style>
 </head>
 <body>
 
 <header>
     <span>APM 2025-2029</span>
-    <div class="menu-dots" onclick="toggleAdmin()">⋮</div>
+    <div class="menu-dots" onclick="openAdmin()">⋮</div>
 </header>
 
-<div id="profileArea">
-    <img id="profilePic" src="https://via.placeholder.com/100" alt="Profile">
-    <br>
-    <input type="file" id="dpUpload" accept="image/*" style="display:none">
-    <button onclick="document.getElementById('dpUpload').click()">Update Photo</button>
+<div id="headerProfile">
+    <img id="profilePic" src="https://via.placeholder.com/110" alt="Admin Pic">
 </div>
 
-<div id="adminDashboard" class="section">
-    <h2 style="margin-top:0">🛠️ Admin Upload</h2>
-    <select id="sectionSelect">
-        <option value="notice">Important Notice</option>
-        <option value="announcement">Announcement</option>
-        <option value="study">Study Material</option>
-        <option value="practical">Practical</option>
-    </select>
-    <br>
-    <input type="text" id="textInput" placeholder="Write something..." style="width:80%">
-    <br>
-    <input type="file" id="fileInput">
-    <br>
-    <button onclick="upload()">Post to Portal</button>
-    <button onclick="closeAdmin()" style="background:#444">Lock Dashboard</button>
+<div id="adminDashboard">
+    <h2 style="border:none; text-align:center">⚙️ ADMIN CONTROL PANEL</h2>
+    
+    <div class="admin-tool">
+        <label>Update Main Profile Picture:</label>
+        <input type="file" id="dpUpload" accept="image/*">
+    </div>
+
+    <div class="admin-tool">
+        <label>Post New Content:</label>
+        <select id="sectionSelect">
+            <option value="notice">Important Notice</option>
+            <option value="announcement">Announcement</option>
+            <option value="study">Study Material</option>
+            <option value="practical">Practical</option>
+        </select>
+        <input type="text" id="textInput" placeholder="Message or Title">
+        <input type="file" id="fileInput">
+        <button onclick="publish()">Publish to Portal</button>
+    </div>
+
+    <button onclick="document.getElementById('adminDashboard').style.display='none'" style="background:#333">Close & Lock</button>
 </div>
 
 <div class="section"><h2>📢 Important Notice</h2><div id="notice"></div></div>
@@ -158,63 +175,58 @@
 <div class="section"><h2>🔬 Practical</h2><div id="practical"></div></div>
 
 <div id="chatbot">
-    <div id="chatHeader">🤖 APM Bot (Search)</div>
-    <div id="chatMessages"><div style="color:#888">Ask me anything, I'll find it on Google!</div></div>
-    <div class="chat-input-area">
-        <input type="text" id="chatInput" placeholder="Ask...">
-        <button onclick="ask()">Go</button>
+    <div id="chatHeader">🤖 Search Assistant</div>
+    <div id="chatMessages"><div>How can I help you today?</div></div>
+    <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="Google search...">
+        <button id="chatBtn" onclick="googleSearch()">Go</button>
     </div>
 </div>
 
 <script>
-const PASS = "apmarya81120252026chatt9476gcetts";
+const ACCESS_KEY = "apmarya81120252026chatt9476gcetts";
 
-// 1. Admin Toggle Logic
-function toggleAdmin() {
-    let check = prompt("Enter Admin Password to unlock dashboard:");
-    if (check === PASS) {
+// 1. Admin Access
+function openAdmin() {
+    let ask = prompt("Enter Admin Password:");
+    if (ask === ACCESS_KEY) {
         document.getElementById("adminDashboard").style.display = "block";
-        window.scrollTo(0, 0);
+        window.scrollTo({top: 0, behavior: 'smooth'});
     } else {
-        alert("Access Denied!");
+        alert("Wrong Password. Access Denied.");
     }
 }
 
-function closeAdmin() {
-    document.getElementById("adminDashboard").style.display = "none";
-}
-
-// 2. Persistent Profile Pic
+// 2. Profile Pic Logic (Stored in LocalStorage)
 window.onload = () => {
-    const saved = localStorage.getItem("apm_dp");
-    if(saved) document.getElementById("profilePic").src = saved;
+    const savedImg = localStorage.getItem("apm_admin_pic");
+    if(savedImg) document.getElementById("profilePic").src = savedImg;
 };
 
 document.getElementById("dpUpload").addEventListener("change", function() {
     const reader = new FileReader();
     reader.onload = (e) => {
-        document.getElementById("profilePic").src = e.target.result;
-        localStorage.setItem("apm_dp", e.target.result);
+        const data = e.target.result;
+        document.getElementById("profilePic").src = data;
+        localStorage.setItem("apm_admin_pic", data);
     };
     reader.readAsDataURL(this.files[0]);
 });
 
-// 3. Upload Logic
-function upload() {
+// 3. Publishing Content
+function publish() {
     const section = document.getElementById("sectionSelect").value;
     const text = document.getElementById("textInput").value;
     const file = document.getElementById("fileInput").files[0];
     const container = document.getElementById(section);
 
     const card = document.createElement("div");
-    card.style.background = "#252525";
-    card.style.padding = "10px";
-    card.style.margin = "10px 0";
-    card.style.borderRadius = "8px";
+    card.className = "item-card";
 
     if(text) {
         const p = document.createElement("p");
         p.textContent = text;
+        p.style.margin = "0 0 10px 0";
         card.appendChild(p);
     }
 
@@ -227,49 +239,48 @@ function upload() {
                 img.className = "content-img";
                 card.appendChild(img);
             } else {
-                const a = document.createElement("a");
-                a.href = e.target.result;
-                a.textContent = "📄 View Document: " + file.name;
-                a.style.color = "cyan";
-                a.target = "_blank";
-                card.appendChild(a);
+                const link = document.createElement("a");
+                link.href = e.target.result;
+                link.textContent = "📄 Document: " + file.name;
+                link.style.color = "violet";
+                link.target = "_blank";
+                card.appendChild(link);
             }
         };
         reader.readAsDataURL(file);
     }
 
     const del = document.createElement("button");
-    del.textContent = "Delete Item";
+    del.textContent = "Delete";
     del.className = "delete-btn";
     del.onclick = () => card.remove();
     
-    card.appendChild(document.createElement("br"));
     card.appendChild(del);
     container.prepend(card);
-    
-    // Clear
+
+    // Clear Inputs
     document.getElementById("textInput").value = "";
     document.getElementById("fileInput").value = "";
 }
 
-// 4. Automatic Google Chatbot
-function ask() {
-    const q = document.getElementById("chatInput").value;
-    if(!q) return;
+// 4. Chatbot Auto-Google Logic
+function googleSearch() {
+    const query = document.getElementById("chatInput").value;
+    if(!query) return;
 
     const chat = document.getElementById("chatMessages");
-    chat.innerHTML += `<div><b>You:</b> ${q}</div>`;
-    chat.innerHTML += `<div style="color:var(--accent)"><b>Bot:</b> Opening Google...</div>`;
+    chat.innerHTML += `<div style="text-align:right; color:violet;"><b>You:</b> ${query}</div>`;
+    chat.innerHTML += `<div style="color:lime;"><b>Bot:</b> Searching Google...</div>`;
 
-    // Opens Google automatically in a new tab
-    window.open(`https://www.google.com/search?q=${encodeURIComponent(q)}`, "_blank");
+    // Automatic redirect
+    window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, "_blank");
 
     document.getElementById("chatInput").value = "";
     chat.scrollTop = chat.scrollHeight;
 }
 
-// Enter key support for chat
-document.getElementById("chatInput").onkeydown = (e) => { if(e.key === "Enter") ask(); };
+// Enter key support
+document.getElementById("chatInput").onkeydown = (e) => { if(e.key === "Enter") googleSearch(); };
 
 </script>
 
