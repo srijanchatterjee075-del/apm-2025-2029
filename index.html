@@ -11,20 +11,16 @@ background:black;
 color:white;
 font-family:Arial;
 margin:0;
-padding:0;
 text-align:center;
 }
 
-/* Heading */
 header{
 background:violet;
-color:white;
 padding:15px;
 font-size:28px;
 font-weight:bold;
 }
 
-/* Sections */
 .section{
 margin:20px;
 padding:15px;
@@ -32,11 +28,10 @@ border:1px solid violet;
 border-radius:10px;
 }
 
-/* Profile Picture */
 #profileBox{
 position:fixed;
-top:20px;
-right:20px;
+top:15px;
+right:15px;
 }
 
 #profilePic{
@@ -48,12 +43,18 @@ object-fit:cover;
 background:black;
 }
 
+button{
+margin:5px;
+padding:6px 12px;
+cursor:pointer;
+}
+
 /* Chatbot */
 #chatbot{
 position:fixed;
 bottom:20px;
 right:20px;
-width:260px;
+width:270px;
 background:#111;
 border:1px solid violet;
 border-radius:10px;
@@ -61,7 +62,7 @@ border-radius:10px;
 
 #chatHeader{
 background:violet;
-padding:10px;
+padding:8px;
 font-weight:bold;
 }
 
@@ -70,15 +71,11 @@ height:200px;
 overflow:auto;
 padding:10px;
 font-size:14px;
+text-align:left;
 }
 
 #chatInput{
-width:80%;
-}
-
-button{
-margin:5px;
-padding:5px 10px;
+width:75%;
 }
 </style>
 </head>
@@ -87,7 +84,7 @@ padding:5px 10px;
 
 <header>APM 2025-2029</header>
 
-<!-- Profile DP -->
+<!-- Profile Picture -->
 <div id="profileBox">
 <img id="profilePic">
 <br>
@@ -97,6 +94,7 @@ padding:5px 10px;
 <!-- Admin Upload -->
 <div class="section">
 <h2>Admin Upload</h2>
+
 <input type="password" id="pass" placeholder="Enter Password">
 <br><br>
 
@@ -140,7 +138,7 @@ padding:5px 10px;
 
 <!-- Chatbot -->
 <div id="chatbot">
-<div id="chatHeader">🤖 Chat Bot</div>
+<div id="chatHeader">🤖 Study Chatbot</div>
 <div id="chatMessages"></div>
 <input id="chatInput">
 <button onclick="ask()">Send</button>
@@ -202,8 +200,8 @@ document.getElementById(section).appendChild(del);
 else if(file.type==="application/pdf"){
 let a=document.createElement("a");
 a.href=e.target.result;
-a.textContent="Open PDF";
 a.target="_blank";
+a.textContent="Open PDF";
 
 let del=document.createElement("button");
 del.textContent="Delete";
@@ -223,7 +221,7 @@ reader.readAsDataURL(file);
 
 }
 
-/* Profile Picture Upload */
+/* DP Upload */
 document.getElementById("dpUpload").addEventListener("change",function(){
 const file=this.files[0];
 if(file){
@@ -235,44 +233,46 @@ reader.readAsDataURL(file);
 }
 });
 
-/* Chatbot */
+/* Chatbot Logic */
+
 function ask(){
 
 let input=document.getElementById("chatInput").value.toLowerCase();
 let chat=document.getElementById("chatMessages");
 
-let msg=document.createElement("div");
-msg.textContent="You: "+input;
-chat.appendChild(msg);
+let userMsg=document.createElement("div");
+userMsg.textContent="You: "+input;
+chat.appendChild(userMsg);
 
 let reply=document.createElement("div");
 
-if(
-input.includes("kill") ||
-input.includes("suicide") ||
-input.includes("religion") ||
-input.includes("politics") ||
-input.includes("violence")
-){
-reply.textContent="Sorry I can't answer.";
+let greetings=["hi","hello","hey","thanks","thank you"];
+
+let studyWords=[
+"study","exam","physics","math","engineering",
+"formula","electrical","notes","question","problem"
+];
+
+let isGreeting=greetings.some(word => input.includes(word));
+let isStudy=studyWords.some(word => input.includes(word));
+
+if(isGreeting){
+reply.textContent="Hello 👋";
 }
-else if(
-input.includes("study") ||
-input.includes("exam") ||
-input.includes("engineering") ||
-input.includes("physics") ||
-input.includes("math")
-){
-reply.textContent="Searching on Google... If you have any more doubt contact to our respected crs.";
+
+else if(isStudy){
+reply.textContent="Searching answer on Google...";
+window.open("https://www.google.com/search?q="+input);
 }
+
 else{
 reply.textContent="Sorry I can't answer.";
 }
 
 chat.appendChild(reply);
-
 chat.scrollTop=chat.scrollHeight;
 
+document.getElementById("chatInput").value="";
 }
 
 </script>
