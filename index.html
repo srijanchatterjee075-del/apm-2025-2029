@@ -1,277 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APM 25-29</title>
-    <style>
-        :root {
-            --bg-color: #000000;
-            --text-color: #ffffff;
-            --highlight: #8a2be2;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTECH 25-29</title>
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+<style>
+body {
+  margin:0;
+  font-family: Arial;
+  background:black;
+  color:white;
+}
 
-        /* Header & DP */
-        #header-title {
-            font-size: 2rem;
-            font-weight: bold;
-            background-color: var(--highlight);
-            padding: 5px 15px;
-            cursor: pointer;
-            user-select: none;
-            margin-top: 10px;
-        }
+header {
+  text-align:center;
+  padding:15px;
+  font-size:24px;
+  font-weight:bold;
+}
 
-        #profile-pic {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--highlight);
-            margin-bottom: 10px;
-        }
+header span {
+  color:violet;
+}
 
-        /* Content Sections */
-        .container {
-            width: 100%;
-            max-width: 800px;
-            margin-top: 30px;
-        }
+#dp {
+  display:block;
+  margin:10px auto;
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  object-fit:cover;
+}
 
-        .section {
-            border-bottom: 1px solid #333;
-            padding: 15px 0;
-        }
+.container {
+  padding:10px;
+}
 
-        .section h2 {
-            color: var(--highlight);
-            text-transform: uppercase;
-            font-size: 1.2rem;
-        }
+.section {
+  background:#111;
+  margin:10px 0;
+  padding:10px;
+  border-radius:10px;
+}
 
-        .content-item {
-            margin: 10px 0;
-            word-wrap: break-word;
-        }
+.chatbot {
+  position:fixed;
+  bottom:10px;
+  left:10px;
+  width:250px;
+  background:#111;
+  border-radius:10px;
+  padding:10px;
+}
 
-        a { color: #bb86fc; }
+.chatbot input {
+  width:100%;
+  padding:5px;
+}
 
-        /* Admin Dashboard */
-        #admin-panel {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #1a1a1a;
-            padding: 20px;
-            border: 2px solid var(--highlight);
-            z-index: 100;
-            width: 90%;
-            max-width: 500px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
+.admin {
+  display:none;
+  position:fixed;
+  top:10%;
+  left:50%;
+  transform:translateX(-50%);
+  background:#222;
+  padding:15px;
+  border-radius:10px;
+}
 
-        input, textarea, select {
-            width: 100%;
-            margin-bottom: 10px;
-            background: #333;
-            color: white;
-            border: 1px solid var(--highlight);
-            padding: 8px;
-            box-sizing: border-box;
-        }
-
-        .btn {
-            background: var(--highlight);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        /* Chatbot */
-        #chat-wrapper {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 1000;
-        }
-
-        #chat-icon {
-            font-size: 40px;
-            cursor: pointer;
-            background: #1a1a1a;
-            border-radius: 50%;
-            padding: 5px;
-        }
-
-        #chat-box {
-            display: none;
-            width: 280px;
-            height: 350px;
-            background: #1a1a1a;
-            border: 1px solid var(--highlight);
-            flex-direction: column;
-        }
-
-        #chat-messages {
-            flex: 1;
-            padding: 10px;
-            overflow-y: auto;
-            font-size: 0.9rem;
-        }
-
-        .bot-msg { color: var(--highlight); margin-bottom: 5px; }
-        .user-msg { color: #00ff00; text-align: right; margin-bottom: 5px; }
-    </style>
+button {
+  margin-top:5px;
+}
+</style>
 </head>
+
 <body>
 
-    <img id="profile-pic" src="https://via.placeholder.com/120" alt="DP">
-    <div id="header-title" onclick="handleTitleClick()">APM 25 29</div>
+<header id="title">BTECH <span>25 29</span></header>
 
-    <div class="container">
-        <div class="section" id="sec-notice"><h2>1st Notice</h2><div class="list"></div></div>
-        <div class="section" id="sec-books"><h2>2nd Books</h2><div class="list"></div></div>
-        <div class="section" id="sec-practical"><h2>3rd Practical</h2><div class="list"></div></div>
-        <div class="section" id="sec-notes"><h2>4th Important Notes</h2><div class="list"></div></div>
-    </div>
+<!-- ✅ Eagle DP added -->
+<img id="dp" src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Bald_Eagle_Portrait.jpg">
 
-    <div id="admin-panel">
-        <h3>Admin Dashboard</h3>
-        <input type="text" id="admin-dp" placeholder="Paste Image URL for DP">
-        <select id="admin-category">
-            <option value="notice">1st Notice</option>
-            <option value="books">2nd Books</option>
-            <option value="practical">3rd Practical</option>
-            <option value="notes">4th Important Notes</option>
-        </select>
-        <textarea id="admin-text" rows="4" placeholder="Enter long text here..."></textarea>
-        <input type="text" id="admin-link" placeholder="Enter URL (optional)">
-        <button class="btn" onclick="uploadData()">Upload & Lock</button>
-        <button class="btn" style="background:red; margin-top:10px;" onclick="clearAllData()">Delete All Data</button>
-        <button class="btn" style="background:#555; margin-top:10px;" onclick="closeAdmin()">Close</button>
-    </div>
+<div class="container" id="content"></div>
 
-    <div id="chat-wrapper">
-        <div id="chat-icon" onclick="toggleChat()">😊</div>
-        <div id="chat-box">
-            <div id="chat-messages">
-                <div class="bot-msg">Hi, I am APM Chat Bot. How can I help you?</div>
-            </div>
-            <input type="text" id="chat-input" placeholder="Type and press Enter..." onkeypress="handleChat(event)">
-        </div>
-    </div>
+<div class="chatbot">
+  🤖<br>
+  <input id="chatInput" placeholder="Type message..." onkeydown="chat(event)">
+  <div id="chatOutput"></div>
+</div>
 
-    <script>
-        let clickCount = 0;
-        const PASS = "arya9476apm2529";
+<div class="admin" id="adminPanel">
+  <h3>Admin Panel</h3>
+  <input id="adminPass" placeholder="Password"><br>
+  <button onclick="login()">Login</button>
 
-        // Secret Admin Access
-        function handleTitleClick() {
-            clickCount++;
-            if (clickCount >= 10) {
-                let pswd = prompt("Enter Admin Password:");
-                if (pswd === PASS) {
-                    document.getElementById('admin-panel').style.display = 'block';
-                } else {
-                    alert("Wrong Password");
-                }
-                clickCount = 0;
-            }
-        }
+  <div id="adminContent" style="display:none;">
+    <textarea id="text" placeholder="Text"></textarea>
+    <input id="link" placeholder="Link">
+    <select id="section">
+      <option>Notice</option>
+      <option>Books</option>
+      <option>Practical</option>
+      <option>Important Notes</option>
+    </select>
+    <input type="file" id="dpUpload">
+    <button onclick="upload()">Upload & Lock</button>
+  </div>
+</div>
 
-        function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
+<script>
 
-        // Core Functionality: Upload
-        function uploadData() {
-            const cat = document.getElementById('admin-category').value;
-            const text = document.getElementById('admin-text').value;
-            const link = document.getElementById('admin-link').value;
-            const dp = document.getElementById('admin-dp').value;
+// ✅ Default data (Important Notes text added)
+let data = JSON.parse(localStorage.getItem("data")) || {
+  Notice:[],
+  Books:[],
+  Practical:[],
+  "Important Notes":[
+    {text:"ghgdhdejeh", link:""}
+  ]
+};
 
-            if (dp) localStorage.setItem('apm_dp', dp);
-            
-            const newItem = { text, link };
-            let data = JSON.parse(localStorage.getItem('apm_data')) || { notice:[], books:[], practical:[], notes:[] };
-            data[cat].push(newItem);
-            
-            localStorage.setItem('apm_data', JSON.stringify(data));
-            renderData();
-            closeAdmin();
-        }
+function render(){
+  let html="";
+  for(let key in data){
+    html += `<div class='section'><h3>${key}</h3>`;
 
-        function clearAllData() {
-            if(confirm("Delete everything?")) {
-                localStorage.removeItem('apm_data');
-                renderData();
-            }
-        }
+    data[key].forEach(d=>{
+      html += `<p>${d.text}</p>`;
+      if(d.link){
+        html += `<a href='${d.link}' target='_blank'>Open Link</a>`;
+      }
+    });
 
-        function renderData() {
-            const data = JSON.parse(localStorage.getItem('apm_data')) || { notice:[], books:[], practical:[], notes:[] };
-            const dp = localStorage.getItem('apm_dp');
-            if(dp) document.getElementById('profile-pic').src = dp;
+    html += `</div>`;
+  }
 
-            for (let cat in data) {
-                const container = document.querySelector(`#sec-${cat} .list`);
-                container.innerHTML = data[cat].map(item => `
-                    <div class="content-item">
-                        <p>${item.text}</p>
-                        ${item.link ? `<a href="${item.link}" target="_blank">View Link</a>` : ''}
-                    </div>
-                `).join('');
-            }
-        }
+  document.getElementById("content").innerHTML = html;
+}
 
-        // Chatbot Logic
-        function toggleChat() {
-            const box = document.getElementById('chat-box');
-            box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
-        }
+render();
 
-        function handleChat(e) {
-            if (e.key === 'Enter') {
-                const input = e.target.value.toLowerCase();
-                const chatMsgs = document.getElementById('chat-messages');
-                
-                chatMsgs.innerHTML += `<div class="user-msg">${input}</div>`;
-                
-                const greetings = ['hi', 'hello', 'hey', 'whatsup'];
-                const isGreeting = greetings.some(g => input.includes(g));
+// 🔐 Admin open (10 clicks)
+let clicks=0;
+document.getElementById("title").onclick=function(){
+  clicks++;
+  if(clicks>=10){
+    document.getElementById("adminPanel").style.display="block";
+  }
+};
 
-                if (isGreeting) {
-                    setTimeout(() => {
-                        chatMsgs.innerHTML += `<div class="bot-msg">Hi, I am APM Chat Bot. How can I help you?</div>`;
-                        chatMsgs.scrollTop = chatMsgs.scrollHeight;
-                    }, 500);
-                } else {
-                    window.open(`https://www.google.com/search?q=${input}`, '_blank');
-                    setTimeout(() => {
-                        chatMsgs.innerHTML += `<div class="bot-msg">For more, you should contact our respected CRS...</div>`;
-                        chatMsgs.scrollTop = chatMsgs.scrollHeight;
-                    }, 1000);
-                }
-                e.target.value = '';
-            }
-        }
+// 🔐 Login
+function login(){
+  let pass=document.getElementById("adminPass").value;
+  if(pass==="arya9476apm2529"){
+    document.getElementById("adminContent").style.display="block";
+  }
+}
 
-        // Initial Load
-        renderData();
-    </script>
+// ➕ Upload
+function upload(){
+  let text=document.getElementById("text").value;
+  let link=document.getElementById("link").value;
+  let section=document.getElementById("section").value;
+
+  if(text==="") return;
+
+  data[section].unshift({text,link});
+  localStorage.setItem("data",JSON.stringify(data));
+
+  // DP upload
+  let file=document.getElementById("dpUpload").files[0];
+  if(file){
+    let reader=new FileReader();
+    reader.onload=function(e){
+      localStorage.setItem("dp",e.target.result);
+      document.getElementById("dp").src=e.target.result;
+    }
+    reader.readAsDataURL(file);
+  }
+
+  render();
+}
+
+// Load saved DP
+let savedDP=localStorage.getItem("dp");
+if(savedDP) document.getElementById("dp").src=savedDP;
+
+// 🤖 Chatbot
+function chat(e){
+  if(e.key==='Enter'){
+    let msg=e.target.value.toLowerCase();
+    let out=document.getElementById("chatOutput");
+
+    if(msg.includes("hi")||msg.includes("hello")||msg.includes("hey")||msg.includes("whatsup")){
+      out.innerHTML="Hi I am APM chatbot, how can I help you?";
+    } else {
+      window.open("https://www.google.com/search?q="+msg);
+      out.innerHTML="For more contact CRS...";
+    }
+
+    e.target.value="";
+  }
+}
+
+</script>
+
 </body>
 </html>
