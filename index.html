@@ -6,205 +6,265 @@
 <title>BTECH 25-29</title>
 
 <style>
+:root{
+  --bg:#0b0b0f;
+  --card:#12121a;
+  --muted:#a0a0b2;
+  --accent:#8b5cf6; /* violet */
+  --accent-soft:rgba(139,92,246,0.15);
+}
+
+*{box-sizing:border-box}
+
 body {
   margin:0;
-  font-family: Arial;
-  background:black;
+  font-family: Inter, Arial, sans-serif;
+  background: radial-gradient(1200px 600px at 50% -200px, #1a1a2e 0%, var(--bg) 60%);
   color:white;
 }
 
 header {
   text-align:center;
-  padding:15px;
-  font-size:24px;
-  font-weight:bold;
+  padding:18px 10px 6px;
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:0.5px;
 }
 
 header span {
-  color:violet;
-}
-
-#dp {
-  display:block;
-  margin:10px auto;
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  object-fit:cover;
+  color:var(--accent);
 }
 
 .container {
-  padding:10px;
+  padding:14px;
+  max-width:820px;
+  margin:10px auto 80px;
 }
 
 .section {
-  background:#111;
-  margin:10px 0;
-  padding:10px;
-  border-radius:10px;
+  background:linear-gradient(180deg, #151522, #101019);
+  margin:14px 0;
+  padding:16px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+  border:1px solid rgba(255,255,255,0.05);
 }
+
+.section h3 {
+  color:var(--accent);
+  margin:0 0 10px;
+}
+
+.section p { margin:6px 0; color:#e5e7eb; }
+.section a { color:#c4b5fd; text-decoration:none; }
+.section a:hover { text-decoration:underline; }
+
+.badge {
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:#ddd6fe;
+  font-size:12px;
+  margin-left:6px;
+}
+
+.note-wrap{
+  position:fixed;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.note-box {
+  width:210px;
+  background:linear-gradient(180deg, #151522, #101019);
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:0 10px 25px rgba(0,0,0,0.6);
+}
+
+.note-title{ font-weight:700; }
+.note-sub{ color:var(--muted); font-size:12px; margin-left:6px; }
+
+.note-box textarea {
+  width:100%;
+  height:110px;
+  margin-top:8px;
+  background:#0b0b0f;
+  color:white;
+  border:1px solid #26263a;
+  border-radius:10px;
+  padding:8px;
+  resize:none;
+}
+
+.note-actions{ display:flex; gap:8px; margin-top:8px; }
+
+.btn{
+  flex:1;
+  padding:8px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  background:var(--accent);
+  color:white;
+}
+
+.btn.secondary{ background:#1f1f2e; }
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:20px;
+  transform:translateX(-50%);
+  background:#1f1f2e;
+  color:#e5e7eb;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:0 8px 20px rgba(0,0,0,0.5);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease, transform .25s ease;
+}
+.toast.show{ opacity:1; transform:translateX(-50%) translateY(-6px); }
 
 .chatbot {
   position:fixed;
-  bottom:10px;
-  left:10px;
-  width:250px;
-  background:#111;
-  border-radius:10px;
+  bottom:12px;
+  left:12px;
+  width:260px;
+  background:linear-gradient(180deg, #151522, #101019);
+  border-radius:14px;
   padding:10px;
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:0 10px 25px rgba(0,0,0,0.6);
 }
 
 .chatbot input {
   width:100%;
-  padding:5px;
-}
-
-.admin {
-  display:none;
-  position:fixed;
-  top:10%;
-  left:50%;
-  transform:translateX(-50%);
-  background:#222;
-  padding:15px;
+  padding:8px;
+  margin-top:6px;
   border-radius:10px;
+  border:1px solid #26263a;
+  background:#0b0b0f;
+  color:white;
 }
 
-button {
-  margin-top:5px;
+#chatOutput{ margin-top:6px; color:#d1d5db; font-size:14px; }
+
+/* small screens */
+@media(max-width:700px){
+  .note-wrap{ position:static; transform:none; margin:10px; }
+  .chatbot{ left:auto; right:10px; }
 }
 </style>
 </head>
 
 <body>
 
-<header id="title">BTECH <span>25 29</span></header>
+<header>BTECH <span>25 29</span></header>
 
-<!-- ✅ Eagle DP added -->
-<img id="dp" src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Bald_Eagle_Portrait.jpg">
+<!-- 📌 Note Box with save (only you can see) -->
+<div class="note-wrap">
+  <div class="note-box">
+    <div class="note-title">Notes <span class="note-sub">(only you can see)</span></div>
+    <textarea id="noteArea" placeholder="Write here..."></textarea>
+    <div class="note-actions">
+      <button class="btn" onclick="saveNote()">Save</button>
+      <button class="btn secondary" onclick="clearNote()">Clear</button>
+    </div>
+  </div>
+</div>
 
-<div class="container" id="content"></div>
+<div class="container">
 
+  <div class="section">
+    <h3>Notice</h3>
+    <p style="color:white;">NO UPDATE</p>
+  </div>
+
+  <div class="section">
+    <h3>Books</h3>
+    <p style="color:white;">NO UPDATE</p>
+  </div>
+
+  <div class="section">
+    <h3>Practical</h3>
+    <p style="color:white;">NO UPDATE</p>
+  </div>
+
+  <div class="section">
+    <h3>Important Notes</h3>
+    <p>math play list for 2nd sem</p>
+    <a href="https://youtube.com/playlist?list=PLn3Wz38keZOfqVnFaM5bhlGVj8pnKntfW&si=TkjuvCdfZabbt4WY" target="_blank">Open Playlist</a>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">Saved</div>
+
+<!-- 🤖 Chatbot -->
 <div class="chatbot">
   🤖<br>
   <input id="chatInput" placeholder="Type message..." onkeydown="chat(event)">
   <div id="chatOutput"></div>
 </div>
 
-<div class="admin" id="adminPanel">
-  <h3>Admin Panel</h3>
-  <input id="adminPass" placeholder="Password"><br>
-  <button onclick="login()">Login</button>
-
-  <div id="adminContent" style="display:none;">
-    <textarea id="text" placeholder="Text"></textarea>
-    <input id="link" placeholder="Link">
-    <select id="section">
-      <option>Notice</option>
-      <option>Books</option>
-      <option>Practical</option>
-      <option>Important Notes</option>
-    </select>
-    <input type="file" id="dpUpload">
-    <button onclick="upload()">Upload & Lock</button>
-  </div>
-</div>
-
 <script>
+// 📝 Notes (only you) with localStorage
+const NOTE_KEY = 'apm_note_v1';
+const noteArea = document.getElementById('noteArea');
 
-// ✅ Default data (Important Notes text added)
-let data = JSON.parse(localStorage.getItem("data")) || {
-  Notice:[],
-  Books:[],
-  Practical:[],
-  "Important Notes":[
-    {text:"ghgdhdejeh", link:""}
-  ]
-};
-
-function render(){
-  let html="";
-  for(let key in data){
-    html += `<div class='section'><h3>${key}</h3>`;
-
-    data[key].forEach(d=>{
-      html += `<p>${d.text}</p>`;
-      if(d.link){
-        html += `<a href='${d.link}' target='_blank'>Open Link</a>`;
-      }
-    });
-
-    html += `</div>`;
-  }
-
-  document.getElementById("content").innerHTML = html;
+function loadNote(){
+  const saved = localStorage.getItem(NOTE_KEY);
+  if(saved) noteArea.value = saved;
 }
 
-render();
-
-// 🔐 Admin open (10 clicks)
-let clicks=0;
-document.getElementById("title").onclick=function(){
-  clicks++;
-  if(clicks>=10){
-    document.getElementById("adminPanel").style.display="block";
-  }
-};
-
-// 🔐 Login
-function login(){
-  let pass=document.getElementById("adminPass").value;
-  if(pass==="arya9476apm2529"){
-    document.getElementById("adminContent").style.display="block";
-  }
+function saveNote(){
+  localStorage.setItem(NOTE_KEY, noteArea.value);
+  showToast('Saved');
 }
 
-// ➕ Upload
-function upload(){
-  let text=document.getElementById("text").value;
-  let link=document.getElementById("link").value;
-  let section=document.getElementById("section").value;
-
-  if(text==="") return;
-
-  data[section].unshift({text,link});
-  localStorage.setItem("data",JSON.stringify(data));
-
-  // DP upload
-  let file=document.getElementById("dpUpload").files[0];
-  if(file){
-    let reader=new FileReader();
-    reader.onload=function(e){
-      localStorage.setItem("dp",e.target.result);
-      document.getElementById("dp").src=e.target.result;
-    }
-    reader.readAsDataURL(file);
-  }
-
-  render();
+function clearNote(){
+  localStorage.removeItem(NOTE_KEY);
+  noteArea.value = '';
+  showToast('Cleared');
 }
 
-// Load saved DP
-let savedDP=localStorage.getItem("dp");
-if(savedDP) document.getElementById("dp").src=savedDP;
+function showToast(text){
+  const t = document.getElementById('toast');
+  t.textContent = text;
+  t.classList.add('show');
+  setTimeout(()=> t.classList.remove('show'), 1200);
+}
+
+loadNote();
+
+// 🔄 Real-time updates (auto refresh every 10s)
+setInterval(()=>{
+  // placeholder for future online data; currently just a visual ping
+  console.log('sync');
+}, 10000);
 
 // 🤖 Chatbot
 function chat(e){
   if(e.key==='Enter'){
     let msg=e.target.value.toLowerCase();
-    let out=document.getElementById("chatOutput");
+    let out=document.getElementById('chatOutput');
 
-    if(msg.includes("hi")||msg.includes("hello")||msg.includes("hey")||msg.includes("whatsup")){
-      out.innerHTML="Hi I am APM chatbot, how can I help you?";
+    if(msg.includes('hi')||msg.includes('hello')||msg.includes('hey')||msg.includes('whatsup')){
+      out.innerHTML='Hi I am APM chatbot, how can I help you?';
     } else {
-      window.open("https://www.google.com/search?q="+msg);
-      out.innerHTML="For more contact CRS...";
+      window.open('https://www.google.com/search?q='+encodeURIComponent(msg));
+      out.innerHTML='For more contact CRS...';
     }
 
-    e.target.value="";
+    e.target.value='';
   }
 }
-
 </script>
 
 </body>
