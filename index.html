@@ -22,13 +22,12 @@ header span{color:violet;}
 position:fixed;left:10px;top:50%;transform:translateY(-50%);
 width:240px;background:#111;padding:10px;border-radius:12px;
 }
-.notes input,.notes textarea,.notes button{
+.notes textarea,.notes button{
 width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;
 }
-.notes input,.notes textarea{background:#000;color:white;border:1px solid #333;}
+.notes textarea{background:#000;color:white;border:1px solid #333;}
 .notes button{background:violet;color:black;font-weight:bold;cursor:pointer;}
 .note-item{background:#000;margin-top:6px;padding:6px;border-radius:6px;font-size:13px;}
-.note-item a{color:violet;display:block;margin-top:4px;}
 
 .todo{background:#111;margin-top:15px;padding:12px;border-radius:12px;position:relative;}
 .todo input,.todo button{width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;}
@@ -62,7 +61,6 @@ width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;
 <div class="notes">
 <b>Notes (only you can see)</b>
 <textarea id="noteText" placeholder="Write note..."></textarea>
-<input id="noteLink" placeholder="Add link (optional)">
 <button onclick="addNote()">Save</button>
 <div id="noteList"></div>
 </div>
@@ -107,24 +105,22 @@ setInterval(()=>{
 document.getElementById("clock").innerText=new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"});
 },1000);
 
-// NOTES
+// NOTES (NO LINK)
 let notes=JSON.parse(localStorage.getItem("notes"))||[];
 function saveNotes(){localStorage.setItem("notes",JSON.stringify(notes));}
 
 function addNote(){
 let t=noteText.value;
-let l=noteLink.value;
 if(!t)return;
-notes.push({t,l});
+notes.push({t});
 saveNotes();
 renderNotes();
-noteText.value="";noteLink.value="";
+noteText.value="";
 }
 
 function delNote(i){notes.splice(i,1);saveNotes();renderNotes();}
 function editNote(i){
 noteText.value=notes[i].t;
-noteLink.value=notes[i].l||"";
 delNote(i);
 }
 
@@ -135,7 +131,6 @@ notes.forEach((n,i)=>{
 let div=document.createElement("div");
 div.className="note-item";
 div.innerHTML=`• ${n.t}
-${n.l?`<a href='${n.l}' target='_blank'>Open Link</a>`:""}
 <button onclick='editNote(${i})'>Edit</button>
 <button onclick='delNote(${i})'>Delete</button>`;
 box.appendChild(div);
@@ -200,44 +195,42 @@ document.getElementById("reminder").style.display=showReminder?"block":"none";
 }
 render();
 
-// CHATBOT (UPDATED ONLY THIS PART)
+// CHATBOT UPDATED
 let ask=false;
 function chatbot(e){
 if(e.key==='Enter'){
 let msg=e.target.value.toLowerCase().trim();
 let out=document.getElementById("out");
 
-// GREETINGS
-if(msg.includes("hi")||msg.includes("hello")||msg.includes("hey")||msg.includes("hei")||msg.includes("hii")){
+if(msg.includes("hi")||msg.includes("hello")||msg.includes("hey")){
 out.innerText="Hello 👋 How can I help you?";
 }
 
-// INTRO
 else if(msg.includes("i am")||msg.includes("i'm")||msg.includes("im ")||msg.startsWith("i ")){
 out.innerText="I am a chatbot 🤖, nice to meet you!";
 }
 
-// TASK
 else if(msg.includes("task")||msg.includes("work")||msg.includes("pending")){
 out.innerText="Do you want to see your tasks?";
 ask=true;
 }
 
-// YES
-else if(ask && (msg.includes("yes")||msg.includes("ha")||msg.includes("hmm"))){
+else if(ask && msg.includes("yes")){
 let p=tasks.filter(x=>!x.done).map(x=>x.t+" ("+new Date(x.d).toLocaleString()+")").join("\n");
 out.innerText=p||"No pending tasks";
 ask=false;
 }
 
-// SHOW TASKS
 else if(msg.includes("show my tasks")){
 out.innerText=tasks.map(x=>x.t+" ("+new Date(x.d).toLocaleString()+")").join("\n")||"No tasks";
 }
 
-// DEFAULT
 else{
+out.innerText="Searching on Google...";
+setTimeout(()=>{
 window.open("https://www.google.com/search?q="+encodeURIComponent(msg));
+out.innerText="For more contact to CRS";
+},800);
 }
 
 e.target.value="";
