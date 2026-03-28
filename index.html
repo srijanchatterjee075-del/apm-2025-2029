@@ -22,10 +22,16 @@ width:230px;background:#111;padding:12px;border-radius:12px;box-shadow:0 0 10px 
 width:100%;margin-top:6px;padding:6px;background:black;color:white;border:1px solid #333;border-radius:6px;
 }
 
-/* BIG CLOCK */
+/* ANIMATED CLOCK */
 .clock {
-text-align:center;margin-top:15px;font-size:22px;font-weight:bold;
-background:#111;padding:10px;border-radius:12px;box-shadow:0 0 12px rgba(138,43,226,0.3);
+text-align:center;margin-top:15px;font-size:26px;font-weight:bold;
+background:#111;padding:15px;border-radius:12px;
+box-shadow:0 0 20px rgba(138,43,226,0.6);
+animation: glow 1.5s infinite alternate;
+}
+@keyframes glow {
+from { box-shadow:0 0 10px violet; }
+to { box-shadow:0 0 25px violet; }
 }
 
 /* TODO */
@@ -33,9 +39,11 @@ background:#111;padding:10px;border-radius:12px;box-shadow:0 0 12px rgba(138,43,
 background:#111;margin:10px;padding:12px;border-radius:12px;box-shadow:0 0 10px rgba(138,43,226,0.2);
 }
 .todo input {width:100%;padding:6px;margin-top:5px;border-radius:6px;border:1px solid #333;background:black;color:white;}
-.todo-item {display:flex;align-items:center;justify-content:space-between;margin-top:8px;background:#000;padding:6px;border-radius:6px;}
+.todo-item {display:flex;flex-direction:column;margin-top:8px;background:#000;padding:8px;border-radius:6px;}
+.todo-top {display:flex;align-items:center;justify-content:space-between;}
 .todo-item span {flex:1;margin-left:6px;}
 .todo-item button {background:red;color:white;border:none;padding:4px 8px;border-radius:5px;cursor:pointer;}
+.deadline {font-size:12px;color:#aaa;margin-top:4px;}
 
 .chatbot {position:fixed;bottom:10px;left:10px;width:250px;background:#111;padding:10px;border-radius:10px;}
 .chatbot input {width:100%;padding:5px;}
@@ -75,7 +83,8 @@ background:#111;margin:10px;padding:12px;border-radius:12px;box-shadow:0 0 10px 
 <!-- TODO -->
 <div class="todo">
 <b>Todo List</b>
-<input id="todoInput" placeholder="Add task">
+<input id="todoInput" placeholder="Task">
+<input type="datetime-local" id="deadlineInput">
 <label><input type="checkbox" id="toggleTime"> Show Time/Date</label>
 <button onclick="addTodo()">Add</button>
 <div id="todoList"></div>
@@ -100,15 +109,13 @@ document.getElementById("noteTime").innerText=now;
 setInterval(updateClock,1000);
 updateClock();
 
-// NOTES (no file upload now)
+// NOTES
 function saveNote(){
 let text=document.getElementById("noteText").value;
 let link=document.getElementById("noteLink").value;
-let data={text,link};
-localStorage.setItem("note",JSON.stringify(data));
+localStorage.setItem("note",JSON.stringify({text,link}));
 displayNote();
 }
-
 function displayNote(){
 let n=JSON.parse(localStorage.getItem("note"));
 if(!n) return;
@@ -116,34 +123,43 @@ let html=`<p>${n.text}</p>`;
 if(n.link) html+=`<a href='${n.link}' target='_blank'>Open Link</a>`;
 document.getElementById("noteDisplay").innerHTML=html;
 }
-
 function deleteNote(){
 localStorage.removeItem("note");
 document.getElementById("noteDisplay").innerHTML="";
 }
-
 displayNote();
 
-// TODO with tick + delete
+// TODO with deadline
 function addTodo(){
 let val=document.getElementById("todoInput").value;
+let deadline=document.getElementById("deadlineInput").value;
 if(!val) return;
 let showTime=document.getElementById("toggleTime").checked;
 let now=new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"});
 let text=showTime ? val+" ("+now+")" : val;
 
-let list=document.getElementById("todoList");
 let div=document.createElement("div");
 div.className="todo-item";
 
+let remaining="";
+if(deadline){
+let diff=new Date(deadline)-new Date();
+let hrs=Math.floor(diff/1000/60/60);
+remaining="Deadline: "+deadline+" ("+hrs+" hrs left)";
+}
+
 div.innerHTML=`
+<div class='todo-top'>
 <input type='checkbox'>
 <span>${text}</span>
-<button onclick='this.parentElement.remove()'>X</button>
+<button onclick='this.parentElement.parentElement.remove()'>X</button>
+</div>
+<div class='deadline'>${remaining}</div>
 `;
 
-list.appendChild(div);
+document.getElementById("todoList").appendChild(div);
 document.getElementById("todoInput").value="";
+document.getElementById("deadlineInput").value="";
 }
 
 // CHAT
