@@ -6,6 +6,7 @@
 <title>BTECH 25-29</title>
 
 <style>
+*{box-sizing:border-box}
 body{margin:0;font-family:Arial;background:#0b0b0f;color:white;}
 header{text-align:center;padding:15px;font-size:26px;font-weight:bold;}
 header span{color:violet;}
@@ -45,25 +46,21 @@ header span{color:violet;}
 .progress-bar{width:100%;height:10px;background:#222;border-radius:10px;margin-top:5px;}
 .progress-fill{height:100%;background:violet;width:0%;}
 
-/* CHATBOT */
-.bot-btn{
-position:fixed;bottom:10px;left:10px;
-width:50px;height:50px;border-radius:50%;
-background:#111;display:flex;align-items:center;justify-content:center;
-cursor:pointer;font-size:22px;
-}
+/* CHATBOT BUTTON */
+.bot-btn{position:fixed;bottom:10px;left:10px;width:50px;height:50px;border-radius:50%;background:#111;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;}
 
-.chatbox{
-position:fixed;bottom:70px;left:10px;width:260px;
-background:#111;padding:10px;border-radius:10px;
-display:none;
-}
-
+.chatbox{position:fixed;bottom:70px;left:10px;width:260px;background:#111;padding:10px;border-radius:10px;display:none;}
 .chatbox input{width:100%;padding:6px;}
+
+/* BOT SETTINGS UI */
+.bot-settings{position:fixed;right:10px;bottom:10px;width:220px;background:#111;padding:10px;border-radius:10px;}
+.bot-settings input{width:100%;margin-top:5px;padding:5px;border-radius:5px;border:none;background:#000;color:white;}
+.bot-settings button{margin-top:5px;width:100%;padding:6px;border:none;border-radius:6px;background:violet;color:black;font-weight:bold;}
 
 @media(max-width:768px){
 .notes{position:static;width:100%;}
 .chatbox{width:90%;left:5%;}
+.bot-settings{width:90%;left:5%;right:auto;}
 }
 </style>
 </head>
@@ -83,7 +80,11 @@ display:none;
 
 <div class="clock" id="clock"></div>
 
+<!-- 4 POINTS KEPT -->
 <div class="section"><h3>Notice</h3><p>NO UPDATE</p></div>
+<div class="section"><h3>Books</h3><p>NO UPDATE</p></div>
+<div class="section"><h3>Practical</h3><p>NO UPDATE</p></div>
+<div class="section"><h3>Important Notes</h3><p>NO UPDATE</p></div>
 
 <div class="todo">
 <div class="circle-wrap">
@@ -102,7 +103,7 @@ display:none;
 
 </div>
 
-<!-- BOT BUTTON -->
+<!-- CHAT BUTTON -->
 <div class="bot-btn" onclick="toggleBot()">🤖</div>
 
 <!-- CHATBOX -->
@@ -111,41 +112,30 @@ display:none;
 <div id="out"></div>
 </div>
 
+<!-- BOT SETTINGS (REPLACEABLE FROM WEBSITE) -->
+<div class="bot-settings">
+<b>Bot Settings</b>
+<input id="botNameInput" placeholder="Bot Name">
+<input id="botReplyInput" placeholder="Google Reply">
+<button onclick="saveBot()">Save Bot</button>
+</div>
+
 <script>
 // CLOCK
-setInterval(()=>{
-clock.innerText=new Date().toLocaleString("en-IN");
-},1000);
+setInterval(()=>{clock.innerText=new Date().toLocaleString("en-IN");},1000);
 
 // NOTES
 let notes=JSON.parse(localStorage.getItem("notes"))||[];
 function saveNotes(){localStorage.setItem("notes",JSON.stringify(notes));}
-
-function addNote(){
-if(!noteText.value)return;
-notes.push({t:noteText.value});
-saveNotes();renderNotes();
-noteText.value="";
-}
-function renderNotes(){
-noteList.innerHTML="";
-notes.forEach((n,i)=>{
-noteList.innerHTML+=`<div class="note-item">${n.t}<button onclick="delNote(${i})">X</button></div>`;
-});
-}
+function addNote(){if(!noteText.value)return;notes.push({t:noteText.value});saveNotes();renderNotes();noteText.value="";}
 function delNote(i){notes.splice(i,1);saveNotes();renderNotes();}
+function renderNotes(){noteList.innerHTML="";notes.forEach((n,i)=>{noteList.innerHTML+=`<div class='note-item'>${n.t}<button onclick='delNote(${i})'>X</button></div>`});}
 renderNotes();
 
 // TODO
 let tasks=JSON.parse(localStorage.getItem("tasks"))||[];
 function save(){localStorage.setItem("tasks",JSON.stringify(tasks));}
-
-function addTask(){
-if(!task.value||!date.value)return;
-tasks.push({t:task.value,d:date.value,done:false});
-save();render();
-}
-
+function addTask(){if(!task.value||!date.value)return;tasks.push({t:task.value,d:date.value,done:false});save();render();}
 function toggle(i){tasks[i].done=!tasks[i].done;save();render();}
 function del(i){tasks.splice(i,1);save();render();}
 
@@ -154,7 +144,6 @@ list.innerHTML="";
 let done=tasks.filter(x=>x.done).length;
 let total=tasks.length;
 let percent= total?Math.round(done/total*100):0;
-
 bar.style.width=percent+"%";
 circleText.innerText="("+percent+"%)";
 
@@ -166,36 +155,31 @@ else if(r>0)circle.classList.add("green");
 else circle.classList.add("blue");
 
 let remind=false;
-
 tasks.forEach((x,i)=>{
 let dl=new Date(x.d);
 if((dl-new Date())/86400000<=3 && !x.done) remind=true;
-
-list.innerHTML+=`
-<div class="todo-item">
-<input type="checkbox" ${x.done?"checked":""} onclick="toggle(${i})">
-<span class="${x.done?"completed":""}">${x.t}</span>
-<button onclick="del(${i})">X</button>
-</div>`;
+list.innerHTML+=`<div class='todo-item'><input type='checkbox' ${x.done?"checked":""} onclick='toggle(${i})'><span class='${x.done?"completed":""}'>${x.t}</span><button onclick='del(${i})'>X</button></div>`;
 });
 
-if(remind){
-botSpeak("Work is remaining ⚠️ Stay focused!");
-setTimeout(()=>window.open("https://www.google.com"),1500);
-}
+if(remind){botSpeak("Work is remaining ⚠️");setTimeout(()=>window.open("https://www.google.com"),1500);} 
 }
 render();
 
-// CHATBOT CONFIG (REPLACEABLE)
-const BOT_NAME="CRS BOT";
-const BOT_REPLY="For more contact to CRS";
+// BOT STORAGE
+let BOT_NAME=localStorage.getItem("botName")||"CRS BOT";
+let BOT_REPLY=localStorage.getItem("botReply")||"For more contact to CRS";
 
-// CHAT TOGGLE
-function toggleBot(){
-chatbox.style.display = chatbox.style.display==="block"?"none":"block";
+function saveBot(){
+BOT_NAME=botNameInput.value||BOT_NAME;
+BOT_REPLY=botReplyInput.value||BOT_REPLY;
+localStorage.setItem("botName",BOT_NAME);
+localStorage.setItem("botReply",BOT_REPLY);
+alert("Bot Updated!");
 }
 
-// CHATBOT
+// CHAT
+function toggleBot(){chatbox.style.display = chatbox.style.display==='block'?'none':'block';}
+
 function chatbot(e){
 if(e.key==='Enter'){
 let msg=e.target.value.toLowerCase();
@@ -218,11 +202,7 @@ e.target.value="";
 }
 }
 
-// BOT SPEAK
-function botSpeak(text){
-chatbox.style.display="block";
-out.innerText=text;
-}
+function botSpeak(text){chatbox.style.display="block";out.innerText=text;}
 </script>
 
 </body>
