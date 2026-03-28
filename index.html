@@ -27,29 +27,30 @@
     .info-bar { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 10px; }
     .info-item { background: #111; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #222; }
 
-    /* Clock (No glow) */
+    /* Clock */
     .clock { font-size: 24px; font-weight: bold; color: #ccc; margin-bottom: 10px; text-align: center; }
 
-    /* Todo Title Glow Effect */
+    /* Todo Title Glow Effect (Color handled by JS) */
     .todo-title { 
         font-size: 20px; 
         font-weight: bold; 
         display: block; 
         margin-bottom: 10px;
-        animation: titleGlow 1.5s infinite alternate; 
+        transition: 0.5s;
     }
+
     @keyframes titleGlow {
-        from { text-shadow: 0 0 5px violet; color: white; }
-        to { text-shadow: 0 0 15px violet, 0 0 20px violet; color: violet; }
+        from { text-shadow: 0 0 5px var(--glow-color); color: white; }
+        to { text-shadow: 0 0 15px var(--glow-color), 0 0 20px var(--glow-color); color: var(--glow-color); }
     }
 
     /* Notes Styling */
     .notes-box textarea, .notes-box button { width: 100%; margin-top: 8px; padding: 8px; border-radius: 6px; border: none; box-sizing: border-box; }
     .notes-box textarea { background: #000; color: white; border: 1px solid #333; height: 80px; resize: none; }
     .notes-box button { background: violet; color: black; font-weight: bold; cursor: pointer; }
-    .note-item { background: #000; margin-top: 8px; padding: 8px; border-radius: 6px; font-size: 13px; position: relative; }
+    .note-item { background: #000; margin-top: 8px; padding: 8px; border-radius: 6px; font-size: 13px; }
     .note-actions { margin-top: 5px; display: flex; gap: 5px; }
-    .note-actions button { padding: 2px 5px; font-size: 10px; }
+    .note-actions button { padding: 2px 5px; font-size: 10px; width: auto; }
 
     /* Todo Styling */
     .todo-box input, .todo-box button { width: 100%; margin-top: 8px; padding: 8px; border-radius: 6px; border: none; box-sizing: border-box; }
@@ -60,7 +61,7 @@
     
     .progress-container { margin: 15px 0; }
     .progress-bar { width: 100%; height: 8px; background: #222; border-radius: 10px; overflow: hidden; margin-top: 5px; }
-    .progress-fill { height: 100%; background: violet; width: 0%; transition: 0.4s; }
+    .progress-fill { height: 100%; width: 0%; transition: 0.4s; }
 
     /* Yellow Reminder */
     .reminder-text { color: yellow; font-size: 14px; margin-top: 15px; text-align: center; display: none; font-style: italic; }
@@ -99,7 +100,7 @@
 
         <div class="section-card todo-box">
             <div class="clock" id="clock"></div>
-            <span class="todo-title">Todo List</span>
+            <span id="todoTitle" class="todo-title">Todo List</span>
             
             <input id="task" placeholder="What needs to be done?">
             <input type="datetime-local" id="date">
@@ -117,7 +118,6 @@
 
         <div class="section-card bot-box">
             <h3>AI Assistant 🤖</h3>
-            <p style="font-size: 12px; color: #666;">Ask about your tasks or search Google</p>
             <input id="chat" placeholder="Type a message..." onkeydown="chatbot(event)">
             <div id="out"></div>
         </div>
@@ -126,7 +126,7 @@
 </div>
 
 <script>
-// CLOCK (No Glow)
+// CLOCK
 setInterval(()=>{
     document.getElementById("clock").innerText = new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata", hour: '2-digit', minute:'2-digit', second:'2-digit'});
 },1000);
@@ -134,29 +134,25 @@ setInterval(()=>{
 // NOTES LOGIC
 let notes = JSON.parse(localStorage.getItem("notes")) || [];
 function saveNotes() { localStorage.setItem("notes", JSON.stringify(notes)); }
-
 function addNote() {
     let t = document.getElementById("noteText").value;
     if(!t) return;
     notes.push({t});
-    saveNotes();
-    renderNotes();
+    saveNotes(); renderNotes();
     document.getElementById("noteText").value = "";
 }
-
 function delNote(i) { notes.splice(i,1); saveNotes(); renderNotes(); }
 function editNote(i) {
     document.getElementById("noteText").value = notes[i].t;
     delNote(i);
 }
-
 function renderNotes() {
     let box = document.getElementById("noteList");
     box.innerHTML = "";
     notes.forEach((n, i) => {
         let div = document.createElement("div");
         div.className = "note-item";
-        div.innerHTML = `<div>${n.t}</div>
+        div.innerHTML = `<div>• ${n.t}</div>
         <div class="note-actions">
             <button onclick='editNote(${i})'>Edit</button>
             <button onclick='delNote(${i})'>Delete</button>
@@ -166,7 +162,7 @@ function renderNotes() {
 }
 renderNotes();
 
-// TODO LOGIC
+// TODO LOGIC WITH DYNAMIC COLORING
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 function save() { localStorage.setItem("tasks", JSON.stringify(tasks)); }
 
@@ -187,21 +183,38 @@ function render() {
     list.innerHTML = "";
     let done = tasks.filter(x => x.done).length;
     let total = tasks.length;
-    let percent = total ? Math.round((done / total) * 100) : 0;
+    let pending = total - done;
+    let percentDone = total ? Math.round((done / total) * 100) : 0;
+    
+    // Logic: Color based on "Work Remaining" percentage
+    let workRemainingPercent = total ? (pending / total) * 100 : 0;
+    let statusColor = "cyan"; // Default Blue (0% work remain)
 
-    document.getElementById("progress").innerText = `${done}/${total} tasks completed (${percent}%)`;
-    document.getElementById("bar").style.width = percent + "%";
+    if (total > 0) {
+        if (workRemainingPercent > 66) statusColor = "red";
+        else if (workRemainingPercent > 33) statusColor = "orange";
+        else if (workRemainingPercent > 0) statusColor = "lime";
+        else statusColor = "cyan"; // Exactly 0% remain
+    }
+
+    // Apply colors to Title Glow and Progress Bar
+    let title = document.getElementById("todoTitle");
+    title.style.setProperty('--glow-color', statusColor);
+    title.style.animation = "titleGlow 1.5s infinite alternate";
+    
+    document.getElementById("bar").style.backgroundColor = statusColor;
+    document.getElementById("bar").style.width = percentDone + "%";
+    document.getElementById("progress").innerText = `${done}/${total} tasks completed (${percentDone}%)`;
 
     let showReminder = false;
-
     tasks.forEach((x, i) => {
         let div = document.createElement("div");
         let dl = new Date(x.d);
         let now = new Date();
-        let diff = (dl - now) / 86400000;
-        if(diff <= 3 && !x.done) showReminder = true;
+        if((dl - now) / 86400000 <= 3 && !x.done) showReminder = true;
 
         div.className = "todo-item";
+        div.style.borderLeftColor = statusColor;
         div.innerHTML = `
             <div style="display:flex; align-items:center; justify-content:space-between;">
                 <div style="display:flex; align-items:center; gap:10px;">
@@ -224,7 +237,6 @@ function chatbot(e) {
     if(e.key === 'Enter') {
         let msg = e.target.value.toLowerCase().trim();
         let out = document.getElementById("out");
-
         if(msg.includes("hi") || msg.includes("hello")) {
             out.innerText = "Hello 👋 How can I help you?";
         } else if(msg.includes("task") || msg.includes("work")) {
@@ -232,13 +244,10 @@ function chatbot(e) {
             ask = true;
         } else if(ask && msg.includes("yes")) {
             let p = tasks.filter(x => !x.done).map(x => "• " + x.t).join("\n");
-            out.innerText = p || "You have no pending tasks! 🎉";
+            out.innerText = p || "No pending tasks! 🎉";
             ask = false;
-        } else if(msg.includes("show my tasks")) {
-            let p = tasks.map(x => (x.done ? "✅ " : "⏳ ") + x.t).join("\n");
-            out.innerText = p || "Task list is empty.";
         } else {
-            out.innerText = "Searching for answers...";
+            out.innerText = "Searching...";
             setTimeout(() => {
                 window.open("https://www.google.com/search?q=" + encodeURIComponent(msg));
                 out.innerText = "Results opened. For more, contact CRS.";
