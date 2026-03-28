@@ -6,235 +6,246 @@
 <title>BTECH 25-29</title>
 
 <style>
-body{margin:0;font-family:Arial;background:#0b0b0f;color:white;}
-header{text-align:center;padding:15px;font-size:28px;font-weight:bold;}
-header span{color:violet;}
-.container{max-width:900px;margin:auto;padding:10px;}
+    body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #0b0b0f; color: white; overflow-x: hidden; }
+    header { text-align: center; padding: 20px; font-size: 32px; font-weight: bold; border-bottom: 1px solid #222; }
+    header span { color: violet; }
+    
+    .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr 1fr;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1400px;
+        margin: auto;
+    }
 
-.section{background:#111;margin:10px 0;padding:15px;border-radius:12px;}
-.section h3{color:violet;margin:0 0 5px;}
+    /* Common Section Styling */
+    .section-card { background: #111; padding: 20px; border-radius: 12px; height: fit-content; border: 1px solid #222; }
+    h3 { color: violet; margin-top: 0; }
 
-.clock{font-size:28px;text-align:center;background:#111;padding:12px;border-radius:10px;animation:glow 1.5s infinite alternate;}
-@keyframes glow{from{box-shadow:0 0 8px violet;}to{box-shadow:0 0 20px violet;}}
+    /* Top Info Bar */
+    .info-bar { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 10px; }
+    .info-item { background: #111; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #222; }
 
-/* NOTES BOX */
-.notes{
-position:fixed;left:10px;top:50%;transform:translateY(-50%);
-width:240px;background:#111;padding:10px;border-radius:12px;
-}
-.notes textarea,.notes button{
-width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;
-}
-.notes textarea{background:#000;color:white;border:1px solid #333;}
-.notes button{background:violet;color:black;font-weight:bold;cursor:pointer;}
-.note-item{background:#000;margin-top:6px;padding:6px;border-radius:6px;font-size:13px;}
+    /* Clock (No glow) */
+    .clock { font-size: 24px; font-weight: bold; color: #ccc; margin-bottom: 10px; text-align: center; }
 
-.todo{background:#111;margin-top:15px;padding:12px;border-radius:12px;position:relative;}
-.todo input,.todo button{width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;}
-.todo input{background:#000;color:white;border:1px solid #333;}
-.todo button{background:violet;color:black;font-weight:bold;cursor:pointer;}
-.todo-item{background:#000;margin-top:8px;padding:8px;border-radius:6px;}
-.completed{text-decoration:line-through;opacity:0.4;}
+    /* Todo Title Glow Effect */
+    .todo-title { 
+        font-size: 20px; 
+        font-weight: bold; 
+        display: block; 
+        margin-bottom: 10px;
+        animation: titleGlow 1.5s infinite alternate; 
+    }
+    @keyframes titleGlow {
+        from { text-shadow: 0 0 5px violet; color: white; }
+        to { text-shadow: 0 0 15px violet, 0 0 20px violet; color: violet; }
+    }
 
-.progress{margin-top:8px;font-size:14px;color:#ccc;}
-.progress-bar{width:100%;height:10px;background:#222;border-radius:10px;margin-top:5px;overflow:hidden;}
-.progress-fill{height:100%;background:violet;width:0%;transition:0.3s;}
+    /* Notes Styling */
+    .notes-box textarea, .notes-box button { width: 100%; margin-top: 8px; padding: 8px; border-radius: 6px; border: none; box-sizing: border-box; }
+    .notes-box textarea { background: #000; color: white; border: 1px solid #333; height: 80px; resize: none; }
+    .notes-box button { background: violet; color: black; font-weight: bold; cursor: pointer; }
+    .note-item { background: #000; margin-top: 8px; padding: 8px; border-radius: 6px; font-size: 13px; position: relative; }
+    .note-actions { margin-top: 5px; display: flex; gap: 5px; }
+    .note-actions button { padding: 2px 5px; font-size: 10px; }
 
-.circle{position:absolute;right:-20px;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;animation:float 2s infinite;}
-@keyframes float{0%{transform:translateY(-50%);}50%{transform:translateY(-60%);}100%{transform:translateY(-50%);}}
-.red{background:red;box-shadow:0 0 10px red;}
-.orange{background:orange;box-shadow:0 0 10px orange;}
-.green{background:lime;box-shadow:0 0 10px lime;}
-.blue{background:cyan;box-shadow:0 0 10px cyan;}
+    /* Todo Styling */
+    .todo-box input, .todo-box button { width: 100%; margin-top: 8px; padding: 8px; border-radius: 6px; border: none; box-sizing: border-box; }
+    .todo-box input { background: #000; color: white; border: 1px solid #333; }
+    .todo-box button { background: violet; color: black; font-weight: bold; cursor: pointer; }
+    .todo-item { background: #000; margin-top: 10px; padding: 10px; border-radius: 8px; border-left: 4px solid violet; }
+    .completed { text-decoration: line-through; opacity: 0.4; }
+    
+    .progress-container { margin: 15px 0; }
+    .progress-bar { width: 100%; height: 8px; background: #222; border-radius: 10px; overflow: hidden; margin-top: 5px; }
+    .progress-fill { height: 100%; background: violet; width: 0%; transition: 0.4s; }
 
-.reminder{position:fixed;right:10px;top:50%;color:yellow;display:none;animation:float 2s infinite;}
+    /* Yellow Reminder */
+    .reminder-text { color: yellow; font-size: 14px; margin-top: 15px; text-align: center; display: none; font-style: italic; }
 
-.chatbot{position:fixed;bottom:10px;left:10px;width:260px;background:#111;padding:10px;border-radius:10px;}
-.chatbot input{width:100%;padding:5px;}
+    /* Chatbot Styling */
+    .bot-box input { width: 100%; padding: 10px; background: #000; border: 1px solid #333; color: white; border-radius: 6px; box-sizing: border-box; }
+    #out { margin-top: 15px; font-size: 14px; color: #aaa; line-height: 1.4; white-space: pre-wrap; }
+
+    /* Responsive */
+    @media (max-width: 850px) { .main-grid { grid-template-columns: 1fr; } .info-bar { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
 <body>
 
 <header>BTECH <span>25 29</span></header>
 
-<!-- NOTES -->
-<div class="notes">
-<b>Notes (only you can see)</b>
-<textarea id="noteText" placeholder="Write note..."></textarea>
-<button onclick="addNote()">Save</button>
-<div id="noteList"></div>
-</div>
-
 <div class="container">
+    <div class="main-grid">
+        
+        <div class="info-bar">
+            <div class="info-item"><h3>Notice</h3><p>NO UPDATE</p></div>
+            <div class="info-item"><h3>Books</h3><p>NO UPDATE</p></div>
+            <div class="info-item"><h3>Practical</h3><p>NO UPDATE</p></div>
+            <div class="info-item">
+                <h3>Important</h3>
+                <a href="https://youtube.com/playlist?list=PLn3Wz38keZOfqVnFaM5bhlGVj8pnKntfW&si=TkjuvCdfZabbt4WY" target="_blank" style="color:violet; font-size: 13px;">Math 2nd Sem Playlist</a>
+            </div>
+        </div>
 
-<div class="clock" id="clock"></div>
+        <div class="section-card notes-box">
+            <h3>Personal Notes</h3>
+            <textarea id="noteText" placeholder="Write a private note..."></textarea>
+            <button onclick="addNote()">Save Note</button>
+            <div id="noteList"></div>
+        </div>
 
-<div class="section"><h3>Notice</h3><p>NO UPDATE</p></div>
-<div class="section"><h3>Books</h3><p>NO UPDATE</p></div>
-<div class="section"><h3>Practical</h3><p>NO UPDATE</p></div>
-<div class="section">
-<h3>Important Notes</h3>
-<p>math play list for 2nd sem</p>
-<a href="https://youtube.com/playlist?list=PLn3Wz38keZOfqVnFaM5bhlGVj8pnKntfW&si=TkjuvCdfZabbt4WY" target="_blank" style="color:violet">Open Playlist</a>
-</div>
+        <div class="section-card todo-box">
+            <div class="clock" id="clock"></div>
+            <span class="todo-title">Todo List</span>
+            
+            <input id="task" placeholder="What needs to be done?">
+            <input type="datetime-local" id="date">
+            <button onclick="addTask()">Add Task</button>
 
-<div class="todo">
-<div id="circle" class="circle"></div>
-<b>Todo List</b>
-<input id="task" placeholder="Enter task">
-<input type="datetime-local" id="date">
-<button onclick="addTask()">Add</button>
-<div class="progress" id="progress"></div>
-<div class="progress-bar"><div id="bar" class="progress-fill"></div></div>
-<div id="list"></div>
-</div>
+            <div class="progress-container">
+                <div id="progress" style="font-size: 12px; color: #888;">0/0 tasks done</div>
+                <div class="progress-bar"><div id="bar" class="progress-fill"></div></div>
+            </div>
 
-</div>
+            <div id="list"></div>
+            
+            <div id="reminder" class="reminder-text">Stay focused, you're closer than you think ✨</div>
+        </div>
 
-<div id="reminder" class="reminder">Stay focused, you're closer than you think ✨</div>
+        <div class="section-card bot-box">
+            <h3>AI Assistant 🤖</h3>
+            <p style="font-size: 12px; color: #666;">Ask about your tasks or search Google</p>
+            <input id="chat" placeholder="Type a message..." onkeydown="chatbot(event)">
+            <div id="out"></div>
+        </div>
 
-<div class="chatbot">
-🤖
-<input id="chat" onkeydown="chatbot(event)">
-<div id="out"></div>
+    </div>
 </div>
 
 <script>
-// CLOCK
+// CLOCK (No Glow)
 setInterval(()=>{
-document.getElementById("clock").innerText=new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"});
+    document.getElementById("clock").innerText = new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata", hour: '2-digit', minute:'2-digit', second:'2-digit'});
 },1000);
 
-// NOTES (NO LINK)
-let notes=JSON.parse(localStorage.getItem("notes"))||[];
-function saveNotes(){localStorage.setItem("notes",JSON.stringify(notes));}
+// NOTES LOGIC
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+function saveNotes() { localStorage.setItem("notes", JSON.stringify(notes)); }
 
-function addNote(){
-let t=noteText.value;
-if(!t)return;
-notes.push({t});
-saveNotes();
+function addNote() {
+    let t = document.getElementById("noteText").value;
+    if(!t) return;
+    notes.push({t});
+    saveNotes();
+    renderNotes();
+    document.getElementById("noteText").value = "";
+}
+
+function delNote(i) { notes.splice(i,1); saveNotes(); renderNotes(); }
+function editNote(i) {
+    document.getElementById("noteText").value = notes[i].t;
+    delNote(i);
+}
+
+function renderNotes() {
+    let box = document.getElementById("noteList");
+    box.innerHTML = "";
+    notes.forEach((n, i) => {
+        let div = document.createElement("div");
+        div.className = "note-item";
+        div.innerHTML = `<div>${n.t}</div>
+        <div class="note-actions">
+            <button onclick='editNote(${i})'>Edit</button>
+            <button onclick='delNote(${i})'>Delete</button>
+        </div>`;
+        box.appendChild(div);
+    });
+}
 renderNotes();
-noteText.value="";
+
+// TODO LOGIC
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+function save() { localStorage.setItem("tasks", JSON.stringify(tasks)); }
+
+function addTask() {
+    let t = document.getElementById("task").value;
+    let d = document.getElementById("date").value;
+    if(!t || !d) return;
+    tasks.push({t, d, done: false});
+    save(); render();
+    document.getElementById("task").value = "";
 }
 
-function delNote(i){notes.splice(i,1);saveNotes();renderNotes();}
-function editNote(i){
-noteText.value=notes[i].t;
-delNote(i);
-}
+function toggle(i) { tasks[i].done = !tasks[i].done; save(); render(); }
+function del(i) { tasks.splice(i, 1); save(); render(); }
 
-function renderNotes(){
-let box=document.getElementById("noteList");
-box.innerHTML="";
-notes.forEach((n,i)=>{
-let div=document.createElement("div");
-div.className="note-item";
-div.innerHTML=`• ${n.t}
-<button onclick='editNote(${i})'>Edit</button>
-<button onclick='delNote(${i})'>Delete</button>`;
-box.appendChild(div);
-});
-}
-renderNotes();
+function render() {
+    let list = document.getElementById("list");
+    list.innerHTML = "";
+    let done = tasks.filter(x => x.done).length;
+    let total = tasks.length;
+    let percent = total ? Math.round((done / total) * 100) : 0;
 
-// TODO
-let tasks=JSON.parse(localStorage.getItem("tasks"))||[];
-function save(){localStorage.setItem("tasks",JSON.stringify(tasks));}
+    document.getElementById("progress").innerText = `${done}/${total} tasks completed (${percent}%)`;
+    document.getElementById("bar").style.width = percent + "%";
 
-function addTask(){
-let t=task.value;
-let d=date.value;
-if(!t||!d)return;
-tasks.push({t,d,done:false});
-save();render();
-}
+    let showReminder = false;
 
-function toggle(i){tasks[i].done=!tasks[i].done;save();render();}
-function del(i){tasks.splice(i,1);save();render();}
+    tasks.forEach((x, i) => {
+        let div = document.createElement("div");
+        let dl = new Date(x.d);
+        let now = new Date();
+        let diff = (dl - now) / 86400000;
+        if(diff <= 3 && !x.done) showReminder = true;
 
-function render(){
-let list=document.getElementById("list");
-list.innerHTML="";
+        div.className = "todo-item";
+        div.innerHTML = `
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <input type='checkbox' ${x.done ? "checked" : ""} onclick='toggle(${i})' style="width:auto; margin:0;">
+                    <span class='${x.done ? "completed" : ""}'>${x.t}</span>
+                </div>
+                <button onclick='del(${i})' style="width:30px; margin:0; padding:2px; background:#333; color:white;">✕</button>
+            </div>
+            <div style="font-size:11px; color:#777; margin-top:5px;">📅 ${dl.toLocaleString()}</div>`;
+        list.appendChild(div);
+    });
 
-let done=tasks.filter(x=>x.done).length;
-let total=tasks.length;
-let remain=total-done;
-let percent= total? Math.round(done/total*100):0;
-
-document.getElementById("progress").innerText=`${done}/${total} tasks done → ${percent}%`;
-document.getElementById("bar").style.width=percent+"%";
-
-let circle=document.getElementById("circle");
-circle.className="circle";
-let r= total? (remain/total)*100:0;
-if(r>66)circle.classList.add("red");
-else if(r>33)circle.classList.add("orange");
-else if(r>0)circle.classList.add("green");
-else circle.classList.add("blue");
-
-let showReminder=false;
-
-tasks.forEach((x,i)=>{
-let div=document.createElement("div");
-let dl=new Date(x.d);
-let now=new Date();
-let diff=(dl-now)/86400000;
-if(diff<=3 && !x.done) showReminder=true;
-
-div.className="todo-item";
-div.innerHTML=`
-<input type='checkbox' ${x.done?"checked":""} onclick='toggle(${i})'>
-<span class='${x.done?"completed":""}'>${x.t}</span>
-<button onclick='del(${i})'>X</button>
-<div>📅 ${dl.toLocaleString()}</div>`;
-list.appendChild(div);
-});
-
-document.getElementById("reminder").style.display=showReminder?"block":"none";
+    document.getElementById("reminder").style.display = showReminder ? "block" : "none";
 }
 render();
 
-// CHATBOT UPDATED
-let ask=false;
-function chatbot(e){
-if(e.key==='Enter'){
-let msg=e.target.value.toLowerCase().trim();
-let out=document.getElementById("out");
+// CHATBOT LOGIC
+let ask = false;
+function chatbot(e) {
+    if(e.key === 'Enter') {
+        let msg = e.target.value.toLowerCase().trim();
+        let out = document.getElementById("out");
 
-if(msg.includes("hi")||msg.includes("hello")||msg.includes("hey")){
-out.innerText="Hello 👋 How can I help you?";
-}
-
-else if(msg.includes("i am")||msg.includes("i'm")||msg.includes("im ")||msg.startsWith("i ")){
-out.innerText="I am a chatbot 🤖, nice to meet you!";
-}
-
-else if(msg.includes("task")||msg.includes("work")||msg.includes("pending")){
-out.innerText="Do you want to see your tasks?";
-ask=true;
-}
-
-else if(ask && msg.includes("yes")){
-let p=tasks.filter(x=>!x.done).map(x=>x.t+" ("+new Date(x.d).toLocaleString()+")").join("\n");
-out.innerText=p||"No pending tasks";
-ask=false;
-}
-
-else if(msg.includes("show my tasks")){
-out.innerText=tasks.map(x=>x.t+" ("+new Date(x.d).toLocaleString()+")").join("\n")||"No tasks";
-}
-
-else{
-out.innerText="Searching on Google...";
-setTimeout(()=>{
-window.open("https://www.google.com/search?q="+encodeURIComponent(msg));
-out.innerText="For more contact to CRS";
-},800);
-}
-
-e.target.value="";
-}
+        if(msg.includes("hi") || msg.includes("hello")) {
+            out.innerText = "Hello 👋 How can I help you?";
+        } else if(msg.includes("task") || msg.includes("work")) {
+            out.innerText = "Do you want to see your pending tasks?";
+            ask = true;
+        } else if(ask && msg.includes("yes")) {
+            let p = tasks.filter(x => !x.done).map(x => "• " + x.t).join("\n");
+            out.innerText = p || "You have no pending tasks! 🎉";
+            ask = false;
+        } else if(msg.includes("show my tasks")) {
+            let p = tasks.map(x => (x.done ? "✅ " : "⏳ ") + x.t).join("\n");
+            out.innerText = p || "Task list is empty.";
+        } else {
+            out.innerText = "Searching for answers...";
+            setTimeout(() => {
+                window.open("https://www.google.com/search?q=" + encodeURIComponent(msg));
+                out.innerText = "Results opened. For more, contact CRS.";
+            }, 800);
+        }
+        e.target.value = "";
+    }
 }
 </script>
 </body>
