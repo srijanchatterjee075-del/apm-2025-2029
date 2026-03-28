@@ -6,31 +6,35 @@
 <title>BTECH 25-29</title>
 
 <style>
-body {margin:0;font-family:Arial;background:#0b0b0f;color:white;}
-header {text-align:center;padding:15px;font-size:28px;font-weight:bold;}
-header span {color:violet;}
-.container {padding:10px;max-width:800px;margin:auto;}
-.section {background:#111;margin:10px 0;padding:15px;border-radius:14px;}
-.section h3 {color:violet;}
-
-.note-box {position:fixed;left:10px;top:50%;transform:translateY(-50%);width:240px;background:#111;padding:12px;border-radius:12px;}
-.note-box textarea,.note-box input{width:100%;margin-top:6px;padding:6px;background:black;color:white;border:1px solid #333;border-radius:6px;}
-.note-item{background:#000;padding:6px;margin-top:6px;border-radius:6px;}
+body{margin:0;font-family:Arial;background:#0b0b0f;color:white;}
+header{text-align:center;padding:15px;font-size:28px;font-weight:bold;}
+header span{color:violet;}
+.container{padding:10px;max-width:800px;margin:auto;}
+.section{background:#111;margin:10px 0;padding:15px;border-radius:14px;}
+.section h3{color:violet;}
 
 .clock{text-align:center;margin-top:15px;font-size:30px;font-weight:bold;background:#111;padding:15px;border-radius:12px;animation:glow 1.5s infinite alternate;}
 @keyframes glow{from{box-shadow:0 0 10px violet;}to{box-shadow:0 0 25px violet;}}
 
-.progress-bar{height:10px;background:#333;border-radius:10px;overflow:hidden;}
-.progress-fill{height:100%;background:violet;width:0%;transition:0.4s;}
-
-.todo{background:#111;margin:10px;padding:12px;border-radius:12px;}
+.todo{background:#111;margin:10px;padding:12px;border-radius:12px;position:relative;}
 .todo input{width:100%;padding:6px;margin-top:5px;border-radius:6px;border:1px solid #333;background:black;color:white;}
 .todo-item{margin-top:8px;background:#000;padding:8px;border-radius:6px;}
 .completed{opacity:0.4;text-decoration:line-through;}
-.deadline{font-size:12px;margin-top:4px;}
-.green{color:lightgreen;} .yellow{color:yellow;} .red{color:red;}
 
-.reminder-popup{position:fixed;top:10px;right:10px;background:#111;padding:10px;border-radius:10px;color:yellow;}
+.circle{
+position:absolute;right:-25px;top:50%;transform:translateY(-50%);
+width:20px;height:20px;border-radius:50%;
+animation:float 2s infinite ease-in-out;
+}
+@keyframes float{
+0%{transform:translateY(-50%) translateY(0);} 
+50%{transform:translateY(-50%) translateY(-8px);} 
+100%{transform:translateY(-50%) translateY(0);} }
+
+.red{background:red;box-shadow:0 0 10px red;}
+.orange{background:orange;box-shadow:0 0 10px orange;}
+.green{background:lime;box-shadow:0 0 10px lime;}
+.blue{background:cyan;box-shadow:0 0 10px cyan;}
 
 .chatbot{position:fixed;bottom:10px;left:10px;width:250px;background:#111;padding:10px;border-radius:10px;}
 .chatbot input{width:100%;padding:5px;}
@@ -40,28 +44,11 @@ header span {color:violet;}
 
 <header>BTECH <span>25 29</span></header>
 
-<div class="note-box">
-<b>Notes (only you can see)</b>
-<textarea id="noteText"></textarea>
-<input id="noteLink">
-<button onclick="saveNote()">Save</button>
-<div id="noteDisplay"></div>
-</div>
-
 <div class="container">
-<div class="section"><h3>Notice</h3><p>NO UPDATE</p></div>
-<div class="section"><h3>Books</h3><p>NO UPDATE</p></div>
-<div class="section"><h3>Practical</h3><p>NO UPDATE</p></div>
-<div class="section"><h3>Important Notes</h3>
-<p>math play list for 2nd sem</p>
-<a href="https://youtube.com/playlist?list=PLn3Wz38keZOfqVnFaM5bhlGVj8pnKntfW" target="_blank">Open</a>
-</div>
-
 <div class="clock" id="clock"></div>
-<div id="progressText"></div>
-<div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
 
 <div class="todo">
+<div id="circle" class="circle"></div>
 <b>Todo List</b>
 <input id="todoInput" placeholder="Task">
 <input type="datetime-local" id="deadlineInput">
@@ -69,8 +56,6 @@ header span {color:violet;}
 <div id="todoList"></div>
 </div>
 </div>
-
-<div id="popup"></div>
 
 <div class="chatbot">
 🤖
@@ -81,99 +66,73 @@ header span {color:violet;}
 <script>
 // CLOCK
 setInterval(()=>{
-document.getElementById("clock").innerText=new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"});
+clock.innerText=new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"});
 },1000);
 
-// NOTES
-let notes=JSON.parse(localStorage.getItem("notes"))||[];
-function saveNote(){
-let t=noteText.value,l=noteLink.value;
-notes.push({t,l});
-localStorage.setItem("notes",JSON.stringify(notes));
-displayNotes();
-}
-function displayNotes(){
-noteDisplay.innerHTML="";
-notes.forEach((n,i)=>{
-noteDisplay.innerHTML+=`<div class='note-item'>• ${n.t}<br>${n.l?`<a href='${n.l}' target='_blank'>link</a>`:""}<br>
-<button onclick='editNote(${i})'>Edit</button>
-<button onclick='delNote(${i})'>Delete</button></div>`;
-});}
-function delNote(i){notes.splice(i,1);localStorage.setItem("notes",JSON.stringify(notes));displayNotes();}
-function editNote(i){noteText.value=notes[i].t;noteLink.value=notes[i].l;delNote(i);} displayNotes();
+// LOAD TASKS
+let tasks=JSON.parse(localStorage.getItem("tasks"))||[];
 
-// TODO
-let total=0,done=0,tasks=[];
-function updateProgress(){
-let p=total?Math.round(done/total*100):0;
-progressFill.style.width=p+"%";
-progressText.innerText=`${done}/${total} → ${p}%`;
+function saveTasks(){
+localStorage.setItem("tasks",JSON.stringify(tasks));
 }
 
 function addTodo(){
 let t=todoInput.value,d=deadlineInput.value;
-if(!t)return;
+if(!t||!d)return;
 tasks.push({t,d,done:false});
-total++;
+saveTasks();
 render();
 }
 
 function render(){
 todoList.innerHTML="";
+let total=tasks.length;
+let done=tasks.filter(t=>t.done).length;
+let remain=total-done;
+let percent= total? (remain/total)*100 : 0;
+
+// circle color
+let c=circle;
+c.className="circle";
+if(percent>66) c.classList.add("red");
+else if(percent>33) c.classList.add("orange");
+else if(percent>0) c.classList.add("green");
+else c.classList.add("blue");
+
+// render tasks
 tasks.forEach((task,i)=>{
-let now=new Date(),dl=new Date(task.d);
-let diff=(dl-now)/86400000;
-let color=diff<1?"red":diff<3?"yellow":"green";
-
-if(diff<=3&&!task.done){
-popup.innerHTML=`<div class='reminder-popup'>⏰ Deadline near: ${task.t}</div>`;
-setTimeout(()=>popup.innerHTML="",5000);
-}
-
 let div=document.createElement("div");
 div.className="todo-item";
 div.innerHTML=`
 <input type='checkbox' ${task.done?"checked":""} onchange='toggle(${i})'>
 <span class='${task.done?"completed":""}'>${task.t}</span>
 <button onclick='remove(${i})'>X</button>
-<div class='deadline ${color}'>${task.d}</div>`;
+<div>${new Date(task.d).toLocaleString()}</div>`;
 todoList.appendChild(div);
 });
-updateProgress();
 }
 
 function toggle(i){
 tasks[i].done=!tasks[i].done;
-done+=tasks[i].done?1:-1;
+saveTasks();
 render();
 }
 
 function remove(i){
-if(tasks[i].done)done--;
 tasks.splice(i,1);
-total--;
+saveTasks();
 render();
 }
 
+render();
+
 // CHATBOT
-let ask=false;
 function chat(e){
 if(e.key==='Enter'){
 let msg=e.target.value.toLowerCase();
-if(msg.includes("task")||msg.includes("work")||msg.includes("pending")){
-chatOutput.innerText="Are you want to know about show my tasks?";
-ask=true;
-}else if(ask && (msg.includes("h")||msg.includes("ha")||msg.includes("hm"))){
-let pending=tasks.filter(t=>!t.done).map(t=>t.t).join(", ");
-chatOutput.innerText=pending||"No pending tasks";
-ask=false;
-}else if(msg.includes("show my tasks")){
-let all=tasks.map(t=>t.t).join(", ");
-chatOutput.innerText=all||"No tasks";
-}else if(msg.includes("today deadline")){
-let today=new Date().toDateString();
-let list=tasks.filter(t=>new Date(t.d).toDateString()==today).map(t=>t.t).join(", ");
-chatOutput.innerText=list||"No deadlines today";
+if(msg.includes("show my tasks")){
+let list=tasks.map(t=>`${t.t} (Due: ${new Date(t.d).toLocaleString()})`).join("\n");
+chatOutput.innerText=list||"No tasks";
 }else{
 window.open("https://www.google.com/search?q="+msg);
 }
