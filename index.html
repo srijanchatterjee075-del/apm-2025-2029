@@ -7,8 +7,27 @@
 
 <style>
     body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #0b0b0f; color: white; overflow-x: hidden; }
-    header { text-align: center; padding: 20px; font-size: 32px; font-weight: bold; border-bottom: 1px solid #222; }
+    
+    /* Header Area */
+    header { text-align: center; padding: 15px 15px 5px 15px; font-size: 32px; font-weight: bold; }
     header span { color: violet; }
+
+    /* Green Glowing Digital Clock */
+    .digital-clock {
+        text-align: center;
+        color: #00ff00;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px #00ff00;
+        animation: glowUpDown 2s infinite ease-in-out;
+    }
+
+    @keyframes glowUpDown {
+        0%, 100% { transform: translateY(0); text-shadow: 0 0 5px #00ff00; }
+        50% { transform: translateY(-5px); text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00; }
+    }
     
     .main-grid {
         display: grid;
@@ -23,14 +42,11 @@
     .section-card { background: #111; padding: 20px; border-radius: 12px; height: fit-content; border: 1px solid #222; }
     h3 { color: violet; margin-top: 0; }
 
-    /* Top Info Bar */
+    /* Top 4 Points Info Bar */
     .info-bar { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 10px; }
     .info-item { background: #111; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #222; }
 
-    /* Clock */
-    .clock { font-size: 24px; font-weight: bold; color: #ccc; margin-bottom: 10px; text-align: center; }
-
-    /* Todo Title Glow Effect (Color handled by JS) */
+    /* Todo Title Glow Effect (Variable Color) */
     .todo-title { 
         font-size: 20px; 
         font-weight: bold; 
@@ -48,9 +64,9 @@
     .notes-box textarea, .notes-box button { width: 100%; margin-top: 8px; padding: 8px; border-radius: 6px; border: none; box-sizing: border-box; }
     .notes-box textarea { background: #000; color: white; border: 1px solid #333; height: 80px; resize: none; }
     .notes-box button { background: violet; color: black; font-weight: bold; cursor: pointer; }
-    .note-item { background: #000; margin-top: 8px; padding: 8px; border-radius: 6px; font-size: 13px; }
+    .note-item { background: #000; margin-top: 8px; padding: 8px; border-radius: 6px; font-size: 13px; border-bottom: 1px solid #222; }
     .note-actions { margin-top: 5px; display: flex; gap: 5px; }
-    .note-actions button { padding: 2px 5px; font-size: 10px; width: auto; }
+    .note-actions button { padding: 2px 5px; font-size: 10px; width: auto; background: #222; color: #fff; }
 
     /* Todo Styling */
     .todo-box input, .todo-box button { width: 100%; margin-top: 8px; padding: 8px; border-radius: 6px; border: none; box-sizing: border-box; }
@@ -70,13 +86,13 @@
     .bot-box input { width: 100%; padding: 10px; background: #000; border: 1px solid #333; color: white; border-radius: 6px; box-sizing: border-box; }
     #out { margin-top: 15px; font-size: 14px; color: #aaa; line-height: 1.4; white-space: pre-wrap; }
 
-    /* Responsive */
     @media (max-width: 850px) { .main-grid { grid-template-columns: 1fr; } .info-bar { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
 <body>
 
 <header>BTECH <span>25 29</span></header>
+<div class="digital-clock" id="mainClock">Loading...</div>
 
 <div class="container">
     <div class="main-grid">
@@ -92,22 +108,21 @@
         </div>
 
         <div class="section-card notes-box">
-            <h3>Personal Notes</h3>
-            <textarea id="noteText" placeholder="Write a private note..."></textarea>
-            <button onclick="addNote()">Save Note</button>
+            <h3>Notes</h3>
+            <textarea id="noteText" placeholder="Write a note..."></textarea>
+            <button onclick="addNote()">Save</button>
             <div id="noteList"></div>
         </div>
 
         <div class="section-card todo-box">
-            <div class="clock" id="clock"></div>
             <span id="todoTitle" class="todo-title">Todo List</span>
             
-            <input id="task" placeholder="What needs to be done?">
+            <input id="task" placeholder="Enter Task">
             <input type="datetime-local" id="date">
             <button onclick="addTask()">Add Task</button>
 
             <div class="progress-container">
-                <div id="progress" style="font-size: 12px; color: #888;">0/0 tasks done</div>
+                <div id="progress" style="font-size: 12px; color: #888;">0/0 done</div>
                 <div class="progress-bar"><div id="bar" class="progress-fill"></div></div>
             </div>
 
@@ -117,8 +132,8 @@
         </div>
 
         <div class="section-card bot-box">
-            <h3>AI Assistant 🤖</h3>
-            <input id="chat" placeholder="Type a message..." onkeydown="chatbot(event)">
+            <h3>Assistant 🤖</h3>
+            <input id="chat" placeholder="Ask me something..." onkeydown="chatbot(event)">
             <div id="out"></div>
         </div>
 
@@ -126,10 +141,21 @@
 </div>
 
 <script>
-// CLOCK
-setInterval(()=>{
-    document.getElementById("clock").innerText = new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata", hour: '2-digit', minute:'2-digit', second:'2-digit'});
-},1000);
+// MAIN INDIA CLOCK
+function updateClock() {
+    const options = { 
+        timeZone: "Asia/Kolkata", 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit',
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+    };
+    document.getElementById("mainClock").innerText = new Date().toLocaleString("en-IN", options);
+}
+setInterval(updateClock, 1000);
+updateClock();
 
 // NOTES LOGIC
 let notes = JSON.parse(localStorage.getItem("notes")) || [];
@@ -162,7 +188,7 @@ function renderNotes() {
 }
 renderNotes();
 
-// TODO LOGIC WITH DYNAMIC COLORING
+// TODO LOGIC (DYNAMIC COLORS)
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 function save() { localStorage.setItem("tasks", JSON.stringify(tasks)); }
 
@@ -188,30 +214,28 @@ function render() {
     
     // Logic: Color based on "Work Remaining" percentage
     let workRemainingPercent = total ? (pending / total) * 100 : 0;
-    let statusColor = "cyan"; // Default Blue (0% work remain)
+    let statusColor = "cyan"; // Blue (0% work remain)
 
     if (total > 0) {
         if (workRemainingPercent > 66) statusColor = "red";
         else if (workRemainingPercent > 33) statusColor = "orange";
         else if (workRemainingPercent > 0) statusColor = "lime";
-        else statusColor = "cyan"; // Exactly 0% remain
+        else statusColor = "cyan"; 
     }
 
-    // Apply colors to Title Glow and Progress Bar
     let title = document.getElementById("todoTitle");
     title.style.setProperty('--glow-color', statusColor);
     title.style.animation = "titleGlow 1.5s infinite alternate";
     
     document.getElementById("bar").style.backgroundColor = statusColor;
     document.getElementById("bar").style.width = percentDone + "%";
-    document.getElementById("progress").innerText = `${done}/${total} tasks completed (${percentDone}%)`;
+    document.getElementById("progress").innerText = `${done}/${total} completed (${percentDone}%)`;
 
     let showReminder = false;
     tasks.forEach((x, i) => {
         let div = document.createElement("div");
         let dl = new Date(x.d);
-        let now = new Date();
-        if((dl - now) / 86400000 <= 3 && !x.done) showReminder = true;
+        if((dl - new Date()) / 86400000 <= 3 && !x.done) showReminder = true;
 
         div.className = "todo-item";
         div.style.borderLeftColor = statusColor;
@@ -221,9 +245,9 @@ function render() {
                     <input type='checkbox' ${x.done ? "checked" : ""} onclick='toggle(${i})' style="width:auto; margin:0;">
                     <span class='${x.done ? "completed" : ""}'>${x.t}</span>
                 </div>
-                <button onclick='del(${i})' style="width:30px; margin:0; padding:2px; background:#333; color:white;">✕</button>
+                <button onclick='del(${i})' style="width:25px; margin:0; padding:2px; background:#333; color:white; font-size:10px;">✕</button>
             </div>
-            <div style="font-size:11px; color:#777; margin-top:5px;">📅 ${dl.toLocaleString()}</div>`;
+            <div style="font-size:11px; color:#666; margin-top:5px;">📅 ${dl.toLocaleString()}</div>`;
         list.appendChild(div);
     });
 
@@ -231,26 +255,25 @@ function render() {
 }
 render();
 
-// CHATBOT LOGIC
+// CHATBOT
 let ask = false;
 function chatbot(e) {
     if(e.key === 'Enter') {
         let msg = e.target.value.toLowerCase().trim();
         let out = document.getElementById("out");
         if(msg.includes("hi") || msg.includes("hello")) {
-            out.innerText = "Hello 👋 How can I help you?";
-        } else if(msg.includes("task") || msg.includes("work")) {
-            out.innerText = "Do you want to see your pending tasks?";
+            out.innerText = "Hello! Need help with your schedule?";
+        } else if(msg.includes("task")) {
+            out.innerText = "View pending tasks?";
             ask = true;
         } else if(ask && msg.includes("yes")) {
             let p = tasks.filter(x => !x.done).map(x => "• " + x.t).join("\n");
-            out.innerText = p || "No pending tasks! 🎉";
+            out.innerText = p || "All clear!";
             ask = false;
         } else {
-            out.innerText = "Searching...";
+            out.innerText = "Redirecting to search...";
             setTimeout(() => {
                 window.open("https://www.google.com/search?q=" + encodeURIComponent(msg));
-                out.innerText = "Results opened. For more, contact CRS.";
             }, 800);
         }
         e.target.value = "";
