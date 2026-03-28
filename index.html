@@ -9,17 +9,21 @@
 body{margin:0;font-family:Arial;background:#0b0b0f;color:white;}
 header{text-align:center;padding:15px;font-size:28px;font-weight:bold;}
 header span{color:violet;}
-.container{padding:10px;max-width:800px;margin:auto;}
-.section{background:#111;margin:10px 0;padding:15px;border-radius:14px;}
-.section h3{color:violet;}
+.container{padding:10px;max-width:900px;margin:auto;}
+
+.section{background:#111;margin:12px 0;padding:15px;border-radius:14px;box-shadow:0 0 10px #000;}
+.section h3{color:violet;margin-bottom:6px;}
+.section p{color:white;margin:0;}
 
 .clock{text-align:center;margin-top:15px;font-size:30px;font-weight:bold;background:#111;padding:15px;border-radius:12px;animation:glow 1.5s infinite alternate;}
 @keyframes glow{from{box-shadow:0 0 10px violet;}to{box-shadow:0 0 25px violet;}}
 
-.todo{background:#111;margin:10px;padding:12px;border-radius:12px;position:relative;}
+.todo{background:#111;margin:15px 0;padding:12px;border-radius:12px;position:relative;}
 .todo input{width:100%;padding:6px;margin-top:5px;border-radius:6px;border:1px solid #333;background:black;color:white;}
 .todo-item{margin-top:8px;background:#000;padding:8px;border-radius:6px;}
 .completed{opacity:0.4;text-decoration:line-through;}
+
+.progress-text{margin-top:8px;font-size:14px;color:#ccc;}
 
 .circle{
 position:absolute;right:-25px;top:50%;transform:translateY(-50%);
@@ -31,12 +35,23 @@ animation:float 2s infinite ease-in-out;
 50%{transform:translateY(-50%) translateY(-8px);} 
 100%{transform:translateY(-50%) translateY(0);} }
 
-.red{background:red;box-shadow:0 0 10px red;}
-.orange{background:orange;box-shadow:0 0 10px orange;}
-.green{background:lime;box-shadow:0 0 10px lime;}
-.blue{background:cyan;box-shadow:0 0 10px cyan;}
+.red{background:red;box-shadow:0 0 15px red;}
+.orange{background:orange;box-shadow:0 0 15px orange;}
+.green{background:lime;box-shadow:0 0 15px lime;}
+.blue{background:cyan;box-shadow:0 0 15px cyan;}
 
-.chatbot{position:fixed;bottom:10px;left:10px;width:250px;background:#111;padding:10px;border-radius:10px;}
+.side-reminder{
+position:fixed;right:10px;top:50%;transform:translateY(-50%);
+color:yellow;font-size:14px;text-align:center;
+animation:floatText 2s infinite ease-in-out;
+display:none;
+}
+@keyframes floatText{
+0%{transform:translateY(-50%) translateY(0);} 
+50%{transform:translateY(-50%) translateY(-10px);} 
+100%{transform:translateY(-50%) translateY(0);} }
+
+.chatbot{position:fixed;bottom:10px;left:10px;width:260px;background:#111;padding:10px;border-radius:10px;}
 .chatbot input{width:100%;padding:5px;}
 </style>
 </head>
@@ -45,18 +60,53 @@ animation:float 2s infinite ease-in-out;
 <header>BTECH <span>25 29</span></header>
 
 <div class="container">
+
+<!-- CLOCK -->
 <div class="clock" id="clock"></div>
 
+<!-- 4 POINTS SECTION -->
+<div class="section">
+<h3>Notice</h3>
+<p>NO UPDATE</p>
+</div>
+
+<div class="section">
+<h3>Books</h3>
+<p>NO UPDATE</p>
+</div>
+
+<div class="section">
+<h3>Practical</h3>
+<p>NO UPDATE</p>
+</div>
+
+<div class="section">
+<h3>Important Notes</h3>
+<p>math play list for 2nd sem</p>
+<a href="https://youtube.com/playlist?list=PLn3Wz38keZOfqVnFaM5bhlGVj8pnKntfW&si=TkjuvCdfZabbt4WY" target="_blank" style="color:violet;">Open Playlist</a>
+</div>
+
+<!-- TODO -->
 <div class="todo">
 <div id="circle" class="circle"></div>
 <b>Todo List</b>
 <input id="todoInput" placeholder="Task">
 <input type="datetime-local" id="deadlineInput">
 <button onclick="addTodo()">Add</button>
+
+<div class="progress-text" id="progressText"></div>
+
 <div id="todoList"></div>
 </div>
+
 </div>
 
+<!-- REMINDER -->
+<div id="sideReminder" class="side-reminder">
+“Stay focused, you’re closer than you think ✨”
+</div>
+
+<!-- CHATBOT -->
 <div class="chatbot">
 🤖
 <input id="chatInput" onkeydown="chat(event)">
@@ -69,12 +119,9 @@ setInterval(()=>{
 clock.innerText=new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"});
 },1000);
 
-// LOAD TASKS
+// STORAGE
 let tasks=JSON.parse(localStorage.getItem("tasks"))||[];
-
-function saveTasks(){
-localStorage.setItem("tasks",JSON.stringify(tasks));
-}
+function saveTasks(){localStorage.setItem("tasks",JSON.stringify(tasks));}
 
 function addTodo(){
 let t=todoInput.value,d=deadlineInput.value;
@@ -89,27 +136,39 @@ todoList.innerHTML="";
 let total=tasks.length;
 let done=tasks.filter(t=>t.done).length;
 let remain=total-done;
-let percent= total? (remain/total)*100 : 0;
+let percentDone = total? Math.round((done/total)*100) : 0;
+let percentRemain = total? (remain/total)*100 : 0;
+
+progressText.innerText = `${done}/${total} tasks done → ${percentDone}%`;
 
 // circle color
-let c=circle;
-c.className="circle";
-if(percent>66) c.classList.add("red");
-else if(percent>33) c.classList.add("orange");
-else if(percent>0) c.classList.add("green");
-else c.classList.add("blue");
+circle.className="circle";
+if(percentRemain>66) circle.classList.add("red");
+else if(percentRemain>33) circle.classList.add("orange");
+else if(percentRemain>0) circle.classList.add("green");
+else circle.classList.add("blue");
 
-// render tasks
+let show=false;
+
 tasks.forEach((task,i)=>{
+let now=new Date();
+let dl=new Date(task.d);
+let diff=(dl-now)/86400000;
+
+if(diff<=3 && !task.done) show=true;
+
 let div=document.createElement("div");
 div.className="todo-item";
 div.innerHTML=`
 <input type='checkbox' ${task.done?"checked":""} onchange='toggle(${i})'>
 <span class='${task.done?"completed":""}'>${task.t}</span>
 <button onclick='remove(${i})'>X</button>
-<div>${new Date(task.d).toLocaleString()}</div>`;
+<div>📅 ${new Date(task.d).toLocaleString()}</div>`;
+
 todoList.appendChild(div);
 });
+
+sideReminder.style.display = show ? "block" : "none";
 }
 
 function toggle(i){
@@ -127,15 +186,29 @@ render();
 render();
 
 // CHATBOT
+let ask=false;
 function chat(e){
 if(e.key==='Enter'){
 let msg=e.target.value.toLowerCase();
-if(msg.includes("show my tasks")){
+
+if(msg.includes("task")||msg.includes("work")||msg.includes("pending")){
+chatOutput.innerText="Do you want to see your tasks?";
+ask=true;
+}
+else if(ask && (msg.includes("h")||msg.includes("ha")||msg.includes("hm")||msg.includes("yes"))){
+let pending=tasks.filter(t=>!t.done)
+.map(t=>`${t.t} (Due: ${new Date(t.d).toLocaleString()})`).join("\n");
+chatOutput.innerText=pending||"No pending tasks";
+ask=false;
+}
+else if(msg.includes("show my tasks")){
 let list=tasks.map(t=>`${t.t} (Due: ${new Date(t.d).toLocaleString()})`).join("\n");
 chatOutput.innerText=list||"No tasks";
-}else{
+}
+else{
 window.open("https://www.google.com/search?q="+msg);
 }
+
 e.target.value="";
 }
 }
