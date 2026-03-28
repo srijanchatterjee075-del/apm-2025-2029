@@ -52,15 +52,9 @@ header span{color:violet;}
 .chatbox{position:fixed;bottom:70px;left:10px;width:260px;background:#111;padding:10px;border-radius:10px;display:none;}
 .chatbox input{width:100%;padding:6px;}
 
-/* BOT SETTINGS UI */
-.bot-settings{position:fixed;right:10px;bottom:10px;width:220px;background:#111;padding:10px;border-radius:10px;}
-.bot-settings input{width:100%;margin-top:5px;padding:5px;border-radius:5px;border:none;background:#000;color:white;}
-.bot-settings button{margin-top:5px;width:100%;padding:6px;border:none;border-radius:6px;background:violet;color:black;font-weight:bold;}
-
 @media(max-width:768px){
 .notes{position:static;width:100%;}
 .chatbox{width:90%;left:5%;}
-.bot-settings{width:90%;left:5%;right:auto;}
 }
 </style>
 </head>
@@ -112,14 +106,6 @@ header span{color:violet;}
 <div id="out"></div>
 </div>
 
-<!-- BOT SETTINGS (REPLACEABLE FROM WEBSITE) -->
-<div class="bot-settings">
-<b>Bot Settings</b>
-<input id="botNameInput" placeholder="Bot Name">
-<input id="botReplyInput" placeholder="Google Reply">
-<button onclick="saveBot()">Save Bot</button>
-</div>
-
 <script>
 // CLOCK
 setInterval(()=>{clock.innerText=new Date().toLocaleString("en-IN");},1000);
@@ -165,17 +151,9 @@ if(remind){botSpeak("Work is remaining ⚠️");setTimeout(()=>window.open("http
 }
 render();
 
-// BOT STORAGE
-let BOT_NAME=localStorage.getItem("botName")||"CRS BOT";
-let BOT_REPLY=localStorage.getItem("botReply")||"For more contact to CRS";
-
-function saveBot(){
-BOT_NAME=botNameInput.value||BOT_NAME;
-BOT_REPLY=botReplyInput.value||BOT_REPLY;
-localStorage.setItem("botName",BOT_NAME);
-localStorage.setItem("botReply",BOT_REPLY);
-alert("Bot Updated!");
-}
+// BOT CONFIG (EDIT HERE IN CODE)
+const BOT_NAME="CRS BOT";
+const BOT_REPLY="For more contact to CRS";
 
 // CHAT
 function toggleBot(){chatbox.style.display = chatbox.style.display==='block'?'none':'block';}
