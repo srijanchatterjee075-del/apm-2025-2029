@@ -7,31 +7,35 @@
 
 <style>
 body {margin:0;font-family:Arial;background:#0b0b0f;color:white;}
-header {text-align:center;padding:15px;font-size:26px;font-weight:bold;}
+header {text-align:center;padding:15px;font-size:28px;font-weight:bold;letter-spacing:1px;}
 header span {color:violet;}
 .container {padding:10px;max-width:800px;margin:auto;}
-.section {background:#111;margin:10px 0;padding:15px;border-radius:12px;}
+.section {background:#111;margin:10px 0;padding:15px;border-radius:14px;box-shadow:0 0 10px rgba(138,43,226,0.2);} 
 .section h3 {color:violet;}
 
 /* NOTE BOX */
 .note-box {
 position:fixed;left:10px;top:50%;transform:translateY(-50%);
-width:220px;background:#111;padding:10px;border-radius:10px;
+width:230px;background:#111;padding:12px;border-radius:12px;box-shadow:0 0 10px rgba(138,43,226,0.3);
 }
 .note-box textarea, .note-box input {
-width:100%;margin-top:5px;padding:5px;background:black;color:white;border:1px solid #333;
+width:100%;margin-top:6px;padding:6px;background:black;color:white;border:1px solid #333;border-radius:6px;
 }
 
-/* CLOCK */
+/* BIG CLOCK */
 .clock {
-text-align:center;margin-top:10px;font-size:14px;color:#ccc;
+text-align:center;margin-top:15px;font-size:22px;font-weight:bold;
+background:#111;padding:10px;border-radius:12px;box-shadow:0 0 12px rgba(138,43,226,0.3);
 }
 
 /* TODO */
 .todo {
-background:#111;margin:10px;padding:10px;border-radius:10px;
+background:#111;margin:10px;padding:12px;border-radius:12px;box-shadow:0 0 10px rgba(138,43,226,0.2);
 }
-.todo input {width:100%;padding:5px;margin-top:5px;}
+.todo input {width:100%;padding:6px;margin-top:5px;border-radius:6px;border:1px solid #333;background:black;color:white;}
+.todo-item {display:flex;align-items:center;justify-content:space-between;margin-top:8px;background:#000;padding:6px;border-radius:6px;}
+.todo-item span {flex:1;margin-left:6px;}
+.todo-item button {background:red;color:white;border:none;padding:4px 8px;border-radius:5px;cursor:pointer;}
 
 .chatbot {position:fixed;bottom:10px;left:10px;width:250px;background:#111;padding:10px;border-radius:10px;}
 .chatbot input {width:100%;padding:5px;}
@@ -48,7 +52,6 @@ background:#111;margin:10px;padding:10px;border-radius:10px;
 <div id="noteTime"></div>
 <textarea id="noteText" placeholder="Write note..."></textarea>
 <input id="noteLink" placeholder="Add link">
-<input type="file" id="noteFile">
 <button onclick="saveNote()">Save</button>
 <button onclick="deleteNote()">Delete</button>
 <div id="noteDisplay"></div>
@@ -97,23 +100,13 @@ document.getElementById("noteTime").innerText=now;
 setInterval(updateClock,1000);
 updateClock();
 
-// NOTES
+// NOTES (no file upload now)
 function saveNote(){
 let text=document.getElementById("noteText").value;
 let link=document.getElementById("noteLink").value;
-let file=document.getElementById("noteFile").files[0];
-
-let reader=new FileReader();
-reader.onload=function(e){
-let data={text,link,file:e.target.result};
-localStorage.setItem("note",JSON.stringify(data));
-displayNote();
-}
-if(file){reader.readAsDataURL(file);} else {
 let data={text,link};
 localStorage.setItem("note",JSON.stringify(data));
 displayNote();
-}
 }
 
 function displayNote(){
@@ -121,7 +114,6 @@ let n=JSON.parse(localStorage.getItem("note"));
 if(!n) return;
 let html=`<p>${n.text}</p>`;
 if(n.link) html+=`<a href='${n.link}' target='_blank'>Open Link</a>`;
-if(n.file) html+=`<br><a href='${n.file}' target='_blank'>Open File</a>`;
 document.getElementById("noteDisplay").innerHTML=html;
 }
 
@@ -132,17 +124,26 @@ document.getElementById("noteDisplay").innerHTML="";
 
 displayNote();
 
-// TODO
+// TODO with tick + delete
 function addTodo(){
 let val=document.getElementById("todoInput").value;
+if(!val) return;
 let showTime=document.getElementById("toggleTime").checked;
 let now=new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"});
 let text=showTime ? val+" ("+now+")" : val;
+
 let list=document.getElementById("todoList");
 let div=document.createElement("div");
-div.innerHTML=text;
-div.onclick=function(){div.remove();}
+div.className="todo-item";
+
+div.innerHTML=`
+<input type='checkbox'>
+<span>${text}</span>
+<button onclick='this.parentElement.remove()'>X</button>
+`;
+
 list.appendChild(div);
+document.getElementById("todoInput").value="";
 }
 
 // CHAT
