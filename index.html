@@ -39,11 +39,13 @@ to { box-shadow:0 0 25px violet; }
 background:#111;margin:10px;padding:12px;border-radius:12px;box-shadow:0 0 10px rgba(138,43,226,0.2);
 }
 .todo input {width:100%;padding:6px;margin-top:5px;border-radius:6px;border:1px solid #333;background:black;color:white;}
-.todo-item {display:flex;flex-direction:column;margin-top:8px;background:#000;padding:8px;border-radius:6px;}
+.todo-item {display:flex;flex-direction:column;margin-top:8px;background:#000;padding:8px;border-radius:6px;transition:0.3s;}
 .todo-top {display:flex;align-items:center;justify-content:space-between;}
-.todo-item span {flex:1;margin-left:6px;}
+.todo-text {flex:1;margin-left:6px;}
 .todo-item button {background:red;color:white;border:none;padding:4px 8px;border-radius:5px;cursor:pointer;}
 .deadline {font-size:12px;color:#aaa;margin-top:4px;}
+.done {color:red;font-size:12px;margin-left:5px;}
+.completed {opacity:0.4;}
 
 .chatbot {position:fixed;bottom:10px;left:10px;width:250px;background:#111;padding:10px;border-radius:10px;}
 .chatbot input {width:100%;padding:5px;}
@@ -129,7 +131,7 @@ document.getElementById("noteDisplay").innerHTML="";
 }
 displayNote();
 
-// TODO with deadline
+// TODO with completion effect
 function addTodo(){
 let val=document.getElementById("todoInput").value;
 let deadline=document.getElementById("deadlineInput").value;
@@ -148,10 +150,12 @@ let hrs=Math.floor(diff/1000/60/60);
 remaining="Deadline: "+deadline+" ("+hrs+" hrs left)";
 }
 
+let spanId="task"+Date.now();
+
 div.innerHTML=`
 <div class='todo-top'>
-<input type='checkbox'>
-<span>${text}</span>
+<input type='checkbox' onchange="markDone(this,'${spanId}')">
+<span id='${spanId}' class='todo-text'>${text}</span>
 <button onclick='this.parentElement.parentElement.remove()'>X</button>
 </div>
 <div class='deadline'>${remaining}</div>
@@ -160,6 +164,17 @@ div.innerHTML=`
 document.getElementById("todoList").appendChild(div);
 document.getElementById("todoInput").value="";
 document.getElementById("deadlineInput").value="";
+}
+
+function markDone(checkbox,id){
+let text=document.getElementById(id);
+if(checkbox.checked){
+text.classList.add("completed");
+text.innerHTML += " <span class='done'>(done)</span>";
+}else{
+text.classList.remove("completed");
+text.innerHTML = text.innerHTML.replace(/<span class='done'>\(done\)<\/span>/,'');
+}
 }
 
 // CHAT
