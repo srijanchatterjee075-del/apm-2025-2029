@@ -17,14 +17,8 @@ header span{color:violet;}
 .clock{font-size:28px;text-align:center;background:#111;padding:12px;border-radius:10px;animation:glow 1.5s infinite alternate;}
 @keyframes glow{from{box-shadow:0 0 8px violet;}to{box-shadow:0 0 20px violet;}}
 
-/* NOTES BOX */
-.notes{
-position:fixed;left:10px;top:50%;transform:translateY(-50%);
-width:240px;background:#111;padding:10px;border-radius:12px;
-}
-.notes input,.notes textarea,.notes button{
-width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;
-}
+.notes{position:fixed;left:10px;top:50%;transform:translateY(-50%);width:240px;background:#111;padding:10px;border-radius:12px;}
+.notes input,.notes textarea,.notes button{width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;}
 .notes input,.notes textarea{background:#000;color:white;border:1px solid #333;}
 .notes button{background:violet;color:black;font-weight:bold;cursor:pointer;}
 .note-item{background:#000;margin-top:6px;padding:6px;border-radius:6px;font-size:13px;}
@@ -51,16 +45,16 @@ width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;
 .reminder{position:fixed;right:10px;top:50%;color:yellow;display:none;animation:float 2s infinite;}
 
 .chatbot{position:fixed;bottom:10px;left:10px;width:260px;background:#111;padding:10px;border-radius:10px;}
-.chatbot input{width:100%;padding:5px;}
+.chatbot input{width:100%;padding:5px;background:#000;color:white;border:1px solid #333;}
+.chat-output{margin-top:8px;font-size:13px;white-space:pre-line;}
 </style>
 </head>
 <body>
 
 <header>BTECH <span>25 29</span></header>
 
-<!-- NOTES -->
 <div class="notes">
-<b>Notes (only you can see)</b>
+<b>Notes</b>
 <textarea id="noteText" placeholder="Write note..."></textarea>
 <input id="noteLink" placeholder="Add link (optional)">
 <button onclick="addNote()">Save</button>
@@ -74,11 +68,6 @@ width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;
 <div class="section"><h3>Notice</h3><p>NO UPDATE</p></div>
 <div class="section"><h3>Books</h3><p>NO UPDATE</p></div>
 <div class="section"><h3>Practical</h3><p>NO UPDATE</p></div>
-<div class="section">
-<h3>Important Notes</h3>
-<p>math play list for 2nd sem</p>
-<a href="https://youtube.com/playlist?list=PLn3Wz38keZOfqVnFaM5bhlGVj8pnKntfW&si=TkjuvCdfZabbt4WY" target="_blank" style="color:violet">Open Playlist</a>
-</div>
 
 <div class="todo">
 <div id="circle" class="circle"></div>
@@ -93,12 +82,12 @@ width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;
 
 </div>
 
-<div id="reminder" class="reminder">Stay focused, you're closer than you think ✨</div>
+<div id="reminder" class="reminder">Stay focused ✨</div>
 
 <div class="chatbot">
-🤖
-<input id="chat" onkeydown="chatbot(event)">
-<div id="out"></div>
+🤖 Chat
+<input id="chat" onkeydown="chatbot(event)" placeholder="Ask something...">
+<div id="out" class="chat-output"></div>
 </div>
 
 <script>
@@ -110,34 +99,22 @@ document.getElementById("clock").innerText=new Date().toLocaleString("en-IN",{ti
 // NOTES
 let notes=JSON.parse(localStorage.getItem("notes"))||[];
 function saveNotes(){localStorage.setItem("notes",JSON.stringify(notes));}
-
 function addNote(){
 let t=noteText.value;
 let l=noteLink.value;
 if(!t)return;
 notes.push({t,l});
-saveNotes();
-renderNotes();
+saveNotes();renderNotes();
 noteText.value="";noteLink.value="";
 }
-
 function delNote(i){notes.splice(i,1);saveNotes();renderNotes();}
-function editNote(i){
-noteText.value=notes[i].t;
-noteLink.value=notes[i].l||"";
-delNote(i);
-}
-
 function renderNotes(){
 let box=document.getElementById("noteList");
 box.innerHTML="";
 notes.forEach((n,i)=>{
 let div=document.createElement("div");
 div.className="note-item";
-div.innerHTML=`• ${n.t}
-${n.l?`<a href='${n.l}' target='_blank'>Open Link</a>`:""}
-<button onclick='editNote(${i})'>Edit</button>
-<button onclick='delNote(${i})'>Delete</button>`;
+div.innerHTML=`• ${n.t} ${n.l?`<a href='${n.l}' target='_blank'>Link</a>`:""} <button onclick='delNote(${i})'>X</button>`;
 box.appendChild(div);
 });
 }
@@ -146,7 +123,6 @@ renderNotes();
 // TODO
 let tasks=JSON.parse(localStorage.getItem("tasks"))||[];
 function save(){localStorage.setItem("tasks",JSON.stringify(tasks));}
-
 function addTask(){
 let t=task.value;
 let d=date.value;
@@ -154,39 +130,28 @@ if(!t||!d)return;
 tasks.push({t,d,done:false});
 save();render();
 }
-
 function toggle(i){tasks[i].done=!tasks[i].done;save();render();}
 function del(i){tasks.splice(i,1);save();render();}
 
 function render(){
 let list=document.getElementById("list");
 list.innerHTML="";
-
 let done=tasks.filter(x=>x.done).length;
 let total=tasks.length;
-let remain=total-done;
 let percent= total? Math.round(done/total*100):0;
 
-document.getElementById("progress").innerText=`${done}/${total} tasks done → ${percent}%`;
+document.getElementById("progress").innerText=`${done}/${total} → ${percent}%`;
 document.getElementById("bar").style.width=percent+"%";
-
-let circle=document.getElementById("circle");
-circle.className="circle";
-let r= total? (remain/total)*100:0;
-if(r>66)circle.classList.add("red");
-else if(r>33)circle.classList.add("orange");
-else if(r>0)circle.classList.add("green");
-else circle.classList.add("blue");
 
 let showReminder=false;
 
 tasks.forEach((x,i)=>{
-let div=document.createElement("div");
 let dl=new Date(x.d);
 let now=new Date();
 let diff=(dl-now)/86400000;
 if(diff<=3 && !x.done) showReminder=true;
 
+let div=document.createElement("div");
 div.className="todo-item";
 div.innerHTML=`
 <input type='checkbox' ${x.done?"checked":""} onclick='toggle(${i})'>
@@ -204,28 +169,38 @@ render();
 let ask=false;
 function chatbot(e){
 if(e.key==='Enter'){
-let msg=e.target.value.toLowerCase();
+let msg=e.target.value.toLowerCase().trim();
 let out=document.getElementById("out");
 
-if(msg.includes("task")||msg.includes("work")||msg.includes("pending")){
+if(msg.match(/\b(hi|hello|hey|hii|helo)\b/)){
+out.innerText="Hello 👋 How can I help you?";
+}
+else if(msg.match(/\b(i am|i'm|im|i )\b/)){
+out.innerText="I am a chatbot 🤖, nice to meet you!";
+}
+else if(msg.includes("task")||msg.includes("work")){
 out.innerText="Do you want to see your tasks?";
 ask=true;
 }
-else if(ask && (msg.includes("h")||msg.includes("yes"))){
-let p=tasks.filter(x=>!x.done).map(x=>x.t+" ("+new Date(x.d).toLocaleString()+")").join("\n");
-out.innerText=p||"No pending tasks";
+else if(ask && msg.includes("yes")){
+let p=tasks.filter(x=>!x.done).map(x=>x.t).join("\n");
+out.innerText=p||"No pending tasks 🎉";
 ask=false;
 }
-else if(msg.includes("show my tasks")){
-out.innerText=tasks.map(x=>x.t+" ("+new Date(x.d).toLocaleString()+")").join("\n")||"No tasks";
+else if(msg.includes("show")){
+out.innerText=tasks.map(x=>x.t).join("\n")||"No tasks";
 }
 else{
-window.open("https://www.google.com/search?q="+msg);
+out.innerText="Searching...";
+setTimeout(()=>{
+window.open("https://www.google.com/search?q="+encodeURIComponent(msg));
+},700);
 }
 
 e.target.value="";
 }
 }
 </script>
+
 </body>
 </html>
