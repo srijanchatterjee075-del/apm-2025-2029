@@ -7,26 +7,27 @@
 
 <style>
 body {margin:0;font-family:Arial;background:#0b0b0f;color:white;}
-header {text-align:center;padding:15px;font-size:28px;font-weight:bold;letter-spacing:1px;}
+header {text-align:center;padding:15px;font-size:28px;font-weight:bold;}
 header span {color:violet;}
 .container {padding:10px;max-width:800px;margin:auto;}
-.section {background:#111;margin:10px 0;padding:15px;border-radius:14px;box-shadow:0 0 10px rgba(138,43,226,0.2);} 
+.section {background:#111;margin:10px 0;padding:15px;border-radius:14px;}
 .section h3 {color:violet;}
 
 /* NOTE BOX */
 .note-box {
 position:fixed;left:10px;top:50%;transform:translateY(-50%);
-width:230px;background:#111;padding:12px;border-radius:12px;box-shadow:0 0 10px rgba(138,43,226,0.3);
+width:240px;background:#111;padding:12px;border-radius:12px;
 }
 .note-box textarea, .note-box input {
 width:100%;margin-top:6px;padding:6px;background:black;color:white;border:1px solid #333;border-radius:6px;
 }
+.note-item {background:#000;padding:6px;margin-top:6px;border-radius:6px;}
+.note-actions button {margin-right:5px;margin-top:5px;}
 
-/* ANIMATED CLOCK */
+/* CLOCK */
 .clock {
-text-align:center;margin-top:15px;font-size:26px;font-weight:bold;
+text-align:center;margin-top:15px;font-size:28px;font-weight:bold;
 background:#111;padding:15px;border-radius:12px;
-box-shadow:0 0 20px rgba(138,43,226,0.6);
 animation: glow 1.5s infinite alternate;
 }
 @keyframes glow {
@@ -34,18 +35,24 @@ from { box-shadow:0 0 10px violet; }
 to { box-shadow:0 0 25px violet; }
 }
 
+/* PROGRESS */
+.progress-box {margin:10px 0;}
+.progress-bar {height:10px;background:#333;border-radius:10px;overflow:hidden;}
+.progress-fill {height:100%;background:violet;width:0%;transition:0.4s;}
+
 /* TODO */
-.todo {
-background:#111;margin:10px;padding:12px;border-radius:12px;box-shadow:0 0 10px rgba(138,43,226,0.2);
-}
+.todo {background:#111;margin:10px;padding:12px;border-radius:12px;}
 .todo input {width:100%;padding:6px;margin-top:5px;border-radius:6px;border:1px solid #333;background:black;color:white;}
-.todo-item {display:flex;flex-direction:column;margin-top:8px;background:#000;padding:8px;border-radius:6px;transition:0.3s;}
+.todo-item {margin-top:8px;background:#000;padding:8px;border-radius:6px;}
 .todo-top {display:flex;align-items:center;justify-content:space-between;}
 .todo-text {flex:1;margin-left:6px;}
-.todo-item button {background:red;color:white;border:none;padding:4px 8px;border-radius:5px;cursor:pointer;}
-.deadline {font-size:12px;color:#aaa;margin-top:4px;}
-.done {color:red;font-size:12px;margin-left:5px;}
-.completed {opacity:0.4;}
+.completed {opacity:0.4;text-decoration:line-through;}
+.done {color:red;margin-left:5px;}
+.deadline {font-size:12px;margin-top:4px;}
+.green {color:lightgreen;}
+.yellow {color:yellow;}
+.red {color:red;}
+.reminder {font-size:12px;color:#aaa;margin-top:3px;}
 
 .chatbot {position:fixed;bottom:10px;left:10px;width:250px;background:#111;padding:10px;border-radius:10px;}
 .chatbot input {width:100%;padding:5px;}
@@ -56,14 +63,12 @@ background:#111;margin:10px;padding:12px;border-radius:12px;box-shadow:0 0 10px 
 
 <header>BTECH <span>25 29</span></header>
 
-<!-- NOTE BOX -->
 <div class="note-box">
 <b>Notes (only you can see)</b>
 <div id="noteTime"></div>
 <textarea id="noteText" placeholder="Write note..."></textarea>
 <input id="noteLink" placeholder="Add link">
 <button onclick="saveNote()">Save</button>
-<button onclick="deleteNote()">Delete</button>
 <div id="noteDisplay"></div>
 </div>
 
@@ -79,30 +84,31 @@ background:#111;margin:10px;padding:12px;border-radius:12px;box-shadow:0 0 10px 
 <a href="https://youtube.com/playlist?list=PLn3Wz38keZOfqVnFaM5bhlGVj8pnKntfW&si=TkjuvCdfZabbt4WY" target="_blank">Open Playlist</a>
 </div>
 
-<!-- CLOCK -->
 <div class="clock" id="clock"></div>
 
-<!-- TODO -->
+<div class="progress-box">
+<div id="progressText"></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
 <div class="todo">
 <b>Todo List</b>
 <input id="todoInput" placeholder="Task">
 <input type="datetime-local" id="deadlineInput">
-<label><input type="checkbox" id="toggleTime"> Show Time/Date</label>
 <button onclick="addTodo()">Add</button>
 <div id="todoList"></div>
 </div>
 
 </div>
 
-<!-- CHATBOT -->
 <div class="chatbot">
 🤖<br>
-<input id="chatInput" placeholder="Type message..." onkeydown="chat(event)">
+<input id="chatInput" onkeydown="chat(event)">
 <div id="chatOutput"></div>
 </div>
 
 <script>
-// CLOCK INDIA
+// CLOCK
 function updateClock(){
 let now=new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"});
 document.getElementById("clock").innerText=now;
@@ -111,73 +117,121 @@ document.getElementById("noteTime").innerText=now;
 setInterval(updateClock,1000);
 updateClock();
 
-// NOTES
+// NOTES WITH EDIT DELETE
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
 function saveNote(){
 let text=document.getElementById("noteText").value;
 let link=document.getElementById("noteLink").value;
-localStorage.setItem("note",JSON.stringify({text,link}));
-displayNote();
+if(!text) return;
+notes.push({text,link});
+localStorage.setItem("notes",JSON.stringify(notes));
+displayNotes();
+document.getElementById("noteText").value="";
+document.getElementById("noteLink").value="";
 }
-function displayNote(){
-let n=JSON.parse(localStorage.getItem("note"));
-if(!n) return;
-let html=`<p>${n.text}</p>`;
-if(n.link) html+=`<a href='${n.link}' target='_blank'>Open Link</a>`;
+
+function displayNotes(){
+let html="";
+notes.forEach((n,i)=>{
+html+=`<div class='note-item'>
+<p>• ${n.text}</p>
+${n.link ? `<a href='${n.link}' target='_blank'>Open</a>`:""}
+<div class='note-actions'>
+<button onclick='editNote(${i})'>Edit</button>
+<button onclick='deleteNote(${i})'>Delete</button>
+</div>
+</div>`;
+});
 document.getElementById("noteDisplay").innerHTML=html;
 }
-function deleteNote(){
-localStorage.removeItem("note");
-document.getElementById("noteDisplay").innerHTML="";
-}
-displayNote();
 
-// TODO with completion effect
+function deleteNote(i){
+notes.splice(i,1);
+localStorage.setItem("notes",JSON.stringify(notes));
+displayNotes();
+}
+
+function editNote(i){
+document.getElementById("noteText").value=notes[i].text;
+document.getElementById("noteLink").value=notes[i].link;
+notes.splice(i,1);
+localStorage.setItem("notes",JSON.stringify(notes));
+displayNotes();
+}
+
+displayNotes();
+
+let total=0,done=0;
+function updateProgress(){
+let percent= total? Math.round((done/total)*100):0;
+document.getElementById("progressFill").style.width=percent+"%";
+document.getElementById("progressText").innerText=`${done}/${total} tasks done → ${percent}%`;
+}
+
 function addTodo(){
 let val=document.getElementById("todoInput").value;
 let deadline=document.getElementById("deadlineInput").value;
 if(!val) return;
-let showTime=document.getElementById("toggleTime").checked;
-let now=new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"});
-let text=showTime ? val+" ("+now+")" : val;
+total++;
 
 let div=document.createElement("div");
 div.className="todo-item";
 
-let remaining="";
-if(deadline){
-let diff=new Date(deadline)-new Date();
-let hrs=Math.floor(diff/1000/60/60);
-remaining="Deadline: "+deadline+" ("+hrs+" hrs left)";
-}
+let now=new Date();
+let d=new Date(deadline);
+let diff=(d-now)/1000/60/60;
+let color="green";
+if(diff<2) color="red";
+else if(diff<6) color="yellow";
 
-let spanId="task"+Date.now();
+let reminders=[
+"You’re doing great—just a little more to finish on time",
+"Just a small push left—complete it before the deadline",
+"Time is moving, but so are you—stay focused and finish"
+];
+let msg= reminders[Math.floor(Math.random()*reminders.length)];
+
+let id="task"+Date.now();
 
 div.innerHTML=`
 <div class='todo-top'>
-<input type='checkbox' onchange="markDone(this,'${spanId}')">
-<span id='${spanId}' class='todo-text'>${text}</span>
-<button onclick='this.parentElement.parentElement.remove()'>X</button>
+<input type='checkbox' onchange="markDone(this,'${id}')">
+<span id='${id}' class='todo-text'>${val}</span>
+<button onclick='removeTask(this)'>X</button>
 </div>
-<div class='deadline'>${remaining}</div>
+<div class='deadline ${color}'>Deadline: ${deadline}</div>
+<div class='reminder'>${msg}</div>
 `;
 
 document.getElementById("todoList").appendChild(div);
 document.getElementById("todoInput").value="";
 document.getElementById("deadlineInput").value="";
+updateProgress();
 }
 
-function markDone(checkbox,id){
-let text=document.getElementById(id);
-if(checkbox.checked){
-text.classList.add("completed");
-text.innerHTML += " <span class='done'>(done)</span>";
+function markDone(cb,id){
+let t=document.getElementById(id);
+if(cb.checked){
+t.classList.add("completed");
+t.innerHTML += " <span class='done'>(done)</span>";
+done++;
 }else{
-text.classList.remove("completed");
-text.innerHTML = text.innerHTML.replace(/<span class='done'>\(done\)<\/span>/,'');
+t.classList.remove("completed");
+t.innerHTML = t.innerHTML.replace(/<span class='done'>\(done\)<\/span>/,'');
+done--;
 }
+updateProgress();
 }
 
-// CHAT
+function removeTask(btn){
+let item=btn.parentElement.parentElement;
+if(item.querySelector("input").checked) done--;
+total--;
+item.remove();
+updateProgress();
+}
+
 function chat(e){
 if(e.key==='Enter'){
 let msg=e.target.value.toLowerCase();
