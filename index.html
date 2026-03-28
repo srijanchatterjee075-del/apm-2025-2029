@@ -6,22 +6,27 @@
 <title>BTECH 25-29</title>
 
 <style>
+*{box-sizing:border-box}
 body{margin:0;font-family:Arial;background:#0b0b0f;color:white;}
-header{text-align:center;padding:15px;font-size:28px;font-weight:bold;}
+
+header{text-align:center;padding:15px;font-size:24px;font-weight:bold;}
 header span{color:violet;}
+
 .container{max-width:900px;margin:auto;padding:10px;}
 
 .section{background:#111;margin:10px 0;padding:15px;border-radius:12px;}
 .section h3{color:violet;margin:0 0 5px;}
 
-.clock{font-size:28px;text-align:center;background:#111;padding:12px;border-radius:10px;animation:glow 1.5s infinite alternate;}
+.clock{font-size:22px;text-align:center;background:#111;padding:12px;border-radius:10px;animation:glow 1.5s infinite alternate;}
 @keyframes glow{from{box-shadow:0 0 8px violet;}to{box-shadow:0 0 20px violet;}}
 
-/* NOTES BOX */
+/* NOTES */
 .notes{
-position:fixed;left:10px;top:50%;transform:translateY(-50%);
-width:240px;background:#111;padding:10px;border-radius:12px;
+position:fixed;left:10px;top:10px;
+width:220px;background:#111;padding:10px;border-radius:12px;
+max-height:90vh;overflow:auto;
 }
+
 .notes textarea,.notes button{
 width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;
 }
@@ -29,8 +34,9 @@ width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;
 .notes button{background:violet;color:black;font-weight:bold;cursor:pointer;}
 .note-item{background:#000;margin-top:6px;padding:6px;border-radius:6px;font-size:13px;}
 
+/* TODO */
 .todo{background:#111;margin-top:15px;padding:12px;border-radius:12px;position:relative;}
-.todo input,.todo button{width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;}
+.todo input,.todo button{width:100%;margin-top:6px;padding:8px;border-radius:6px;border:none;}
 .todo input{background:#000;color:white;border:1px solid #333;}
 .todo button{background:violet;color:black;font-weight:bold;cursor:pointer;}
 .todo-item{background:#000;margin-top:8px;padding:8px;border-radius:6px;}
@@ -40,43 +46,49 @@ width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;
 .progress-bar{width:100%;height:10px;background:#222;border-radius:10px;margin-top:5px;overflow:hidden;}
 .progress-fill{height:100%;background:violet;width:0%;transition:0.3s;}
 
-.circle{position:absolute;right:-20px;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;animation:float 2s infinite;}
+.circle{position:absolute;right:-10px;top:50%;transform:translateY(-50%);width:16px;height:16px;border-radius:50%;animation:float 2s infinite;}
 @keyframes float{0%{transform:translateY(-50%);}50%{transform:translateY(-60%);}100%{transform:translateY(-50%);}}
-.red{background:red;box-shadow:0 0 10px red;}
-.orange{background:orange;box-shadow:0 0 10px orange;}
-.green{background:lime;box-shadow:0 0 10px lime;}
-.blue{background:cyan;box-shadow:0 0 10px cyan;}
+.red{background:red;}
+.orange{background:orange;}
+.green{background:lime;}
+.blue{background:cyan;}
 
-.reminder{position:fixed;right:10px;top:50%;color:yellow;display:none;animation:float 2s infinite;}
+.reminder{position:fixed;right:10px;bottom:80px;color:yellow;display:none;}
 
-.chatbot{position:fixed;bottom:10px;left:10px;width:260px;background:#111;padding:10px;border-radius:10px;}
-.chatbot input{width:100%;padding:5px;}
+/* CHATBOT */
+.chatbot{position:fixed;bottom:10px;left:10px;width:260px;max-width:90%;background:#111;padding:10px;border-radius:10px;}
+.chatbot input{width:100%;padding:8px;}
+
+/* MOBILE FIX */
+@media(max-width:768px){
+.notes{
+position:static;width:100%;margin-bottom:10px;
+}
+.container{padding:5px;}
+.chatbot{left:5px;right:5px;width:auto;}
+}
+
 </style>
 </head>
 <body>
 
 <header>BTECH <span>25 29</span></header>
 
+<div class="container">
+
 <!-- NOTES -->
 <div class="notes">
-<b>Notes (only you can see)</b>
+<b>Notes</b>
 <textarea id="noteText" placeholder="Write note..."></textarea>
 <button onclick="addNote()">Save</button>
 <div id="noteList"></div>
 </div>
-
-<div class="container">
 
 <div class="clock" id="clock"></div>
 
 <div class="section"><h3>Notice</h3><p>NO UPDATE</p></div>
 <div class="section"><h3>Books</h3><p>NO UPDATE</p></div>
 <div class="section"><h3>Practical</h3><p>NO UPDATE</p></div>
-<div class="section">
-<h3>Important Notes</h3>
-<p>math play list for 2nd sem</p>
-<a href="https://youtube.com/playlist?list=PLn3Wz38keZOfqVnFaM5bhlGVj8pnKntfW&si=TkjuvCdfZabbt4WY" target="_blank" style="color:violet">Open Playlist</a>
-</div>
 
 <div class="todo">
 <div id="circle" class="circle"></div>
@@ -91,7 +103,7 @@ width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;
 
 </div>
 
-<div id="reminder" class="reminder">Stay focused, you're closer than you think ✨</div>
+<div id="reminder" class="reminder">Stay focused ✨</div>
 
 <div class="chatbot">
 🤖
@@ -102,10 +114,10 @@ width:100%;margin-top:6px;padding:6px;border-radius:6px;border:none;
 <script>
 // CLOCK
 setInterval(()=>{
-document.getElementById("clock").innerText=new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"});
+document.getElementById("clock").innerText=new Date().toLocaleString("en-IN");
 },1000);
 
-// NOTES (NO LINK)
+// NOTES
 let notes=JSON.parse(localStorage.getItem("notes"))||[];
 function saveNotes(){localStorage.setItem("notes",JSON.stringify(notes));}
 
@@ -119,10 +131,6 @@ noteText.value="";
 }
 
 function delNote(i){notes.splice(i,1);saveNotes();renderNotes();}
-function editNote(i){
-noteText.value=notes[i].t;
-delNote(i);
-}
 
 function renderNotes(){
 let box=document.getElementById("noteList");
@@ -130,9 +138,7 @@ box.innerHTML="";
 notes.forEach((n,i)=>{
 let div=document.createElement("div");
 div.className="note-item";
-div.innerHTML=`• ${n.t}
-<button onclick='editNote(${i})'>Edit</button>
-<button onclick='delNote(${i})'>Delete</button>`;
+div.innerHTML=`• ${n.t}<button onclick='delNote(${i})'>X</button>`;
 box.appendChild(div);
 });
 }
@@ -159,19 +165,10 @@ list.innerHTML="";
 
 let done=tasks.filter(x=>x.done).length;
 let total=tasks.length;
-let remain=total-done;
 let percent= total? Math.round(done/total*100):0;
 
-document.getElementById("progress").innerText=`${done}/${total} tasks done → ${percent}%`;
+document.getElementById("progress").innerText=`${done}/${total} → ${percent}%`;
 document.getElementById("bar").style.width=percent+"%";
-
-let circle=document.getElementById("circle");
-circle.className="circle";
-let r= total? (remain/total)*100:0;
-if(r>66)circle.classList.add("red");
-else if(r>33)circle.classList.add("orange");
-else if(r>0)circle.classList.add("green");
-else circle.classList.add("blue");
 
 let showReminder=false;
 
@@ -195,40 +192,22 @@ document.getElementById("reminder").style.display=showReminder?"block":"none";
 }
 render();
 
-// CHATBOT UPDATED
-let ask=false;
+// CHATBOT
 function chatbot(e){
 if(e.key==='Enter'){
-let msg=e.target.value.toLowerCase().trim();
+let msg=e.target.value.toLowerCase();
 let out=document.getElementById("out");
 
 if(msg.includes("hi")||msg.includes("hello")||msg.includes("hey")){
-out.innerText="Hello 👋 How can I help you?";
+out.innerText="Hello 👋";
 }
-
-else if(msg.includes("i am")||msg.includes("i'm")||msg.includes("im ")||msg.startsWith("i ")){
-out.innerText="I am a chatbot 🤖, nice to meet you!";
+else if(msg.includes("i am")||msg.includes("im")){
+out.innerText="I am a chatbot 🤖";
 }
-
-else if(msg.includes("task")||msg.includes("work")||msg.includes("pending")){
-out.innerText="Do you want to see your tasks?";
-ask=true;
-}
-
-else if(ask && msg.includes("yes")){
-let p=tasks.filter(x=>!x.done).map(x=>x.t+" ("+new Date(x.d).toLocaleString()+")").join("\n");
-out.innerText=p||"No pending tasks";
-ask=false;
-}
-
-else if(msg.includes("show my tasks")){
-out.innerText=tasks.map(x=>x.t+" ("+new Date(x.d).toLocaleString()+")").join("\n")||"No tasks";
-}
-
 else{
-out.innerText="Searching on Google...";
+out.innerText="Searching...";
 setTimeout(()=>{
-window.open("https://www.google.com/search?q="+encodeURIComponent(msg));
+window.open("https://www.google.com/search?q="+msg);
 out.innerText="For more contact to CRS";
 },800);
 }
