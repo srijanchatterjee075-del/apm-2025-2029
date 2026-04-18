@@ -29,25 +29,18 @@
         50% { transform: translateY(-5px); text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00; }
     }
 
-    /* Glowing Animation for CA2 Notice */
-    .glow-notice {
-        color: #f0a0ff;
+    /* Green Glowing & Bouncing Animation for Notice */
+    .notice-green-glow {
+        color: #00ff00;
         font-size: 13px;
-        line-height: 1.4;
-        animation: noticeBounce 2.5s infinite ease-in-out;
-    }
-
-    @keyframes noticeBounce {
-        0%, 100% { transform: translateY(0); text-shadow: 0 0 5px violet; }
-        50% { transform: translateY(-5px); text-shadow: 0 0 15px violet, 0 0 25px violet; }
-    }
-
-    .schedule-list {
-        list-style: none;
-        padding: 0;
-        margin: 8px 0;
+        line-height: 1.5;
         text-align: left;
-        font-size: 12px;
+        animation: greenGlowBounce 2s infinite ease-in-out;
+    }
+
+    @keyframes greenGlowBounce {
+        0%, 100% { transform: translateY(0); text-shadow: 0 0 5px #00ff00; }
+        50% { transform: translateY(-8px); text-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00; }
     }
     
     .main-grid {
@@ -65,7 +58,7 @@
 
     /* Top 4 Points Info Bar */
     .info-bar { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 10px; }
-    .info-item { background: #111; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #222; display: flex; flex-direction: column; align-items: center; }
+    .info-item { background: #111; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #222; }
 
     /* Todo Title Glow Effect (Variable Color) */
     .todo-title { 
@@ -121,16 +114,14 @@
         <div class="info-bar">
             <div class="info-item">
                 <h3>Notice</h3>
-                <div class="glow-notice">
-                    <strong>CA2 Schedule</strong>
-                    <ul class="schedule-list">
-                        <li>Math: 21/04/2026</li>
-                        <li>English: 23/04/2026</li>
-                        <li>PPS: 25/04/2026</li>
-                    </ul>
+                <div class="notice-green-glow">
+                    <b>CA2 Submission Schedule</b><br>
+                    Mathematics CA2: 21/04/2026<br>
+                    English CA2: 23/04/2026<br>
+                    PPS CA2: 25/04/2026<br><br>
+                    <small>Note: All students must ensure timely submission of their CA2 work.</small>
                 </div>
             </div>
-            
             <div class="info-item"><h3>Books</h3><p>NO UPDATE</p></div>
             <div class="info-item"><h3>Practical</h3><p>NO UPDATE</p></div>
             <div class="info-item">
@@ -220,7 +211,7 @@ function renderNotes() {
 }
 renderNotes();
 
-// TODO LOGIC (DYNAMIC COLORS)
+// TODO LOGIC
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 function save() { localStorage.setItem("tasks", JSON.stringify(tasks)); }
 
@@ -244,9 +235,8 @@ function render() {
     let pending = total - done;
     let percentDone = total ? Math.round((done / total) * 100) : 0;
     
-    // Logic: Color based on "Work Remaining" percentage
     let workRemainingPercent = total ? (pending / total) * 100 : 0;
-    let statusColor = "cyan"; // Blue (0% work remain)
+    let statusColor = "cyan";
 
     if (total > 0) {
         if (workRemainingPercent > 66) statusColor = "red";
