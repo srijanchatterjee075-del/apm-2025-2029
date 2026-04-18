@@ -28,6 +28,27 @@
         0%, 100% { transform: translateY(0); text-shadow: 0 0 5px #00ff00; }
         50% { transform: translateY(-5px); text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00; }
     }
+
+    /* Glowing Animation for CA2 Notice */
+    .glow-notice {
+        color: #f0a0ff;
+        font-size: 13px;
+        line-height: 1.4;
+        animation: noticeBounce 2.5s infinite ease-in-out;
+    }
+
+    @keyframes noticeBounce {
+        0%, 100% { transform: translateY(0); text-shadow: 0 0 5px violet; }
+        50% { transform: translateY(-5px); text-shadow: 0 0 15px violet, 0 0 25px violet; }
+    }
+
+    .schedule-list {
+        list-style: none;
+        padding: 0;
+        margin: 8px 0;
+        text-align: left;
+        font-size: 12px;
+    }
     
     .main-grid {
         display: grid;
@@ -44,7 +65,7 @@
 
     /* Top 4 Points Info Bar */
     .info-bar { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 10px; }
-    .info-item { background: #111; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #222; }
+    .info-item { background: #111; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #222; display: flex; flex-direction: column; align-items: center; }
 
     /* Todo Title Glow Effect (Variable Color) */
     .todo-title { 
@@ -98,7 +119,18 @@
     <div class="main-grid">
         
         <div class="info-bar">
-            <div class="info-item"><h3>Notice</h3><p>NO UPDATE</p></div>
+            <div class="info-item">
+                <h3>Notice</h3>
+                <div class="glow-notice">
+                    <strong>CA2 Schedule</strong>
+                    <ul class="schedule-list">
+                        <li>Math: 21/04/2026</li>
+                        <li>English: 23/04/2026</li>
+                        <li>PPS: 25/04/2026</li>
+                    </ul>
+                </div>
+            </div>
+            
             <div class="info-item"><h3>Books</h3><p>NO UPDATE</p></div>
             <div class="info-item"><h3>Practical</h3><p>NO UPDATE</p></div>
             <div class="info-item">
