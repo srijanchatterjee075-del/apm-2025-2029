@@ -2,284 +2,1159 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>STUDENT`S CA</title>
 
 <style>
-*{box-sizing:border-box}
+
+/* =========================
+   BASIC
+========================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-margin:0;background:#050505;color:white;
-font-family:Arial,sans-serif;
+    margin:0;
+    background:#030303;
+    color:white;
+    font-family:Arial,Helvetica,sans-serif;
 }
+
+
+/* =========================
+   HEADER
+========================= */
+
 header{
-background:#62d5ff;color:white;
-padding:22px 5%;
-display:flex;justify-content:space-between;
-align-items:center;gap:20px;
-box-shadow:0 0 30px #62d5ff66;
+    background:#62d5ff;
+    color:white;
+
+    padding:22px 5%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:20px;
+
+    box-shadow:
+        0 0 25px rgba(98,213,255,.45);
 }
-h1{margin:0;font-size:clamp(28px,5vw,48px);letter-spacing:2px}
-header p{margin:5px 0 0;font-weight:bold}
+
+h1{
+    margin:0;
+
+    font-size:
+        clamp(28px,5vw,48px);
+
+    letter-spacing:2px;
+
+    text-shadow:
+        0 2px 5px rgba(0,0,0,.25);
+}
+
+header p{
+    margin:6px 0 0;
+
+    font-weight:bold;
+}
+
+
+/* =========================
+   DEEP BLUE CLOCK
+========================= */
+
 .clock{
-color:#00ff66;text-align:right;
-font-weight:bold;
-text-shadow:0 0 5px #00ff66,0 0 15px #00ff66,0 0 30px #00ff66;
-animation:glow 1.5s infinite alternate;
+    text-align:right;
+
+    color:#071eff;
+
+    font-weight:900;
+
+    animation:
+        blueGlow 1.7s ease-in-out infinite alternate;
 }
-#time{font-size:35px}
-@keyframes glow{
-from{transform:translateY(-3px);text-shadow:0 0 5px #00ff66}
-to{transform:translateY(3px);text-shadow:0 0 10px #00ff66,0 0 30px #00ff66}
+
+#time{
+    font-size:
+        clamp(25px,4vw,40px);
+
+    letter-spacing:2px;
 }
+
+#date{
+    font-size:16px;
+
+    margin-top:5px;
+}
+
+@keyframes blueGlow{
+
+    0%{
+        transform:translateY(-4px);
+
+        text-shadow:
+            0 0 4px #001eff,
+            0 0 10px #001eff,
+            0 0 18px #001eff;
+    }
+
+    50%{
+        transform:translateY(0);
+
+        text-shadow:
+            0 0 7px #001eff,
+            0 0 20px #001eff,
+            0 0 35px #001eff;
+    }
+
+    100%{
+        transform:translateY(4px);
+
+        text-shadow:
+            0 0 10px #001eff,
+            0 0 25px #001eff,
+            0 0 45px #001eff;
+    }
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
 nav{
-background:#111;padding:12px 5%;
-display:flex;gap:8px;position:sticky;top:0;z-index:5;
+    background:#0d0d0d;
+
+    padding:12px 5%;
+
+    display:flex;
+
+    gap:8px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:10;
+
+    border-bottom:1px solid #222;
 }
-nav button,.btn{
-border:0;border-radius:8px;padding:11px 15px;
-font-weight:bold;cursor:pointer;
-background:#222;color:white;
+
+nav button{
+    background:#181818;
+
+    color:white;
+
+    border:1px solid #333;
+
+    border-radius:8px;
+
+    padding:11px 16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
 }
-nav button.active,nav button:hover,.btn{
-background:#8b5cf6;color:white;
+
+nav button:hover,
+nav button.active{
+    background:#8b5cf6;
+
+    border-color:#a78bfa;
 }
-main{max-width:1200px;margin:auto;padding:30px 5%}
-section{display:none}
-section.active{display:block}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:30px 5%;
+}
+
+section{
+    display:none;
+}
+
+section.active{
+    display:block;
+}
+
+
+/* =========================
+   HEADINGS
+========================= */
+
 .head{
-display:flex;justify-content:space-between;
-align-items:center;gap:15px;margin-bottom:20px;
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:20px;
 }
-.head h2{margin:0}
-.head p{color:#aaa}
-input,textarea{
-width:100%;padding:11px;
-background:#101010;color:white;
-border:1px solid #333;border-radius:8px;
-margin-top:6px;
+
+.head h2{
+    margin:0;
 }
+
+.head p{
+    color:#aaa;
+
+    margin:6px 0 0;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+    border:0;
+
+    border-radius:8px;
+
+    padding:11px 15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    background:#8b5cf6;
+
+    color:white;
+}
+
+.btn:hover{
+    background:#a78bfa;
+}
+
+.btn.red{
+    background:#8b2020;
+}
+
+.btn.red:hover{
+    background:#b52b2b;
+}
+
+.btn.dark{
+    background:#222;
+
+    border:1px solid #444;
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
 .summary{
-display:grid;grid-template-columns:repeat(3,1fr);
-gap:12px;margin-bottom:20px;
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+    margin-bottom:20px;
 }
-.box,.card,.task,.note{
-background:#0e0e0e;border:1px solid #292929;
-border-radius:12px;padding:16px;margin-bottom:12px;
+
+.box{
+    background:#0e0e0e;
+
+    border:1px solid #292929;
+
+    border-radius:12px;
+
+    padding:17px;
 }
-.box span{color:#999;font-size:12px}
-.box strong{display:block;font-size:25px;margin-top:7px}
-.cards,.notes{
-display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:14px;
+
+.box span{
+    color:#888;
+
+    font-size:12px;
 }
-.card h3,.note h3{margin-top:0}
-.amounts{
-display:grid;grid-template-columns:1fr 1fr;gap:8px;
+
+.box strong{
+    display:block;
+
+    margin-top:7px;
+
+    font-size:25px;
 }
-.amount{
-background:#171717;padding:10px;border-radius:8px;
+
+
+/* =========================
+   INPUT
+========================= */
+
+input,
+textarea{
+
+    width:100%;
+
+    padding:11px;
+
+    margin-top:6px;
+
+    background:#101010;
+
+    color:white;
+
+    border:1px solid #333;
+
+    border-radius:8px;
+
+    outline:none;
 }
-.amount small{display:block;color:#888}
-.balance{
-padding:12px;margin:12px 0;border-radius:8px;font-weight:bold;
+
+input:focus,
+textarea:focus{
+
+    border-color:#8b5cf6;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(139,92,246,.15);
 }
-.receive{border:1px solid #00ff66;color:#00ff66;background:#00ff6610}
-.pay{border:1px solid #ff4444;color:#ff6666;background:#ff000010}
-.settle{border:1px solid #00ff66;color:#00ff66}
-.actions{display:flex;gap:7px;flex-wrap:wrap}
-.red{background:#8d2020!important}
-.empty{
-border:1px dashed #333;padding:30px;text-align:center;
-color:#777;border-radius:10px;
+
+
+/* =========================
+   CARDS
+========================= */
+
+.cards,
+.notes{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(280px,1fr)
+        );
+
+    gap:14px;
 }
-.note p{white-space:pre-wrap;color:#ccc}
-.note img{
-width:100%;max-height:250px;object-fit:contain;
-border-radius:8px;background:#000;
-}
-.note a{color:#62d5ff;word-break:break-all}
-.progress{
-background:#222;height:18px;border-radius:20px;
-overflow:hidden;margin:12px 0;
-}
-.bar{
-height:100%;width:0;background:#00ff66;
-box-shadow:0 0 15px #00ff66;
-transition:.4s;
-}
-.yellow{background:#ffe600!important;box-shadow:0 0 15px #ffe600!important}
-.redbar{background:#ff3030!important;box-shadow:0 0 15px #ff3030!important}
+
+.card,
+.note,
 .task{
-display:flex;align-items:center;gap:12px;
+
+    background:#0e0e0e;
+
+    border:1px solid #292929;
+
+    border-radius:12px;
+
+    padding:16px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.3);
 }
-.task input[type=checkbox]{width:21px;height:21px}
-.task-main{flex:1}
-.task-title{font-weight:bold}
-.task-date{color:#999;font-size:12px;margin-top:4px}
+
+.card h3,
+.note h3{
+
+    margin-top:0;
+}
+
+
+/* =========================
+   ACCOUNT AMOUNTS
+========================= */
+
+.amounts{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:8px;
+}
+
+.amount{
+
+    background:#171717;
+
+    padding:10px;
+
+    border-radius:8px;
+}
+
+.amount small{
+
+    display:block;
+
+    color:#888;
+}
+
+
+/* =========================
+   BALANCE
+========================= */
+
+.balance{
+
+    padding:12px;
+
+    margin:12px 0;
+
+    border-radius:8px;
+
+    font-weight:bold;
+}
+
+.receive{
+
+    color:#00ff66;
+
+    border:1px solid #00ff66;
+
+    background:#00ff6610;
+}
+
+.pay{
+
+    color:#ff5555;
+
+    border:1px solid #ff4444;
+
+    background:#ff000010;
+}
+
+.settle{
+
+    color:#00ff66;
+
+    border:1px solid #00ff66;
+
+    background:#00ff6610;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
+.actions{
+
+    display:flex;
+
+    gap:7px;
+
+    flex-wrap:wrap;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+
+    border:1px dashed #333;
+
+    padding:30px;
+
+    text-align:center;
+
+    color:#777;
+
+    border-radius:10px;
+
+    margin-top:12px;
+}
+
+
+/* =========================
+   NOTES
+========================= */
+
+.note p{
+
+    white-space:pre-wrap;
+
+    color:#ccc;
+}
+
+.note img{
+
+    width:100%;
+
+    max-height:250px;
+
+    object-fit:contain;
+
+    background:#000;
+
+    border-radius:8px;
+}
+
+.note a{
+
+    color:#62d5ff;
+
+    word-break:break-all;
+}
+
+
+/* =========================
+   TODO PROGRESS
+========================= */
+
+.progress-box{
+
+    background:#0e0e0e;
+
+    border:1px solid #292929;
+
+    border-radius:12px;
+
+    padding:17px;
+
+    margin-bottom:20px;
+}
+
+.progress-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.progress{
+
+    height:18px;
+
+    background:#242424;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin:13px 0;
+}
+
+.bar{
+
+    height:100%;
+
+    width:0;
+
+    transition:
+        width .5s ease,
+        background .3s ease;
+
+    border-radius:20px;
+}
+
+
+/* GREEN = 0% */
+
+.bar.green{
+
+    background:#00ff55;
+
+    box-shadow:
+        0 0 8px #00ff55,
+        0 0 20px #00ff55,
+        0 0 35px #00ff55;
+}
+
+
+/* YELLOW = 1-50% */
+
+.bar.yellow{
+
+    background:#ffe600;
+
+    box-shadow:
+        0 0 8px #ffe600,
+        0 0 20px #ffe600,
+        0 0 35px #ffe600;
+}
+
+
+/* RED = >50% */
+
+.bar.redbar{
+
+    background:#ff3030;
+
+    box-shadow:
+        0 0 8px #ff3030,
+        0 0 20px #ff3030,
+        0 0 35px #ff3030;
+}
+
+
+/* =========================
+   TODO
+========================= */
+
+.task{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:10px;
+}
+
+.task input[type="checkbox"]{
+
+    width:21px;
+
+    height:21px;
+
+    cursor:pointer;
+
+    accent-color:#00ff55;
+}
+
+.task-main{
+
+    flex:1;
+}
+
+.task-title{
+
+    font-weight:bold;
+
+    transition:.25s;
+}
+
+
+/* COMPLETED TASK */
+
+.task.completed .task-title{
+
+    text-decoration:
+        line-through;
+
+    text-decoration-thickness:2px;
+
+    color:#777;
+}
+
+.task.completed{
+
+    border-color:#00ff55;
+
+    opacity:.75;
+}
+
+.task-date{
+
+    color:#999;
+
+    font-size:12px;
+
+    margin-top:5px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
 .modal{
-position:fixed;inset:0;background:#000c;
-display:flex;align-items:center;justify-content:center;
-padding:20px;z-index:20;
+
+    position:fixed;
+
+    inset:0;
+
+    background:#000c;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    z-index:30;
 }
-.modal.hide{display:none}
+
+.modal.hide{
+
+    display:none;
+}
+
 .modalbox{
-background:#111;border:1px solid #444;
-border-radius:14px;padding:22px;
-width:min(500px,100%);
-max-height:90vh;overflow:auto;
-position:relative;
+
+    background:#111;
+
+    border:1px solid #444;
+
+    border-radius:14px;
+
+    padding:22px;
+
+    width:min(500px,100%);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    position:relative;
 }
-.close{
-position:absolute;right:12px;top:8px;
-font-size:28px;background:none;border:0;color:white;
-cursor:pointer;
+
+.modalbox h2{
+
+    margin-top:0;
 }
+
 .modalbox label{
-display:block;color:#bbb;font-weight:bold;margin:12px 0;
+
+    display:block;
+
+    color:#bbb;
+
+    font-weight:bold;
+
+    margin:13px 0;
 }
-.modalbox h2{margin-top:0}
+
+.close{
+
+    position:absolute;
+
+    right:12px;
+
+    top:7px;
+
+    background:none;
+
+    border:0;
+
+    color:white;
+
+    font-size:29px;
+
+    cursor:pointer;
+}
+
 .modalbuttons{
-display:flex;justify-content:flex-end;gap:8px;margin-top:18px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:8px;
+
+    margin-top:18px;
 }
+
+
+/* =========================
+   TOAST
+========================= */
+
 .toast{
-position:fixed;right:20px;bottom:20px;
-background:#181818;border:1px solid #555;
-padding:13px 17px;border-radius:8px;
-opacity:0;transition:.3s;z-index:50;
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:20px;
+
+    background:#181818;
+
+    border:1px solid #555;
+
+    padding:13px 17px;
+
+    border-radius:8px;
+
+    opacity:0;
+
+    transform:translateY(15px);
+
+    transition:.3s;
+
+    z-index:50;
 }
-.toast.show{opacity:1}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:650px){
-header{flex-direction:column;align-items:flex-start}
-.clock{text-align:left}
-.summary{grid-template-columns:1fr}
-.head{flex-direction:column;align-items:flex-start}
-nav{overflow:auto}
+
+    header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+    .clock{
+
+        text-align:left;
+    }
+
+    .summary{
+
+        grid-template-columns:1fr;
+    }
+
+    .head{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+    nav{
+
+        overflow:auto;
+    }
+
+    .task{
+
+        align-items:flex-start;
+
+        flex-wrap:wrap;
+    }
+
+    .task .actions{
+
+        width:100%;
+
+        padding-left:34px;
+    }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
+
 <div>
+
 <h1>STUDENT`S CA</h1>
-<p>Accounts • Notes • Tasks</p>
+
+<p>
+Accounts • Notes • Tasks
+</p>
+
 </div>
+
 
 <div class="clock">
-<div id="time">00:00:00</div>
-<div id="date">00/00/0000</div>
+
+<div id="time">
+00:00:00
 </div>
+
+<div id="date">
+00/00/0000
+</div>
+
+</div>
+
 </header>
 
+
+<!-- =========================
+     NAV
+========================= -->
+
 <nav>
-<button class="tab active" onclick="showTab('accounts',this)">ACCOUNTS</button>
-<button class="tab" onclick="showTab('notes',this)">NOTEPAD</button>
-<button class="tab" onclick="showTab('todo',this)">TO-DO LIST</button>
+
+<button
+class="tab active"
+onclick="showTab('accounts',this)">
+ACCOUNTS
+</button>
+
+<button
+class="tab"
+onclick="showTab('notes',this)">
+NOTEPAD
+</button>
+
+<button
+class="tab"
+onclick="showTab('todo',this)">
+TO-DO LIST
+</button>
+
 </nav>
+
 
 <main>
 
-<!-- ACCOUNTS -->
 
-<section id="accounts" class="active">
+<!-- =========================
+     ACCOUNTS
+========================= -->
+
+<section
+id="accounts"
+class="active">
 
 <div class="head">
+
 <div>
-<h2>Student Accounts</h2>
-<p>Add as many names as your browser storage allows.</p>
+
+<h2>
+Student Accounts
+</h2>
+
+<p>
+Track given, taken and final balance.
+</p>
+
 </div>
-<button class="btn" onclick="addPerson()">+ ADD NAME</button>
+
+<button
+class="btn"
+onclick="addPerson()">
+
++ ADD NAME
+
+</button>
+
 </div>
+
 
 <div class="summary">
 
 <div class="box">
-<span>PEOPLE</span>
-<strong id="peopleCount">0</strong>
+
+<span>
+PEOPLE
+</span>
+
+<strong id="peopleCount">
+0
+</strong>
+
 </div>
+
 
 <div class="box">
-<span>YOU RECEIVE</span>
-<strong id="receive">₹0</strong>
+
+<span>
+YOU RECEIVE
+</span>
+
+<strong id="receive">
+₹0
+</strong>
+
 </div>
+
 
 <div class="box">
-<span>YOU PAY</span>
-<strong id="pay">₹0</strong>
-</div>
+
+<span>
+YOU PAY
+</span>
+
+<strong id="pay">
+₹0
+</strong>
 
 </div>
 
-<input id="search" placeholder="Search name..." oninput="renderPeople()">
+</div>
+
+
+<input
+id="search"
+placeholder="Search name..."
+oninput="renderPeople()">
+
 
 <br><br>
 
-<div id="people" class="cards"></div>
 
-<div id="noPeople" class="empty">
+<div
+id="people"
+class="cards">
+</div>
+
+
+<div
+id="noPeople"
+class="empty">
+
 No names added yet.
+
 </div>
 
 </section>
 
 
-<!-- NOTES -->
+
+<!-- =========================
+     NOTEPAD
+========================= -->
 
 <section id="notes">
 
 <div class="head">
+
 <div>
-<h2>Notepad</h2>
-<p>Save notes, links and pictures.</p>
+
+<h2>
+Notepad
+</h2>
+
+<p>
+Save notes, links and pictures.
+</p>
+
 </div>
 
-<button class="btn" onclick="addNote()">+ ADD NOTE</button>
+<button
+class="btn"
+onclick="addNote()">
+
++ ADD NOTE
+
+</button>
+
 </div>
 
-<div id="notesList" class="notes"></div>
 
-<div id="noNotes" class="empty">
+<div
+id="notesList"
+class="notes">
+</div>
+
+
+<div
+id="noNotes"
+class="empty">
+
 No notes saved yet.
+
 </div>
 
 </section>
 
 
-<!-- TODO -->
+
+<!-- =========================
+     TODO
+========================= -->
 
 <section id="todo">
 
 <div class="head">
+
 <div>
-<h2>To-Do List</h2>
-<p>Complete your work and confirm before deleting it.</p>
+
+<h2>
+To-Do List
+</h2>
+
+<p>
+Tick completed work. Edit or delete anytime.
+</p>
+
 </div>
 
-<button class="btn" onclick="addTask()">+ ADD TASK</button>
+<button
+class="btn"
+onclick="addTask()">
+
++ ADD TASK
+
+</button>
+
 </div>
 
-<div class="box">
 
-<div style="display:flex;justify-content:space-between">
-<b>REMAINING WORK</b>
-<b id="percent">0%</b>
+<div class="progress-box">
+
+<div class="progress-top">
+
+<b>
+REMAINING WORK
+</b>
+
+<b id="percent">
+0%
+</b>
+
 </div>
+
 
 <div class="progress">
-<div id="bar" class="bar"></div>
+
+<div
+id="bar"
+class="bar green">
 </div>
 
-<span id="progressText" style="color:#aaa">
+</div>
+
+
+<span
+id="progressText"
+style="color:#aaa">
+
 No tasks
+
 </span>
 
 </div>
 
-<div id="tasks"></div>
 
-<div id="noTasks" class="empty">
+<div id="tasks">
+</div>
+
+
+<div
+id="noTasks"
+class="empty">
+
 No tasks added yet.
+
 </div>
 
 </section>
@@ -287,206 +1162,352 @@ No tasks added yet.
 </main>
 
 
-<!-- PERSON MODAL -->
 
-<div id="personModal" class="modal hide">
+<!-- =========================
+     PERSON MODAL
+========================= -->
+
+<div
+id="personModal"
+class="modal hide">
 
 <div class="modalbox">
 
-<button class="close" onclick="closeModal('personModal')">×</button>
+<button
+class="close"
+onclick="closeModal('personModal')">
 
-<h2 id="personTitle">Add Student</h2>
+×
 
-<input type="hidden" id="personId">
+</button>
+
+
+<h2 id="personTitle">
+Add Student
+</h2>
+
+
+<input
+type="hidden"
+id="personId">
+
 
 <label>
+
 Name
-<input id="personName" placeholder="Student name">
+
+<input
+id="personName"
+placeholder="Student name">
+
 </label>
 
+
 <label>
+
 Given Amount ₹
-<input id="given" type="number" min="0" value="0">
+
+<input
+id="given"
+type="number"
+min="0"
+value="0">
+
 </label>
 
+
 <label>
+
 Taken Amount ₹
-<input id="taken" type="number" min="0" value="0">
+
+<input
+id="taken"
+type="number"
+min="0"
+value="0">
+
 </label>
 
+
 <div class="modalbuttons">
-<button class="btn" onclick="savePerson()">SAVE</button>
+
+<button
+class="btn"
+onclick="savePerson()">
+
+SAVE
+
+</button>
+
+</div>
+
 </div>
 
 </div>
-</div>
 
 
-<!-- NOTE MODAL -->
 
-<div id="noteModal" class="modal hide">
+<!-- =========================
+     NOTE MODAL
+========================= -->
+
+<div
+id="noteModal"
+class="modal hide">
 
 <div class="modalbox">
 
-<button class="close" onclick="closeModal('noteModal')">×</button>
+<button
+class="close"
+onclick="closeModal('noteModal')">
 
-<h2 id="noteTitle">Add Note</h2>
+×
 
-<input type="hidden" id="noteId">
+</button>
+
+
+<h2 id="noteTitle">
+Add Note
+</h2>
+
+
+<input
+type="hidden"
+id="noteId">
+
 
 <label>
+
 Title
-<input id="nTitle" placeholder="Note title">
+
+<input
+id="nTitle"
+placeholder="Note title">
+
 </label>
 
+
 <label>
+
 Note
-<textarea id="nText" rows="7" placeholder="Write your note..."></textarea>
+
+<textarea
+id="nText"
+rows="7"
+placeholder="Write your note..."></textarea>
+
 </label>
 
+
 <label>
+
 Link
-<input id="nLink" placeholder="https://example.com">
+
+<input
+id="nLink"
+placeholder="https://example.com">
+
 </label>
+
 
 <label>
+
 Picture
-<input id="nImage" type="file" accept="image/*">
+
+<input
+id="nImage"
+type="file"
+accept="image/*">
+
 </label>
 
-<div id="preview"></div>
+
+<div id="preview">
+</div>
+
 
 <div class="modalbuttons">
-<button class="btn" onclick="saveNote()">SAVE</button>
+
+<button
+class="btn"
+onclick="saveNote()">
+
+SAVE
+
+</button>
+
+</div>
+
 </div>
 
 </div>
-</div>
 
 
-<!-- TASK MODAL -->
 
-<div id="taskModal" class="modal hide">
+<!-- =========================
+     TODO MODAL
+========================= -->
+
+<div
+id="taskModal"
+class="modal hide">
 
 <div class="modalbox">
 
-<button class="close" onclick="closeModal('taskModal')">×</button>
+<button
+class="close"
+onclick="closeModal('taskModal')">
 
-<h2>Add Task</h2>
+×
 
-<input type="hidden" id="taskId">
+</button>
+
+
+<h2>
+Add / Edit Task
+</h2>
+
+
+<input
+type="hidden"
+id="taskId">
+
 
 <label>
+
 Task
-<input id="taskName" placeholder="What do you have to do?">
+
+<input
+id="taskName"
+placeholder="What do you have to do?">
+
 </label>
 
+
 <label>
+
 Date
-<input id="taskDate" type="date">
+
+<input
+id="taskDate"
+type="date">
+
 </label>
 
+
 <label>
+
 Time
-<input id="taskTime" type="time">
+
+<input
+id="taskTime"
+type="time">
+
 </label>
+
 
 <div class="modalbuttons">
-<button class="btn" onclick="saveTask()">SAVE</button>
+
+<button
+class="btn"
+onclick="saveTask()">
+
+SAVE
+
+</button>
+
 </div>
 
 </div>
+
 </div>
 
 
-<div id="toast" class="toast"></div>
+
+<div
+id="toast"
+class="toast">
+</div>
+
 
 
 <script>
 
 /* =========================
-   DATA STORAGE
+   STORAGE
 ========================= */
 
-let people=JSON.parse(localStorage.getItem("people")||"[]");
-let notes=JSON.parse(localStorage.getItem("notes")||"[]");
-let tasks=JSON.parse(localStorage.getItem("tasks")||"[]");
+let people =
+JSON.parse(
+localStorage.getItem("sca_people") || "[]"
+);
+
+let notes =
+JSON.parse(
+localStorage.getItem("sca_notes") || "[]"
+);
+
+let tasks =
+JSON.parse(
+localStorage.getItem("sca_tasks") || "[]"
+);
+
 
 function saveData(){
 
-localStorage.setItem("people",JSON.stringify(people));
-localStorage.setItem("notes",JSON.stringify(notes));
-localStorage.setItem("tasks",JSON.stringify(tasks));
+localStorage.setItem(
+"sca_people",
+JSON.stringify(people)
+);
+
+localStorage.setItem(
+"sca_notes",
+JSON.stringify(notes)
+);
+
+localStorage.setItem(
+"sca_tasks",
+JSON.stringify(tasks)
+);
 
 }
 
 
 /* =========================
-   CLOCK
+   ID
 ========================= */
 
-function updateClock(){
-
-let d=new Date();
-
-document.getElementById("time").textContent=
-d.toLocaleTimeString("en-GB");
-
-document.getElementById("date").textContent=
-d.toLocaleDateString("en-GB",{
-weekday:"long",
-day:"2-digit",
-month:"long",
-year:"numeric"
-});
-
-}
-
-updateClock();
-setInterval(updateClock,1000);
-
-
-/* =========================
-   TABS
-========================= */
-
-function showTab(id,button){
-
-document.querySelectorAll("section")
-.forEach(x=>x.classList.remove("active"));
-
-document.getElementById(id)
-.classList.add("active");
-
-document.querySelectorAll(".tab")
-.forEach(x=>x.classList.remove("active"));
-
-button.classList.add("active");
-
-}
-
-
-/* =========================
-   HELPERS
-========================= */
-
-function id(){
+function makeID(){
 
 return Date.now().toString(36)+
 Math.random().toString(36).substring(2);
 
 }
 
-function money(n){
 
-return "₹"+Number(n||0).toLocaleString("en-IN",{
+/* =========================
+   MONEY
+========================= */
+
+function money(number){
+
+return "₹"+
+Number(number||0).toLocaleString(
+"en-IN",
+{
 minimumFractionDigits:2,
 maximumFractionDigits:2
-});
+}
+);
 
 }
 
-function escapeText(text){
+
+/* =========================
+   ESCAPE
+========================= */
+
+function safe(text){
 
 return String(text||"")
 .replaceAll("&","&amp;")
@@ -497,111 +1518,272 @@ return String(text||"")
 
 }
 
-function toast(text){
 
-let t=document.getElementById("toast");
+/* =========================
+   CLOCK
+========================= */
 
-t.textContent=text;
-t.classList.add("show");
+function updateClock(){
 
-setTimeout(()=>{
-t.classList.remove("show");
-},2200);
+const now=new Date();
+
+document.getElementById("time")
+.textContent=
+now.toLocaleTimeString("en-GB");
+
+document.getElementById("date")
+.textContent=
+now.toLocaleDateString(
+"en-GB",
+{
+weekday:"long",
+day:"2-digit",
+month:"long",
+year:"numeric"
+}
+);
+
+}
+
+updateClock();
+
+setInterval(
+updateClock,
+1000
+);
+
+
+/* =========================
+   TABS
+========================= */
+
+function showTab(id,button){
+
+document
+.querySelectorAll("section")
+.forEach(
+section=>
+section.classList.remove("active")
+);
+
+document
+.getElementById(id)
+.classList.add("active");
+
+document
+.querySelectorAll(".tab")
+.forEach(
+button=>
+button.classList.remove("active")
+);
+
+button.classList.add("active");
 
 }
 
 
 /* =========================
-   PEOPLE
+   TOAST
+========================= */
+
+function toast(message){
+
+const t=
+document.getElementById("toast");
+
+t.textContent=message;
+
+t.classList.add("show");
+
+setTimeout(
+()=>{
+t.classList.remove("show");
+},
+2200
+);
+
+}
+
+
+/* =========================
+   ACCOUNT
 ========================= */
 
 function addPerson(){
 
-document.getElementById("personId").value="";
-document.getElementById("personName").value="";
-document.getElementById("given").value=0;
-document.getElementById("taken").value=0;
+document.getElementById("personId")
+.value="";
 
-document.getElementById("personTitle").textContent=
-"Add Student";
+document.getElementById("personName")
+.value="";
 
-document.getElementById("personModal")
+document.getElementById("given")
+.value=0;
+
+document.getElementById("taken")
+.value=0;
+
+document.getElementById("personTitle")
+.textContent="Add Student";
+
+document
+.getElementById("personModal")
 .classList.remove("hide");
 
 }
 
-function closeModal(id){
 
-document.getElementById(id).classList.add("hide");
+function editPerson(id){
+
+const p=
+people.find(
+person=>person.id===id
+);
+
+if(!p)return;
+
+document.getElementById("personId")
+.value=p.id;
+
+document.getElementById("personName")
+.value=p.name;
+
+document.getElementById("given")
+.value=p.given;
+
+document.getElementById("taken")
+.value=p.taken;
+
+document.getElementById("personTitle")
+.textContent="Edit Student";
+
+document
+.getElementById("personModal")
+.classList.remove("hide");
 
 }
 
+
 function savePerson(){
 
-let name=document.getElementById("personName")
+const name=
+document
+.getElementById("personName")
 .value.trim();
 
 if(!name){
 
 alert("Please enter a name.");
+
 return;
 
 }
 
-let personId=document.getElementById("personId").value;
+const personID=
+document.getElementById("personId")
+.value;
 
-let data={
-id:personId||id(),
+const person={
+
+id:personID||makeID(),
+
 name:name,
-given:Number(document.getElementById("given").value)||0,
-taken:Number(document.getElementById("taken").value)||0
+
+given:
+Number(
+document.getElementById("given").value
+)||0,
+
+taken:
+Number(
+document.getElementById("taken").value
+)||0
+
 };
 
-if(personId){
 
-people=people.map(p=>
-p.id===personId?data:p
+if(personID){
+
+people=
+people.map(
+p=>
+p.id===personID
+?person
+:p
 );
 
 }else{
 
-people.push(data);
+people.push(person);
 
 }
 
 saveData();
+
 renderPeople();
-closeModal("personModal");
+
+closeModal(
+"personModal"
+);
 
 toast("Account saved!");
 
 }
 
 
+function deletePerson(id){
+
+if(
+!confirm(
+"Delete this student's account?"
+)
+)return;
+
+people=
+people.filter(
+p=>p.id!==id
+);
+
+saveData();
+
+renderPeople();
+
+toast("Student deleted.");
+
+}
+
+
 function renderPeople(){
 
-let search=document.getElementById("search")
-.value.toLowerCase();
+const search=
+document
+.getElementById("search")
+.value
+.toLowerCase();
 
-let list=document.getElementById("people");
-
-let filtered=people.filter(p=>
-p.name.toLowerCase().includes(search)
-);
+const list=
+document.getElementById("people");
 
 list.innerHTML="";
 
 let receive=0;
 let pay=0;
 
+
 people.forEach(p=>{
 
-let balance=p.given-p.taken;
+const balance=
+Number(p.given)-
+Number(p.taken);
 
-if(balance>0) receive+=balance;
-if(balance<0) pay+=Math.abs(balance);
+if(balance>0)
+receive+=balance;
+
+if(balance<0)
+pay+=Math.abs(balance);
 
 });
+
 
 document.getElementById("peopleCount")
 .textContent=people.length;
@@ -612,132 +1794,178 @@ document.getElementById("receive")
 document.getElementById("pay")
 .textContent=money(pay);
 
+
+const filtered=
+people.filter(
+p=>
+p.name
+.toLowerCase()
+.includes(search)
+);
+
+
 filtered.forEach(p=>{
 
-let balance=p.given-p.taken;
+const balance=
+Number(p.given)-
+Number(p.taken);
 
-let status="";
+let status;
+
 
 if(balance>0){
 
-status=
-`<div class="balance receive">
-They have to pay you ${money(balance)}
-</div>`;
+status=`
+
+<div class="balance receive">
+
+They have to pay you
+${money(balance)}
+
+</div>
+
+`;
 
 }else if(balance<0){
 
-status=
-`<div class="balance pay">
-You have to pay them ${money(Math.abs(balance))}
-</div>`;
+status=`
+
+<div class="balance pay">
+
+You have to pay them
+${money(Math.abs(balance))}
+
+</div>
+
+`;
 
 }else{
 
-status=
-`<div class="balance settle">
+status=`
+
+<div class="balance settle">
+
 Account settled
-</div>`;
+
+</div>
+
+`;
 
 }
 
-let card=document.createElement("div");
+
+const card=
+document.createElement("div");
 
 card.className="card";
 
+
 card.innerHTML=`
 
-<h3>${escapeText(p.name)}</h3>
+<h3>
+${safe(p.name)}
+</h3>
+
 
 <div class="amounts">
 
 <div class="amount">
-<small>GIVEN</small>
-<b>${money(p.given)}</b>
+
+<small>
+GIVEN
+</small>
+
+<b>
+${money(p.given)}
+</b>
+
 </div>
+
 
 <div class="amount">
-<small>TAKEN</small>
-<b>${money(p.taken)}</b>
+
+<small>
+TAKEN
+</small>
+
+<b>
+${money(p.taken)}
+</b>
+
 </div>
 
 </div>
+
 
 ${status}
 
+
 <div class="actions">
 
-<button class="btn"
+<button
+class="btn"
 onclick="sharePerson('${p.id}')">
+
 ↗ SHARE
+
 </button>
 
-<button class="btn"
+
+<button
+class="btn dark"
 onclick="editPerson('${p.id}')">
+
 EDIT
+
 </button>
 
-<button class="btn red"
+
+<button
+class="btn red"
 onclick="deletePerson('${p.id}')">
+
 DELETE
+
 </button>
 
 </div>
 
 `;
 
+
 list.appendChild(card);
 
 });
 
+
 document.getElementById("noPeople")
-.style.display=filtered.length?"none":"block";
+.style.display=
+filtered.length
+?"none"
+:"block";
 
 }
 
 
-function editPerson(personId){
+/* =========================
+   SHARE
+========================= */
 
-let p=people.find(x=>x.id===personId);
+async function sharePerson(id){
+
+const p=
+people.find(
+person=>person.id===id
+);
 
 if(!p)return;
 
-document.getElementById("personId").value=p.id;
-document.getElementById("personName").value=p.name;
-document.getElementById("given").value=p.given;
-document.getElementById("taken").value=p.taken;
+const balance=
+Number(p.given)-
+Number(p.taken);
 
-document.getElementById("personTitle")
-.textContent="Edit Student";
+let message;
 
-document.getElementById("personModal")
-.classList.remove("hide");
-
-}
-
-
-function deletePerson(personId){
-
-if(!confirm("Delete this student's account?"))
-return;
-
-people=people.filter(p=>p.id!==personId);
-
-saveData();
-renderPeople();
-
-toast("Student deleted.");
-
-}
-
-
-async function sharePerson(personId){
-
-let p=people.find(x=>x.id===personId);
-
-let balance=p.given-p.taken;
-
-let message="";
 
 if(balance>0){
 
@@ -756,15 +1984,23 @@ message=
 
 }
 
+
 try{
 
-await navigator.clipboard.writeText(message);
+await navigator.clipboard.writeText(
+message
+);
 
-toast("Message copied!");
+toast(
+"Payment message copied!"
+);
 
 }catch{
 
-prompt("Copy this message:",message);
+prompt(
+"Copy this message:",
+message
+);
 
 }
 
@@ -777,12 +2013,23 @@ prompt("Copy this message:",message);
 
 function addNote(){
 
-document.getElementById("noteId").value="";
-document.getElementById("nTitle").value="";
-document.getElementById("nText").value="";
-document.getElementById("nLink").value="";
-document.getElementById("nImage").value="";
-document.getElementById("preview").innerHTML="";
+document.getElementById("noteId")
+.value="";
+
+document.getElementById("nTitle")
+.value="";
+
+document.getElementById("nText")
+.value="";
+
+document.getElementById("nLink")
+.value="";
+
+document.getElementById("nImage")
+.value="";
+
+document.getElementById("preview")
+.innerHTML="";
 
 document.getElementById("noteTitle")
 .textContent="Add Note";
@@ -795,43 +2042,65 @@ document.getElementById("noteModal")
 
 function saveNote(){
 
-let title=document.getElementById("nTitle")
+const title=
+document
+.getElementById("nTitle")
 .value.trim();
 
 if(!title){
 
 alert("Please enter a title.");
+
 return;
 
 }
 
-let noteId=document.getElementById("noteId").value;
+const noteID=
+document.getElementById("noteId")
+.value;
 
-let old=notes.find(n=>n.id===noteId);
+const old=
+notes.find(
+n=>n.id===noteID
+);
 
-let file=document.getElementById("nImage")
+const file=
+document
+.getElementById("nImage")
 .files[0];
+
 
 function finish(image){
 
-let note={
+const note={
 
-id:noteId||id(),
+id:noteID||makeID(),
 
 title:title,
 
-text:document.getElementById("nText").value,
+text:
+document.getElementById("nText")
+.value,
 
-link:document.getElementById("nLink").value,
+link:
+document.getElementById("nLink")
+.value,
 
-image:image||old?.image||""
+image:
+image||
+(old?.image||"")
 
 };
 
-if(noteId){
 
-notes=notes.map(n=>
-n.id===noteId?note:n
+if(noteID){
+
+notes=
+notes.map(
+n=>
+n.id===noteID
+?note
+:n
 );
 
 }else{
@@ -840,20 +2109,30 @@ notes.push(note);
 
 }
 
+
 saveData();
+
 renderNotes();
-closeModal("noteModal");
+
+closeModal(
+"noteModal"
+);
 
 toast("Note saved!");
 
 }
 
+
 if(file){
 
-let reader=new FileReader();
+const reader=
+new FileReader();
 
-reader.onload=()=>{
-finish(reader.result);
+reader.onload=
+()=>{
+finish(
+reader.result
+);
 };
 
 reader.readAsDataURL(file);
@@ -867,79 +2146,35 @@ finish("");
 }
 
 
-function renderNotes(){
+function editNote(id){
 
-let list=document.getElementById("notesList");
-
-list.innerHTML="";
-
-notes.forEach(n=>{
-
-let card=document.createElement("div");
-
-card.className="note";
-
-let image=n.image?
-`<img src="${n.image}">`:"";
-
-let link=n.link?
-`<p><a href="${escapeText(n.link)}" target="_blank">
-${escapeText(n.link)}
-</a></p>`:"";
-
-card.innerHTML=`
-
-<h3>${escapeText(n.title)}</h3>
-
-${n.text?
-`<p>${escapeText(n.text)}</p>`:""}
-
-${link}
-
-${image}
-
-<br>
-
-<div class="actions">
-
-<button class="btn"
-onclick="editNote('${n.id}')">
-EDIT
-</button>
-
-<button class="btn red"
-onclick="deleteNote('${n.id}')">
-DELETE
-</button>
-
-</div>
-
-`;
-
-list.appendChild(card);
-
-});
-
-document.getElementById("noNotes")
-.style.display=notes.length?"none":"block";
-
-}
-
-
-function editNote(noteId){
-
-let n=notes.find(x=>x.id===noteId);
+const n=
+notes.find(
+note=>note.id===id
+);
 
 if(!n)return;
 
-document.getElementById("noteId").value=n.id;
-document.getElementById("nTitle").value=n.title;
-document.getElementById("nText").value=n.text;
-document.getElementById("nLink").value=n.link;
-document.getElementById("nImage").value="";
+document.getElementById("noteId")
+.value=n.id;
 
-document.getElementById("preview").innerHTML=
-n.image?`<img src="${n.image}" style="width:100%">`:"";
+document.getElementById("nTitle")
+.value=n.title;
+
+document.getElementById("nText")
+.value=n.text;
+
+document.getElementById("nLink")
+.value=n.link;
+
+document.getElementById("nImage")
+.value="";
+
+document.getElementById("preview")
+.innerHTML=
+n.image
+?`<img src="${n.image}" style="width:100%">`
+:"";
 
 document.getElementById("noteTitle")
 .textContent="Edit Note";
@@ -950,17 +2185,116 @@ document.getElementById("noteModal")
 }
 
 
-function deleteNote(noteId){
+function deleteNote(id){
 
 if(!confirm("Delete this note?"))
 return;
 
-notes=notes.filter(n=>n.id!==noteId);
+notes=
+notes.filter(
+n=>n.id!==id
+);
 
 saveData();
+
 renderNotes();
 
 toast("Note deleted.");
+
+}
+
+
+function renderNotes(){
+
+const list=
+document.getElementById("notesList");
+
+list.innerHTML="";
+
+
+notes.forEach(n=>{
+
+const card=
+document.createElement("div");
+
+card.className="note";
+
+
+card.innerHTML=`
+
+<h3>
+${safe(n.title)}
+</h3>
+
+
+${
+n.text
+?
+`<p>${safe(n.text)}</p>`
+:""
+}
+
+
+${
+n.link
+?
+`<p>
+<a
+href="${safe(n.link)}"
+target="_blank"
+rel="noopener">
+${safe(n.link)}
+</a>
+</p>`
+:""
+}
+
+
+${
+n.image
+?
+`<img src="${n.image}">`
+:""
+}
+
+
+<br>
+
+
+<div class="actions">
+
+<button
+class="btn dark"
+onclick="editNote('${n.id}')">
+
+EDIT
+
+</button>
+
+
+<button
+class="btn red"
+onclick="deleteNote('${n.id}')">
+
+DELETE
+
+</button>
+
+</div>
+
+`;
+
+
+list.appendChild(card);
+
+});
+
+
+document.getElementById("noNotes")
+.style.display=
+notes.length
+?"none"
+:"block";
 
 }
 
@@ -971,16 +2305,51 @@ toast("Note deleted.");
 
 function addTask(){
 
-let d=new Date();
+const now=
+new Date();
 
-document.getElementById("taskId").value="";
-document.getElementById("taskName").value="";
+document.getElementById("taskId")
+.value="";
 
-document.getElementById("taskDate").value=
-d.toISOString().split("T")[0];
+document.getElementById("taskName")
+.value="";
 
-document.getElementById("taskTime").value=
-d.toTimeString().substring(0,5);
+document.getElementById("taskDate")
+.value=
+now.toISOString()
+.split("T")[0];
+
+document.getElementById("taskTime")
+.value=
+now.toTimeString()
+.substring(0,5);
+
+document.getElementById("taskModal")
+.classList.remove("hide");
+
+}
+
+
+function editTask(id){
+
+const task=
+tasks.find(
+t=>t.id===id
+);
+
+if(!task)return;
+
+document.getElementById("taskId")
+.value=task.id;
+
+document.getElementById("taskName")
+.value=task.name;
+
+document.getElementById("taskDate")
+.value=task.date;
+
+document.getElementById("taskTime")
+.value=task.time;
 
 document.getElementById("taskModal")
 .classList.remove("hide");
@@ -990,163 +2359,132 @@ document.getElementById("taskModal")
 
 function saveTask(){
 
-let name=document.getElementById("taskName")
+const name=
+document
+.getElementById("taskName")
 .value.trim();
 
 if(!name){
 
-alert("Enter a task.");
+alert("Please enter a task.");
+
 return;
 
 }
 
-let taskId=document.getElementById("taskId").value;
+const taskID=
+document.getElementById("taskId")
+.value;
 
-let old=tasks.find(t=>t.id===taskId);
 
-let task={
+if(taskID){
 
-id:taskId||id(),
+tasks=
+tasks.map(
+t=>{
+
+if(t.id===taskID){
+
+return{
+
+...t,
 
 name:name,
 
-date:document.getElementById("taskDate").value,
+date:
+document.getElementById("taskDate")
+.value,
 
-time:document.getElementById("taskTime").value,
-
-done:old?.done||false
+time:
+document.getElementById("taskTime")
+.value
 
 };
 
-if(taskId){
+}
 
-tasks=tasks.map(t=>
-t.id===taskId?task:t
+return t;
+
+}
 );
 
 }else{
 
-tasks.push(task);
+tasks.push({
+
+id:makeID(),
+
+name:name,
+
+date:
+document.getElementById("taskDate")
+.value,
+
+time:
+document.getElementById("taskTime")
+.value,
+
+done:false
+
+});
 
 }
 
+
 saveData();
+
 renderTasks();
-closeModal("taskModal");
+
+closeModal(
+"taskModal"
+);
 
 toast("Task saved!");
 
 }
 
 
-function renderTasks(){
+/* =========================
+   TICK TASK
+========================= */
 
-let list=document.getElementById("tasks");
+function toggleTask(id){
 
-list.innerHTML="";
-
-tasks.sort((a,b)=>
-(a.date+a.time).localeCompare(b.date+b.time)
+const task=
+tasks.find(
+t=>t.id===id
 );
 
-tasks.forEach(t=>{
+if(!task)return;
 
-let div=document.createElement("div");
-
-div.className="task";
-
-div.innerHTML=`
-
-<input type="checkbox"
-onclick="completeTask('${t.id}')">
-
-<div class="task-main">
-
-<div class="task-title">
-${escapeText(t.name)}
-</div>
-
-<div class="task-date">
-${t.date} • ${t.time}
-</div>
-
-</div>
-
-<button class="btn"
-onclick="editTask('${t.id}')">
-EDIT
-</button>
-
-<button class="btn red"
-onclick="deleteTask('${t.id}')">
-DELETE
-</button>
-
-`;
-
-list.appendChild(div);
-
-});
-
-updateProgress();
-
-document.getElementById("noTasks")
-.style.display=tasks.length?"none":"block";
-
-}
-
-
-function completeTask(taskId){
-
-let t=tasks.find(x=>x.id===taskId);
-
-if(!t)return;
-
-if(confirm(
-`Confirm that "${t.name}" is completed?\n\nAfter confirmation it will be deleted automatically.`
-)){
-
-tasks=tasks.filter(x=>x.id!==taskId);
+task.done=
+!task.done;
 
 saveData();
-renderTasks();
-
-toast("Task completed and deleted!");
-
-}else{
 
 renderTasks();
 
 }
 
-}
 
+/* =========================
+   DELETE TASK
+========================= */
 
-function editTask(taskId){
+function deleteTask(id){
 
-let t=tasks.find(x=>x.id===taskId);
-
-if(!t)return;
-
-document.getElementById("taskId").value=t.id;
-document.getElementById("taskName").value=t.name;
-document.getElementById("taskDate").value=t.date;
-document.getElementById("taskTime").value=t.time;
-
-document.getElementById("taskModal")
-.classList.remove("hide");
-
-}
-
-
-function deleteTask(taskId){
-
-if(!confirm("Delete this task?"))
+if(!confirm(
+"Delete this task?"
+))
 return;
 
-tasks=tasks.filter(t=>t.id!==taskId);
+tasks=
+tasks.filter(
+t=>t.id!==id
+);
 
 saveData();
+
 renderTasks();
 
 toast("Task deleted.");
@@ -1154,44 +2492,202 @@ toast("Task deleted.");
 }
 
 
+/* =========================
+   RENDER TASKS
+========================= */
+
+function renderTasks(){
+
+const list=
+document.getElementById("tasks");
+
+list.innerHTML="";
+
+
+tasks.sort(
+(a,b)=>
+(a.date+a.time)
+.localeCompare(
+b.date+b.time
+)
+);
+
+
+tasks.forEach(task=>{
+
+const div=
+document.createElement("div");
+
+div.className=
+"task"+
+(task.done
+?" completed"
+:"");
+
+
+div.innerHTML=`
+
+<input
+type="checkbox"
+${task.done?"checked":""}
+onchange="toggleTask('${task.id}')">
+
+
+<div class="task-main">
+
+<div class="task-title">
+
+${safe(task.name)}
+
+</div>
+
+<div class="task-date">
+
+${task.date}
+•
+${task.time}
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn dark"
+onclick="editTask('${task.id}')">
+
+EDIT
+
+</button>
+
+
+<button
+class="btn red"
+onclick="deleteTask('${task.id}')">
+
+DELETE
+
+</button>
+
+</div>
+
+`;
+
+
+list.appendChild(div);
+
+});
+
+
+document.getElementById("noTasks")
+.style.display=
+tasks.length
+?"none"
+:"block";
+
+
+updateProgress();
+
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
 function updateProgress(){
 
-let remaining=tasks.filter(t=>!t.done).length;
+const total=
+tasks.length;
 
-let total=tasks.length;
+const remaining=
+tasks.filter(
+task=>!task.done
+).length;
 
-let percentage=total?
-Math.round((remaining/total)*100):0;
+
+let percentage=0;
+
+
+if(total>0){
+
+percentage=
+Math.round(
+(remaining/total)*100
+);
+
+}
+
 
 document.getElementById("percent")
-.textContent=percentage+"%";
+.textContent=
+percentage+"%";
 
-let bar=document.getElementById("bar");
 
-bar.style.width=percentage+"%";
+const bar=
+document.getElementById("bar");
+
+
+bar.style.width=
+percentage+"%";
+
 
 bar.className="bar";
 
+
+if(total===0){
+
+bar.classList.add("green");
+
+document.getElementById(
+"progressText"
+).textContent=
+"No tasks";
+
+return;
+
+}
+
+
+/*
+    0%       = GREEN
+    1-50%    = YELLOW
+    >50%     = RED
+*/
+
+
 if(percentage===0){
 
-bar.style.background="#00ff66";
+bar.classList.add("green");
 
-document.getElementById("progressText")
-.textContent="Everything completed 🟢";
+document.getElementById(
+"progressText"
+).textContent=
+"Everything completed 🟢";
 
-}else if(percentage<=50){
+}
+
+else if(percentage<=50){
 
 bar.classList.add("yellow");
 
-document.getElementById("progressText")
-.textContent="50% or less work remains 🟡";
+document.getElementById(
+"progressText"
+).textContent=
+"50% or less work remains 🟡";
 
-}else{
+}
+
+else{
 
 bar.classList.add("redbar");
 
-document.getElementById("progressText")
-.textContent="More than 50% work remains 🔴";
+document.getElementById(
+"progressText"
+).textContent=
+"More than 50% work remains 🔴";
 
 }
 
@@ -1199,11 +2695,26 @@ document.getElementById("progressText")
 
 
 /* =========================
-   START
+   CLOSE MODALS
+========================= */
+
+function closeModal(id){
+
+document
+.getElementById(id)
+.classList.add("hide");
+
+}
+
+
+/* =========================
+   INITIAL LOAD
 ========================= */
 
 renderPeople();
+
 renderNotes();
+
 renderTasks();
 
 </script>
