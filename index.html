@@ -8,9 +8,9 @@
 
 <style>
 
-/* =====================================================
-   GLOBAL
-===================================================== */
+/* =========================
+   BASIC
+========================= */
 
 *{
     box-sizing:border-box;
@@ -23,18 +23,18 @@ html{
 body{
     margin:0;
     background:#030303;
-    color:#ffffff;
+    color:white;
     font-family:Arial,Helvetica,sans-serif;
 }
 
 
-/* =====================================================
+/* =========================
    HEADER
-===================================================== */
+========================= */
 
 header{
     background:#62d5ff;
-    color:#ffffff;
+    color:white;
 
     padding:22px 5%;
 
@@ -67,110 +67,73 @@ header p{
 }
 
 
-/* =====================================================
-   NEON GREEN TIME + DATE
-===================================================== */
+/* =========================
+   BROWN / GOLDEN CLOCK
+========================= */
 
 .clock{
-
     text-align:right;
 
-    color:#00ff66;
+    color:#c8873a;
 
     font-weight:900;
 
     animation:
-        neonGreenGlow
-        1.7s
-        ease-in-out
-        infinite
-        alternate;
+        brownGlow 1.7s ease-in-out infinite alternate;
 }
 
-
-/* TIME */
-
 #time{
-
     font-size:
         clamp(25px,4vw,40px);
 
     letter-spacing:2px;
 }
 
-
-/* DATE */
-
 #date{
-
     font-size:16px;
 
     margin-top:5px;
-
-    letter-spacing:.5px;
 }
 
 
-/* ANIMATED UP/DOWN GLOW */
+/* BROWN NEON GLOW */
 
-@keyframes neonGreenGlow{
+@keyframes brownGlow{
 
     0%{
-
-        transform:
-            translateY(-4px);
+        transform:translateY(-4px);
 
         text-shadow:
-
-            0 0 4px #00ff66,
-
-            0 0 10px #00ff66,
-
-            0 0 18px #00ff66;
-
+            0 0 4px #7a4218,
+            0 0 10px #9b5b25,
+            0 0 18px #b87333;
     }
-
 
     50%{
-
-        transform:
-            translateY(0);
+        transform:translateY(0);
 
         text-shadow:
-
-            0 0 7px #00ff66,
-
-            0 0 20px #00ff66,
-
-            0 0 35px #00ff66;
-
+            0 0 7px #8b4f20,
+            0 0 20px #c47a36,
+            0 0 35px #d99a55;
     }
-
 
     100%{
-
-        transform:
-            translateY(4px);
+        transform:translateY(4px);
 
         text-shadow:
-
-            0 0 10px #00ff66,
-
-            0 0 25px #00ff66,
-
-            0 0 45px #00ff66;
-
+            0 0 10px #9b5b25,
+            0 0 25px #c47a36,
+            0 0 45px #e0a15c;
     }
-
 }
 
 
-/* =====================================================
+/* =========================
    NAVIGATION
-===================================================== */
+========================= */
 
 nav{
-
     background:#0d0d0d;
 
     padding:12px 5%;
@@ -185,18 +148,15 @@ nav{
 
     z-index:10;
 
-    border-bottom:
-        1px solid #222;
+    border-bottom:1px solid #222;
 }
 
 nav button{
-
     background:#181818;
 
-    color:#ffffff;
+    color:white;
 
-    border:
-        1px solid #333;
+    border:1px solid #333;
 
     border-radius:8px;
 
@@ -205,26 +165,21 @@ nav button{
     font-weight:bold;
 
     cursor:pointer;
-
-    transition:.2s;
 }
 
 nav button:hover,
 nav button.active{
-
     background:#8b5cf6;
 
     border-color:#a78bfa;
-
 }
 
 
-/* =====================================================
+/* =========================
    MAIN
-===================================================== */
+========================= */
 
 main{
-
     max-width:1200px;
 
     margin:auto;
@@ -233,22 +188,19 @@ main{
 }
 
 section{
-
     display:none;
 }
 
 section.active{
-
     display:block;
 }
 
 
-/* =====================================================
+/* =========================
    HEADINGS
-===================================================== */
+========================= */
 
 .head{
-
     display:flex;
 
     justify-content:space-between;
@@ -261,24 +213,21 @@ section.active{
 }
 
 .head h2{
-
     margin:0;
 }
 
 .head p{
-
     color:#aaa;
 
     margin:6px 0 0;
 }
 
 
-/* =====================================================
+/* =========================
    BUTTONS
-===================================================== */
+========================= */
 
 .btn{
-
     border:0;
 
     border-radius:8px;
@@ -291,43 +240,33 @@ section.active{
 
     background:#8b5cf6;
 
-    color:#ffffff;
-
-    transition:.2s;
+    color:white;
 }
 
 .btn:hover{
-
     background:#a78bfa;
-
-    transform:translateY(-1px);
 }
 
 .btn.red{
-
     background:#8b2020;
 }
 
 .btn.red:hover{
-
     background:#b52b2b;
 }
 
 .btn.dark{
-
     background:#222;
 
-    border:
-        1px solid #444;
+    border:1px solid #444;
 }
 
 
-/* =====================================================
+/* =========================
    SUMMARY
-===================================================== */
+========================= */
 
 .summary{
-
     display:grid;
 
     grid-template-columns:
@@ -339,11 +278,9 @@ section.active{
 }
 
 .box{
-
     background:#0e0e0e;
 
-    border:
-        1px solid #292929;
+    border:1px solid #292929;
 
     border-radius:12px;
 
@@ -351,14 +288,12 @@ section.active{
 }
 
 .box span{
-
     color:#888;
 
     font-size:12px;
 }
 
 .box strong{
-
     display:block;
 
     margin-top:7px;
@@ -367,9 +302,9 @@ section.active{
 }
 
 
-/* =====================================================
-   INPUTS
-===================================================== */
+/* =========================
+   INPUT
+========================= */
 
 input,
 textarea{
@@ -382,10 +317,9 @@ textarea{
 
     background:#101010;
 
-    color:#ffffff;
+    color:white;
 
-    border:
-        1px solid #333;
+    border:1px solid #333;
 
     border-radius:8px;
 
@@ -403,9 +337,9 @@ textarea:focus{
 }
 
 
-/* =====================================================
+/* =========================
    CARDS
-===================================================== */
+========================= */
 
 .cards,
 .notes{
@@ -427,16 +361,14 @@ textarea:focus{
 
     background:#0e0e0e;
 
-    border:
-        1px solid #292929;
+    border:1px solid #292929;
 
     border-radius:12px;
 
     padding:16px;
 
     box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.3);
+        0 8px 25px rgba(0,0,0,.3);
 }
 
 .card h3,
@@ -446,9 +378,9 @@ textarea:focus{
 }
 
 
-/* =====================================================
+/* =========================
    ACCOUNT AMOUNTS
-===================================================== */
+========================= */
 
 .amounts{
 
@@ -477,9 +409,9 @@ textarea:focus{
 }
 
 
-/* =====================================================
+/* =========================
    BALANCE
-===================================================== */
+========================= */
 
 .balance{
 
@@ -492,52 +424,37 @@ textarea:focus{
     font-weight:bold;
 }
 
-
-/* RECEIVE */
-
 .receive{
 
     color:#00ff66;
 
-    border:
-        1px solid #00ff66;
+    border:1px solid #00ff66;
 
-    background:
-        rgba(0,255,102,.06);
+    background:#00ff6610;
 }
-
-
-/* PAY */
 
 .pay{
 
     color:#ff5555;
 
-    border:
-        1px solid #ff4444;
+    border:1px solid #ff4444;
 
-    background:
-        rgba(255,0,0,.06);
+    background:#ff000010;
 }
-
-
-/* SETTLED */
 
 .settle{
 
     color:#00ff66;
 
-    border:
-        1px solid #00ff66;
+    border:1px solid #00ff66;
 
-    background:
-        rgba(0,255,102,.06);
+    background:#00ff6610;
 }
 
 
-/* =====================================================
-   ACTION BUTTONS
-===================================================== */
+/* =========================
+   ACTIONS
+========================= */
 
 .actions{
 
@@ -549,14 +466,13 @@ textarea:focus{
 }
 
 
-/* =====================================================
-   EMPTY MESSAGE
-===================================================== */
+/* =========================
+   EMPTY
+========================= */
 
 .empty{
 
-    border:
-        1px dashed #333;
+    border:1px dashed #333;
 
     padding:30px;
 
@@ -570,9 +486,9 @@ textarea:focus{
 }
 
 
-/* =====================================================
+/* =========================
    NOTES
-===================================================== */
+========================= */
 
 .note p{
 
@@ -602,16 +518,15 @@ textarea:focus{
 }
 
 
-/* =====================================================
-   TODO PROGRESS BOX
-===================================================== */
+/* =========================
+   TODO PROGRESS
+========================= */
 
 .progress-box{
 
     background:#0e0e0e;
 
-    border:
-        1px solid #292929;
+    border:1px solid #292929;
 
     border-radius:12px;
 
@@ -648,78 +563,56 @@ textarea:focus{
 
     width:0;
 
-    border-radius:20px;
-
     transition:
-
         width .5s ease,
+        background .3s ease;
 
-        background .3s ease,
-
-        box-shadow .3s ease;
+    border-radius:20px;
 }
 
 
-/* =====================================================
-   PROGRESS GREEN
-   0% REMAINING
-===================================================== */
+/* GREEN = 0% */
 
 .bar.green{
 
     background:#00ff55;
 
     box-shadow:
-
         0 0 8px #00ff55,
-
         0 0 20px #00ff55,
-
         0 0 35px #00ff55;
 }
 
 
-/* =====================================================
-   PROGRESS YELLOW
-   1-50% REMAINING
-===================================================== */
+/* YELLOW = 1-50% */
 
 .bar.yellow{
 
     background:#ffe600;
 
     box-shadow:
-
         0 0 8px #ffe600,
-
         0 0 20px #ffe600,
-
         0 0 35px #ffe600;
 }
 
 
-/* =====================================================
-   PROGRESS RED
-   MORE THAN 50%
-===================================================== */
+/* RED = >50% */
 
 .bar.redbar{
 
     background:#ff3030;
 
     box-shadow:
-
         0 0 8px #ff3030,
-
         0 0 20px #ff3030,
-
         0 0 35px #ff3030;
 }
 
 
-/* =====================================================
-   TODO TASK
-===================================================== */
+/* =========================
+   TODO
+========================= */
 
 .task{
 
@@ -730,12 +623,7 @@ textarea:focus{
     gap:12px;
 
     margin-bottom:10px;
-
-    transition:.2s;
 }
-
-
-/* CHECKBOX */
 
 .task input[type="checkbox"]{
 
@@ -746,22 +634,12 @@ textarea:focus{
     cursor:pointer;
 
     accent-color:#00ff55;
-
-    flex-shrink:0;
 }
-
-
-/* TASK MAIN */
 
 .task-main{
 
     flex:1;
-
-    min-width:150px;
 }
-
-
-/* TASK TITLE */
 
 .task-title{
 
@@ -771,16 +649,7 @@ textarea:focus{
 }
 
 
-/* =====================================================
-   COMPLETED TASK
-===================================================== */
-
-.task.completed{
-
-    border-color:#00ff55;
-
-    opacity:.75;
-}
+/* COMPLETED TASK */
 
 .task.completed .task-title{
 
@@ -792,8 +661,12 @@ textarea:focus{
     color:#777;
 }
 
+.task.completed{
 
-/* TASK DATE */
+    border-color:#00ff55;
+
+    opacity:.75;
+}
 
 .task-date{
 
@@ -805,9 +678,9 @@ textarea:focus{
 }
 
 
-/* =====================================================
+/* =========================
    MODAL
-===================================================== */
+========================= */
 
 .modal{
 
@@ -815,8 +688,7 @@ textarea:focus{
 
     inset:0;
 
-    background:
-        rgba(0,0,0,.8);
+    background:#000c;
 
     display:flex;
 
@@ -838,8 +710,7 @@ textarea:focus{
 
     background:#111;
 
-    border:
-        1px solid #444;
+    border:1px solid #444;
 
     border-radius:14px;
 
@@ -901,9 +772,9 @@ textarea:focus{
 }
 
 
-/* =====================================================
+/* =========================
    TOAST
-===================================================== */
+========================= */
 
 .toast{
 
@@ -915,8 +786,7 @@ textarea:focus{
 
     background:#181818;
 
-    border:
-        1px solid #555;
+    border:1px solid #555;
 
     padding:13px 17px;
 
@@ -924,8 +794,7 @@ textarea:focus{
 
     opacity:0;
 
-    transform:
-        translateY(15px);
+    transform:translateY(15px);
 
     transition:.3s;
 
@@ -936,14 +805,13 @@ textarea:focus{
 
     opacity:1;
 
-    transform:
-        translateY(0);
+    transform:translateY(0);
 }
 
 
-/* =====================================================
+/* =========================
    MOBILE
-===================================================== */
+========================= */
 
 @media(max-width:650px){
 
@@ -999,17 +867,15 @@ textarea:focus{
 <body>
 
 
-<!-- =====================================================
+<!-- =========================
      HEADER
-===================================================== -->
+========================= -->
 
 <header>
 
 <div>
 
-<h1>
-STUDENT`S CA
-</h1>
+<h1>STUDENT`S CA</h1>
 
 <p>
 Accounts • Notes • Tasks
@@ -1033,54 +899,43 @@ Accounts • Notes • Tasks
 </header>
 
 
-
-<!-- =====================================================
-     NAVIGATION
-===================================================== -->
+<!-- =========================
+     NAV
+========================= -->
 
 <nav>
 
 <button
 class="tab active"
 onclick="showTab('accounts',this)">
-
 ACCOUNTS
-
 </button>
-
 
 <button
 class="tab"
 onclick="showTab('notes',this)">
-
 NOTEPAD
-
 </button>
-
 
 <button
 class="tab"
 onclick="showTab('todo',this)">
-
 TO-DO LIST
-
 </button>
 
 </nav>
 
 
-
 <main>
 
 
-<!-- =====================================================
+<!-- =========================
      ACCOUNTS
-===================================================== -->
+========================= -->
 
 <section
 id="accounts"
 class="active">
-
 
 <div class="head">
 
@@ -1096,7 +951,6 @@ Track given, taken and final balance.
 
 </div>
 
-
 <button
 class="btn"
 onclick="addPerson()">
@@ -1108,9 +962,7 @@ onclick="addPerson()">
 </div>
 
 
-
 <div class="summary">
-
 
 <div class="box">
 
@@ -1150,15 +1002,13 @@ YOU PAY
 
 </div>
 
-
 </div>
-
 
 
 <input
 id="search"
 placeholder="Search name..."
-oninput="renderPeople()">
+oninput="renderPeople">
 
 
 <br><br>
@@ -1182,12 +1032,11 @@ No names added yet.
 
 
 
-<!-- =====================================================
+<!-- =========================
      NOTEPAD
-===================================================== -->
+========================= -->
 
 <section id="notes">
-
 
 <div class="head">
 
@@ -1202,7 +1051,6 @@ Save notes, links and pictures.
 </p>
 
 </div>
-
 
 <button
 class="btn"
@@ -1233,12 +1081,11 @@ No notes saved yet.
 
 
 
-<!-- =====================================================
-     TODO LIST
-===================================================== -->
+<!-- =========================
+     TODO
+========================= -->
 
 <section id="todo">
-
 
 <div class="head">
 
@@ -1254,7 +1101,6 @@ Tick completed work. Edit or delete anytime.
 
 </div>
 
-
 <button
 class="btn"
 onclick="addTask()">
@@ -1266,18 +1112,13 @@ onclick="addTask()">
 </div>
 
 
-
-<!-- PROGRESS -->
-
 <div class="progress-box">
-
 
 <div class="progress-top">
 
 <b>
 REMAINING WORK
 </b>
-
 
 <b id="percent">
 0%
@@ -1304,9 +1145,7 @@ No tasks
 
 </span>
 
-
 </div>
-
 
 
 <div id="tasks">
@@ -1321,24 +1160,21 @@ No tasks added yet.
 
 </div>
 
-
 </section>
 
 </main>
 
 
 
-<!-- =====================================================
+<!-- =========================
      PERSON MODAL
-===================================================== -->
+========================= -->
 
 <div
 id="personModal"
 class="modal hide">
 
-
 <div class="modalbox">
-
 
 <button
 class="close"
@@ -1408,24 +1244,21 @@ SAVE
 
 </div>
 
-
 </div>
 
 </div>
 
 
 
-<!-- =====================================================
+<!-- =========================
      NOTE MODAL
-===================================================== -->
+========================= -->
 
 <div
 id="noteModal"
 class="modal hide">
 
-
 <div class="modalbox">
-
 
 <button
 class="close"
@@ -1508,24 +1341,21 @@ SAVE
 
 </div>
 
-
 </div>
 
 </div>
 
 
 
-<!-- =====================================================
-     TASK MODAL
-===================================================== -->
+<!-- =========================
+     TODO MODAL
+========================= -->
 
 <div
 id="taskModal"
 class="modal hide">
 
-
 <div class="modalbox">
-
 
 <button
 class="close"
@@ -1591,16 +1421,11 @@ SAVE
 
 </div>
 
-
 </div>
 
 </div>
 
 
-
-<!-- =====================================================
-     TOAST
-===================================================== -->
 
 <div
 id="toast"
@@ -1611,1762 +1436,1283 @@ class="toast">
 
 <script>
 
-/* =====================================================
-   LOAD DATA
-===================================================== */
+/* =========================
+   STORAGE
+========================= */
 
 let people =
 JSON.parse(
-localStorage.getItem("sca_people")
-|| "[]"
+localStorage.getItem("sca_people") || "[]"
 );
-
 
 let notes =
 JSON.parse(
-localStorage.getItem("sca_notes")
-|| "[]"
+localStorage.getItem("sca_notes") || "[]"
 );
-
 
 let tasks =
 JSON.parse(
-localStorage.getItem("sca_tasks")
-|| "[]"
+localStorage.getItem("sca_tasks") || "[]"
 );
 
 
-
-/* =====================================================
-   SAVE DATA
-===================================================== */
-
 function saveData(){
 
-    localStorage.setItem(
-        "sca_people",
-        JSON.stringify(people)
-    );
+localStorage.setItem(
+"sca_people",
+JSON.stringify(people)
+);
 
-    localStorage.setItem(
-        "sca_notes",
-        JSON.stringify(notes)
-    );
+localStorage.setItem(
+"sca_notes",
+JSON.stringify(notes)
+);
 
-    localStorage.setItem(
-        "sca_tasks",
-        JSON.stringify(tasks)
-    );
+localStorage.setItem(
+"sca_tasks",
+JSON.stringify(tasks)
+);
 
 }
 
 
-
-/* =====================================================
-   UNIQUE ID
-===================================================== */
+/* =========================
+   ID
+========================= */
 
 function makeID(){
 
-    return Date.now().toString(36)
-    +
-    Math.random()
-    .toString(36)
-    .substring(2);
+return Date.now().toString(36)+
+Math.random().toString(36).substring(2);
 
 }
 
 
-
-/* =====================================================
+/* =========================
    MONEY
-===================================================== */
+========================= */
 
 function money(number){
 
-    return "₹"
-    +
-    Number(number || 0)
-    .toLocaleString(
-        "en-IN",
-        {
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        }
-    );
+return "₹"+
+Number(number||0).toLocaleString(
+"en-IN",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}
+);
 
 }
 
 
-
-/* =====================================================
-   SAFE TEXT
-===================================================== */
+/* =========================
+   ESCAPE
+========================= */
 
 function safe(text){
 
-    return String(text || "")
-
-    .replaceAll("&","&amp;")
-
-    .replaceAll("<","&lt;")
-
-    .replaceAll(">","&gt;")
-
-    .replaceAll('"',"&quot;")
-
-    .replaceAll("'","&#039;");
+return String(text||"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
 }
 
 
-
-/* =====================================================
+/* =========================
    CLOCK
-===================================================== */
+========================= */
 
 function updateClock(){
 
-    const now =
-        new Date();
+const now=new Date();
 
+document.getElementById("time")
+.textContent=
+now.toLocaleTimeString("en-GB");
 
-    document
-    .getElementById("time")
-    .textContent =
-        now.toLocaleTimeString(
-            "en-GB"
-        );
-
-
-    document
-    .getElementById("date")
-    .textContent =
-        now.toLocaleDateString(
-            "en-GB",
-            {
-                weekday:"long",
-                day:"2-digit",
-                month:"long",
-                year:"numeric"
-            }
-        );
+document.getElementById("date")
+.textContent=
+now.toLocaleDateString(
+"en-GB",
+{
+weekday:"long",
+day:"2-digit",
+month:"long",
+year:"numeric"
+}
+);
 
 }
-
 
 updateClock();
 
 setInterval(
-    updateClock,
-    1000
+updateClock,
+1000
 );
 
 
-
-/* =====================================================
+/* =========================
    TABS
-===================================================== */
+========================= */
 
 function showTab(id,button){
 
-    document
-    .querySelectorAll("section")
-    .forEach(
-        section =>
-            section.classList
-            .remove("active")
-    );
+document
+.querySelectorAll("section")
+.forEach(
+section=>
+section.classList.remove("active")
+);
 
+document
+.getElementById(id)
+.classList.add("active");
 
-    document
-    .getElementById(id)
-    .classList
-    .add("active");
+document
+.querySelectorAll(".tab")
+.forEach(
+button=>
+button.classList.remove("active")
+);
 
-
-    document
-    .querySelectorAll(".tab")
-    .forEach(
-        button =>
-            button.classList
-            .remove("active")
-    );
-
-
-    button.classList
-    .add("active");
+button.classList.add("active");
 
 }
 
 
-
-/* =====================================================
+/* =========================
    TOAST
-===================================================== */
+========================= */
 
 function toast(message){
 
-    const t =
-        document
-        .getElementById("toast");
+const t=
+document.getElementById("toast");
 
+t.textContent=message;
 
-    t.textContent =
-        message;
+t.classList.add("show");
 
-
-    t.classList
-    .add("show");
-
-
-    setTimeout(
-        () => {
-            t.classList
-            .remove("show");
-        },
-        2200
-    );
+setTimeout(
+()=>{
+t.classList.remove("show");
+},
+2200
+);
 
 }
 
 
-
-/* =====================================================
-   ADD PERSON
-===================================================== */
+/* =========================
+   ACCOUNT
+========================= */
 
 function addPerson(){
 
-    document
-    .getElementById("personId")
-    .value="";
+document.getElementById("personId")
+.value="";
 
+document.getElementById("personName")
+.value="";
 
-    document
-    .getElementById("personName")
-    .value="";
+document.getElementById("given")
+.value=0;
 
+document.getElementById("taken")
+.value=0;
 
-    document
-    .getElementById("given")
-    .value=0;
+document.getElementById("personTitle")
+.textContent="Add Student";
 
-
-    document
-    .getElementById("taken")
-    .value=0;
-
-
-    document
-    .getElementById("personTitle")
-    .textContent=
-        "Add Student";
-
-
-    document
-    .getElementById("personModal")
-    .classList
-    .remove("hide");
+document
+.getElementById("personModal")
+.classList.remove("hide");
 
 }
 
-
-
-/* =====================================================
-   EDIT PERSON
-===================================================== */
 
 function editPerson(id){
 
-    const p =
-        people.find(
-            person =>
-                person.id===id
-        );
+const p=
+people.find(
+person=>person.id===id
+);
 
+if(!p)return;
 
-    if(!p)
-        return;
+document.getElementById("personId")
+.value=p.id;
 
+document.getElementById("personName")
+.value=p.name;
 
-    document
-    .getElementById("personId")
-    .value =
-        p.id;
+document.getElementById("given")
+.value=p.given;
 
+document.getElementById("taken")
+.value=p.taken;
 
-    document
-    .getElementById("personName")
-    .value =
-        p.name;
+document.getElementById("personTitle")
+.textContent="Edit Student";
 
-
-    document
-    .getElementById("given")
-    .value =
-        p.given;
-
-
-    document
-    .getElementById("taken")
-    .value =
-        p.taken;
-
-
-    document
-    .getElementById("personTitle")
-    .textContent =
-        "Edit Student";
-
-
-    document
-    .getElementById("personModal")
-    .classList
-    .remove("hide");
+document
+.getElementById("personModal")
+.classList.remove("hide");
 
 }
 
-
-
-/* =====================================================
-   SAVE PERSON
-===================================================== */
 
 function savePerson(){
 
-    const name =
-        document
-        .getElementById("personName")
-        .value
-        .trim();
+const name=
+document
+.getElementById("personName")
+.value.trim();
 
+if(!name){
 
-    if(!name){
+alert("Please enter a name.");
 
-        alert(
-            "Please enter a name."
-        );
-
-        return;
-
-    }
-
-
-    const personID =
-        document
-        .getElementById("personId")
-        .value;
-
-
-    const person = {
-
-        id:
-            personID ||
-            makeID(),
-
-        name:name,
-
-        given:
-            Number(
-                document
-                .getElementById("given")
-                .value
-            ) || 0,
-
-        taken:
-            Number(
-                document
-                .getElementById("taken")
-                .value
-            ) || 0
-
-    };
-
-
-    if(personID){
-
-        people =
-            people.map(
-                p =>
-                    p.id===personID
-                    ? person
-                    : p
-            );
-
-    }
-
-    else{
-
-        people.push(
-            person
-        );
-
-    }
-
-
-    saveData();
-
-    renderPeople();
-
-    closeModal(
-        "personModal"
-    );
-
-    toast(
-        "Account saved!"
-    );
+return;
 
 }
 
+const personID=
+document.getElementById("personId")
+.value;
+
+const person={
+
+id:personID||makeID(),
+
+name:name,
+
+given:
+Number(
+document.getElementById("given").value
+)||0,
+
+taken:
+Number(
+document.getElementById("taken").value
+)||0
+
+};
 
 
-/* =====================================================
-   DELETE PERSON
-===================================================== */
+if(personID){
+
+people=
+people.map(
+p=>
+p.id===personID
+?person
+:p
+);
+
+}else{
+
+people.push(person);
+
+}
+
+saveData();
+
+renderPeople();
+
+closeModal(
+"personModal"
+);
+
+toast("Account saved!");
+
+}
+
 
 function deletePerson(id){
 
-    if(
-        !confirm(
-            "Delete this student's account?"
-        )
-    )
-        return;
+if(
+!confirm(
+"Delete this student's account?"
+)
+)return;
 
+people=
+people.filter(
+p=>p.id!==id
+);
 
-    people =
-        people.filter(
-            p =>
-                p.id!==id
-        );
+saveData();
 
+renderPeople();
 
-    saveData();
-
-    renderPeople();
-
-    toast(
-        "Student deleted."
-    );
+toast("Student deleted.");
 
 }
 
-
-
-/* =====================================================
-   RENDER PEOPLE
-===================================================== */
 
 function renderPeople(){
 
-    const search =
-        document
-        .getElementById("search")
-        .value
-        .toLowerCase();
+const search=
+document
+.getElementById("search")
+.value
+.toLowerCase();
 
+const list=
+document.getElementById("people");
 
-    const list =
-        document
-        .getElementById("people");
+list.innerHTML="";
 
+let receive=0;
+let pay=0;
 
-    list.innerHTML="";
 
+people.forEach(p=>{
 
-    let receive=0;
+const balance=
+Number(p.given)-
+Number(p.taken);
 
-    let pay=0;
+if(balance>0)
+receive+=balance;
 
+if(balance<0)
+pay+=Math.abs(balance);
 
-    people.forEach(
-        p => {
+});
 
-            const balance =
-                Number(p.given)
-                -
-                Number(p.taken);
 
+document.getElementById("peopleCount")
+.textContent=people.length;
 
-            if(balance>0)
-                receive += balance;
+document.getElementById("receive")
+.textContent=money(receive);
 
+document.getElementById("pay")
+.textContent=money(pay);
 
-            if(balance<0)
-                pay +=
-                    Math.abs(balance);
 
-        }
-    );
+const filtered=
+people.filter(
+p=>
+p.name
+.toLowerCase()
+.includes(search)
+);
 
 
-    document
-    .getElementById("peopleCount")
-    .textContent =
-        people.length;
+filtered.forEach(p=>{
 
+const balance=
+Number(p.given)-
+Number(p.taken);
 
-    document
-    .getElementById("receive")
-    .textContent =
-        money(receive);
+let status;
 
 
-    document
-    .getElementById("pay")
-    .textContent =
-        money(pay);
+if(balance>0){
 
+status=`
 
-    const filtered =
-        people.filter(
-            p =>
-                p.name
-                .toLowerCase()
-                .includes(search)
-        );
+<div class="balance receive">
 
+They have to pay you
+${money(balance)}
 
-    filtered.forEach(
-        p => {
+</div>
 
-            const balance =
-                Number(p.given)
-                -
-                Number(p.taken);
+`;
 
+}else if(balance<0){
 
-            let status;
+status=`
 
+<div class="balance pay">
 
-            if(balance>0){
+You have to pay them
+${money(Math.abs(balance))}
 
-                status = `
+</div>
 
-                <div
-                    class="balance receive">
+`;
 
-                    They have to pay you
-                    ${money(balance)}
+}else{
 
-                </div>
+status=`
 
-                `;
+<div class="balance settle">
 
-            }
+Account settled
 
-            else if(balance<0){
+</div>
 
-                status = `
-
-                <div
-                    class="balance pay">
-
-                    You have to pay them
-                    ${money(
-                        Math.abs(balance)
-                    )}
-
-                </div>
-
-                `;
-
-            }
-
-            else{
-
-                status = `
-
-                <div
-                    class="balance settle">
-
-                    Account settled
-
-                </div>
-
-                `;
-
-            }
-
-
-            const card =
-                document
-                .createElement("div");
-
-
-            card.className =
-                "card";
-
-
-            card.innerHTML = `
-
-            <h3>
-                ${safe(p.name)}
-            </h3>
-
-
-            <div class="amounts">
-
-
-                <div class="amount">
-
-                    <small>
-                        GIVEN
-                    </small>
-
-                    <b>
-                        ${money(p.given)}
-                    </b>
-
-                </div>
-
-
-                <div class="amount">
-
-                    <small>
-                        TAKEN
-                    </small>
-
-                    <b>
-                        ${money(p.taken)}
-                    </b>
-
-                </div>
-
-
-            </div>
-
-
-            ${status}
-
-
-            <div class="actions">
-
-
-                <button
-                    class="btn"
-                    onclick=
-                    "sharePerson('${p.id}')">
-
-                    ↗ SHARE
-
-                </button>
-
-
-                <button
-                    class="btn dark"
-                    onclick=
-                    "editPerson('${p.id}')">
-
-                    EDIT
-
-                </button>
-
-
-                <button
-                    class="btn red"
-                    onclick=
-                    "deletePerson('${p.id}')">
-
-                    DELETE
-
-                </button>
-
-
-            </div>
-
-            `;
-
-
-            list.appendChild(
-                card
-            );
-
-        }
-    );
-
-
-    document
-    .getElementById("noPeople")
-    .style.display =
-        filtered.length
-        ? "none"
-        : "block";
+`;
 
 }
 
 
+const card=
+document.createElement("div");
 
-/* =====================================================
-   SHARE PAYMENT MESSAGE
-===================================================== */
+card.className="card";
+
+
+card.innerHTML=`
+
+<h3>
+${safe(p.name)}
+</h3>
+
+
+<div class="amounts">
+
+<div class="amount">
+
+<small>
+GIVEN
+</small>
+
+<b>
+${money(p.given)}
+</b>
+
+</div>
+
+
+<div class="amount">
+
+<small>
+TAKEN
+</small>
+
+<b>
+${money(p.taken)}
+</b>
+
+</div>
+
+</div>
+
+
+${status}
+
+
+<div class="actions">
+
+<button
+class="btn"
+onclick="sharePerson('${p.id}')">
+
+↗ SHARE
+
+</button>
+
+
+<button
+class="btn dark"
+onclick="editPerson('${p.id}')">
+
+EDIT
+
+</button>
+
+
+<button
+class="btn red"
+onclick="deletePerson('${p.id}')">
+
+DELETE
+
+</button>
+
+</div>
+
+`;
+
+
+list.appendChild(card);
+
+});
+
+
+document.getElementById("noPeople")
+.style.display=
+filtered.length
+?"none"
+:"block";
+
+}
+
+
+/* =========================
+   SHARE
+========================= */
 
 async function sharePerson(id){
 
-    const p =
-        people.find(
-            person =>
-                person.id===id
-        );
+const p=
+people.find(
+person=>person.id===id
+);
+
+if(!p)return;
+
+const balance=
+Number(p.given)-
+Number(p.taken);
+
+let message;
 
 
-    if(!p)
-        return;
+if(balance>0){
 
+message=
+`Hi ${p.name}, just a gentle reminder that you currently have ${money(balance)} to pay me. Please pay whenever convenient. Thank you!`;
 
-    const balance =
-        Number(p.given)
-        -
-        Number(p.taken);
+}else if(balance<0){
 
+message=
+`Hi ${p.name}, just a gentle reminder that I currently owe you ${money(Math.abs(balance))}. I’ll make the payment whenever convenient. Thank you!`;
 
-    let message;
+}else{
 
-
-    if(balance>0){
-
-        message =
-
-        `Hi ${p.name}, just a gentle reminder that you currently have ${money(balance)} to pay me. Please pay whenever convenient. Thank you!`;
-
-    }
-
-
-    else if(balance<0){
-
-        message =
-
-        `Hi ${p.name}, just a gentle reminder that I currently owe you ${money(Math.abs(balance))}. I’ll make the payment whenever convenient. Thank you!`;
-
-    }
-
-
-    else{
-
-        message =
-
-        `Hi ${p.name}, just a quick update that our account is fully settled. Thank you!`;
-
-    }
-
-
-    try{
-
-        await navigator
-        .clipboard
-        .writeText(
-            message
-        );
-
-
-        toast(
-            "Payment message copied!"
-        );
-
-    }
-
-    catch{
-
-        prompt(
-            "Copy this message:",
-            message
-        );
-
-    }
+message=
+`Hi ${p.name}, just a quick update that our account is fully settled. Thank you!`;
 
 }
 
 
+try{
 
-/* =====================================================
-   ADD NOTE
-===================================================== */
+await navigator.clipboard.writeText(
+message
+);
+
+toast(
+"Payment message copied!"
+);
+
+}catch{
+
+prompt(
+"Copy this message:",
+message
+);
+
+}
+
+}
+
+
+/* =========================
+   NOTES
+========================= */
 
 function addNote(){
 
-    document
-    .getElementById("noteId")
-    .value="";
+document.getElementById("noteId")
+.value="";
 
+document.getElementById("nTitle")
+.value="";
 
-    document
-    .getElementById("nTitle")
-    .value="";
+document.getElementById("nText")
+.value="";
 
+document.getElementById("nLink")
+.value="";
 
-    document
-    .getElementById("nText")
-    .value="";
+document.getElementById("nImage")
+.value="";
 
+document.getElementById("preview")
+.innerHTML="";
 
-    document
-    .getElementById("nLink")
-    .value="";
+document.getElementById("noteTitle")
+.textContent="Add Note";
 
-
-    document
-    .getElementById("nImage")
-    .value="";
-
-
-    document
-    .getElementById("preview")
-    .innerHTML="";
-
-
-    document
-    .getElementById("noteTitle")
-    .textContent=
-        "Add Note";
-
-
-    document
-    .getElementById("noteModal")
-    .classList
-    .remove("hide");
+document.getElementById("noteModal")
+.classList.remove("hide");
 
 }
 
-
-
-/* =====================================================
-   SAVE NOTE
-===================================================== */
 
 function saveNote(){
 
-    const title =
-        document
-        .getElementById("nTitle")
-        .value
-        .trim();
+const title=
+document
+.getElementById("nTitle")
+.value.trim();
+
+if(!title){
+
+alert("Please enter a title.");
+
+return;
+
+}
+
+const noteID=
+document.getElementById("noteId")
+.value;
+
+const old=
+notes.find(
+n=>n.id===noteID
+);
+
+const file=
+document
+.getElementById("nImage")
+.files[0];
 
 
-    if(!title){
+function finish(image){
 
-        alert(
-            "Please enter a title."
-        );
+const note={
 
-        return;
+id:noteID||makeID(),
 
-    }
+title:title,
 
+text:
+document.getElementById("nText")
+.value,
 
-    const noteID =
-        document
-        .getElementById("noteId")
-        .value;
+link:
+document.getElementById("nLink")
+.value,
 
+image:
+image||
+(old?.image||"")
 
-    const old =
-        notes.find(
-            n =>
-                n.id===noteID
-        );
-
-
-    const file =
-        document
-        .getElementById("nImage")
-        .files[0];
+};
 
 
-    function finish(image){
+if(noteID){
 
-        const note = {
+notes=
+notes.map(
+n=>
+n.id===noteID
+?note
+:n
+);
 
-            id:
-                noteID ||
-                makeID(),
+}else{
 
-            title:title,
-
-            text:
-                document
-                .getElementById("nText")
-                .value,
-
-            link:
-                document
-                .getElementById("nLink")
-                .value,
-
-            image:
-                image ||
-                (old?.image || "")
-
-        };
-
-
-        if(noteID){
-
-            notes =
-                notes.map(
-                    n =>
-                        n.id===noteID
-                        ? note
-                        : n
-                );
-
-        }
-
-        else{
-
-            notes.push(
-                note
-            );
-
-        }
-
-
-        saveData();
-
-        renderNotes();
-
-        closeModal(
-            "noteModal"
-        );
-
-        toast(
-            "Note saved!"
-        );
-
-    }
-
-
-    if(file){
-
-        const reader =
-            new FileReader();
-
-
-        reader.onload =
-            () => {
-
-                finish(
-                    reader.result
-                );
-
-            };
-
-
-        reader.readAsDataURL(
-            file
-        );
-
-    }
-
-    else{
-
-        finish("");
-
-    }
+notes.push(note);
 
 }
 
 
+saveData();
 
-/* =====================================================
-   EDIT NOTE
-===================================================== */
+renderNotes();
+
+closeModal(
+"noteModal"
+);
+
+toast("Note saved!");
+
+}
+
+
+if(file){
+
+const reader=
+new FileReader();
+
+reader.onload=
+()=>{
+finish(
+reader.result
+);
+};
+
+reader.readAsDataURL(file);
+
+}else{
+
+finish("");
+
+}
+
+}
+
 
 function editNote(id){
 
-    const n =
-        notes.find(
-            note =>
-                note.id===id
-        );
+const n=
+notes.find(
+note=>note.id===id
+);
 
+if(!n)return;
 
-    if(!n)
-        return;
+document.getElementById("noteId")
+.value=n.id;
 
+document.getElementById("nTitle")
+.value=n.title;
 
-    document
-    .getElementById("noteId")
-    .value =
-        n.id;
+document.getElementById("nText")
+.value=n.text;
 
+document.getElementById("nLink")
+.value=n.link;
 
-    document
-    .getElementById("nTitle")
-    .value =
-        n.title;
+document.getElementById("nImage")
+.value="";
 
+document.getElementById("preview")
+.innerHTML=
+n.image
+?`<img src="${n.image}" style="width:100%">`
+:"";
 
-    document
-    .getElementById("nText")
-    .value =
-        n.text;
+document.getElementById("noteTitle")
+.textContent="Edit Note";
 
-
-    document
-    .getElementById("nLink")
-    .value =
-        n.link;
-
-
-    document
-    .getElementById("nImage")
-    .value="";
-
-
-    document
-    .getElementById("preview")
-    .innerHTML =
-        n.image
-        ?
-        `<img
-            src="${n.image}"
-            style="width:100%">`
-        :
-        "";
-
-
-    document
-    .getElementById("noteTitle")
-    .textContent =
-        "Edit Note";
-
-
-    document
-    .getElementById("noteModal")
-    .classList
-    .remove("hide");
+document.getElementById("noteModal")
+.classList.remove("hide");
 
 }
 
-
-
-/* =====================================================
-   DELETE NOTE
-===================================================== */
 
 function deleteNote(id){
 
-    if(
-        !confirm(
-            "Delete this note?"
-        )
-    )
-        return;
+if(!confirm("Delete this note?"))
+return;
 
+notes=
+notes.filter(
+n=>n.id!==id
+);
 
-    notes =
-        notes.filter(
-            n =>
-                n.id!==id
-        );
+saveData();
 
+renderNotes();
 
-    saveData();
-
-    renderNotes();
-
-    toast(
-        "Note deleted."
-    );
+toast("Note deleted.");
 
 }
 
-
-
-/* =====================================================
-   RENDER NOTES
-===================================================== */
 
 function renderNotes(){
 
-    const list =
-        document
-        .getElementById("notesList");
+const list=
+document.getElementById("notesList");
+
+list.innerHTML="";
 
 
-    list.innerHTML="";
+notes.forEach(n=>{
+
+const card=
+document.createElement("div");
+
+card.className="note";
 
 
-    notes.forEach(
-        n => {
+card.innerHTML=`
 
-            const card =
-                document
-                .createElement("div");
-
-
-            card.className =
-                "note";
+<h3>
+${safe(n.title)}
+</h3>
 
 
-            card.innerHTML = `
-
-            <h3>
-                ${safe(n.title)}
-            </h3>
-
-
-            ${
-                n.text
-                ?
-                `<p>
-                    ${safe(n.text)}
-                </p>`
-                :
-                ""
-            }
+${
+n.text
+?
+`<p>${safe(n.text)}</p>`
+:""
+}
 
 
-            ${
-                n.link
-                ?
-                `<p>
-
-                    <a
-                        href="${safe(n.link)}"
-                        target="_blank"
-                        rel="noopener">
-
-                        ${safe(n.link)}
-
-                    </a>
-
-                </p>`
-                :
-                ""
-            }
+${
+n.link
+?
+`<p>
+<a
+href="${safe(n.link)}"
+target="_blank"
+rel="noopener">
+${safe(n.link)}
+</a>
+</p>`
+:""
+}
 
 
-            ${
-                n.image
-                ?
-                `<img
-                    src="${n.image}">`
-                :
-                ""
-            }
+${
+n.image
+?
+`<img src="${n.image}">`
+:""
+}
 
 
-            <br>
+<br>
 
 
-            <div class="actions">
+<div class="actions">
+
+<button
+class="btn dark"
+onclick="editNote('${n.id}')">
+
+EDIT
+
+</button>
 
 
-                <button
-                    class="btn dark"
-                    onclick=
-                    "editNote('${n.id}')">
+<button
+class="btn red"
+onclick="deleteNote('${n.id}')">
 
-                    EDIT
+DELETE
 
-                </button>
+</button>
 
+</div>
 
-                <button
-                    class="btn red"
-                    onclick=
-                    "deleteNote('${n.id}')">
-
-                    DELETE
-
-                </button>
+`;
 
 
-            </div>
+list.appendChild(card);
 
-            `;
-
-
-            list.appendChild(
-                card
-            );
-
-        }
-    );
+});
 
 
-    document
-    .getElementById("noNotes")
-    .style.display =
-        notes.length
-        ? "none"
-        : "block";
+document.getElementById("noNotes")
+.style.display=
+notes.length
+?"none"
+:"block";
 
 }
 
 
-
-/* =====================================================
-   ADD TASK
-===================================================== */
+/* =========================
+   TODO
+========================= */
 
 function addTask(){
 
-    const now =
-        new Date();
+const now=
+new Date();
 
+document.getElementById("taskId")
+.value="";
 
-    document
-    .getElementById("taskId")
-    .value="";
+document.getElementById("taskName")
+.value="";
 
+document.getElementById("taskDate")
+.value=
+now.toISOString()
+.split("T")[0];
 
-    document
-    .getElementById("taskName")
-    .value="";
+document.getElementById("taskTime")
+.value=
+now.toTimeString()
+.substring(0,5);
 
-
-    document
-    .getElementById("taskDate")
-    .value =
-        now.toISOString()
-        .split("T")[0];
-
-
-    document
-    .getElementById("taskTime")
-    .value =
-        now.toTimeString()
-        .substring(0,5);
-
-
-    document
-    .getElementById("taskModal")
-    .classList
-    .remove("hide");
+document.getElementById("taskModal")
+.classList.remove("hide");
 
 }
 
-
-
-/* =====================================================
-   EDIT TASK
-===================================================== */
 
 function editTask(id){
 
-    const task =
-        tasks.find(
-            t =>
-                t.id===id
-        );
+const task=
+tasks.find(
+t=>t.id===id
+);
 
+if(!task)return;
 
-    if(!task)
-        return;
+document.getElementById("taskId")
+.value=task.id;
 
+document.getElementById("taskName")
+.value=task.name;
 
-    document
-    .getElementById("taskId")
-    .value =
-        task.id;
+document.getElementById("taskDate")
+.value=task.date;
 
+document.getElementById("taskTime")
+.value=task.time;
 
-    document
-    .getElementById("taskName")
-    .value =
-        task.name;
-
-
-    document
-    .getElementById("taskDate")
-    .value =
-        task.date;
-
-
-    document
-    .getElementById("taskTime")
-    .value =
-        task.time;
-
-
-    document
-    .getElementById("taskModal")
-    .classList
-    .remove("hide");
+document.getElementById("taskModal")
+.classList.remove("hide");
 
 }
 
-
-
-/* =====================================================
-   SAVE TASK
-===================================================== */
 
 function saveTask(){
 
-    const name =
-        document
-        .getElementById("taskName")
-        .value
-        .trim();
+const name=
+document
+.getElementById("taskName")
+.value.trim();
+
+if(!name){
+
+alert("Please enter a task.");
+
+return;
+
+}
+
+const taskID=
+document.getElementById("taskId")
+.value;
 
 
-    if(!name){
+if(taskID){
 
-        alert(
-            "Please enter a task."
-        );
+tasks=
+tasks.map(
+t=>{
 
-        return;
+if(t.id===taskID){
 
-    }
+return{
 
+...t,
 
-    const taskID =
-        document
-        .getElementById("taskId")
-        .value;
+name:name,
 
+date:
+document.getElementById("taskDate")
+.value,
 
-    if(taskID){
+time:
+document.getElementById("taskTime")
+.value
 
-        tasks =
-            tasks.map(
-                task => {
+};
 
-                    if(
-                        task.id===taskID
-                    ){
+}
 
-                        return {
+return t;
 
-                            ...task,
+}
+);
 
-                            name:name,
+}else{
 
-                            date:
-                                document
-                                .getElementById(
-                                    "taskDate"
-                                )
-                                .value,
+tasks.push({
 
-                            time:
-                                document
-                                .getElementById(
-                                    "taskTime"
-                                )
-                                .value
+id:makeID(),
 
-                        };
+name:name,
 
-                    }
+date:
+document.getElementById("taskDate")
+.value,
 
+time:
+document.getElementById("taskTime")
+.value,
 
-                    return task;
+done:false
 
-                }
-            );
-
-    }
-
-    else{
-
-        tasks.push({
-
-            id:
-                makeID(),
-
-            name:name,
-
-            date:
-                document
-                .getElementById(
-                    "taskDate"
-                )
-                .value,
-
-            time:
-                document
-                .getElementById(
-                    "taskTime"
-                )
-                .value,
-
-            done:false
-
-        });
-
-    }
-
-
-    saveData();
-
-    renderTasks();
-
-    closeModal(
-        "taskModal"
-    );
-
-    toast(
-        "Task saved!"
-    );
+});
 
 }
 
 
+saveData();
 
-/* =====================================================
-   TOGGLE TASK
-===================================================== */
+renderTasks();
+
+closeModal(
+"taskModal"
+);
+
+toast("Task saved!");
+
+}
+
+
+/* =========================
+   TICK TASK
+========================= */
 
 function toggleTask(id){
 
-    const task =
-        tasks.find(
-            t =>
-                t.id===id
-        );
+const task=
+tasks.find(
+t=>t.id===id
+);
 
+if(!task)return;
 
-    if(!task)
-        return;
+task.done=
+!task.done;
 
+saveData();
 
-    task.done =
-        !task.done;
-
-
-    saveData();
-
-    renderTasks();
+renderTasks();
 
 }
 
 
-
-/* =====================================================
+/* =========================
    DELETE TASK
-===================================================== */
+========================= */
 
 function deleteTask(id){
 
-    if(
-        !confirm(
-            "Delete this task?"
-        )
-    )
-        return;
+if(!confirm(
+"Delete this task?"
+))
+return;
 
+tasks=
+tasks.filter(
+t=>t.id!==id
+);
 
-    tasks =
-        tasks.filter(
-            t =>
-                t.id!==id
-        );
+saveData();
 
+renderTasks();
 
-    saveData();
-
-    renderTasks();
-
-    toast(
-        "Task deleted."
-    );
+toast("Task deleted.");
 
 }
 
 
-
-/* =====================================================
+/* =========================
    RENDER TASKS
-===================================================== */
+========================= */
 
 function renderTasks(){
 
-    const list =
-        document
-        .getElementById("tasks");
+const list=
+document.getElementById("tasks");
+
+list.innerHTML="";
 
 
-    list.innerHTML="";
+tasks.sort(
+(a,b)=>
+(a.date+a.time)
+.localeCompare(
+b.date+b.time
+)
+);
 
 
-    tasks.sort(
-        (a,b) =>
-            (a.date+a.time)
-            .localeCompare(
-                b.date+b.time
-            )
-    );
+tasks.forEach(task=>{
+
+const div=
+document.createElement("div");
+
+div.className=
+"task"+
+(task.done
+?" completed"
+:"");
 
 
-    tasks.forEach(
-        task => {
+div.innerHTML=`
 
-            const div =
-                document
-                .createElement("div");
-
-
-            div.className =
-                "task"
-                +
-                (
-                    task.done
-                    ?
-                    " completed"
-                    :
-                    ""
-                );
+<input
+type="checkbox"
+${task.done?"checked":""}
+onchange="toggleTask('${task.id}')">
 
 
-            div.innerHTML = `
+<div class="task-main">
 
-            <input
-                type="checkbox"
+<div class="task-title">
 
-                ${
-                    task.done
-                    ?
-                    "checked"
-                    :
-                    ""
-                }
+${safe(task.name)}
 
-                onchange=
-                "toggleTask('${task.id}')">
+</div>
 
+<div class="task-date">
 
-            <div class="task-main">
+${task.date}
+•
+${task.time}
 
+</div>
 
-                <div class="task-title">
-
-                    ${safe(task.name)}
-
-                </div>
+</div>
 
 
-                <div class="task-date">
+<div class="actions">
 
-                    ${task.date}
+<button
+class="btn dark"
+onclick="editTask('${task.id}')">
 
-                    •
+EDIT
 
-                    ${task.time}
-
-                </div>
-
-
-            </div>
+</button>
 
 
-            <div class="actions">
+<button
+class="btn red"
+onclick="deleteTask('${task.id}')">
+
+DELETE
+
+</button>
+
+</div>
+
+`;
 
 
-                <button
-                    class="btn dark"
-                    onclick=
-                    "editTask('${task.id}')">
+list.appendChild(div);
 
-                    EDIT
-
-                </button>
+});
 
 
-                <button
-                    class="btn red"
-                    onclick=
-                    "deleteTask('${task.id}')">
-
-                    DELETE
-
-                </button>
+document.getElementById("noTasks")
+.style.display=
+tasks.length
+?"none"
+:"block";
 
 
-            </div>
-
-            `;
-
-
-            list.appendChild(
-                div
-            );
-
-        }
-    );
-
-
-    document
-    .getElementById("noTasks")
-    .style.display =
-        tasks.length
-        ?
-        "none"
-        :
-        "block";
-
-
-    updateProgress();
+updateProgress();
 
 }
 
 
-
-/* =====================================================
-   UPDATE TODO PROGRESS
-===================================================== */
+/* =========================
+   PROGRESS
+========================= */
 
 function updateProgress(){
 
-    const total =
-        tasks.length;
+const total=
+tasks.length;
+
+const remaining=
+tasks.filter(
+task=>!task.done
+).length;
 
 
-    const remaining =
-        tasks.filter(
-            task =>
-                !task.done
-        ).length;
+let percentage=0;
 
 
-    let percentage=0;
+if(total>0){
 
-
-    if(total>0){
-
-        percentage =
-            Math.round(
-                (
-                    remaining
-                    /
-                    total
-                )
-                *
-                100
-            );
-
-    }
-
-
-    document
-    .getElementById("percent")
-    .textContent =
-        percentage+"%";
-
-
-    const bar =
-        document
-        .getElementById("bar");
-
-
-    bar.style.width =
-        percentage+"%";
-
-
-    bar.className =
-        "bar";
-
-
-    /* -----------------------------------------
-       NO TASKS
-    ----------------------------------------- */
-
-    if(total===0){
-
-        bar.classList
-        .add("green");
-
-
-        document
-        .getElementById(
-            "progressText"
-        )
-        .textContent =
-            "No tasks";
-
-        return;
-
-    }
-
-
-    /* -----------------------------------------
-       0% = GREEN
-    ----------------------------------------- */
-
-    if(percentage===0){
-
-        bar.classList
-        .add("green");
-
-
-        document
-        .getElementById(
-            "progressText"
-        )
-        .textContent =
-            "Everything completed 🟢";
-
-    }
-
-
-    /* -----------------------------------------
-       1-50% = YELLOW
-    ----------------------------------------- */
-
-    else if(
-        percentage<=50
-    ){
-
-        bar.classList
-        .add("yellow");
-
-
-        document
-        .getElementById(
-            "progressText"
-        )
-        .textContent =
-            "50% or less work remains 🟡";
-
-    }
-
-
-    /* -----------------------------------------
-       >50% = RED
-    ----------------------------------------- */
-
-    else{
-
-        bar.classList
-        .add("redbar");
-
-
-        document
-        .getElementById(
-            "progressText"
-        )
-        .textContent =
-            "More than 50% work remains 🔴";
-
-    }
+percentage=
+Math.round(
+(remaining/total)*100
+);
 
 }
 
 
+document.getElementById("percent")
+.textContent=
+percentage+"%";
 
-/* =====================================================
-   CLOSE MODAL
-===================================================== */
+
+const bar=
+document.getElementById("bar");
+
+
+bar.style.width=
+percentage+"%";
+
+
+bar.className="bar";
+
+
+if(total===0){
+
+bar.classList.add("green");
+
+document.getElementById(
+"progressText"
+).textContent=
+"No tasks";
+
+return;
+
+}
+
+
+/*
+    0%       = GREEN
+    1-50%    = YELLOW
+    >50%     = RED
+*/
+
+
+if(percentage===0){
+
+bar.classList.add("green");
+
+document.getElementById(
+"progressText"
+).textContent=
+"Everything completed 🟢";
+
+}
+
+else if(percentage<=50){
+
+bar.classList.add("yellow");
+
+document.getElementById(
+"progressText"
+).textContent=
+"50% or less work remains 🟡";
+
+}
+
+else{
+
+bar.classList.add("redbar");
+
+document.getElementById(
+"progressText"
+).textContent=
+"More than 50% work remains 🔴";
+
+}
+
+}
+
+
+/* =========================
+   CLOSE MODALS
+========================= */
 
 function closeModal(id){
 
-    document
-    .getElementById(id)
-    .classList
-    .add("hide");
+document
+.getElementById(id)
+.classList.add("hide");
 
 }
 
 
-
-/* =====================================================
+/* =========================
    INITIAL LOAD
-===================================================== */
+========================= */
 
 renderPeople();
 
