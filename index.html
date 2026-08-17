@@ -2,305 +2,1211 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BTECH 25-29</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>STUDENT`S CA</title>
 
 <style>
-    body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #0b0b0f; color: white; overflow-x: hidden; }
-    
-    /* Header Area */
-    header { text-align: center; padding: 15px 15px 5px 15px; font-size: 32px; font-weight: bold; }
-    header span { color: violet; }
-
-    /* Green Glowing Digital Clock */
-    .digital-clock {
-        text-align: center;
-        color: #00ff00;
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 22px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        text-shadow: 0 0 10px #00ff00;
-        animation: glowUpDown 2s infinite ease-in-out;
-    }
-
-    @keyframes glowUpDown {
-        0%, 100% { transform: translateY(0); text-shadow: 0 0 5px #00ff00; }
-        50% { transform: translateY(-5px); text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00; }
-    }
-
-    /* Green Glowing & Bouncing Animation for Notice */
-    .notice-green-glow {
-        color: #00ff00;
-        font-size: 13px;
-        line-height: 1.5;
-        text-align: left;
-        animation: greenGlowBounce 2s infinite ease-in-out;
-    }
-
-    @keyframes greenGlowBounce {
-        0%, 100% { transform: translateY(0); text-shadow: 0 0 5px #00ff00; }
-        50% { transform: translateY(-8px); text-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00; }
-    }
-    
-    .main-grid {
-        display: grid;
-        grid-template-columns: 1fr 1.5fr 1fr;
-        gap: 20px;
-        padding: 20px;
-        max-width: 1400px;
-        margin: auto;
-    }
-
-    /* Common Section Styling */
-    .section-card { background: #111; padding: 20px; border-radius: 12px; height: fit-content; border: 1px solid #222; }
-    h3 { color: violet; margin-top: 0; }
-
-    /* Top 4 Points Info Bar */
-    .info-bar { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 10px; }
-    .info-item { background: #111; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #222; }
-
-    /* Todo Title Glow Effect (Variable Color) */
-    .todo-title { 
-        font-size: 20px; 
-        font-weight: bold; 
-        display: block; 
-        margin-bottom: 10px;
-        transition: 0.5s;
-    }
-
-    @keyframes titleGlow {
-        from { text-shadow: 0 0 5px var(--glow-color); color: white; }
-        to { text-shadow: 0 0 15px var(--glow-color), 0 0 20px var(--glow-color); color: var(--glow-color); }
-    }
-
-    /* Notes Styling */
-    .notes-box textarea, .notes-box button { width: 100%; margin-top: 8px; padding: 8px; border-radius: 6px; border: none; box-sizing: border-box; }
-    .notes-box textarea { background: #000; color: white; border: 1px solid #333; height: 80px; resize: none; }
-    .notes-box button { background: violet; color: black; font-weight: bold; cursor: pointer; }
-    .note-item { background: #000; margin-top: 8px; padding: 8px; border-radius: 6px; font-size: 13px; border-bottom: 1px solid #222; }
-    .note-actions { margin-top: 5px; display: flex; gap: 5px; }
-    .note-actions button { padding: 2px 5px; font-size: 10px; width: auto; background: #222; color: #fff; }
-
-    /* Todo Styling */
-    .todo-box input, .todo-box button { width: 100%; margin-top: 8px; padding: 8px; border-radius: 6px; border: none; box-sizing: border-box; }
-    .todo-box input { background: #000; color: white; border: 1px solid #333; }
-    .todo-box button { background: violet; color: black; font-weight: bold; cursor: pointer; }
-    .todo-item { background: #000; margin-top: 10px; padding: 10px; border-radius: 8px; border-left: 4px solid violet; }
-    .completed { text-decoration: line-through; opacity: 0.4; }
-    
-    .progress-container { margin: 15px 0; }
-    .progress-bar { width: 100%; height: 8px; background: #222; border-radius: 10px; overflow: hidden; margin-top: 5px; }
-    .progress-fill { height: 100%; width: 0%; transition: 0.4s; }
-
-    /* Yellow Reminder */
-    .reminder-text { color: yellow; font-size: 14px; margin-top: 15px; text-align: center; display: none; font-style: italic; }
-
-    /* Chatbot Styling */
-    .bot-box input { width: 100%; padding: 10px; background: #000; border: 1px solid #333; color: white; border-radius: 6px; box-sizing: border-box; }
-    #out { margin-top: 15px; font-size: 14px; color: #aaa; line-height: 1.4; white-space: pre-wrap; }
-
-    @media (max-width: 850px) { .main-grid { grid-template-columns: 1fr; } .info-bar { grid-template-columns: 1fr 1fr; } }
+*{box-sizing:border-box}
+body{
+margin:0;background:#050505;color:white;
+font-family:Arial,sans-serif;
+}
+header{
+background:#62d5ff;color:white;
+padding:22px 5%;
+display:flex;justify-content:space-between;
+align-items:center;gap:20px;
+box-shadow:0 0 30px #62d5ff66;
+}
+h1{margin:0;font-size:clamp(28px,5vw,48px);letter-spacing:2px}
+header p{margin:5px 0 0;font-weight:bold}
+.clock{
+color:#00ff66;text-align:right;
+font-weight:bold;
+text-shadow:0 0 5px #00ff66,0 0 15px #00ff66,0 0 30px #00ff66;
+animation:glow 1.5s infinite alternate;
+}
+#time{font-size:35px}
+@keyframes glow{
+from{transform:translateY(-3px);text-shadow:0 0 5px #00ff66}
+to{transform:translateY(3px);text-shadow:0 0 10px #00ff66,0 0 30px #00ff66}
+}
+nav{
+background:#111;padding:12px 5%;
+display:flex;gap:8px;position:sticky;top:0;z-index:5;
+}
+nav button,.btn{
+border:0;border-radius:8px;padding:11px 15px;
+font-weight:bold;cursor:pointer;
+background:#222;color:white;
+}
+nav button.active,nav button:hover,.btn{
+background:#8b5cf6;color:white;
+}
+main{max-width:1200px;margin:auto;padding:30px 5%}
+section{display:none}
+section.active{display:block}
+.head{
+display:flex;justify-content:space-between;
+align-items:center;gap:15px;margin-bottom:20px;
+}
+.head h2{margin:0}
+.head p{color:#aaa}
+input,textarea{
+width:100%;padding:11px;
+background:#101010;color:white;
+border:1px solid #333;border-radius:8px;
+margin-top:6px;
+}
+.summary{
+display:grid;grid-template-columns:repeat(3,1fr);
+gap:12px;margin-bottom:20px;
+}
+.box,.card,.task,.note{
+background:#0e0e0e;border:1px solid #292929;
+border-radius:12px;padding:16px;margin-bottom:12px;
+}
+.box span{color:#999;font-size:12px}
+.box strong{display:block;font-size:25px;margin-top:7px}
+.cards,.notes{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:14px;
+}
+.card h3,.note h3{margin-top:0}
+.amounts{
+display:grid;grid-template-columns:1fr 1fr;gap:8px;
+}
+.amount{
+background:#171717;padding:10px;border-radius:8px;
+}
+.amount small{display:block;color:#888}
+.balance{
+padding:12px;margin:12px 0;border-radius:8px;font-weight:bold;
+}
+.receive{border:1px solid #00ff66;color:#00ff66;background:#00ff6610}
+.pay{border:1px solid #ff4444;color:#ff6666;background:#ff000010}
+.settle{border:1px solid #00ff66;color:#00ff66}
+.actions{display:flex;gap:7px;flex-wrap:wrap}
+.red{background:#8d2020!important}
+.empty{
+border:1px dashed #333;padding:30px;text-align:center;
+color:#777;border-radius:10px;
+}
+.note p{white-space:pre-wrap;color:#ccc}
+.note img{
+width:100%;max-height:250px;object-fit:contain;
+border-radius:8px;background:#000;
+}
+.note a{color:#62d5ff;word-break:break-all}
+.progress{
+background:#222;height:18px;border-radius:20px;
+overflow:hidden;margin:12px 0;
+}
+.bar{
+height:100%;width:0;background:#00ff66;
+box-shadow:0 0 15px #00ff66;
+transition:.4s;
+}
+.yellow{background:#ffe600!important;box-shadow:0 0 15px #ffe600!important}
+.redbar{background:#ff3030!important;box-shadow:0 0 15px #ff3030!important}
+.task{
+display:flex;align-items:center;gap:12px;
+}
+.task input[type=checkbox]{width:21px;height:21px}
+.task-main{flex:1}
+.task-title{font-weight:bold}
+.task-date{color:#999;font-size:12px;margin-top:4px}
+.modal{
+position:fixed;inset:0;background:#000c;
+display:flex;align-items:center;justify-content:center;
+padding:20px;z-index:20;
+}
+.modal.hide{display:none}
+.modalbox{
+background:#111;border:1px solid #444;
+border-radius:14px;padding:22px;
+width:min(500px,100%);
+max-height:90vh;overflow:auto;
+position:relative;
+}
+.close{
+position:absolute;right:12px;top:8px;
+font-size:28px;background:none;border:0;color:white;
+cursor:pointer;
+}
+.modalbox label{
+display:block;color:#bbb;font-weight:bold;margin:12px 0;
+}
+.modalbox h2{margin-top:0}
+.modalbuttons{
+display:flex;justify-content:flex-end;gap:8px;margin-top:18px;
+}
+.toast{
+position:fixed;right:20px;bottom:20px;
+background:#181818;border:1px solid #555;
+padding:13px 17px;border-radius:8px;
+opacity:0;transition:.3s;z-index:50;
+}
+.toast.show{opacity:1}
+@media(max-width:650px){
+header{flex-direction:column;align-items:flex-start}
+.clock{text-align:left}
+.summary{grid-template-columns:1fr}
+.head{flex-direction:column;align-items:flex-start}
+nav{overflow:auto}
+}
 </style>
 </head>
+
 <body>
 
-<header>BTECH <span>25 29</span></header>
-<div class="digital-clock" id="mainClock">Loading...</div>
-
-<div class="container">
-    <div class="main-grid">
-        
-        <div class="info-bar">
-            <div class="info-item">
-                <h3>Notice</h3>
-                <div class="notice-green-glow">
-                    <b>CA2 Submission Schedule</b><br>
-                    Mathematics CA2: 21/04/2026<br>
-                    English CA2: 23/04/2026<br>
-                    PPS CA2: 23/04/2026<br><br>
-                    <small>Note: All students must ensure timely submission of their CA2 work as per the above schedule.</small>
-                </div>
-            </div>
-            <div class="info-item"><h3>Books</h3><p>NO UPDATE</p></div>
-            <div class="info-item"><h3>Practical</h3><p>NO UPDATE</p></div>
-            <div class="info-item">
-                <h3>Important</h3>
-                <a href="https://youtube.com/playlist?list=PLn3Wz38keZOfqVnFaM5bhlGVj8pnKntfW&si=TkjuvCdfZabbt4WY" target="_blank" style="color:violet; font-size: 13px;">Math 2nd Sem Playlist</a>
-            </div>
-        </div>
-
-        <div class="section-card notes-box">
-            <h3>Notes</h3>
-            <textarea id="noteText" placeholder="Write a note..."></textarea>
-            <button onclick="addNote()">Save</button>
-            <div id="noteList"></div>
-        </div>
-
-        <div class="section-card todo-box">
-            <span id="todoTitle" class="todo-title">Todo List</span>
-            
-            <input id="task" placeholder="Enter Task">
-            <input type="datetime-local" id="date">
-            <button onclick="addTask()">Add Task</button>
-
-            <div class="progress-container">
-                <div id="progress" style="font-size: 12px; color: #888;">0/0 done</div>
-                <div class="progress-bar"><div id="bar" class="progress-fill"></div></div>
-            </div>
-
-            <div id="list"></div>
-            
-            <div id="reminder" class="reminder-text">Stay focused, you're closer than you think ✨</div>
-        </div>
-
-        <div class="section-card bot-box">
-            <h3>Assistant 🤖</h3>
-            <input id="chat" placeholder="Ask me something..." onkeydown="chatbot(event)">
-            <div id="out"></div>
-        </div>
-
-    </div>
+<header>
+<div>
+<h1>STUDENT`S CA</h1>
+<p>Accounts • Notes • Tasks</p>
 </div>
 
-<script>
-// MAIN INDIA CLOCK
-function updateClock() {
-    const options = { 
-        timeZone: "Asia/Kolkata", 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        second: '2-digit',
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric'
-    };
-    document.getElementById("mainClock").innerText = new Date().toLocaleString("en-IN", options);
-}
-setInterval(updateClock, 1000);
-updateClock();
+<div class="clock">
+<div id="time">00:00:00</div>
+<div id="date">00/00/0000</div>
+</div>
+</header>
 
-// NOTES LOGIC
-let notes = JSON.parse(localStorage.getItem("notes")) || [];
-function saveNotes() { localStorage.setItem("notes", JSON.stringify(notes)); }
-function addNote() {
-    let t = document.getElementById("noteText").value;
-    if(!t) return;
-    notes.push({t});
-    saveNotes(); renderNotes();
-    document.getElementById("noteText").value = "";
+<nav>
+<button class="tab active" onclick="showTab('accounts',this)">ACCOUNTS</button>
+<button class="tab" onclick="showTab('notes',this)">NOTEPAD</button>
+<button class="tab" onclick="showTab('todo',this)">TO-DO LIST</button>
+</nav>
+
+<main>
+
+<!-- ACCOUNTS -->
+
+<section id="accounts" class="active">
+
+<div class="head">
+<div>
+<h2>Student Accounts</h2>
+<p>Add as many names as your browser storage allows.</p>
+</div>
+<button class="btn" onclick="addPerson()">+ ADD NAME</button>
+</div>
+
+<div class="summary">
+
+<div class="box">
+<span>PEOPLE</span>
+<strong id="peopleCount">0</strong>
+</div>
+
+<div class="box">
+<span>YOU RECEIVE</span>
+<strong id="receive">₹0</strong>
+</div>
+
+<div class="box">
+<span>YOU PAY</span>
+<strong id="pay">₹0</strong>
+</div>
+
+</div>
+
+<input id="search" placeholder="Search name..." oninput="renderPeople()">
+
+<br><br>
+
+<div id="people" class="cards"></div>
+
+<div id="noPeople" class="empty">
+No names added yet.
+</div>
+
+</section>
+
+
+<!-- NOTES -->
+
+<section id="notes">
+
+<div class="head">
+<div>
+<h2>Notepad</h2>
+<p>Save notes, links and pictures.</p>
+</div>
+
+<button class="btn" onclick="addNote()">+ ADD NOTE</button>
+</div>
+
+<div id="notesList" class="notes"></div>
+
+<div id="noNotes" class="empty">
+No notes saved yet.
+</div>
+
+</section>
+
+
+<!-- TODO -->
+
+<section id="todo">
+
+<div class="head">
+<div>
+<h2>To-Do List</h2>
+<p>Complete your work and confirm before deleting it.</p>
+</div>
+
+<button class="btn" onclick="addTask()">+ ADD TASK</button>
+</div>
+
+<div class="box">
+
+<div style="display:flex;justify-content:space-between">
+<b>REMAINING WORK</b>
+<b id="percent">0%</b>
+</div>
+
+<div class="progress">
+<div id="bar" class="bar"></div>
+</div>
+
+<span id="progressText" style="color:#aaa">
+No tasks
+</span>
+
+</div>
+
+<div id="tasks"></div>
+
+<div id="noTasks" class="empty">
+No tasks added yet.
+</div>
+
+</section>
+
+</main>
+
+
+<!-- PERSON MODAL -->
+
+<div id="personModal" class="modal hide">
+
+<div class="modalbox">
+
+<button class="close" onclick="closeModal('personModal')">×</button>
+
+<h2 id="personTitle">Add Student</h2>
+
+<input type="hidden" id="personId">
+
+<label>
+Name
+<input id="personName" placeholder="Student name">
+</label>
+
+<label>
+Given Amount ₹
+<input id="given" type="number" min="0" value="0">
+</label>
+
+<label>
+Taken Amount ₹
+<input id="taken" type="number" min="0" value="0">
+</label>
+
+<div class="modalbuttons">
+<button class="btn" onclick="savePerson()">SAVE</button>
+</div>
+
+</div>
+</div>
+
+
+<!-- NOTE MODAL -->
+
+<div id="noteModal" class="modal hide">
+
+<div class="modalbox">
+
+<button class="close" onclick="closeModal('noteModal')">×</button>
+
+<h2 id="noteTitle">Add Note</h2>
+
+<input type="hidden" id="noteId">
+
+<label>
+Title
+<input id="nTitle" placeholder="Note title">
+</label>
+
+<label>
+Note
+<textarea id="nText" rows="7" placeholder="Write your note..."></textarea>
+</label>
+
+<label>
+Link
+<input id="nLink" placeholder="https://example.com">
+</label>
+
+<label>
+Picture
+<input id="nImage" type="file" accept="image/*">
+</label>
+
+<div id="preview"></div>
+
+<div class="modalbuttons">
+<button class="btn" onclick="saveNote()">SAVE</button>
+</div>
+
+</div>
+</div>
+
+
+<!-- TASK MODAL -->
+
+<div id="taskModal" class="modal hide">
+
+<div class="modalbox">
+
+<button class="close" onclick="closeModal('taskModal')">×</button>
+
+<h2>Add Task</h2>
+
+<input type="hidden" id="taskId">
+
+<label>
+Task
+<input id="taskName" placeholder="What do you have to do?">
+</label>
+
+<label>
+Date
+<input id="taskDate" type="date">
+</label>
+
+<label>
+Time
+<input id="taskTime" type="time">
+</label>
+
+<div class="modalbuttons">
+<button class="btn" onclick="saveTask()">SAVE</button>
+</div>
+
+</div>
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+/* =========================
+   DATA STORAGE
+========================= */
+
+let people=JSON.parse(localStorage.getItem("people")||"[]");
+let notes=JSON.parse(localStorage.getItem("notes")||"[]");
+let tasks=JSON.parse(localStorage.getItem("tasks")||"[]");
+
+function saveData(){
+
+localStorage.setItem("people",JSON.stringify(people));
+localStorage.setItem("notes",JSON.stringify(notes));
+localStorage.setItem("tasks",JSON.stringify(tasks));
+
 }
-function delNote(i) { notes.splice(i,1); saveNotes(); renderNotes(); }
-function editNote(i) {
-    document.getElementById("noteText").value = notes[i].t;
-    delNote(i);
+
+
+/* =========================
+   CLOCK
+========================= */
+
+function updateClock(){
+
+let d=new Date();
+
+document.getElementById("time").textContent=
+d.toLocaleTimeString("en-GB");
+
+document.getElementById("date").textContent=
+d.toLocaleDateString("en-GB",{
+weekday:"long",
+day:"2-digit",
+month:"long",
+year:"numeric"
+});
+
 }
-function renderNotes() {
-    let box = document.getElementById("noteList");
-    box.innerHTML = "";
-    notes.forEach((n, i) => {
-        let div = document.createElement("div");
-        div.className = "note-item";
-        div.innerHTML = `<div>• ${n.t}</div>
-        <div class="note-actions">
-            <button onclick='editNote(${i})'>Edit</button>
-            <button onclick='delNote(${i})'>Delete</button>
-        </div>`;
-        box.appendChild(div);
-    });
+
+updateClock();
+setInterval(updateClock,1000);
+
+
+/* =========================
+   TABS
+========================= */
+
+function showTab(id,button){
+
+document.querySelectorAll("section")
+.forEach(x=>x.classList.remove("active"));
+
+document.getElementById(id)
+.classList.add("active");
+
+document.querySelectorAll(".tab")
+.forEach(x=>x.classList.remove("active"));
+
+button.classList.add("active");
+
 }
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function id(){
+
+return Date.now().toString(36)+
+Math.random().toString(36).substring(2);
+
+}
+
+function money(n){
+
+return "₹"+Number(n||0).toLocaleString("en-IN",{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+});
+
+}
+
+function escapeText(text){
+
+return String(text||"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+function toast(text){
+
+let t=document.getElementById("toast");
+
+t.textContent=text;
+t.classList.add("show");
+
+setTimeout(()=>{
+t.classList.remove("show");
+},2200);
+
+}
+
+
+/* =========================
+   PEOPLE
+========================= */
+
+function addPerson(){
+
+document.getElementById("personId").value="";
+document.getElementById("personName").value="";
+document.getElementById("given").value=0;
+document.getElementById("taken").value=0;
+
+document.getElementById("personTitle").textContent=
+"Add Student";
+
+document.getElementById("personModal")
+.classList.remove("hide");
+
+}
+
+function closeModal(id){
+
+document.getElementById(id).classList.add("hide");
+
+}
+
+function savePerson(){
+
+let name=document.getElementById("personName")
+.value.trim();
+
+if(!name){
+
+alert("Please enter a name.");
+return;
+
+}
+
+let personId=document.getElementById("personId").value;
+
+let data={
+id:personId||id(),
+name:name,
+given:Number(document.getElementById("given").value)||0,
+taken:Number(document.getElementById("taken").value)||0
+};
+
+if(personId){
+
+people=people.map(p=>
+p.id===personId?data:p
+);
+
+}else{
+
+people.push(data);
+
+}
+
+saveData();
+renderPeople();
+closeModal("personModal");
+
+toast("Account saved!");
+
+}
+
+
+function renderPeople(){
+
+let search=document.getElementById("search")
+.value.toLowerCase();
+
+let list=document.getElementById("people");
+
+let filtered=people.filter(p=>
+p.name.toLowerCase().includes(search)
+);
+
+list.innerHTML="";
+
+let receive=0;
+let pay=0;
+
+people.forEach(p=>{
+
+let balance=p.given-p.taken;
+
+if(balance>0) receive+=balance;
+if(balance<0) pay+=Math.abs(balance);
+
+});
+
+document.getElementById("peopleCount")
+.textContent=people.length;
+
+document.getElementById("receive")
+.textContent=money(receive);
+
+document.getElementById("pay")
+.textContent=money(pay);
+
+filtered.forEach(p=>{
+
+let balance=p.given-p.taken;
+
+let status="";
+
+if(balance>0){
+
+status=
+`<div class="balance receive">
+They have to pay you ${money(balance)}
+</div>`;
+
+}else if(balance<0){
+
+status=
+`<div class="balance pay">
+You have to pay them ${money(Math.abs(balance))}
+</div>`;
+
+}else{
+
+status=
+`<div class="balance settle">
+Account settled
+</div>`;
+
+}
+
+let card=document.createElement("div");
+
+card.className="card";
+
+card.innerHTML=`
+
+<h3>${escapeText(p.name)}</h3>
+
+<div class="amounts">
+
+<div class="amount">
+<small>GIVEN</small>
+<b>${money(p.given)}</b>
+</div>
+
+<div class="amount">
+<small>TAKEN</small>
+<b>${money(p.taken)}</b>
+</div>
+
+</div>
+
+${status}
+
+<div class="actions">
+
+<button class="btn"
+onclick="sharePerson('${p.id}')">
+↗ SHARE
+</button>
+
+<button class="btn"
+onclick="editPerson('${p.id}')">
+EDIT
+</button>
+
+<button class="btn red"
+onclick="deletePerson('${p.id}')">
+DELETE
+</button>
+
+</div>
+
+`;
+
+list.appendChild(card);
+
+});
+
+document.getElementById("noPeople")
+.style.display=filtered.length?"none":"block";
+
+}
+
+
+function editPerson(personId){
+
+let p=people.find(x=>x.id===personId);
+
+if(!p)return;
+
+document.getElementById("personId").value=p.id;
+document.getElementById("personName").value=p.name;
+document.getElementById("given").value=p.given;
+document.getElementById("taken").value=p.taken;
+
+document.getElementById("personTitle")
+.textContent="Edit Student";
+
+document.getElementById("personModal")
+.classList.remove("hide");
+
+}
+
+
+function deletePerson(personId){
+
+if(!confirm("Delete this student's account?"))
+return;
+
+people=people.filter(p=>p.id!==personId);
+
+saveData();
+renderPeople();
+
+toast("Student deleted.");
+
+}
+
+
+async function sharePerson(personId){
+
+let p=people.find(x=>x.id===personId);
+
+let balance=p.given-p.taken;
+
+let message="";
+
+if(balance>0){
+
+message=
+`Hi ${p.name}, just a gentle reminder that you currently have ${money(balance)} to pay me. Please pay whenever convenient. Thank you!`;
+
+}else if(balance<0){
+
+message=
+`Hi ${p.name}, just a gentle reminder that I currently owe you ${money(Math.abs(balance))}. I’ll make the payment whenever convenient. Thank you!`;
+
+}else{
+
+message=
+`Hi ${p.name}, just a quick update that our account is fully settled. Thank you!`;
+
+}
+
+try{
+
+await navigator.clipboard.writeText(message);
+
+toast("Message copied!");
+
+}catch{
+
+prompt("Copy this message:",message);
+
+}
+
+}
+
+
+/* =========================
+   NOTES
+========================= */
+
+function addNote(){
+
+document.getElementById("noteId").value="";
+document.getElementById("nTitle").value="";
+document.getElementById("nText").value="";
+document.getElementById("nLink").value="";
+document.getElementById("nImage").value="";
+document.getElementById("preview").innerHTML="";
+
+document.getElementById("noteTitle")
+.textContent="Add Note";
+
+document.getElementById("noteModal")
+.classList.remove("hide");
+
+}
+
+
+function saveNote(){
+
+let title=document.getElementById("nTitle")
+.value.trim();
+
+if(!title){
+
+alert("Please enter a title.");
+return;
+
+}
+
+let noteId=document.getElementById("noteId").value;
+
+let old=notes.find(n=>n.id===noteId);
+
+let file=document.getElementById("nImage")
+.files[0];
+
+function finish(image){
+
+let note={
+
+id:noteId||id(),
+
+title:title,
+
+text:document.getElementById("nText").value,
+
+link:document.getElementById("nLink").value,
+
+image:image||old?.image||""
+
+};
+
+if(noteId){
+
+notes=notes.map(n=>
+n.id===noteId?note:n
+);
+
+}else{
+
+notes.push(note);
+
+}
+
+saveData();
+renderNotes();
+closeModal("noteModal");
+
+toast("Note saved!");
+
+}
+
+if(file){
+
+let reader=new FileReader();
+
+reader.onload=()=>{
+finish(reader.result);
+};
+
+reader.readAsDataURL(file);
+
+}else{
+
+finish("");
+
+}
+
+}
+
+
+function renderNotes(){
+
+let list=document.getElementById("notesList");
+
+list.innerHTML="";
+
+notes.forEach(n=>{
+
+let card=document.createElement("div");
+
+card.className="note";
+
+let image=n.image?
+`<img src="${n.image}">`:"";
+
+let link=n.link?
+`<p><a href="${escapeText(n.link)}" target="_blank">
+${escapeText(n.link)}
+</a></p>`:"";
+
+card.innerHTML=`
+
+<h3>${escapeText(n.title)}</h3>
+
+${n.text?
+`<p>${escapeText(n.text)}</p>`:""}
+
+${link}
+
+${image}
+
+<br>
+
+<div class="actions">
+
+<button class="btn"
+onclick="editNote('${n.id}')">
+EDIT
+</button>
+
+<button class="btn red"
+onclick="deleteNote('${n.id}')">
+DELETE
+</button>
+
+</div>
+
+`;
+
+list.appendChild(card);
+
+});
+
+document.getElementById("noNotes")
+.style.display=notes.length?"none":"block";
+
+}
+
+
+function editNote(noteId){
+
+let n=notes.find(x=>x.id===noteId);
+
+if(!n)return;
+
+document.getElementById("noteId").value=n.id;
+document.getElementById("nTitle").value=n.title;
+document.getElementById("nText").value=n.text;
+document.getElementById("nLink").value=n.link;
+document.getElementById("nImage").value="";
+
+document.getElementById("preview").innerHTML=
+n.image?`<img src="${n.image}" style="width:100%">`:"";
+
+document.getElementById("noteTitle")
+.textContent="Edit Note";
+
+document.getElementById("noteModal")
+.classList.remove("hide");
+
+}
+
+
+function deleteNote(noteId){
+
+if(!confirm("Delete this note?"))
+return;
+
+notes=notes.filter(n=>n.id!==noteId);
+
+saveData();
 renderNotes();
 
-// TODO LOGIC (DYNAMIC COLORS)
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-function save() { localStorage.setItem("tasks", JSON.stringify(tasks)); }
+toast("Note deleted.");
 
-function addTask() {
-    let t = document.getElementById("task").value;
-    let d = document.getElementById("date").value;
-    if(!t || !d) return;
-    tasks.push({t, d, done: false});
-    save(); render();
-    document.getElementById("task").value = "";
 }
 
-function toggle(i) { tasks[i].done = !tasks[i].done; save(); render(); }
-function del(i) { tasks.splice(i, 1); save(); render(); }
 
-function render() {
-    let list = document.getElementById("list");
-    list.innerHTML = "";
-    let done = tasks.filter(x => x.done).length;
-    let total = tasks.length;
-    let pending = total - done;
-    let percentDone = total ? Math.round((done / total) * 100) : 0;
-    
-    let workRemainingPercent = total ? (pending / total) * 100 : 0;
-    let statusColor = "cyan";
+/* =========================
+   TODO
+========================= */
 
-    if (total > 0) {
-        if (workRemainingPercent > 66) statusColor = "red";
-        else if (workRemainingPercent > 33) statusColor = "orange";
-        else if (workRemainingPercent > 0) statusColor = "lime";
-        else statusColor = "cyan"; 
-    }
+function addTask(){
 
-    let title = document.getElementById("todoTitle");
-    title.style.setProperty('--glow-color', statusColor);
-    title.style.animation = "titleGlow 1.5s infinite alternate";
-    
-    document.getElementById("bar").style.backgroundColor = statusColor;
-    document.getElementById("bar").style.width = percentDone + "%";
-    document.getElementById("progress").innerText = `${done}/${total} completed (${percentDone}%)`;
+let d=new Date();
 
-    let showReminder = false;
-    tasks.forEach((x, i) => {
-        let div = document.createElement("div");
-        let dl = new Date(x.d);
-        if((dl - new Date()) / 86400000 <= 3 && !x.done) showReminder = true;
+document.getElementById("taskId").value="";
+document.getElementById("taskName").value="";
 
-        div.className = "todo-item";
-        div.style.borderLeftColor = statusColor;
-        div.innerHTML = `
-            <div style="display:flex; align-items:center; justify-content:space-between;">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <input type='checkbox' ${x.done ? "checked" : ""} onclick='toggle(${i})' style="width:auto; margin:0;">
-                    <span class='${x.done ? "completed" : ""}'>${x.t}</span>
-                </div>
-                <button onclick='del(${i})' style="width:25px; margin:0; padding:2px; background:#333; color:white; font-size:10px;">✕</button>
-            </div>
-            <div style="font-size:11px; color:#666; margin-top:5px;">📅 ${dl.toLocaleString()}</div>`;
-        list.appendChild(div);
-    });
+document.getElementById("taskDate").value=
+d.toISOString().split("T")[0];
 
-    document.getElementById("reminder").style.display = showReminder ? "block" : "none";
+document.getElementById("taskTime").value=
+d.toTimeString().substring(0,5);
+
+document.getElementById("taskModal")
+.classList.remove("hide");
+
 }
-render();
 
-// CHATBOT
-let ask = false;
-function chatbot(e) {
-    if(e.key === 'Enter') {
-        let msg = e.target.value.toLowerCase().trim();
-        let out = document.getElementById("out");
-        if(msg.includes("hi") || msg.includes("hello")) {
-            out.innerText = "Hello! Need help with your schedule?";
-        } else if(msg.includes("task")) {
-            out.innerText = "View pending tasks?";
-            ask = true;
-        } else if(ask && msg.includes("yes")) {
-            let p = tasks.filter(x => !x.done).map(x => "• " + x.t).join("\n");
-            out.innerText = p || "All clear!";
-            ask = false;
-        } else {
-            out.innerText = "Redirecting to search...";
-            setTimeout(() => {
-                window.open("https://www.google.com/search?q=" + encodeURIComponent(msg));
-            }, 800);
-        }
-        e.target.value = "";
-    }
+
+function saveTask(){
+
+let name=document.getElementById("taskName")
+.value.trim();
+
+if(!name){
+
+alert("Enter a task.");
+return;
+
 }
+
+let taskId=document.getElementById("taskId").value;
+
+let old=tasks.find(t=>t.id===taskId);
+
+let task={
+
+id:taskId||id(),
+
+name:name,
+
+date:document.getElementById("taskDate").value,
+
+time:document.getElementById("taskTime").value,
+
+done:old?.done||false
+
+};
+
+if(taskId){
+
+tasks=tasks.map(t=>
+t.id===taskId?task:t
+);
+
+}else{
+
+tasks.push(task);
+
+}
+
+saveData();
+renderTasks();
+closeModal("taskModal");
+
+toast("Task saved!");
+
+}
+
+
+function renderTasks(){
+
+let list=document.getElementById("tasks");
+
+list.innerHTML="";
+
+tasks.sort((a,b)=>
+(a.date+a.time).localeCompare(b.date+b.time)
+);
+
+tasks.forEach(t=>{
+
+let div=document.createElement("div");
+
+div.className="task";
+
+div.innerHTML=`
+
+<input type="checkbox"
+onclick="completeTask('${t.id}')">
+
+<div class="task-main">
+
+<div class="task-title">
+${escapeText(t.name)}
+</div>
+
+<div class="task-date">
+${t.date} • ${t.time}
+</div>
+
+</div>
+
+<button class="btn"
+onclick="editTask('${t.id}')">
+EDIT
+</button>
+
+<button class="btn red"
+onclick="deleteTask('${t.id}')">
+DELETE
+</button>
+
+`;
+
+list.appendChild(div);
+
+});
+
+updateProgress();
+
+document.getElementById("noTasks")
+.style.display=tasks.length?"none":"block";
+
+}
+
+
+function completeTask(taskId){
+
+let t=tasks.find(x=>x.id===taskId);
+
+if(!t)return;
+
+if(confirm(
+`Confirm that "${t.name}" is completed?\n\nAfter confirmation it will be deleted automatically.`
+)){
+
+tasks=tasks.filter(x=>x.id!==taskId);
+
+saveData();
+renderTasks();
+
+toast("Task completed and deleted!");
+
+}else{
+
+renderTasks();
+
+}
+
+}
+
+
+function editTask(taskId){
+
+let t=tasks.find(x=>x.id===taskId);
+
+if(!t)return;
+
+document.getElementById("taskId").value=t.id;
+document.getElementById("taskName").value=t.name;
+document.getElementById("taskDate").value=t.date;
+document.getElementById("taskTime").value=t.time;
+
+document.getElementById("taskModal")
+.classList.remove("hide");
+
+}
+
+
+function deleteTask(taskId){
+
+if(!confirm("Delete this task?"))
+return;
+
+tasks=tasks.filter(t=>t.id!==taskId);
+
+saveData();
+renderTasks();
+
+toast("Task deleted.");
+
+}
+
+
+function updateProgress(){
+
+let remaining=tasks.filter(t=>!t.done).length;
+
+let total=tasks.length;
+
+let percentage=total?
+Math.round((remaining/total)*100):0;
+
+document.getElementById("percent")
+.textContent=percentage+"%";
+
+let bar=document.getElementById("bar");
+
+bar.style.width=percentage+"%";
+
+bar.className="bar";
+
+if(percentage===0){
+
+bar.style.background="#00ff66";
+
+document.getElementById("progressText")
+.textContent="Everything completed 🟢";
+
+}else if(percentage<=50){
+
+bar.classList.add("yellow");
+
+document.getElementById("progressText")
+.textContent="50% or less work remains 🟡";
+
+}else{
+
+bar.classList.add("redbar");
+
+document.getElementById("progressText")
+.textContent="More than 50% work remains 🔴";
+
+}
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+renderPeople();
+renderNotes();
+renderTasks();
+
 </script>
+
 </body>
 </html>
