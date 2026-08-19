@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -8,9 +9,9 @@
 
 <style>
 
-/* =========================
+/* =====================================================
    BASIC
-========================= */
+===================================================== */
 
 *{
     box-sizing:border-box;
@@ -28,9 +29,9 @@ body{
 }
 
 
-/* =========================
+/* =====================================================
    HEADER
-========================= */
+===================================================== */
 
 header{
     background:#62d5ff;
@@ -62,14 +63,13 @@ h1{
 
 header p{
     margin:6px 0 0;
-
     font-weight:bold;
 }
 
 
-/* =========================
-   BROWN / GOLDEN CLOCK
-========================= */
+/* =====================================================
+   BROWN / GOLD CLOCK
+===================================================== */
 
 .clock{
     text-align:right;
@@ -91,12 +91,8 @@ header p{
 
 #date{
     font-size:16px;
-
     margin-top:5px;
 }
-
-
-/* BROWN NEON GLOW */
 
 @keyframes brownGlow{
 
@@ -129,9 +125,9 @@ header p{
 }
 
 
-/* =========================
+/* =====================================================
    NAVIGATION
-========================= */
+===================================================== */
 
 nav{
     background:#0d0d0d;
@@ -170,20 +166,17 @@ nav button{
 nav button:hover,
 nav button.active{
     background:#8b5cf6;
-
     border-color:#a78bfa;
 }
 
 
-/* =========================
+/* =====================================================
    MAIN
-========================= */
+===================================================== */
 
 main{
     max-width:1200px;
-
     margin:auto;
-
     padding:30px 5%;
 }
 
@@ -196,9 +189,9 @@ section.active{
 }
 
 
-/* =========================
+/* =====================================================
    HEADINGS
-========================= */
+===================================================== */
 
 .head{
     display:flex;
@@ -218,21 +211,20 @@ section.active{
 
 .head p{
     color:#aaa;
-
     margin:6px 0 0;
 }
 
 
-/* =========================
+/* =====================================================
    BUTTONS
-========================= */
+===================================================== */
 
 .btn{
     border:0;
 
     border-radius:8px;
 
-    padding:11px 15px;
+    padding:10px 14px;
 
     font-weight:bold;
 
@@ -241,10 +233,13 @@ section.active{
     background:#8b5cf6;
 
     color:white;
+
+    transition:.2s;
 }
 
 .btn:hover{
     background:#a78bfa;
+    transform:translateY(-1px);
 }
 
 .btn.red{
@@ -257,14 +252,29 @@ section.active{
 
 .btn.dark{
     background:#222;
-
     border:1px solid #444;
 }
 
+.btn.green{
+    background:#087f3d;
+}
 
-/* =========================
+.btn.green:hover{
+    background:#00a94f;
+}
+
+.btn.orange{
+    background:#8f541f;
+}
+
+.btn.orange:hover{
+    background:#b66b27;
+}
+
+
+/* =====================================================
    SUMMARY
-========================= */
+===================================================== */
 
 .summary{
     display:grid;
@@ -289,7 +299,6 @@ section.active{
 
 .box span{
     color:#888;
-
     font-size:12px;
 }
 
@@ -302,9 +311,9 @@ section.active{
 }
 
 
-/* =========================
+/* =====================================================
    INPUT
-========================= */
+===================================================== */
 
 input,
 textarea{
@@ -337,9 +346,9 @@ textarea:focus{
 }
 
 
-/* =========================
+/* =====================================================
    CARDS
-========================= */
+===================================================== */
 
 .cards,
 .notes{
@@ -373,14 +382,13 @@ textarea:focus{
 
 .card h3,
 .note h3{
-
     margin-top:0;
 }
 
 
-/* =========================
-   ACCOUNT AMOUNTS
-========================= */
+/* =====================================================
+   MONEY AREA
+===================================================== */
 
 .amounts{
 
@@ -389,16 +397,20 @@ textarea:focus{
     grid-template-columns:
         1fr 1fr;
 
-    gap:8px;
+    gap:10px;
+
+    margin-top:12px;
 }
 
 .amount{
 
     background:#171717;
 
-    padding:10px;
+    padding:12px;
 
-    border-radius:8px;
+    border-radius:10px;
+
+    border:1px solid #282828;
 }
 
 .amount small{
@@ -406,12 +418,97 @@ textarea:focus{
     display:block;
 
     color:#888;
+
+    font-size:11px;
+
+    margin-bottom:5px;
+}
+
+.amount b{
+
+    display:block;
+
+    font-size:20px;
+
+    margin-bottom:10px;
 }
 
 
-/* =========================
+/* =====================================================
+   MONEY ACTIONS
+===================================================== */
+
+.money-actions{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:6px;
+}
+
+.money-btn{
+
+    border:0;
+
+    padding:8px 5px;
+
+    border-radius:7px;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+
+/* ADD = GREEN */
+
+.add-money{
+
+    background:#064d2c;
+
+    color:#00ff66;
+
+    border:1px solid #00ff66;
+}
+
+.add-money:hover{
+
+    background:#08753e;
+
+    box-shadow:
+        0 0 10px rgba(0,255,102,.3);
+}
+
+
+/* SUBTRACT = RED */
+
+.subtract-money{
+
+    background:#4c1111;
+
+    color:#ff5555;
+
+    border:1px solid #ff4444;
+}
+
+.subtract-money:hover{
+
+    background:#721717;
+
+    box-shadow:
+        0 0 10px rgba(255,60,60,.3);
+}
+
+
+/* =====================================================
    BALANCE
-========================= */
+===================================================== */
 
 .balance{
 
@@ -452,9 +549,68 @@ textarea:focus{
 }
 
 
-/* =========================
+/* =====================================================
+   TRANSACTION HISTORY
+===================================================== */
+
+.history{
+
+    margin-top:14px;
+
+    border-top:1px solid #292929;
+
+    padding-top:12px;
+}
+
+.history-title{
+
+    color:#888;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+}
+
+.transaction{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 0;
+
+    border-bottom:1px solid #202020;
+
+    font-size:12px;
+}
+
+.transaction:last-child{
+    border-bottom:0;
+}
+
+.transaction-add{
+    color:#00ff66;
+}
+
+.transaction-sub{
+    color:#ff5555;
+}
+
+.transaction-date{
+    color:#666;
+    font-size:10px;
+}
+
+
+/* =====================================================
    ACTIONS
-========================= */
+===================================================== */
 
 .actions{
 
@@ -463,12 +619,14 @@ textarea:focus{
     gap:7px;
 
     flex-wrap:wrap;
+
+    margin-top:12px;
 }
 
 
-/* =========================
+/* =====================================================
    EMPTY
-========================= */
+===================================================== */
 
 .empty{
 
@@ -486,9 +644,9 @@ textarea:focus{
 }
 
 
-/* =========================
+/* =====================================================
    NOTES
-========================= */
+===================================================== */
 
 .note p{
 
@@ -518,9 +676,9 @@ textarea:focus{
 }
 
 
-/* =========================
+/* =====================================================
    TODO PROGRESS
-========================= */
+===================================================== */
 
 .progress-box{
 
@@ -570,9 +728,6 @@ textarea:focus{
     border-radius:20px;
 }
 
-
-/* GREEN = 0% */
-
 .bar.green{
 
     background:#00ff55;
@@ -583,9 +738,6 @@ textarea:focus{
         0 0 35px #00ff55;
 }
 
-
-/* YELLOW = 1-50% */
-
 .bar.yellow{
 
     background:#ffe600;
@@ -595,9 +747,6 @@ textarea:focus{
         0 0 20px #ffe600,
         0 0 35px #ffe600;
 }
-
-
-/* RED = >50% */
 
 .bar.redbar{
 
@@ -610,9 +759,9 @@ textarea:focus{
 }
 
 
-/* =========================
+/* =====================================================
    TODO
-========================= */
+===================================================== */
 
 .task{
 
@@ -637,7 +786,6 @@ textarea:focus{
 }
 
 .task-main{
-
     flex:1;
 }
 
@@ -648,13 +796,9 @@ textarea:focus{
     transition:.25s;
 }
 
-
-/* COMPLETED TASK */
-
 .task.completed .task-title{
 
-    text-decoration:
-        line-through;
+    text-decoration:line-through;
 
     text-decoration-thickness:2px;
 
@@ -678,9 +822,9 @@ textarea:focus{
 }
 
 
-/* =========================
+/* =====================================================
    MODAL
-========================= */
+===================================================== */
 
 .modal{
 
@@ -702,7 +846,6 @@ textarea:focus{
 }
 
 .modal.hide{
-
     display:none;
 }
 
@@ -726,7 +869,6 @@ textarea:focus{
 }
 
 .modalbox h2{
-
     margin-top:0;
 }
 
@@ -772,9 +914,9 @@ textarea:focus{
 }
 
 
-/* =========================
+/* =====================================================
    TOAST
-========================= */
+===================================================== */
 
 .toast{
 
@@ -809,9 +951,9 @@ textarea:focus{
 }
 
 
-/* =========================
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media(max-width:650px){
 
@@ -823,12 +965,10 @@ textarea:focus{
     }
 
     .clock{
-
         text-align:left;
     }
 
     .summary{
-
         grid-template-columns:1fr;
     }
 
@@ -840,8 +980,11 @@ textarea:focus{
     }
 
     nav{
-
         overflow:auto;
+    }
+
+    .amounts{
+        grid-template-columns:1fr;
     }
 
     .task{
@@ -861,15 +1004,16 @@ textarea:focus{
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
      HEADER
-========================= -->
+===================================================== -->
 
 <header>
 
@@ -899,9 +1043,9 @@ Accounts • Notes • Tasks
 </header>
 
 
-<!-- =========================
-     NAV
-========================= -->
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
 
 <nav>
 
@@ -929,9 +1073,9 @@ TO-DO LIST
 <main>
 
 
-<!-- =========================
+<!-- =====================================================
      ACCOUNTS
-========================= -->
+===================================================== -->
 
 <section
 id="accounts"
@@ -946,7 +1090,7 @@ Student Accounts
 </h2>
 
 <p>
-Track given, taken and final balance.
+Add or subtract money whenever someone gives or takes money.
 </p>
 
 </div>
@@ -984,7 +1128,7 @@ YOU RECEIVE
 </span>
 
 <strong id="receive">
-₹0
+₹0.00
 </strong>
 
 </div>
@@ -997,7 +1141,7 @@ YOU PAY
 </span>
 
 <strong id="pay">
-₹0
+₹0.00
 </strong>
 
 </div>
@@ -1008,7 +1152,7 @@ YOU PAY
 <input
 id="search"
 placeholder="Search name..."
-oninput="renderPeople">
+oninput="renderPeople()">
 
 
 <br><br>
@@ -1032,9 +1176,9 @@ No names added yet.
 
 
 
-<!-- =========================
+<!-- =====================================================
      NOTEPAD
-========================= -->
+===================================================== -->
 
 <section id="notes">
 
@@ -1081,9 +1225,9 @@ No notes saved yet.
 
 
 
-<!-- =========================
+<!-- =====================================================
      TODO
-========================= -->
+===================================================== -->
 
 <section id="todo">
 
@@ -1166,9 +1310,9 @@ No tasks added yet.
 
 
 
-<!-- =========================
+<!-- =====================================================
      PERSON MODAL
-========================= -->
+===================================================== -->
 
 <div
 id="personModal"
@@ -1208,12 +1352,13 @@ placeholder="Student name">
 
 <label>
 
-Given Amount ₹
+Initial Given Amount ₹
 
 <input
 id="given"
 type="number"
 min="0"
+step="0.01"
 value="0">
 
 </label>
@@ -1221,12 +1366,13 @@ value="0">
 
 <label>
 
-Taken Amount ₹
+Initial Taken Amount ₹
 
 <input
 id="taken"
 type="number"
 min="0"
+step="0.01"
 value="0">
 
 </label>
@@ -1250,9 +1396,92 @@ SAVE
 
 
 
-<!-- =========================
+<!-- =====================================================
+     MONEY MODAL
+===================================================== -->
+
+<div
+id="moneyModal"
+class="modal hide">
+
+<div class="modalbox">
+
+<button
+class="close"
+onclick="closeModal('moneyModal')">
+
+×
+
+</button>
+
+
+<h2 id="moneyTitle">
+Add Money
+</h2>
+
+
+<p
+id="moneyPerson"
+style="color:#aaa;">
+</p>
+
+
+<input
+type="hidden"
+id="moneyPersonId">
+
+
+<input
+type="hidden"
+id="moneyType">
+
+
+<label>
+
+Amount ₹
+
+<input
+id="moneyAmount"
+type="number"
+min="0"
+step="0.01"
+placeholder="Enter amount">
+
+</label>
+
+
+<label>
+
+Reason / Note
+
+<input
+id="moneyReason"
+placeholder="Example: Paid for lunch">
+
+</label>
+
+
+<div class="modalbuttons">
+
+<button
+class="btn"
+onclick="saveMoney()">
+
+SAVE
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
      NOTE MODAL
-========================= -->
+===================================================== -->
 
 <div
 id="noteModal"
@@ -1347,9 +1576,9 @@ SAVE
 
 
 
-<!-- =========================
+<!-- =====================================================
      TODO MODAL
-========================= -->
+===================================================== -->
 
 <div
 id="taskModal"
@@ -1436,9 +1665,10 @@ class="toast">
 
 <script>
 
-/* =========================
+
+/* =====================================================
    STORAGE
-========================= */
+===================================================== */
 
 let people =
 JSON.parse(
@@ -1456,1263 +1686,1822 @@ localStorage.getItem("sca_tasks") || "[]"
 );
 
 
+/* =====================================================
+   SAVE DATA
+===================================================== */
+
 function saveData(){
 
-localStorage.setItem(
-"sca_people",
-JSON.stringify(people)
-);
+    localStorage.setItem(
+        "sca_people",
+        JSON.stringify(people)
+    );
 
-localStorage.setItem(
-"sca_notes",
-JSON.stringify(notes)
-);
+    localStorage.setItem(
+        "sca_notes",
+        JSON.stringify(notes)
+    );
 
-localStorage.setItem(
-"sca_tasks",
-JSON.stringify(tasks)
-);
+    localStorage.setItem(
+        "sca_tasks",
+        JSON.stringify(tasks)
+    );
 
 }
 
 
-/* =========================
+/* =====================================================
    ID
-========================= */
+===================================================== */
 
 function makeID(){
 
-return Date.now().toString(36)+
-Math.random().toString(36).substring(2);
+    return Date.now().toString(36)+
+    Math.random().toString(36).substring(2);
 
 }
 
 
-/* =========================
-   MONEY
-========================= */
+/* =====================================================
+   MONEY FORMAT
+===================================================== */
 
 function money(number){
 
-return "₹"+
-Number(number||0).toLocaleString(
-"en-IN",
-{
-minimumFractionDigits:2,
-maximumFractionDigits:2
-}
-);
+    return "₹"+
+    Number(number||0).toLocaleString(
+        "en-IN",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
 
 }
 
 
-/* =========================
-   ESCAPE
-========================= */
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
 function safe(text){
 
-return String(text||"")
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+    return String(text||"")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
 
 
-/* =========================
+/* =====================================================
    CLOCK
-========================= */
+===================================================== */
 
 function updateClock(){
 
-const now=new Date();
+    const now=new Date();
 
-document.getElementById("time")
-.textContent=
-now.toLocaleTimeString("en-GB");
+    document.getElementById("time")
+    .textContent=
+    now.toLocaleTimeString("en-GB");
 
-document.getElementById("date")
-.textContent=
-now.toLocaleDateString(
-"en-GB",
-{
-weekday:"long",
-day:"2-digit",
-month:"long",
-year:"numeric"
-}
-);
+    document.getElementById("date")
+    .textContent=
+    now.toLocaleDateString(
+        "en-GB",
+        {
+            weekday:"long",
+            day:"2-digit",
+            month:"long",
+            year:"numeric"
+        }
+    );
 
 }
 
 updateClock();
 
 setInterval(
-updateClock,
-1000
+    updateClock,
+    1000
 );
 
 
-/* =========================
+/* =====================================================
    TABS
-========================= */
+===================================================== */
 
 function showTab(id,button){
 
-document
-.querySelectorAll("section")
-.forEach(
-section=>
-section.classList.remove("active")
-);
+    document
+    .querySelectorAll("section")
+    .forEach(
+        section =>
+        section.classList.remove("active")
+    );
 
-document
-.getElementById(id)
-.classList.add("active");
+    document
+    .getElementById(id)
+    .classList.add("active");
 
-document
-.querySelectorAll(".tab")
-.forEach(
-button=>
-button.classList.remove("active")
-);
+    document
+    .querySelectorAll(".tab")
+    .forEach(
+        button =>
+        button.classList.remove("active")
+    );
 
-button.classList.add("active");
+    button.classList.add("active");
 
 }
 
 
-/* =========================
+/* =====================================================
    TOAST
-========================= */
+===================================================== */
 
 function toast(message){
 
-const t=
-document.getElementById("toast");
+    const t=
+    document.getElementById("toast");
 
-t.textContent=message;
+    t.textContent=message;
 
-t.classList.add("show");
+    t.classList.add("show");
 
-setTimeout(
-()=>{
-t.classList.remove("show");
-},
-2200
-);
+    setTimeout(
+        ()=>{
+            t.classList.remove("show");
+        },
+        2200
+    );
 
 }
 
 
-/* =========================
-   ACCOUNT
-========================= */
+/* =====================================================
+   ADD PERSON
+===================================================== */
 
 function addPerson(){
 
-document.getElementById("personId")
-.value="";
+    document.getElementById("personId").value="";
 
-document.getElementById("personName")
-.value="";
+    document.getElementById("personName").value="";
 
-document.getElementById("given")
-.value=0;
+    document.getElementById("given").value=0;
 
-document.getElementById("taken")
-.value=0;
+    document.getElementById("taken").value=0;
 
-document.getElementById("personTitle")
-.textContent="Add Student";
+    document.getElementById("personTitle")
+    .textContent="Add Student";
 
-document
-.getElementById("personModal")
-.classList.remove("hide");
+    document
+    .getElementById("personModal")
+    .classList.remove("hide");
 
 }
 
+
+/* =====================================================
+   EDIT PERSON
+===================================================== */
 
 function editPerson(id){
 
-const p=
-people.find(
-person=>person.id===id
-);
+    const p=
+    people.find(
+        person=>person.id===id
+    );
 
-if(!p)return;
+    if(!p)return;
 
-document.getElementById("personId")
-.value=p.id;
+    document.getElementById("personId")
+    .value=p.id;
 
-document.getElementById("personName")
-.value=p.name;
+    document.getElementById("personName")
+    .value=p.name;
 
-document.getElementById("given")
-.value=p.given;
+    document.getElementById("given")
+    .value=p.given;
 
-document.getElementById("taken")
-.value=p.taken;
+    document.getElementById("taken")
+    .value=p.taken;
 
-document.getElementById("personTitle")
-.textContent="Edit Student";
+    document.getElementById("personTitle")
+    .textContent="Edit Student";
 
-document
-.getElementById("personModal")
-.classList.remove("hide");
+    document
+    .getElementById("personModal")
+    .classList.remove("hide");
 
 }
 
+
+/* =====================================================
+   SAVE PERSON
+===================================================== */
 
 function savePerson(){
 
-const name=
-document
-.getElementById("personName")
-.value.trim();
+    const name=
+    document
+    .getElementById("personName")
+    .value.trim();
 
-if(!name){
+    if(!name){
 
-alert("Please enter a name.");
+        alert("Please enter a name.");
 
-return;
+        return;
+    }
+
+    const personID=
+    document.getElementById("personId")
+    .value;
+
+    const given=
+    Number(
+        document.getElementById("given").value
+    )||0;
+
+    const taken=
+    Number(
+        document.getElementById("taken").value
+    )||0;
+
+
+    if(personID){
+
+        people=
+        people.map(
+            p=>{
+
+                if(p.id===personID){
+
+                    return{
+
+                        ...p,
+
+                        name:name,
+
+                        given:given,
+
+                        taken:taken
+
+                    };
+
+                }
+
+                return p;
+
+            }
+        );
+
+    }else{
+
+        people.push({
+
+            id:makeID(),
+
+            name:name,
+
+            given:given,
+
+            taken:taken,
+
+            history:[]
+
+        });
+
+    }
+
+
+    saveData();
+
+    renderPeople();
+
+    closeModal("personModal");
+
+    toast("Account saved!");
 
 }
 
-const personID=
-document.getElementById("personId")
-.value;
 
-const person={
-
-id:personID||makeID(),
-
-name:name,
-
-given:
-Number(
-document.getElementById("given").value
-)||0,
-
-taken:
-Number(
-document.getElementById("taken").value
-)||0
-
-};
-
-
-if(personID){
-
-people=
-people.map(
-p=>
-p.id===personID
-?person
-:p
-);
-
-}else{
-
-people.push(person);
-
-}
-
-saveData();
-
-renderPeople();
-
-closeModal(
-"personModal"
-);
-
-toast("Account saved!");
-
-}
-
+/* =====================================================
+   DELETE PERSON
+===================================================== */
 
 function deletePerson(id){
 
-if(
-!confirm(
-"Delete this student's account?"
-)
-)return;
+    if(
+        !confirm(
+            "Delete this student's account?"
+        )
+    )return;
 
-people=
-people.filter(
-p=>p.id!==id
-);
+    people=
+    people.filter(
+        p=>p.id!==id
+    );
 
-saveData();
+    saveData();
 
-renderPeople();
+    renderPeople();
 
-toast("Student deleted.");
+    toast("Student deleted.");
 
 }
 
+
+/* =====================================================
+   ADD MONEY
+===================================================== */
+
+function addMoney(id,type){
+
+    const p=
+    people.find(
+        person=>person.id===id
+    );
+
+    if(!p)return;
+
+    document.getElementById("moneyPersonId")
+    .value=id;
+
+    document.getElementById("moneyType")
+    .value=type;
+
+    document.getElementById("moneyAmount")
+    .value="";
+
+    document.getElementById("moneyReason")
+    .value="";
+
+
+    if(type==="given"){
+
+        document.getElementById("moneyTitle")
+        .textContent="Add / Subtract GIVEN";
+
+    }else{
+
+        document.getElementById("moneyTitle")
+        .textContent="Add / Subtract TAKEN";
+
+    }
+
+
+    document.getElementById("moneyPerson")
+    .textContent=
+    "Student: "+p.name;
+
+
+    document
+    .getElementById("moneyModal")
+    .classList.remove("hide");
+
+}
+
+
+/* =====================================================
+   SAVE MONEY TRANSACTION
+===================================================== */
+
+function saveMoney(){
+
+    const id=
+    document.getElementById("moneyPersonId")
+    .value;
+
+    const type=
+    document.getElementById("moneyType")
+    .value;
+
+    const amount=
+    Number(
+        document.getElementById("moneyAmount")
+        .value
+    );
+
+
+    if(!amount || amount<=0){
+
+        alert("Please enter a valid amount.");
+
+        return;
+    }
+
+
+    const reason=
+    document
+    .getElementById("moneyReason")
+    .value.trim();
+
+
+    const person=
+    people.find(
+        p=>p.id===id
+    );
+
+    if(!person)return;
+
+
+    /* ==============================================
+       SECOND CHOICE:
+       Ask whether money should be ADDED or SUBTRACTED
+    ============================================== */
+
+    const action=
+    confirm(
+        "Press OK to ADD money.\n\nPress Cancel to SUBTRACT money."
+    );
+
+
+    if(type==="given"){
+
+        if(action){
+
+            person.given += amount;
+
+        }else{
+
+            person.given -= amount;
+
+            if(person.given<0)
+                person.given=0;
+
+        }
+
+    }else{
+
+        if(action){
+
+            person.taken += amount;
+
+        }else{
+
+            person.taken -= amount;
+
+            if(person.taken<0)
+                person.taken=0;
+
+        }
+
+    }
+
+
+    if(!person.history)
+        person.history=[];
+
+
+    person.history.unshift({
+
+        id:makeID(),
+
+        type:type,
+
+        action:
+        action
+        ?"add"
+        :"subtract",
+
+        amount:amount,
+
+        reason:
+        reason||
+        (
+            action
+            ?"Money added"
+            :"Money subtracted"
+        ),
+
+        date:
+        new Date().toLocaleString(
+            "en-IN"
+        )
+
+    });
+
+
+    saveData();
+
+    renderPeople();
+
+    closeModal("moneyModal");
+
+    toast(
+        action
+        ?"Money added successfully!"
+        :"Money subtracted successfully!"
+    );
+
+}
+
+
+/* =====================================================
+   RENDER PEOPLE
+===================================================== */
 
 function renderPeople(){
 
-const search=
-document
-.getElementById("search")
-.value
-.toLowerCase();
-
-const list=
-document.getElementById("people");
-
-list.innerHTML="";
-
-let receive=0;
-let pay=0;
+    const search=
+    document
+    .getElementById("search")
+    .value
+    .toLowerCase();
 
 
-people.forEach(p=>{
+    const list=
+    document.getElementById("people");
 
-const balance=
-Number(p.given)-
-Number(p.taken);
-
-if(balance>0)
-receive+=balance;
-
-if(balance<0)
-pay+=Math.abs(balance);
-
-});
+    list.innerHTML="";
 
 
-document.getElementById("peopleCount")
-.textContent=people.length;
+    let receive=0;
 
-document.getElementById("receive")
-.textContent=money(receive);
-
-document.getElementById("pay")
-.textContent=money(pay);
+    let pay=0;
 
 
-const filtered=
-people.filter(
-p=>
-p.name
-.toLowerCase()
-.includes(search)
-);
+    people.forEach(p=>{
+
+        const balance=
+        Number(p.given)-
+        Number(p.taken);
 
 
-filtered.forEach(p=>{
-
-const balance=
-Number(p.given)-
-Number(p.taken);
-
-let status;
+        if(balance>0)
+            receive+=balance;
 
 
-if(balance>0){
+        if(balance<0)
+            pay+=Math.abs(balance);
 
-status=`
+    });
 
-<div class="balance receive">
 
-They have to pay you
-${money(balance)}
+    document.getElementById("peopleCount")
+    .textContent=people.length;
 
-</div>
 
-`;
+    document.getElementById("receive")
+    .textContent=money(receive);
 
-}else if(balance<0){
 
-status=`
+    document.getElementById("pay")
+    .textContent=money(pay);
 
-<div class="balance pay">
 
-You have to pay them
-${money(Math.abs(balance))}
+    const filtered=
+    people.filter(
+        p=>
+        p.name
+        .toLowerCase()
+        .includes(search)
+    );
 
-</div>
 
-`;
+    filtered.forEach(p=>{
 
-}else{
+        const balance=
+        Number(p.given)-
+        Number(p.taken);
 
-status=`
 
-<div class="balance settle">
+        let status;
 
-Account settled
 
-</div>
+        if(balance>0){
 
-`;
+            status=`
+
+            <div class="balance receive">
+
+                They have to pay you
+                ${money(balance)}
+
+            </div>
+
+            `;
+
+        }
+
+        else if(balance<0){
+
+            status=`
+
+            <div class="balance pay">
+
+                You have to pay them
+                ${money(Math.abs(balance))}
+
+            </div>
+
+            `;
+
+        }
+
+        else{
+
+            status=`
+
+            <div class="balance settle">
+
+                Account settled
+
+            </div>
+
+            `;
+
+        }
+
+
+        /* =========================================
+           HISTORY
+        ========================================= */
+
+        let historyHTML="";
+
+
+        if(
+            p.history &&
+            p.history.length
+        ){
+
+            historyHTML=`
+
+            <div class="history">
+
+                <div class="history-title">
+                    RECENT TRANSACTIONS
+                </div>
+
+                ${
+                    p.history
+                    .slice(0,5)
+                    .map(h=>`
+
+                        <div class="transaction">
+
+                            <div>
+
+                                <span
+                                class="${
+                                    h.action==="add"
+                                    ?"transaction-add"
+                                    :"transaction-sub"
+                                }">
+
+                                ${
+                                    h.action==="add"
+                                    ?"+"
+                                    :"−"
+                                }
+
+                                ${money(h.amount)}
+
+                                </span>
+
+                                <br>
+
+                                <span>
+                                ${
+                                    h.type==="given"
+                                    ?"GIVEN"
+                                    :"TAKEN"
+                                }
+                                </span>
+
+                                <br>
+
+                                <span
+                                style="color:#777">
+
+                                ${safe(h.reason)}
+
+                                </span>
+
+                            </div>
+
+                            <div class="transaction-date">
+
+                                ${safe(h.date)}
+
+                            </div>
+
+                        </div>
+
+                    `)
+                    .join("")
+                }
+
+            </div>
+
+            `;
+
+        }
+
+
+        const card=
+        document.createElement("div");
+
+        card.className="card";
+
+
+        card.innerHTML=`
+
+            <h3>
+                ${safe(p.name)}
+            </h3>
+
+
+            <div class="amounts">
+
+
+                <!-- GIVEN -->
+
+                <div class="amount">
+
+                    <small>
+                        GIVEN
+                    </small>
+
+                    <b>
+                        ${money(p.given)}
+                    </b>
+
+
+                    <div class="money-actions">
+
+                        <button
+                        class="money-btn add-money"
+                        onclick="addMoney('${p.id}','given')">
+
+                        + ADD
+
+                        </button>
+
+
+                        <button
+                        class="money-btn subtract-money"
+                        onclick="subtractDirect('${p.id}','given')">
+
+                        − SUBTRACT
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TAKEN -->
+
+                <div class="amount">
+
+                    <small>
+                        TAKEN
+                    </small>
+
+                    <b>
+                        ${money(p.taken)}
+                    </b>
+
+
+                    <div class="money-actions">
+
+                        <button
+                        class="money-btn add-money"
+                        onclick="addMoney('${p.id}','taken')">
+
+                        + ADD
+
+                        </button>
+
+
+                        <button
+                        class="money-btn subtract-money"
+                        onclick="subtractDirect('${p.id}','taken')">
+
+                        − SUBTRACT
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            ${status}
+
+
+            ${historyHTML}
+
+
+            <div class="actions">
+
+                <button
+                class="btn"
+                onclick="sharePerson('${p.id}')">
+
+                ↗ SHARE
+
+                </button>
+
+
+                <button
+                class="btn dark"
+                onclick="editPerson('${p.id}')">
+
+                EDIT
+
+                </button>
+
+
+                <button
+                class="btn red"
+                onclick="deletePerson('${p.id}')">
+
+                DELETE
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        list.appendChild(card);
+
+    });
+
+
+    document.getElementById("noPeople")
+    .style.display=
+    filtered.length
+    ?"none"
+    :"block";
 
 }
 
 
-const card=
-document.createElement("div");
+/* =====================================================
+   DIRECT SUBTRACT
+===================================================== */
 
-card.className="card";
+function subtractDirect(id,type){
 
+    const p=
+    people.find(
+        person=>person.id===id
+    );
 
-card.innerHTML=`
-
-<h3>
-${safe(p.name)}
-</h3>
-
-
-<div class="amounts">
-
-<div class="amount">
-
-<small>
-GIVEN
-</small>
-
-<b>
-${money(p.given)}
-</b>
-
-</div>
+    if(!p)return;
 
 
-<div class="amount">
-
-<small>
-TAKEN
-</small>
-
-<b>
-${money(p.taken)}
-</b>
-
-</div>
-
-</div>
+    const amount=
+    prompt(
+        "Enter amount to subtract:"
+    );
 
 
-${status}
+    if(
+        amount===null ||
+        amount==="" ||
+        Number(amount)<=0
+    )return;
 
 
-<div class="actions">
-
-<button
-class="btn"
-onclick="sharePerson('${p.id}')">
-
-↗ SHARE
-
-</button>
+    const value=
+    Number(amount);
 
 
-<button
-class="btn dark"
-onclick="editPerson('${p.id}')">
+    if(type==="given"){
 
-EDIT
+        p.given-=value;
 
-</button>
+        if(p.given<0)
+            p.given=0;
 
+    }else{
 
-<button
-class="btn red"
-onclick="deletePerson('${p.id}')">
+        p.taken-=value;
 
-DELETE
+        if(p.taken<0)
+            p.taken=0;
 
-</button>
-
-</div>
-
-`;
+    }
 
 
-list.appendChild(card);
+    if(!p.history)
+        p.history=[];
 
-});
+
+    p.history.unshift({
+
+        id:makeID(),
+
+        type:type,
+
+        action:"subtract",
+
+        amount:value,
+
+        reason:"Money subtracted",
+
+        date:
+        new Date()
+        .toLocaleString("en-IN")
+
+    });
 
 
-document.getElementById("noPeople")
-.style.display=
-filtered.length
-?"none"
-:"block";
+    saveData();
+
+    renderPeople();
+
+    toast("Money subtracted!");
 
 }
 
 
-/* =========================
+/* =====================================================
    SHARE
-========================= */
+===================================================== */
 
 async function sharePerson(id){
 
-const p=
-people.find(
-person=>person.id===id
-);
+    const p=
+    people.find(
+        person=>person.id===id
+    );
 
-if(!p)return;
-
-const balance=
-Number(p.given)-
-Number(p.taken);
-
-let message;
+    if(!p)return;
 
 
-if(balance>0){
+    const balance=
+    Number(p.given)-
+    Number(p.taken);
 
-message=
-`Hi ${p.name}, just a gentle reminder that you currently have ${money(balance)} to pay me. Please pay whenever convenient. Thank you!`;
 
-}else if(balance<0){
+    let message;
 
-message=
-`Hi ${p.name}, just a gentle reminder that I currently owe you ${money(Math.abs(balance))}. I’ll make the payment whenever convenient. Thank you!`;
 
-}else{
+    if(balance>0){
 
-message=
-`Hi ${p.name}, just a quick update that our account is fully settled. Thank you!`;
+        message=
+        `Hi ${p.name}, just a gentle reminder that you currently have ${money(balance)} to pay me. Please pay whenever convenient. Thank you!`;
+
+    }
+
+    else if(balance<0){
+
+        message=
+        `Hi ${p.name}, just a gentle reminder that I currently owe you ${money(Math.abs(balance))}. I’ll make the payment whenever convenient. Thank you!`;
+
+    }
+
+    else{
+
+        message=
+        `Hi ${p.name}, just a quick update that our account is fully settled. Thank you!`;
+
+    }
+
+
+    try{
+
+        await navigator.clipboard.writeText(
+            message
+        );
+
+        toast(
+            "Payment message copied!"
+        );
+
+    }
+
+    catch{
+
+        prompt(
+            "Copy this message:",
+            message
+        );
+
+    }
 
 }
 
 
-try{
-
-await navigator.clipboard.writeText(
-message
-);
-
-toast(
-"Payment message copied!"
-);
-
-}catch{
-
-prompt(
-"Copy this message:",
-message
-);
-
-}
-
-}
-
-
-/* =========================
+/* =====================================================
    NOTES
-========================= */
+===================================================== */
 
 function addNote(){
 
-document.getElementById("noteId")
-.value="";
+    document.getElementById("noteId")
+    .value="";
 
-document.getElementById("nTitle")
-.value="";
+    document.getElementById("nTitle")
+    .value="";
 
-document.getElementById("nText")
-.value="";
+    document.getElementById("nText")
+    .value="";
 
-document.getElementById("nLink")
-.value="";
+    document.getElementById("nLink")
+    .value="";
 
-document.getElementById("nImage")
-.value="";
+    document.getElementById("nImage")
+    .value="";
 
-document.getElementById("preview")
-.innerHTML="";
+    document.getElementById("preview")
+    .innerHTML="";
 
-document.getElementById("noteTitle")
-.textContent="Add Note";
+    document.getElementById("noteTitle")
+    .textContent="Add Note";
 
-document.getElementById("noteModal")
-.classList.remove("hide");
+    document
+    .getElementById("noteModal")
+    .classList.remove("hide");
 
 }
 
 
 function saveNote(){
 
-const title=
-document
-.getElementById("nTitle")
-.value.trim();
-
-if(!title){
-
-alert("Please enter a title.");
-
-return;
-
-}
-
-const noteID=
-document.getElementById("noteId")
-.value;
-
-const old=
-notes.find(
-n=>n.id===noteID
-);
-
-const file=
-document
-.getElementById("nImage")
-.files[0];
+    const title=
+    document
+    .getElementById("nTitle")
+    .value.trim();
 
 
-function finish(image){
+    if(!title){
 
-const note={
+        alert("Please enter a title.");
 
-id:noteID||makeID(),
+        return;
 
-title:title,
-
-text:
-document.getElementById("nText")
-.value,
-
-link:
-document.getElementById("nLink")
-.value,
-
-image:
-image||
-(old?.image||"")
-
-};
+    }
 
 
-if(noteID){
-
-notes=
-notes.map(
-n=>
-n.id===noteID
-?note
-:n
-);
-
-}else{
-
-notes.push(note);
-
-}
+    const noteID=
+    document.getElementById("noteId")
+    .value;
 
 
-saveData();
-
-renderNotes();
-
-closeModal(
-"noteModal"
-);
-
-toast("Note saved!");
-
-}
+    const old=
+    notes.find(
+        n=>n.id===noteID
+    );
 
 
-if(file){
+    const file=
+    document
+    .getElementById("nImage")
+    .files[0];
 
-const reader=
-new FileReader();
 
-reader.onload=
-()=>{
-finish(
-reader.result
-);
-};
+    function finish(image){
 
-reader.readAsDataURL(file);
+        const note={
 
-}else{
+            id:
+            noteID||
+            makeID(),
 
-finish("");
+            title:title,
 
-}
+            text:
+            document
+            .getElementById("nText")
+            .value,
+
+            link:
+            document
+            .getElementById("nLink")
+            .value,
+
+            image:
+            image||
+            (old?.image||"")
+
+        };
+
+
+        if(noteID){
+
+            notes=
+            notes.map(
+                n=>
+                n.id===noteID
+                ?note
+                :n
+            );
+
+        }
+
+        else{
+
+            notes.push(note);
+
+        }
+
+
+        saveData();
+
+        renderNotes();
+
+        closeModal("noteModal");
+
+        toast("Note saved!");
+
+    }
+
+
+    if(file){
+
+        const reader=
+        new FileReader();
+
+        reader.onload=
+        ()=>{
+            finish(
+                reader.result
+            );
+        };
+
+        reader.readAsDataURL(file);
+
+    }
+
+    else{
+
+        finish("");
+
+    }
 
 }
 
 
 function editNote(id){
 
-const n=
-notes.find(
-note=>note.id===id
-);
+    const n=
+    notes.find(
+        note=>note.id===id
+    );
 
-if(!n)return;
+    if(!n)return;
 
-document.getElementById("noteId")
-.value=n.id;
 
-document.getElementById("nTitle")
-.value=n.title;
+    document.getElementById("noteId")
+    .value=n.id;
 
-document.getElementById("nText")
-.value=n.text;
+    document.getElementById("nTitle")
+    .value=n.title;
 
-document.getElementById("nLink")
-.value=n.link;
+    document.getElementById("nText")
+    .value=n.text;
 
-document.getElementById("nImage")
-.value="";
+    document.getElementById("nLink")
+    .value=n.link;
 
-document.getElementById("preview")
-.innerHTML=
-n.image
-?`<img src="${n.image}" style="width:100%">`
-:"";
+    document.getElementById("nImage")
+    .value="";
 
-document.getElementById("noteTitle")
-.textContent="Edit Note";
 
-document.getElementById("noteModal")
-.classList.remove("hide");
+    document.getElementById("preview")
+    .innerHTML=
+    n.image
+    ?
+    `<img src="${n.image}" style="width:100%">`
+    :
+    "";
+
+
+    document.getElementById("noteTitle")
+    .textContent="Edit Note";
+
+
+    document
+    .getElementById("noteModal")
+    .classList.remove("hide");
 
 }
 
 
 function deleteNote(id){
 
-if(!confirm("Delete this note?"))
-return;
+    if(
+        !confirm(
+            "Delete this note?"
+        )
+    )
+    return;
 
-notes=
-notes.filter(
-n=>n.id!==id
-);
 
-saveData();
+    notes=
+    notes.filter(
+        n=>n.id!==id
+    );
 
-renderNotes();
 
-toast("Note deleted.");
+    saveData();
+
+    renderNotes();
+
+    toast("Note deleted.");
 
 }
 
 
 function renderNotes(){
 
-const list=
-document.getElementById("notesList");
+    const list=
+    document.getElementById("notesList");
 
-list.innerHTML="";
-
-
-notes.forEach(n=>{
-
-const card=
-document.createElement("div");
-
-card.className="note";
+    list.innerHTML="";
 
 
-card.innerHTML=`
+    notes.forEach(n=>{
 
-<h3>
-${safe(n.title)}
-</h3>
+        const card=
+        document.createElement("div");
+
+        card.className="note";
 
 
-${
-n.text
-?
-`<p>${safe(n.text)}</p>`
-:""
+        card.innerHTML=`
+
+            <h3>
+                ${safe(n.title)}
+            </h3>
+
+
+            ${
+                n.text
+                ?
+                `<p>${safe(n.text)}</p>`
+                :
+                ""
+            }
+
+
+            ${
+                n.link
+                ?
+                `
+                <p>
+
+                    <a
+                    href="${safe(n.link)}"
+                    target="_blank"
+                    rel="noopener">
+
+                    ${safe(n.link)}
+
+                    </a>
+
+                </p>
+                `
+                :
+                ""
+            }
+
+
+            ${
+                n.image
+                ?
+                `<img src="${n.image}">`
+                :
+                ""
+            }
+
+
+            <br>
+
+
+            <div class="actions">
+
+                <button
+                class="btn dark"
+                onclick="editNote('${n.id}')">
+
+                EDIT
+
+                </button>
+
+
+                <button
+                class="btn red"
+                onclick="deleteNote('${n.id}')">
+
+                DELETE
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        list.appendChild(card);
+
+    });
+
+
+    document.getElementById("noNotes")
+    .style.display=
+    notes.length
+    ?
+    "none"
+    :
+    "block";
+
 }
 
 
-${
-n.link
-?
-`<p>
-<a
-href="${safe(n.link)}"
-target="_blank"
-rel="noopener">
-${safe(n.link)}
-</a>
-</p>`
-:""
-}
-
-
-${
-n.image
-?
-`<img src="${n.image}">`
-:""
-}
-
-
-<br>
-
-
-<div class="actions">
-
-<button
-class="btn dark"
-onclick="editNote('${n.id}')">
-
-EDIT
-
-</button>
-
-
-<button
-class="btn red"
-onclick="deleteNote('${n.id}')">
-
-DELETE
-
-</button>
-
-</div>
-
-`;
-
-
-list.appendChild(card);
-
-});
-
-
-document.getElementById("noNotes")
-.style.display=
-notes.length
-?"none"
-:"block";
-
-}
-
-
-/* =========================
-   TODO
-========================= */
+/* =====================================================
+   TODO - ADD
+===================================================== */
 
 function addTask(){
 
-const now=
-new Date();
+    const now=
+    new Date();
 
-document.getElementById("taskId")
-.value="";
 
-document.getElementById("taskName")
-.value="";
+    document.getElementById("taskId")
+    .value="";
 
-document.getElementById("taskDate")
-.value=
-now.toISOString()
-.split("T")[0];
 
-document.getElementById("taskTime")
-.value=
-now.toTimeString()
-.substring(0,5);
+    document.getElementById("taskName")
+    .value="";
 
-document.getElementById("taskModal")
-.classList.remove("hide");
+
+    document.getElementById("taskDate")
+    .value=
+    now.toISOString()
+    .split("T")[0];
+
+
+    document.getElementById("taskTime")
+    .value=
+    now.toTimeString()
+    .substring(0,5);
+
+
+    document
+    .getElementById("taskModal")
+    .classList.remove("hide");
 
 }
 
+
+/* =====================================================
+   TODO - EDIT
+===================================================== */
 
 function editTask(id){
 
-const task=
-tasks.find(
-t=>t.id===id
-);
+    const task=
+    tasks.find(
+        t=>t.id===id
+    );
 
-if(!task)return;
 
-document.getElementById("taskId")
-.value=task.id;
+    if(!task)return;
 
-document.getElementById("taskName")
-.value=task.name;
 
-document.getElementById("taskDate")
-.value=task.date;
+    document.getElementById("taskId")
+    .value=task.id;
 
-document.getElementById("taskTime")
-.value=task.time;
 
-document.getElementById("taskModal")
-.classList.remove("hide");
+    document.getElementById("taskName")
+    .value=task.name;
+
+
+    document.getElementById("taskDate")
+    .value=task.date;
+
+
+    document.getElementById("taskTime")
+    .value=task.time;
+
+
+    document
+    .getElementById("taskModal")
+    .classList.remove("hide");
 
 }
 
+
+/* =====================================================
+   TODO - SAVE
+===================================================== */
 
 function saveTask(){
 
-const name=
-document
-.getElementById("taskName")
-.value.trim();
+    const name=
+    document
+    .getElementById("taskName")
+    .value.trim();
 
-if(!name){
 
-alert("Please enter a task.");
+    if(!name){
 
-return;
+        alert("Please enter a task.");
+
+        return;
+
+    }
+
+
+    const taskID=
+    document
+    .getElementById("taskId")
+    .value;
+
+
+    if(taskID){
+
+        tasks=
+        tasks.map(
+            t=>{
+
+                if(t.id===taskID){
+
+                    return{
+
+                        ...t,
+
+                        name:name,
+
+                        date:
+                        document
+                        .getElementById("taskDate")
+                        .value,
+
+                        time:
+                        document
+                        .getElementById("taskTime")
+                        .value
+
+                    };
+
+                }
+
+                return t;
+
+            }
+        );
+
+    }
+
+    else{
+
+        tasks.push({
+
+            id:makeID(),
+
+            name:name,
+
+            date:
+            document
+            .getElementById("taskDate")
+            .value,
+
+            time:
+            document
+            .getElementById("taskTime")
+            .value,
+
+            done:false
+
+        });
+
+    }
+
+
+    saveData();
+
+    renderTasks();
+
+    closeModal("taskModal");
+
+    toast("Task saved!");
 
 }
 
-const taskID=
-document.getElementById("taskId")
-.value;
 
-
-if(taskID){
-
-tasks=
-tasks.map(
-t=>{
-
-if(t.id===taskID){
-
-return{
-
-...t,
-
-name:name,
-
-date:
-document.getElementById("taskDate")
-.value,
-
-time:
-document.getElementById("taskTime")
-.value
-
-};
-
-}
-
-return t;
-
-}
-);
-
-}else{
-
-tasks.push({
-
-id:makeID(),
-
-name:name,
-
-date:
-document.getElementById("taskDate")
-.value,
-
-time:
-document.getElementById("taskTime")
-.value,
-
-done:false
-
-});
-
-}
-
-
-saveData();
-
-renderTasks();
-
-closeModal(
-"taskModal"
-);
-
-toast("Task saved!");
-
-}
-
-
-/* =========================
-   TICK TASK
-========================= */
+/* =====================================================
+   TODO - TOGGLE
+===================================================== */
 
 function toggleTask(id){
 
-const task=
-tasks.find(
-t=>t.id===id
-);
+    const task=
+    tasks.find(
+        t=>t.id===id
+    );
 
-if(!task)return;
 
-task.done=
-!task.done;
+    if(!task)return;
 
-saveData();
 
-renderTasks();
+    task.done=
+    !task.done;
+
+
+    saveData();
+
+    renderTasks();
 
 }
 
 
-/* =========================
-   DELETE TASK
-========================= */
+/* =====================================================
+   TODO - DELETE
+===================================================== */
 
 function deleteTask(id){
 
-if(!confirm(
-"Delete this task?"
-))
-return;
+    if(
+        !confirm(
+            "Delete this task?"
+        )
+    )
+    return;
 
-tasks=
-tasks.filter(
-t=>t.id!==id
-);
 
-saveData();
+    tasks=
+    tasks.filter(
+        t=>t.id!==id
+    );
 
-renderTasks();
 
-toast("Task deleted.");
+    saveData();
+
+    renderTasks();
+
+    toast("Task deleted.");
 
 }
 
 
-/* =========================
-   RENDER TASKS
-========================= */
+/* =====================================================
+   TODO - RENDER
+===================================================== */
 
 function renderTasks(){
 
-const list=
-document.getElementById("tasks");
+    const list=
+    document.getElementById("tasks");
 
-list.innerHTML="";
-
-
-tasks.sort(
-(a,b)=>
-(a.date+a.time)
-.localeCompare(
-b.date+b.time
-)
-);
+    list.innerHTML="";
 
 
-tasks.forEach(task=>{
-
-const div=
-document.createElement("div");
-
-div.className=
-"task"+
-(task.done
-?" completed"
-:"");
+    tasks.sort(
+        (a,b)=>
+        (a.date+a.time)
+        .localeCompare(
+            b.date+b.time
+        )
+    );
 
 
-div.innerHTML=`
+    tasks.forEach(task=>{
 
-<input
-type="checkbox"
-${task.done?"checked":""}
-onchange="toggleTask('${task.id}')">
+        const div=
+        document.createElement("div");
 
 
-<div class="task-main">
-
-<div class="task-title">
-
-${safe(task.name)}
-
-</div>
-
-<div class="task-date">
-
-${task.date}
-•
-${task.time}
-
-</div>
-
-</div>
+        div.className=
+        "task"+
+        (
+            task.done
+            ?
+            " completed"
+            :
+            ""
+        );
 
 
-<div class="actions">
+        div.innerHTML=`
 
-<button
-class="btn dark"
-onclick="editTask('${task.id}')">
-
-EDIT
-
-</button>
+            <input
+            type="checkbox"
+            ${task.done?"checked":""}
+            onchange="toggleTask('${task.id}')">
 
 
-<button
-class="btn red"
-onclick="deleteTask('${task.id}')">
+            <div class="task-main">
 
-DELETE
+                <div class="task-title">
 
-</button>
+                    ${safe(task.name)}
 
-</div>
-
-`;
+                </div>
 
 
-list.appendChild(div);
+                <div class="task-date">
+
+                    ${task.date}
+                    •
+                    ${task.time}
+
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                class="btn dark"
+                onclick="editTask('${task.id}')">
+
+                EDIT
+
+                </button>
+
+
+                <button
+                class="btn red"
+                onclick="deleteTask('${task.id}')">
+
+                DELETE
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        list.appendChild(div);
+
+    });
+
+
+    document.getElementById("noTasks")
+    .style.display=
+    tasks.length
+    ?
+    "none"
+    :
+    "block";
+
+
+    updateProgress();
+
+}
+
+
+/* =====================================================
+   TODO - PROGRESS
+===================================================== */
+
+function updateProgress(){
+
+    const total=
+    tasks.length;
+
+
+    const remaining=
+    tasks.filter(
+        task=>!task.done
+    ).length;
+
+
+    let percentage=0;
+
+
+    if(total>0){
+
+        percentage=
+        Math.round(
+            (remaining/total)*100
+        );
+
+    }
+
+
+    document.getElementById("percent")
+    .textContent=
+    percentage+"%";
+
+
+    const bar=
+    document.getElementById("bar");
+
+
+    bar.style.width=
+    percentage+"%";
+
+
+    bar.className="bar";
+
+
+    if(total===0){
+
+        bar.classList.add("green");
+
+        document.getElementById(
+            "progressText"
+        )
+        .textContent=
+        "No tasks";
+
+        return;
+
+    }
+
+
+    if(percentage===0){
+
+        bar.classList.add("green");
+
+        document.getElementById(
+            "progressText"
+        )
+        .textContent=
+        "Everything completed 🟢";
+
+    }
+
+    else if(percentage<=50){
+
+        bar.classList.add("yellow");
+
+        document.getElementById(
+            "progressText"
+        )
+        .textContent=
+        "50% or less work remains 🟡";
+
+    }
+
+    else{
+
+        bar.classList.add("redbar");
+
+        document.getElementById(
+            "progressText"
+        )
+        .textContent=
+        "More than 50% work remains 🔴";
+
+    }
+
+}
+
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+function closeModal(id){
+
+    document
+    .getElementById(id)
+    .classList.add("hide");
+
+}
+
+
+/* =====================================================
+   CLICK OUTSIDE MODAL TO CLOSE
+===================================================== */
+
+document
+.querySelectorAll(".modal")
+.forEach(modal=>{
+
+    modal.addEventListener(
+        "click",
+        function(e){
+
+            if(e.target===modal){
+
+                modal.classList.add("hide");
+
+            }
+
+        }
+    );
 
 });
 
 
-document.getElementById("noTasks")
-.style.display=
-tasks.length
-?"none"
-:"block";
-
-
-updateProgress();
-
-}
-
-
-/* =========================
-   PROGRESS
-========================= */
-
-function updateProgress(){
-
-const total=
-tasks.length;
-
-const remaining=
-tasks.filter(
-task=>!task.done
-).length;
-
-
-let percentage=0;
-
-
-if(total>0){
-
-percentage=
-Math.round(
-(remaining/total)*100
-);
-
-}
-
-
-document.getElementById("percent")
-.textContent=
-percentage+"%";
-
-
-const bar=
-document.getElementById("bar");
-
-
-bar.style.width=
-percentage+"%";
-
-
-bar.className="bar";
-
-
-if(total===0){
-
-bar.classList.add("green");
-
-document.getElementById(
-"progressText"
-).textContent=
-"No tasks";
-
-return;
-
-}
-
-
-/*
-    0%       = GREEN
-    1-50%    = YELLOW
-    >50%     = RED
-*/
-
-
-if(percentage===0){
-
-bar.classList.add("green");
-
-document.getElementById(
-"progressText"
-).textContent=
-"Everything completed 🟢";
-
-}
-
-else if(percentage<=50){
-
-bar.classList.add("yellow");
-
-document.getElementById(
-"progressText"
-).textContent=
-"50% or less work remains 🟡";
-
-}
-
-else{
-
-bar.classList.add("redbar");
-
-document.getElementById(
-"progressText"
-).textContent=
-"More than 50% work remains 🔴";
-
-}
-
-}
-
-
-/* =========================
-   CLOSE MODALS
-========================= */
-
-function closeModal(id){
-
-document
-.getElementById(id)
-.classList.add("hide");
-
-}
-
-
-/* =========================
+/* =====================================================
    INITIAL LOAD
-========================= */
+===================================================== */
 
 renderPeople();
 
