@@ -3,9 +3,9 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>STUDENT`S CA</title>
+<title>STUDENT'S CA</title>
 
 <style>
 
@@ -23,9 +23,17 @@ html{
 
 body{
     margin:0;
-    background:#030303;
-    color:white;
+    background:#050403;
+    color:#fff;
     font-family:Arial,Helvetica,sans-serif;
+}
+
+button{
+    font-family:inherit;
+}
+
+button:active{
+    transform:scale(.97);
 }
 
 
@@ -52,8 +60,7 @@ header{
 h1{
     margin:0;
 
-    font-size:
-        clamp(28px,5vw,48px);
+    font-size:clamp(28px,5vw,48px);
 
     letter-spacing:2px;
 
@@ -68,24 +75,21 @@ header p{
 
 
 /* =====================================================
-   BROWN / GOLD CLOCK
+   BROWN DATE + TIME
 ===================================================== */
 
 .clock{
     text-align:right;
 
-    color:#c8873a;
+    color:#6b3518;
 
     font-weight:900;
 
-    animation:
-        brownGlow 1.7s ease-in-out infinite alternate;
+    animation:brownGlow 1.7s ease-in-out infinite alternate;
 }
 
 #time{
-    font-size:
-        clamp(25px,4vw,40px);
-
+    font-size:clamp(25px,4vw,40px);
     letter-spacing:2px;
 }
 
@@ -97,30 +101,30 @@ header p{
 @keyframes brownGlow{
 
     0%{
-        transform:translateY(-4px);
+        transform:translateY(-3px);
 
         text-shadow:
-            0 0 4px #7a4218,
-            0 0 10px #9b5b25,
-            0 0 18px #b87333;
+            0 0 4px #6b3518,
+            0 0 10px #8b451f,
+            0 0 18px #8b451f;
     }
 
     50%{
         transform:translateY(0);
 
         text-shadow:
-            0 0 7px #8b4f20,
-            0 0 20px #c47a36,
-            0 0 35px #d99a55;
+            0 0 7px #7b3f19,
+            0 0 20px #a05220,
+            0 0 35px #a05220;
     }
 
     100%{
-        transform:translateY(4px);
+        transform:translateY(3px);
 
         text-shadow:
-            0 0 10px #9b5b25,
-            0 0 25px #c47a36,
-            0 0 45px #e0a15c;
+            0 0 10px #8b451f,
+            0 0 25px #a05220,
+            0 0 45px #a05220;
     }
 }
 
@@ -130,7 +134,7 @@ header p{
 ===================================================== */
 
 nav{
-    background:#0d0d0d;
+    background:#0d0b0a;
 
     padding:12px 5%;
 
@@ -144,15 +148,18 @@ nav{
 
     z-index:10;
 
-    border-bottom:1px solid #222;
+    border-bottom:1px solid #29201b;
+
+    overflow:auto;
 }
 
 nav button{
-    background:#181818;
+
+    background:#191513;
 
     color:white;
 
-    border:1px solid #333;
+    border:1px solid #3a2b24;
 
     border-radius:8px;
 
@@ -161,12 +168,19 @@ nav button{
     font-weight:bold;
 
     cursor:pointer;
+
+    white-space:nowrap;
 }
 
 nav button:hover,
 nav button.active{
-    background:#8b5cf6;
-    border-color:#a78bfa;
+
+    background:#8b451f;
+
+    border-color:#b87333;
+
+    box-shadow:
+        0 0 12px rgba(184,115,51,.35);
 }
 
 
@@ -175,8 +189,10 @@ nav button.active{
 ===================================================== */
 
 main{
-    max-width:1200px;
+    max-width:1250px;
+
     margin:auto;
+
     padding:30px 5%;
 }
 
@@ -194,6 +210,7 @@ section.active{
 ===================================================== */
 
 .head{
+
     display:flex;
 
     justify-content:space-between;
@@ -220,17 +237,18 @@ section.active{
 ===================================================== */
 
 .btn{
+
     border:0;
 
     border-radius:8px;
 
-    padding:10px 14px;
+    padding:11px 15px;
 
     font-weight:bold;
 
     cursor:pointer;
 
-    background:#8b5cf6;
+    background:#8b451f;
 
     color:white;
 
@@ -238,8 +256,7 @@ section.active{
 }
 
 .btn:hover{
-    background:#a78bfa;
-    transform:translateY(-1px);
+    background:#b87333;
 }
 
 .btn.red{
@@ -250,25 +267,26 @@ section.active{
     background:#b52b2b;
 }
 
-.btn.dark{
-    background:#222;
-    border:1px solid #444;
-}
-
 .btn.green{
-    background:#087f3d;
+    background:#087f3f;
 }
 
 .btn.green:hover{
-    background:#00a94f;
+    background:#00a957;
+}
+
+.btn.dark{
+    background:#222;
+
+    border:1px solid #444;
 }
 
 .btn.orange{
-    background:#8f541f;
+    background:#9a5b16;
 }
 
 .btn.orange:hover{
-    background:#b66b27;
+    background:#c47b24;
 }
 
 
@@ -277,10 +295,11 @@ section.active{
 ===================================================== */
 
 .summary{
+
     display:grid;
 
     grid-template-columns:
-        repeat(3,1fr);
+        repeat(4,1fr);
 
     gap:12px;
 
@@ -288,6 +307,7 @@ section.active{
 }
 
 .box{
+
     background:#0e0e0e;
 
     border:1px solid #292929;
@@ -298,16 +318,19 @@ section.active{
 }
 
 .box span{
+
     color:#888;
+
     font-size:12px;
 }
 
 .box strong{
+
     display:block;
 
     margin-top:7px;
 
-    font-size:25px;
+    font-size:24px;
 }
 
 
@@ -316,7 +339,8 @@ section.active{
 ===================================================== */
 
 input,
-textarea{
+textarea,
+select{
 
     width:100%;
 
@@ -336,13 +360,14 @@ textarea{
 }
 
 input:focus,
-textarea:focus{
+textarea:focus,
+select:focus{
 
-    border-color:#8b5cf6;
+    border-color:#a05220;
 
     box-shadow:
         0 0 0 2px
-        rgba(139,92,246,.15);
+        rgba(160,82,32,.15);
 }
 
 
@@ -351,7 +376,8 @@ textarea:focus{
 ===================================================== */
 
 .cards,
-.notes{
+.notes,
+.expenses{
 
     display:grid;
 
@@ -366,7 +392,8 @@ textarea:focus{
 
 .card,
 .note,
-.task{
+.task,
+.expense-card{
 
     background:#0e0e0e;
 
@@ -382,12 +409,13 @@ textarea:focus{
 
 .card h3,
 .note h3{
+
     margin-top:0;
 }
 
 
 /* =====================================================
-   MONEY AREA
+   AMOUNTS
 ===================================================== */
 
 .amounts{
@@ -397,20 +425,16 @@ textarea:focus{
     grid-template-columns:
         1fr 1fr;
 
-    gap:10px;
-
-    margin-top:12px;
+    gap:8px;
 }
 
 .amount{
 
     background:#171717;
 
-    padding:12px;
+    padding:10px;
 
-    border-radius:10px;
-
-    border:1px solid #282828;
+    border-radius:8px;
 }
 
 .amount small{
@@ -419,23 +443,12 @@ textarea:focus{
 
     color:#888;
 
-    font-size:11px;
-
     margin-bottom:5px;
-}
-
-.amount b{
-
-    display:block;
-
-    font-size:20px;
-
-    margin-bottom:10px;
 }
 
 
 /* =====================================================
-   MONEY ACTIONS
+   ACCOUNT TRANSACTION BUTTONS
 ===================================================== */
 
 .money-actions{
@@ -445,64 +458,14 @@ textarea:focus{
     grid-template-columns:
         1fr 1fr;
 
-    gap:6px;
+    gap:7px;
+
+    margin-top:10px;
 }
 
-.money-btn{
-
-    border:0;
-
-    padding:8px 5px;
-
-    border-radius:7px;
-
-    font-size:11px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-
-/* ADD = GREEN */
-
-.add-money{
-
-    background:#064d2c;
-
-    color:#00ff66;
-
-    border:1px solid #00ff66;
-}
-
-.add-money:hover{
-
-    background:#08753e;
-
-    box-shadow:
-        0 0 10px rgba(0,255,102,.3);
-}
-
-
-/* SUBTRACT = RED */
-
-.subtract-money{
-
-    background:#4c1111;
-
-    color:#ff5555;
-
-    border:1px solid #ff4444;
-}
-
-.subtract-money:hover{
-
-    background:#721717;
-
-    box-shadow:
-        0 0 10px rgba(255,60,60,.3);
+.money-actions button{
+    font-size:12px;
+    padding:9px 5px;
 }
 
 
@@ -550,65 +513,6 @@ textarea:focus{
 
 
 /* =====================================================
-   TRANSACTION HISTORY
-===================================================== */
-
-.history{
-
-    margin-top:14px;
-
-    border-top:1px solid #292929;
-
-    padding-top:12px;
-}
-
-.history-title{
-
-    color:#888;
-
-    font-size:11px;
-
-    font-weight:bold;
-
-    margin-bottom:8px;
-}
-
-.transaction{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:8px;
-
-    padding:8px 0;
-
-    border-bottom:1px solid #202020;
-
-    font-size:12px;
-}
-
-.transaction:last-child{
-    border-bottom:0;
-}
-
-.transaction-add{
-    color:#00ff66;
-}
-
-.transaction-sub{
-    color:#ff5555;
-}
-
-.transaction-date{
-    color:#666;
-    font-size:10px;
-}
-
-
-/* =====================================================
    ACTIONS
 ===================================================== */
 
@@ -620,7 +524,7 @@ textarea:focus{
 
     flex-wrap:wrap;
 
-    margin-top:12px;
+    margin-top:10px;
 }
 
 
@@ -677,7 +581,218 @@ textarea:focus{
 
 
 /* =====================================================
-   TODO PROGRESS
+   EXPENSE DASHBOARD
+===================================================== */
+
+.expense-dashboard{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
+
+    margin-bottom:20px;
+}
+
+.expense-box{
+
+    background:#0e0e0e;
+
+    border:1px solid #292929;
+
+    border-radius:12px;
+
+    padding:17px;
+}
+
+.expense-box small{
+
+    color:#888;
+}
+
+.expense-box strong{
+
+    display:block;
+
+    margin-top:7px;
+
+    font-size:23px;
+}
+
+.expense-positive{
+    color:#00ff66;
+}
+
+.expense-negative{
+    color:#ff5555;
+}
+
+.expense-brown{
+    color:#c47b24;
+}
+
+
+/* =====================================================
+   EXPENSE FORM FILTER
+===================================================== */
+
+.expense-filter{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr 1fr;
+
+    gap:10px;
+
+    margin-bottom:20px;
+}
+
+.expense-filter label{
+
+    color:#aaa;
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   EXPENSE CARD
+===================================================== */
+
+.expense-card{
+
+    position:relative;
+}
+
+.expense-card h3{
+
+    margin:0 0 8px;
+}
+
+.expense-amount{
+
+    font-size:25px;
+
+    font-weight:bold;
+
+    color:#ff5555;
+}
+
+.expense-meta{
+
+    color:#999;
+
+    font-size:12px;
+
+    margin-top:6px;
+}
+
+.category{
+
+    display:inline-block;
+
+    margin-top:8px;
+
+    padding:5px 9px;
+
+    border-radius:20px;
+
+    background:#21160f;
+
+    border:1px solid #5c351c;
+
+    color:#c47b24;
+
+    font-size:11px;
+
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   CHARTS
+===================================================== */
+
+.chart-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:15px;
+
+    margin-top:20px;
+}
+
+.chart-box{
+
+    background:#0e0e0e;
+
+    border:1px solid #292929;
+
+    border-radius:12px;
+
+    padding:17px;
+}
+
+.chart-box h3{
+
+    margin-top:0;
+
+    color:#ddd;
+}
+
+.chart-box canvas{
+
+    width:100% !important;
+
+    height:300px !important;
+}
+
+
+/* =====================================================
+   TRANSACTIONS
+===================================================== */
+
+.transaction-list{
+
+    margin-top:15px;
+
+    border-top:1px solid #292929;
+}
+
+.transaction{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:9px 0;
+
+    border-bottom:1px solid #222;
+
+    font-size:13px;
+}
+
+.transaction-add{
+    color:#00ff66;
+}
+
+.transaction-sub{
+    color:#ff5555;
+}
+
+
+/* =====================================================
+   TODO
 ===================================================== */
 
 .progress-box{
@@ -757,11 +872,6 @@ textarea:focus{
         0 0 20px #ff3030,
         0 0 35px #ff3030;
 }
-
-
-/* =====================================================
-   TODO
-===================================================== */
 
 .task{
 
@@ -859,7 +969,7 @@ textarea:focus{
 
     padding:22px;
 
-    width:min(500px,100%);
+    width:min(520px,100%);
 
     max-height:90vh;
 
@@ -955,6 +1065,27 @@ textarea:focus{
    MOBILE
 ===================================================== */
 
+@media(max-width:900px){
+
+    .summary,
+    .expense-dashboard{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .expense-filter{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .chart-grid{
+
+        grid-template-columns:1fr;
+    }
+}
+
 @media(max-width:650px){
 
     header{
@@ -968,7 +1099,9 @@ textarea:focus{
         text-align:left;
     }
 
-    .summary{
+    .summary,
+    .expense-dashboard{
+
         grid-template-columns:1fr;
     }
 
@@ -979,12 +1112,13 @@ textarea:focus{
         align-items:flex-start;
     }
 
-    nav{
-        overflow:auto;
+    .expense-filter{
+
+        grid-template-columns:1fr;
     }
 
-    .amounts{
-        grid-template-columns:1fr;
+    nav{
+        overflow:auto;
     }
 
     .task{
@@ -1001,12 +1135,16 @@ textarea:focus{
         padding-left:34px;
     }
 
+    .money-actions{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
 }
 
 </style>
 
 </head>
-
 
 <body>
 
@@ -1019,14 +1157,13 @@ textarea:focus{
 
 <div>
 
-<h1>STUDENT`S CA</h1>
+<h1>STUDENT'S CA</h1>
 
 <p>
-Accounts • Notes • Tasks
+Accounts • Expenses • Notes • Tasks
 </p>
 
 </div>
-
 
 <div class="clock">
 
@@ -1057,6 +1194,12 @@ ACCOUNTS
 
 <button
 class="tab"
+onclick="showTab('expenses',this)">
+EXPENSES
+</button>
+
+<button
+class="tab"
 onclick="showTab('notes',this)">
 NOTEPAD
 </button>
@@ -1077,20 +1220,16 @@ TO-DO LIST
      ACCOUNTS
 ===================================================== -->
 
-<section
-id="accounts"
-class="active">
+<section id="accounts" class="active">
 
 <div class="head">
 
 <div>
 
-<h2>
-Student Accounts
-</h2>
+<h2>Student Accounts</h2>
 
 <p>
-Add or subtract money whenever someone gives or takes money.
+Track given, taken, additions and subtractions.
 </p>
 
 </div>
@@ -1098,9 +1237,7 @@ Add or subtract money whenever someone gives or takes money.
 <button
 class="btn"
 onclick="addPerson()">
-
 + ADD NAME
-
 </button>
 
 </div>
@@ -1109,41 +1246,23 @@ onclick="addPerson()">
 <div class="summary">
 
 <div class="box">
-
-<span>
-PEOPLE
-</span>
-
-<strong id="peopleCount">
-0
-</strong>
-
+<span>PEOPLE</span>
+<strong id="peopleCount">0</strong>
 </div>
 
-
 <div class="box">
-
-<span>
-YOU RECEIVE
-</span>
-
-<strong id="receive">
-₹0.00
-</strong>
-
+<span>YOU RECEIVE</span>
+<strong id="receive">₹0.00</strong>
 </div>
 
+<div class="box">
+<span>YOU PAY</span>
+<strong id="pay">₹0.00</strong>
+</div>
 
 <div class="box">
-
-<span>
-YOU PAY
-</span>
-
-<strong id="pay">
-₹0.00
-</strong>
-
+<span>NET BALANCE</span>
+<strong id="netBalance">₹0.00</strong>
 </div>
 
 </div>
@@ -1154,21 +1273,285 @@ id="search"
 placeholder="Search name..."
 oninput="renderPeople()">
 
-
 <br><br>
 
+<div id="people" class="cards"></div>
 
-<div
-id="people"
-class="cards">
+<div id="noPeople" class="empty">
+No names added yet.
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     EXPENSES
+===================================================== -->
+
+<section id="expenses">
+
+<div class="head">
+
+<div>
+
+<h2>Daily Expenses</h2>
+
+<p>
+Record daily spending and automatically see monthly and annual totals.
+</p>
+
+</div>
+
+<button
+class="btn"
+onclick="addExpense()">
++ ADD EXPENSE
+</button>
+
 </div>
 
 
+<div class="expense-dashboard">
+
+<div class="expense-box">
+
+<small>TODAY</small>
+
+<strong
+id="todayExpense"
+class="expense-negative">
+₹0.00
+</strong>
+
+</div>
+
+<div class="expense-box">
+
+<small>THIS MONTH</small>
+
+<strong
+id="monthExpense"
+class="expense-negative">
+₹0.00
+</strong>
+
+</div>
+
+<div class="expense-box">
+
+<small>THIS YEAR</small>
+
+<strong
+id="yearExpense"
+class="expense-negative">
+₹0.00
+</strong>
+
+</div>
+
+<div class="expense-box">
+
+<small>PROJECTED ANNUAL</small>
+
+<strong
+id="projectedAnnual"
+class="expense-brown">
+₹0.00
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="expense-dashboard">
+
+<div class="expense-box">
+
+<small>DAILY AVERAGE</small>
+
+<strong
+id="dailyAverage"
+class="expense-brown">
+₹0.00
+</strong>
+
+</div>
+
+<div class="expense-box">
+
+<small>PROJECTED MONTHLY</small>
+
+<strong
+id="projectedMonthly"
+class="expense-brown">
+₹0.00
+</strong>
+
+</div>
+
+<div class="expense-box">
+
+<small>EXPENSE ENTRIES</small>
+
+<strong id="expenseCount">
+0
+</strong>
+
+</div>
+
+<div class="expense-box">
+
+<small>TOP CATEGORY</small>
+
+<strong id="topCategory">
+-
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="expense-filter">
+
+<label>
+
+VIEW
+
+<select
+id="expensePeriod"
+onchange="renderExpenses()">
+
+<option value="all">
+All Expenses
+</option>
+
+<option value="today">
+Today
+</option>
+
+<option value="month">
+This Month
+</option>
+
+<option value="year">
+This Year
+</option>
+
+</select>
+
+</label>
+
+
+<label>
+
+CATEGORY
+
+<select
+id="expenseCategoryFilter"
+onchange="renderExpenses()">
+
+<option value="all">
+All Categories
+</option>
+
+<option>Food</option>
+<option>Travel</option>
+<option>Education</option>
+<option>Shopping</option>
+<option>Bills</option>
+<option>Entertainment</option>
+<option>Health</option>
+<option>Other</option>
+
+</select>
+
+</label>
+
+
+<label>
+
+SEARCH
+
+<input
+id="expenseSearch"
+placeholder="Search expense..."
+oninput="renderExpenses()">
+
+</label>
+
+
+<label>
+
+MONTH FOR GRAPH
+
+<input
+id="graphMonth"
+type="month"
+onchange="drawCharts()">
+
+</label>
+
+</div>
+
+
+<div id="expensesList" class="expenses"></div>
+
 <div
-id="noPeople"
+id="noExpenses"
 class="empty">
 
-No names added yet.
+No expenses recorded yet.
+
+</div>
+
+
+<div class="chart-grid">
+
+<div class="chart-box">
+
+<h3>
+7-Day Expense Chart
+</h3>
+
+<canvas id="weekChart"></canvas>
+
+</div>
+
+
+<div class="chart-box">
+
+<h3>
+Category Expense Chart
+</h3>
+
+<canvas id="categoryChart"></canvas>
+
+</div>
+
+
+<div class="chart-box">
+
+<h3>
+12-Month Expense Chart
+</h3>
+
+<canvas id="monthChart"></canvas>
+
+</div>
+
+
+<div class="chart-box">
+
+<h3>
+Account Balance Chart
+</h3>
+
+<canvas id="accountChart"></canvas>
+
+</div>
 
 </div>
 
@@ -1186,9 +1569,7 @@ No names added yet.
 
 <div>
 
-<h2>
-Notepad
-</h2>
+<h2>Notepad</h2>
 
 <p>
 Save notes, links and pictures.
@@ -1199,9 +1580,7 @@ Save notes, links and pictures.
 <button
 class="btn"
 onclick="addNote()">
-
 + ADD NOTE
-
 </button>
 
 </div>
@@ -1235,9 +1614,7 @@ No notes saved yet.
 
 <div>
 
-<h2>
-To-Do List
-</h2>
+<h2>To-Do List</h2>
 
 <p>
 Tick completed work. Edit or delete anytime.
@@ -1248,9 +1625,7 @@ Tick completed work. Edit or delete anytime.
 <button
 class="btn"
 onclick="addTask()">
-
 + ADD TASK
-
 </button>
 
 </div>
@@ -1292,8 +1667,7 @@ No tasks
 </div>
 
 
-<div id="tasks">
-</div>
+<div id="tasks"></div>
 
 
 <div
@@ -1323,21 +1697,16 @@ class="modal hide">
 <button
 class="close"
 onclick="closeModal('personModal')">
-
 ×
-
 </button>
-
 
 <h2 id="personTitle">
 Add Student
 </h2>
 
-
 <input
 type="hidden"
 id="personId">
-
 
 <label>
 
@@ -1352,13 +1721,12 @@ placeholder="Student name">
 
 <label>
 
-Initial Given Amount ₹
+Given Amount ₹
 
 <input
 id="given"
 type="number"
 min="0"
-step="0.01"
 value="0">
 
 </label>
@@ -1366,16 +1734,20 @@ value="0">
 
 <label>
 
-Initial Taken Amount ₹
+Taken Amount ₹
 
 <input
 id="taken"
 type="number"
 min="0"
-step="0.01"
 value="0">
 
 </label>
+
+
+<p style="color:#888;font-size:12px">
+After saving, use the ADD/SUBTRACT buttons on the account card to modify the amounts.
+</p>
 
 
 <div class="modalbuttons">
@@ -1383,9 +1755,7 @@ value="0">
 <button
 class="btn"
 onclick="savePerson()">
-
 SAVE
-
 </button>
 
 </div>
@@ -1409,32 +1779,20 @@ class="modal hide">
 <button
 class="close"
 onclick="closeModal('moneyModal')">
-
 ×
-
 </button>
 
-
 <h2 id="moneyTitle">
-Add Money
+Modify Money
 </h2>
-
-
-<p
-id="moneyPerson"
-style="color:#aaa;">
-</p>
-
 
 <input
 type="hidden"
 id="moneyPersonId">
 
-
 <input
 type="hidden"
 id="moneyType">
-
 
 <label>
 
@@ -1452,11 +1810,11 @@ placeholder="Enter amount">
 
 <label>
 
-Reason / Note
+Description
 
 <input
-id="moneyReason"
-placeholder="Example: Paid for lunch">
+id="moneyDescription"
+placeholder="Example: Lunch, payment, borrowed...">
 
 </label>
 
@@ -1465,10 +1823,116 @@ placeholder="Example: Paid for lunch">
 
 <button
 class="btn"
-onclick="saveMoney()">
-
+onclick="saveMoneyChange()">
 SAVE
+</button>
 
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     EXPENSE MODAL
+===================================================== -->
+
+<div
+id="expenseModal"
+class="modal hide">
+
+<div class="modalbox">
+
+<button
+class="close"
+onclick="closeModal('expenseModal')">
+×
+</button>
+
+<h2 id="expenseTitle">
+Add Expense
+</h2>
+
+<input
+type="hidden"
+id="expenseId">
+
+<label>
+
+Expense Name
+
+<input
+id="expenseName"
+placeholder="Example: Lunch">
+
+</label>
+
+
+<label>
+
+Amount ₹
+
+<input
+id="expenseAmount"
+type="number"
+min="0"
+step="0.01"
+placeholder="Enter amount">
+
+</label>
+
+
+<label>
+
+Category
+
+<select id="expenseCategory">
+
+<option>Food</option>
+<option>Travel</option>
+<option>Education</option>
+<option>Shopping</option>
+<option>Bills</option>
+<option>Entertainment</option>
+<option>Health</option>
+<option>Other</option>
+
+</select>
+
+</label>
+
+
+<label>
+
+Date
+
+<input
+id="expenseDate"
+type="date">
+
+</label>
+
+
+<label>
+
+Note
+
+<textarea
+id="expenseNote"
+rows="4"
+placeholder="Optional note"></textarea>
+
+</label>
+
+
+<div class="modalbuttons">
+
+<button
+class="btn"
+onclick="saveExpense()">
+SAVE
 </button>
 
 </div>
@@ -1492,21 +1956,16 @@ class="modal hide">
 <button
 class="close"
 onclick="closeModal('noteModal')">
-
 ×
-
 </button>
-
 
 <h2 id="noteTitle">
 Add Note
 </h2>
 
-
 <input
 type="hidden"
 id="noteId">
-
 
 <label>
 
@@ -1517,7 +1976,6 @@ id="nTitle"
 placeholder="Note title">
 
 </label>
-
 
 <label>
 
@@ -1530,7 +1988,6 @@ placeholder="Write your note..."></textarea>
 
 </label>
 
-
 <label>
 
 Link
@@ -1540,7 +1997,6 @@ id="nLink"
 placeholder="https://example.com">
 
 </label>
-
 
 <label>
 
@@ -1553,19 +2009,14 @@ accept="image/*">
 
 </label>
 
-
-<div id="preview">
-</div>
-
+<div id="preview"></div>
 
 <div class="modalbuttons">
 
 <button
 class="btn"
 onclick="saveNote()">
-
 SAVE
-
 </button>
 
 </div>
@@ -1589,21 +2040,16 @@ class="modal hide">
 <button
 class="close"
 onclick="closeModal('taskModal')">
-
 ×
-
 </button>
-
 
 <h2>
 Add / Edit Task
 </h2>
 
-
 <input
 type="hidden"
 id="taskId">
-
 
 <label>
 
@@ -1615,7 +2061,6 @@ placeholder="What do you have to do?">
 
 </label>
 
-
 <label>
 
 Date
@@ -1625,7 +2070,6 @@ id="taskDate"
 type="date">
 
 </label>
-
 
 <label>
 
@@ -1637,15 +2081,12 @@ type="time">
 
 </label>
 
-
 <div class="modalbuttons">
 
 <button
 class="btn"
 onclick="saveTask()">
-
 SAVE
-
 </button>
 
 </div>
@@ -1655,16 +2096,10 @@ SAVE
 </div>
 
 
-
-<div
-id="toast"
-class="toast">
-</div>
-
+<div id="toast" class="toast"></div>
 
 
 <script>
-
 
 /* =====================================================
    STORAGE
@@ -1685,27 +2120,37 @@ JSON.parse(
 localStorage.getItem("sca_tasks") || "[]"
 );
 
+let expenses =
+JSON.parse(
+localStorage.getItem("sca_expenses") || "[]"
+);
+
 
 /* =====================================================
-   SAVE DATA
+   SAVE
 ===================================================== */
 
 function saveData(){
 
-    localStorage.setItem(
-        "sca_people",
-        JSON.stringify(people)
-    );
+localStorage.setItem(
+"sca_people",
+JSON.stringify(people)
+);
 
-    localStorage.setItem(
-        "sca_notes",
-        JSON.stringify(notes)
-    );
+localStorage.setItem(
+"sca_notes",
+JSON.stringify(notes)
+);
 
-    localStorage.setItem(
-        "sca_tasks",
-        JSON.stringify(tasks)
-    );
+localStorage.setItem(
+"sca_tasks",
+JSON.stringify(tasks)
+);
+
+localStorage.setItem(
+"sca_expenses",
+JSON.stringify(expenses)
+);
 
 }
 
@@ -1716,42 +2161,82 @@ function saveData(){
 
 function makeID(){
 
-    return Date.now().toString(36)+
-    Math.random().toString(36).substring(2);
+return Date.now().toString(36)+
+Math.random()
+.toString(36)
+.substring(2);
 
 }
 
 
 /* =====================================================
-   MONEY FORMAT
+   MONEY
 ===================================================== */
 
 function money(number){
 
-    return "₹"+
-    Number(number||0).toLocaleString(
-        "en-IN",
-        {
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        }
-    );
+return "₹"+
+Number(number||0)
+.toLocaleString(
+"en-IN",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}
+);
 
 }
 
 
 /* =====================================================
-   ESCAPE HTML
+   SAFE TEXT
 ===================================================== */
 
 function safe(text){
 
-    return String(text||"")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+return String(text||"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   DATE HELPERS
+===================================================== */
+
+function todayString(){
+
+const d=new Date();
+
+const y=d.getFullYear();
+
+const m=
+String(d.getMonth()+1)
+.padStart(2,"0");
+
+const day=
+String(d.getDate())
+.padStart(2,"0");
+
+return `${y}-${m}-${day}`;
+
+}
+
+
+function currentMonth(){
+
+return todayString().substring(0,7);
+
+}
+
+
+function currentYear(){
+
+return todayString().substring(0,4);
 
 }
 
@@ -1762,32 +2247,29 @@ function safe(text){
 
 function updateClock(){
 
-    const now=new Date();
+const now=new Date();
 
-    document.getElementById("time")
-    .textContent=
-    now.toLocaleTimeString("en-GB");
+document.getElementById("time")
+.textContent=
+now.toLocaleTimeString("en-GB");
 
-    document.getElementById("date")
-    .textContent=
-    now.toLocaleDateString(
-        "en-GB",
-        {
-            weekday:"long",
-            day:"2-digit",
-            month:"long",
-            year:"numeric"
-        }
-    );
+document.getElementById("date")
+.textContent=
+now.toLocaleDateString(
+"en-GB",
+{
+weekday:"long",
+day:"2-digit",
+month:"long",
+year:"numeric"
+}
+);
 
 }
 
 updateClock();
 
-setInterval(
-    updateClock,
-    1000
-);
+setInterval(updateClock,1000);
 
 
 /* =====================================================
@@ -1796,25 +2278,32 @@ setInterval(
 
 function showTab(id,button){
 
-    document
-    .querySelectorAll("section")
-    .forEach(
-        section =>
-        section.classList.remove("active")
-    );
+document
+.querySelectorAll("section")
+.forEach(
+section=>
+section.classList.remove("active")
+);
 
-    document
-    .getElementById(id)
-    .classList.add("active");
+document
+.getElementById(id)
+.classList.add("active");
 
-    document
-    .querySelectorAll(".tab")
-    .forEach(
-        button =>
-        button.classList.remove("active")
-    );
+document
+.querySelectorAll(".tab")
+.forEach(
+button=>
+button.classList.remove("active")
+);
 
-    button.classList.add("active");
+button.classList.add("active");
+
+
+if(id==="expenses"){
+
+setTimeout(drawCharts,50);
+
+}
 
 }
 
@@ -1825,168 +2314,299 @@ function showTab(id,button){
 
 function toast(message){
 
-    const t=
-    document.getElementById("toast");
+const t=
+document.getElementById("toast");
 
-    t.textContent=message;
+t.textContent=message;
 
-    t.classList.add("show");
+t.classList.add("show");
 
-    setTimeout(
-        ()=>{
-            t.classList.remove("show");
-        },
-        2200
-    );
+setTimeout(
+()=>{
+t.classList.remove("show");
+},
+2200
+);
 
 }
 
 
 /* =====================================================
-   ADD PERSON
+   ACCOUNTS
 ===================================================== */
 
 function addPerson(){
 
-    document.getElementById("personId").value="";
+document.getElementById("personId").value="";
 
-    document.getElementById("personName").value="";
+document.getElementById("personName").value="";
 
-    document.getElementById("given").value=0;
+document.getElementById("given").value=0;
 
-    document.getElementById("taken").value=0;
+document.getElementById("taken").value=0;
 
-    document.getElementById("personTitle")
-    .textContent="Add Student";
+document.getElementById("personTitle")
+.textContent="Add Student";
 
-    document
-    .getElementById("personModal")
-    .classList.remove("hide");
+document
+.getElementById("personModal")
+.classList.remove("hide");
 
 }
 
-
-/* =====================================================
-   EDIT PERSON
-===================================================== */
 
 function editPerson(id){
 
-    const p=
-    people.find(
-        person=>person.id===id
-    );
+const p=
+people.find(
+person=>person.id===id
+);
 
-    if(!p)return;
+if(!p)return;
 
-    document.getElementById("personId")
-    .value=p.id;
+document.getElementById("personId").value=p.id;
 
-    document.getElementById("personName")
-    .value=p.name;
+document.getElementById("personName").value=p.name;
 
-    document.getElementById("given")
-    .value=p.given;
+document.getElementById("given").value=p.given;
 
-    document.getElementById("taken")
-    .value=p.taken;
+document.getElementById("taken").value=p.taken;
 
-    document.getElementById("personTitle")
-    .textContent="Edit Student";
+document.getElementById("personTitle")
+.textContent="Edit Student";
 
-    document
-    .getElementById("personModal")
-    .classList.remove("hide");
+document
+.getElementById("personModal")
+.classList.remove("hide");
+
+}
+
+
+function savePerson(){
+
+const name=
+document
+.getElementById("personName")
+.value.trim();
+
+if(!name){
+
+alert("Please enter a name.");
+
+return;
+
+}
+
+const id=
+document.getElementById("personId").value;
+
+const old=
+people.find(p=>p.id===id);
+
+const person={
+
+id:id||makeID(),
+
+name:name,
+
+given:
+Number(
+document.getElementById("given").value
+)||0,
+
+taken:
+Number(
+document.getElementById("taken").value
+)||0,
+
+transactions:
+old?.transactions||[]
+
+};
+
+
+if(id){
+
+people=
+people.map(
+p=>p.id===id?person:p
+);
+
+}else{
+
+people.push(person);
+
+}
+
+saveData();
+
+renderPeople();
+
+closeModal("personModal");
+
+toast("Account saved!");
 
 }
 
 
 /* =====================================================
-   SAVE PERSON
+   MODIFY MONEY
 ===================================================== */
 
-function savePerson(){
+function modifyMoney(id,type){
 
-    const name=
-    document
-    .getElementById("personName")
-    .value.trim();
+document.getElementById("moneyPersonId")
+.value=id;
 
-    if(!name){
+document.getElementById("moneyType")
+.value=type;
 
-        alert("Please enter a name.");
+document.getElementById("moneyAmount")
+.value="";
 
-        return;
-    }
-
-    const personID=
-    document.getElementById("personId")
-    .value;
-
-    const given=
-    Number(
-        document.getElementById("given").value
-    )||0;
-
-    const taken=
-    Number(
-        document.getElementById("taken").value
-    )||0;
+document.getElementById("moneyDescription")
+.value="";
 
 
-    if(personID){
+const names={
+givenAdd:"ADD TO GIVEN",
+givenSub:"SUBTRACT FROM GIVEN",
+takenAdd:"ADD TO TAKEN",
+takenSub:"SUBTRACT FROM TAKEN"
+};
 
-        people=
-        people.map(
-            p=>{
-
-                if(p.id===personID){
-
-                    return{
-
-                        ...p,
-
-                        name:name,
-
-                        given:given,
-
-                        taken:taken
-
-                    };
-
-                }
-
-                return p;
-
-            }
-        );
-
-    }else{
-
-        people.push({
-
-            id:makeID(),
-
-            name:name,
-
-            given:given,
-
-            taken:taken,
-
-            history:[]
-
-        });
-
-    }
+document.getElementById("moneyTitle")
+.textContent=
+names[type]||"Modify Money";
 
 
-    saveData();
+document
+.getElementById("moneyModal")
+.classList.remove("hide");
 
-    renderPeople();
+}
 
-    closeModal("personModal");
 
-    toast("Account saved!");
+function saveMoneyChange(){
+
+const id=
+document.getElementById("moneyPersonId")
+.value;
+
+const type=
+document.getElementById("moneyType")
+.value;
+
+const amount=
+Number(
+document.getElementById("moneyAmount")
+.value
+);
+
+const description=
+document
+.getElementById("moneyDescription")
+.value
+.trim();
+
+
+if(!amount || amount<=0){
+
+alert("Enter a valid amount.");
+
+return;
+
+}
+
+
+const person=
+people.find(
+p=>p.id===id
+);
+
+if(!person)return;
+
+
+if(!person.transactions)
+person.transactions=[];
+
+
+let field="given";
+
+let operation="add";
+
+if(type==="givenAdd"){
+
+field="given";
+operation="add";
+
+}
+
+if(type==="givenSub"){
+
+field="given";
+operation="sub";
+
+}
+
+if(type==="takenAdd"){
+
+field="taken";
+operation="add";
+
+}
+
+if(type==="takenSub"){
+
+field="taken";
+operation="sub";
+
+}
+
+
+if(operation==="add"){
+
+person[field]=
+Number(person[field]||0)+amount;
+
+}else{
+
+person[field]=
+Math.max(
+0,
+Number(person[field]||0)-amount
+);
+
+}
+
+
+person.transactions.unshift({
+
+id:makeID(),
+
+type:type,
+
+amount:amount,
+
+description:
+description||"Money adjustment",
+
+date:todayString(),
+
+time:new Date()
+.toLocaleTimeString("en-GB")
+.substring(0,5)
+
+});
+
+
+saveData();
+
+renderPeople();
+
+closeModal("moneyModal");
+
+toast("Money updated!");
 
 }
 
@@ -1997,704 +2617,1487 @@ function savePerson(){
 
 function deletePerson(id){
 
-    if(
-        !confirm(
-            "Delete this student's account?"
-        )
-    )return;
+if(
+!confirm(
+"Delete this student's account?"
+)
+)return;
 
-    people=
-    people.filter(
-        p=>p.id!==id
-    );
+people=
+people.filter(
+p=>p.id!==id
+);
 
-    saveData();
+saveData();
 
-    renderPeople();
+renderPeople();
 
-    toast("Student deleted.");
-
-}
-
-
-/* =====================================================
-   ADD MONEY
-===================================================== */
-
-function addMoney(id,type){
-
-    const p=
-    people.find(
-        person=>person.id===id
-    );
-
-    if(!p)return;
-
-    document.getElementById("moneyPersonId")
-    .value=id;
-
-    document.getElementById("moneyType")
-    .value=type;
-
-    document.getElementById("moneyAmount")
-    .value="";
-
-    document.getElementById("moneyReason")
-    .value="";
-
-
-    if(type==="given"){
-
-        document.getElementById("moneyTitle")
-        .textContent="Add / Subtract GIVEN";
-
-    }else{
-
-        document.getElementById("moneyTitle")
-        .textContent="Add / Subtract TAKEN";
-
-    }
-
-
-    document.getElementById("moneyPerson")
-    .textContent=
-    "Student: "+p.name;
-
-
-    document
-    .getElementById("moneyModal")
-    .classList.remove("hide");
+toast("Student deleted.");
 
 }
 
 
 /* =====================================================
-   SAVE MONEY TRANSACTION
-===================================================== */
-
-function saveMoney(){
-
-    const id=
-    document.getElementById("moneyPersonId")
-    .value;
-
-    const type=
-    document.getElementById("moneyType")
-    .value;
-
-    const amount=
-    Number(
-        document.getElementById("moneyAmount")
-        .value
-    );
-
-
-    if(!amount || amount<=0){
-
-        alert("Please enter a valid amount.");
-
-        return;
-    }
-
-
-    const reason=
-    document
-    .getElementById("moneyReason")
-    .value.trim();
-
-
-    const person=
-    people.find(
-        p=>p.id===id
-    );
-
-    if(!person)return;
-
-
-    /* ==============================================
-       SECOND CHOICE:
-       Ask whether money should be ADDED or SUBTRACTED
-    ============================================== */
-
-    const action=
-    confirm(
-        "Press OK to ADD money.\n\nPress Cancel to SUBTRACT money."
-    );
-
-
-    if(type==="given"){
-
-        if(action){
-
-            person.given += amount;
-
-        }else{
-
-            person.given -= amount;
-
-            if(person.given<0)
-                person.given=0;
-
-        }
-
-    }else{
-
-        if(action){
-
-            person.taken += amount;
-
-        }else{
-
-            person.taken -= amount;
-
-            if(person.taken<0)
-                person.taken=0;
-
-        }
-
-    }
-
-
-    if(!person.history)
-        person.history=[];
-
-
-    person.history.unshift({
-
-        id:makeID(),
-
-        type:type,
-
-        action:
-        action
-        ?"add"
-        :"subtract",
-
-        amount:amount,
-
-        reason:
-        reason||
-        (
-            action
-            ?"Money added"
-            :"Money subtracted"
-        ),
-
-        date:
-        new Date().toLocaleString(
-            "en-IN"
-        )
-
-    });
-
-
-    saveData();
-
-    renderPeople();
-
-    closeModal("moneyModal");
-
-    toast(
-        action
-        ?"Money added successfully!"
-        :"Money subtracted successfully!"
-    );
-
-}
-
-
-/* =====================================================
-   RENDER PEOPLE
+   ACCOUNT RENDER
 ===================================================== */
 
 function renderPeople(){
 
-    const search=
-    document
-    .getElementById("search")
-    .value
-    .toLowerCase();
+const search=
+document
+.getElementById("search")
+.value
+.toLowerCase();
 
+const list=
+document.getElementById("people");
 
-    const list=
-    document.getElementById("people");
+list.innerHTML="";
 
-    list.innerHTML="";
 
+let receive=0;
 
-    let receive=0;
+let pay=0;
 
-    let pay=0;
 
+people.forEach(p=>{
 
-    people.forEach(p=>{
+const balance=
+Number(p.given||0)-
+Number(p.taken||0);
 
-        const balance=
-        Number(p.given)-
-        Number(p.taken);
+if(balance>0)
+receive+=balance;
 
+if(balance<0)
+pay+=Math.abs(balance);
 
-        if(balance>0)
-            receive+=balance;
+});
 
 
-        if(balance<0)
-            pay+=Math.abs(balance);
+document.getElementById("peopleCount")
+.textContent=people.length;
 
-    });
+document.getElementById("receive")
+.textContent=money(receive);
 
+document.getElementById("pay")
+.textContent=money(pay);
 
-    document.getElementById("peopleCount")
-    .textContent=people.length;
+document.getElementById("netBalance")
+.textContent=
+money(receive-pay);
 
 
-    document.getElementById("receive")
-    .textContent=money(receive);
+const filtered=
+people.filter(
+p=>
+p.name
+.toLowerCase()
+.includes(search)
+);
 
 
-    document.getElementById("pay")
-    .textContent=money(pay);
+filtered.forEach(p=>{
 
+const balance=
+Number(p.given||0)-
+Number(p.taken||0);
 
-    const filtered=
-    people.filter(
-        p=>
-        p.name
-        .toLowerCase()
-        .includes(search)
-    );
 
+let status;
 
-    filtered.forEach(p=>{
 
-        const balance=
-        Number(p.given)-
-        Number(p.taken);
+if(balance>0){
 
+status=`
 
-        let status;
+<div class="balance receive">
 
+They have to pay you
+${money(balance)}
 
-        if(balance>0){
+</div>
 
-            status=`
+`;
 
-            <div class="balance receive">
+}else if(balance<0){
 
-                They have to pay you
-                ${money(balance)}
+status=`
 
-            </div>
+<div class="balance pay">
 
-            `;
+You have to pay them
+${money(Math.abs(balance))}
 
-        }
+</div>
 
-        else if(balance<0){
+`;
 
-            status=`
+}else{
 
-            <div class="balance pay">
+status=`
 
-                You have to pay them
-                ${money(Math.abs(balance))}
+<div class="balance settle">
 
-            </div>
+Account settled
 
-            `;
+</div>
 
-        }
+`;
 
-        else{
+}
 
-            status=`
 
-            <div class="balance settle">
+const transactions=
+(p.transactions||[])
+.slice(0,5)
+.map(t=>{
 
-                Account settled
+const add=
+t.type.includes("Add")||
+t.type.includes("givenAdd")||
+t.type.includes("takenAdd");
 
-            </div>
+return `
 
-            `;
+<div class="transaction">
 
-        }
+<span>
 
+${safe(t.description)}
 
-        /* =========================================
-           HISTORY
-        ========================================= */
+<br>
 
-        let historyHTML="";
+<small style="color:#777">
+${t.date} • ${t.time}
+</small>
 
+</span>
 
-        if(
-            p.history &&
-            p.history.length
-        ){
+<strong
+class="${add?'transaction-add':'transaction-sub'}">
 
-            historyHTML=`
+${add?"+":"-"}${money(t.amount)}
 
-            <div class="history">
+</strong>
 
-                <div class="history-title">
-                    RECENT TRANSACTIONS
-                </div>
+</div>
 
-                ${
-                    p.history
-                    .slice(0,5)
-                    .map(h=>`
+`;
 
-                        <div class="transaction">
+})
+.join("");
 
-                            <div>
 
-                                <span
-                                class="${
-                                    h.action==="add"
-                                    ?"transaction-add"
-                                    :"transaction-sub"
-                                }">
+const card=
+document.createElement("div");
 
-                                ${
-                                    h.action==="add"
-                                    ?"+"
-                                    :"−"
-                                }
+card.className="card";
 
-                                ${money(h.amount)}
 
-                                </span>
+card.innerHTML=`
 
-                                <br>
+<h3>
+${safe(p.name)}
+</h3>
 
-                                <span>
-                                ${
-                                    h.type==="given"
-                                    ?"GIVEN"
-                                    :"TAKEN"
-                                }
-                                </span>
 
-                                <br>
+<div class="amounts">
 
-                                <span
-                                style="color:#777">
+<div class="amount">
 
-                                ${safe(h.reason)}
+<small>
+GIVEN
+</small>
 
-                                </span>
+<b>
+${money(p.given)}
+</b>
 
-                            </div>
+</div>
 
-                            <div class="transaction-date">
 
-                                ${safe(h.date)}
+<div class="amount">
 
-                            </div>
+<small>
+TAKEN
+</small>
 
-                        </div>
+<b>
+${money(p.taken)}
+</b>
 
-                    `)
-                    .join("")
-                }
+</div>
 
-            </div>
+</div>
 
-            `;
 
-        }
+<div class="money-actions">
 
+<button
+class="btn green"
+onclick="modifyMoney('${p.id}','givenAdd')">
 
-        const card=
-        document.createElement("div");
++ GIVEN
 
-        card.className="card";
+</button>
 
+<button
+class="btn red"
+onclick="modifyMoney('${p.id}','givenSub')">
 
-        card.innerHTML=`
+− GIVEN
 
-            <h3>
-                ${safe(p.name)}
-            </h3>
+</button>
 
+<button
+class="btn green"
+onclick="modifyMoney('${p.id}','takenAdd')">
 
-            <div class="amounts">
++ TAKEN
 
+</button>
 
-                <!-- GIVEN -->
+<button
+class="btn red"
+onclick="modifyMoney('${p.id}','takenSub')">
 
-                <div class="amount">
+− TAKEN
 
-                    <small>
-                        GIVEN
-                    </small>
+</button>
 
-                    <b>
-                        ${money(p.given)}
-                    </b>
+</div>
 
 
-                    <div class="money-actions">
+${status}
 
-                        <button
-                        class="money-btn add-money"
-                        onclick="addMoney('${p.id}','given')">
 
-                        + ADD
+${
+transactions
+?
+`
 
-                        </button>
+<div class="transaction-list">
 
+<b style="color:#aaa">
+Recent Transactions
+</b>
 
-                        <button
-                        class="money-btn subtract-money"
-                        onclick="subtractDirect('${p.id}','given')">
+${transactions}
 
-                        − SUBTRACT
+</div>
 
-                        </button>
+`
+:""
+}
 
-                    </div>
 
-                </div>
+<div class="actions">
 
+<button
+class="btn"
+onclick="sharePerson('${p.id}')">
 
-                <!-- TAKEN -->
+↗ SHARE
 
-                <div class="amount">
+</button>
 
-                    <small>
-                        TAKEN
-                    </small>
 
-                    <b>
-                        ${money(p.taken)}
-                    </b>
+<button
+class="btn dark"
+onclick="editPerson('${p.id}')">
 
+EDIT
 
-                    <div class="money-actions">
+</button>
 
-                        <button
-                        class="money-btn add-money"
-                        onclick="addMoney('${p.id}','taken')">
 
-                        + ADD
+<button
+class="btn red"
+onclick="deletePerson('${p.id}')">
 
-                        </button>
+DELETE
 
+</button>
 
-                        <button
-                        class="money-btn subtract-money"
-                        onclick="subtractDirect('${p.id}','taken')">
+</div>
 
-                        − SUBTRACT
+`;
 
-                        </button>
 
-                    </div>
+list.appendChild(card);
 
-                </div>
+});
 
-            </div>
 
-
-            ${status}
-
-
-            ${historyHTML}
-
-
-            <div class="actions">
-
-                <button
-                class="btn"
-                onclick="sharePerson('${p.id}')">
-
-                ↗ SHARE
-
-                </button>
-
-
-                <button
-                class="btn dark"
-                onclick="editPerson('${p.id}')">
-
-                EDIT
-
-                </button>
-
-
-                <button
-                class="btn red"
-                onclick="deletePerson('${p.id}')">
-
-                DELETE
-
-                </button>
-
-            </div>
-
-        `;
-
-
-        list.appendChild(card);
-
-    });
-
-
-    document.getElementById("noPeople")
-    .style.display=
-    filtered.length
-    ?"none"
-    :"block";
+document.getElementById("noPeople")
+.style.display=
+filtered.length
+?"none"
+:"block";
 
 }
 
 
 /* =====================================================
-   DIRECT SUBTRACT
-===================================================== */
-
-function subtractDirect(id,type){
-
-    const p=
-    people.find(
-        person=>person.id===id
-    );
-
-    if(!p)return;
-
-
-    const amount=
-    prompt(
-        "Enter amount to subtract:"
-    );
-
-
-    if(
-        amount===null ||
-        amount==="" ||
-        Number(amount)<=0
-    )return;
-
-
-    const value=
-    Number(amount);
-
-
-    if(type==="given"){
-
-        p.given-=value;
-
-        if(p.given<0)
-            p.given=0;
-
-    }else{
-
-        p.taken-=value;
-
-        if(p.taken<0)
-            p.taken=0;
-
-    }
-
-
-    if(!p.history)
-        p.history=[];
-
-
-    p.history.unshift({
-
-        id:makeID(),
-
-        type:type,
-
-        action:"subtract",
-
-        amount:value,
-
-        reason:"Money subtracted",
-
-        date:
-        new Date()
-        .toLocaleString("en-IN")
-
-    });
-
-
-    saveData();
-
-    renderPeople();
-
-    toast("Money subtracted!");
-
-}
-
-
-/* =====================================================
-   SHARE
+   SHARE ACCOUNT
 ===================================================== */
 
 async function sharePerson(id){
 
-    const p=
-    people.find(
-        person=>person.id===id
-    );
+const p=
+people.find(
+person=>person.id===id
+);
 
-    if(!p)return;
-
-
-    const balance=
-    Number(p.given)-
-    Number(p.taken);
+if(!p)return;
 
 
-    let message;
+const balance=
+Number(p.given)-
+Number(p.taken);
+
+let message;
 
 
-    if(balance>0){
+if(balance>0){
 
-        message=
-        `Hi ${p.name}, just a gentle reminder that you currently have ${money(balance)} to pay me. Please pay whenever convenient. Thank you!`;
+message=
+`Hi ${p.name}, just a gentle reminder that you currently have ${money(balance)} to pay me. Please pay whenever convenient. Thank you!`;
 
-    }
+}else if(balance<0){
 
-    else if(balance<0){
+message=
+`Hi ${p.name}, just a gentle reminder that I currently owe you ${money(Math.abs(balance))}. I'll make the payment whenever convenient. Thank you!`;
 
-        message=
-        `Hi ${p.name}, just a gentle reminder that I currently owe you ${money(Math.abs(balance))}. I’ll make the payment whenever convenient. Thank you!`;
+}else{
 
-    }
+message=
+`Hi ${p.name}, just a quick update that our account is fully settled. Thank you!`;
 
-    else{
-
-        message=
-        `Hi ${p.name}, just a quick update that our account is fully settled. Thank you!`;
-
-    }
+}
 
 
-    try{
+try{
 
-        await navigator.clipboard.writeText(
-            message
-        );
+await navigator.clipboard.writeText(message);
 
-        toast(
-            "Payment message copied!"
-        );
+toast("Payment message copied!");
 
-    }
+}catch{
 
-    catch{
+prompt(
+"Copy this message:",
+message
+);
 
-        prompt(
-            "Copy this message:",
-            message
-        );
+}
 
-    }
+}
+
+
+/* =====================================================
+   EXPENSES
+===================================================== */
+
+function addExpense(){
+
+document.getElementById("expenseId").value="";
+
+document.getElementById("expenseName").value="";
+
+document.getElementById("expenseAmount").value="";
+
+document.getElementById("expenseCategory").value="Food";
+
+document.getElementById("expenseDate").value=
+todayString();
+
+document.getElementById("expenseNote").value="";
+
+document.getElementById("expenseTitle")
+.textContent="Add Expense";
+
+document
+.getElementById("expenseModal")
+.classList.remove("hide");
+
+}
+
+
+function saveExpense(){
+
+const id=
+document.getElementById("expenseId").value;
+
+const name=
+document
+.getElementById("expenseName")
+.value.trim();
+
+const amount=
+Number(
+document.getElementById("expenseAmount").value
+);
+
+const category=
+document.getElementById("expenseCategory").value;
+
+const date=
+document.getElementById("expenseDate").value;
+
+const note=
+document
+.getElementById("expenseNote")
+.value.trim();
+
+
+if(!name){
+
+alert("Enter expense name.");
+
+return;
+
+}
+
+if(!amount || amount<=0){
+
+alert("Enter a valid amount.");
+
+return;
+
+}
+
+if(!date){
+
+alert("Select a date.");
+
+return;
+
+}
+
+
+const expense={
+
+id:id||makeID(),
+
+name:name,
+
+amount:amount,
+
+category:category,
+
+date:date,
+
+note:note
+
+};
+
+
+if(id){
+
+expenses=
+expenses.map(
+e=>e.id===id?expense:e
+);
+
+}else{
+
+expenses.push(expense);
+
+}
+
+
+saveData();
+
+renderExpenses();
+
+closeModal("expenseModal");
+
+toast("Expense saved!");
+
+}
+
+
+function editExpense(id){
+
+const e=
+expenses.find(
+expense=>expense.id===id
+);
+
+if(!e)return;
+
+document.getElementById("expenseId").value=e.id;
+
+document.getElementById("expenseName").value=e.name;
+
+document.getElementById("expenseAmount").value=e.amount;
+
+document.getElementById("expenseCategory").value=e.category;
+
+document.getElementById("expenseDate").value=e.date;
+
+document.getElementById("expenseNote").value=e.note||"";
+
+document.getElementById("expenseTitle")
+.textContent="Edit Expense";
+
+document
+.getElementById("expenseModal")
+.classList.remove("hide");
+
+}
+
+
+function deleteExpense(id){
+
+if(!confirm("Delete this expense?"))
+return;
+
+expenses=
+expenses.filter(
+e=>e.id!==id
+);
+
+saveData();
+
+renderExpenses();
+
+toast("Expense deleted.");
+
+}
+
+
+/* =====================================================
+   EXPENSE TOTALS
+===================================================== */
+
+function calculateExpenseTotals(){
+
+const today=
+todayString();
+
+const month=
+currentMonth();
+
+const year=
+currentYear();
+
+
+const todayTotal=
+expenses
+.filter(e=>e.date===today)
+.reduce(
+(sum,e)=>sum+Number(e.amount),
+0
+);
+
+
+const monthTotal=
+expenses
+.filter(e=>e.date.startsWith(month))
+.reduce(
+(sum,e)=>sum+Number(e.amount),
+0
+);
+
+
+const yearTotal=
+expenses
+.filter(e=>e.date.startsWith(year))
+.reduce(
+(sum,e)=>sum+Number(e.amount),
+0
+);
+
+
+const yearExpenses=
+expenses.filter(
+e=>e.date.startsWith(year)
+);
+
+
+const daysPassed=
+new Date().getMonth()+1===0
+?1
+:new Date().getDate();
+
+
+const currentDay=
+Math.max(
+1,
+Math.floor(
+(
+new Date()-new Date(
+new Date().getFullYear(),
+0,
+0
+)
+)/86400000
+)
+);
+
+
+const dailyAverage=
+yearTotal/currentDay;
+
+
+const projectedMonthly=
+dailyAverage*30.4375;
+
+
+const projectedAnnual=
+dailyAverage*365;
+
+
+document.getElementById("todayExpense")
+.textContent=money(todayTotal);
+
+document.getElementById("monthExpense")
+.textContent=money(monthTotal);
+
+document.getElementById("yearExpense")
+.textContent=money(yearTotal);
+
+document.getElementById("dailyAverage")
+.textContent=money(dailyAverage);
+
+document.getElementById("projectedMonthly")
+.textContent=money(projectedMonthly);
+
+document.getElementById("projectedAnnual")
+.textContent=money(projectedAnnual);
+
+document.getElementById("expenseCount")
+.textContent=expenses.length;
+
+
+/* TOP CATEGORY */
+
+const cats={};
+
+yearExpenses.forEach(e=>{
+
+cats[e.category]=
+(cats[e.category]||0)+
+Number(e.amount);
+
+});
+
+
+const sorted=
+Object.entries(cats)
+.sort((a,b)=>b[1]-a[1]);
+
+
+document.getElementById("topCategory")
+.textContent=
+sorted.length
+?sorted[0][0]
+:"-";
+
+}
+
+
+/* =====================================================
+   RENDER EXPENSES
+===================================================== */
+
+function renderExpenses(){
+
+calculateExpenseTotals();
+
+
+const period=
+document.getElementById("expensePeriod").value;
+
+const category=
+document.getElementById("expenseCategoryFilter").value;
+
+const search=
+document
+.getElementById("expenseSearch")
+.value
+.toLowerCase();
+
+
+const today=
+todayString();
+
+const month=
+currentMonth();
+
+const year=
+currentYear();
+
+
+let list=
+expenses.filter(e=>{
+
+let okPeriod=true;
+
+if(period==="today")
+okPeriod=e.date===today;
+
+if(period==="month")
+okPeriod=e.date.startsWith(month);
+
+if(period==="year")
+okPeriod=e.date.startsWith(year);
+
+
+let okCategory=
+category==="all"||
+e.category===category;
+
+
+let okSearch=
+e.name
+.toLowerCase()
+.includes(search)||
+(e.note||"")
+.toLowerCase()
+.includes(search);
+
+
+return okPeriod &&
+okCategory &&
+okSearch;
+
+});
+
+
+list.sort(
+(a,b)=>
+b.date.localeCompare(a.date)
+);
+
+
+const container=
+document.getElementById("expensesList");
+
+container.innerHTML="";
+
+
+list.forEach(e=>{
+
+const card=
+document.createElement("div");
+
+card.className="expense-card";
+
+
+card.innerHTML=`
+
+<h3>
+${safe(e.name)}
+</h3>
+
+<div class="expense-amount">
+
+${money(e.amount)}
+
+</div>
+
+<div class="category">
+
+${safe(e.category)}
+
+</div>
+
+<div class="expense-meta">
+
+📅 ${safe(e.date)}
+
+</div>
+
+${
+e.note
+?
+`<p style="color:#bbb">
+${safe(e.note)}
+</p>`
+:""
+}
+
+
+<div class="actions">
+
+<button
+class="btn dark"
+onclick="editExpense('${e.id}')">
+
+EDIT
+
+</button>
+
+<button
+class="btn red"
+onclick="deleteExpense('${e.id}')">
+
+DELETE
+
+</button>
+
+</div>
+
+`;
+
+
+container.appendChild(card);
+
+});
+
+
+document.getElementById("noExpenses")
+.style.display=
+list.length
+?"none"
+:"block";
+
+
+drawCharts();
+
+}
+
+
+/* =====================================================
+   CANVAS HELPERS
+===================================================== */
+
+function prepareCanvas(id){
+
+const canvas=
+document.getElementById(id);
+
+if(!canvas)return null;
+
+const rect=
+canvas.getBoundingClientRect();
+
+const dpr=
+window.devicePixelRatio||1;
+
+canvas.width=
+rect.width*dpr;
+
+canvas.height=
+300*dpr;
+
+const ctx=
+canvas.getContext("2d");
+
+ctx.scale(dpr,dpr);
+
+ctx.clearRect(
+0,
+0,
+rect.width,
+300
+);
+
+return {
+canvas,
+ctx,
+width:rect.width,
+height:300
+};
+
+}
+
+
+/* =====================================================
+   BAR CHART
+===================================================== */
+
+function drawBarChart(
+id,
+labels,
+values,
+titleColor="#c47b24"
+){
+
+const obj=
+prepareCanvas(id);
+
+if(!obj)return;
+
+const {
+ctx,
+width,
+height
+}=obj;
+
+
+const max=
+Math.max(...values,1);
+
+const left=45;
+
+const bottom=35;
+
+const top=25;
+
+const chartHeight=
+height-top-bottom;
+
+const chartWidth=
+width-left-15;
+
+
+ctx.font="12px Arial";
+
+ctx.fillStyle="#777";
+
+ctx.textAlign="center";
+
+
+const barSpace=
+chartWidth/
+Math.max(labels.length,1);
+
+const barWidth=
+Math.max(
+8,
+barSpace*.55
+);
+
+
+values.forEach(
+(value,i)=>{
+
+const barHeight=
+(value/max)*chartHeight;
+
+const x=
+left+
+i*barSpace+
+(barSpace-barWidth)/2;
+
+const y=
+height-bottom-barHeight;
+
+
+ctx.fillStyle=
+titleColor;
+
+ctx.fillRect(
+x,
+y,
+barWidth,
+barHeight
+);
+
+
+ctx.fillStyle="#888";
+
+ctx.fillText(
+labels[i],
+x+barWidth/2,
+height-12
+);
+
+if(value>0){
+
+ctx.fillStyle="#ddd";
+
+ctx.fillText(
+Math.round(value),
+x+barWidth/2,
+y-5
+);
+
+}
+
+});
+
+
+ctx.strokeStyle="#333";
+
+ctx.beginPath();
+
+ctx.moveTo(left,top);
+
+ctx.lineTo(left,height-bottom);
+
+ctx.lineTo(width-10,height-bottom);
+
+ctx.stroke();
+
+}
+
+
+/* =====================================================
+   LINE CHART
+===================================================== */
+
+function drawLineChart(
+id,
+labels,
+values
+){
+
+const obj=
+prepareCanvas(id);
+
+if(!obj)return;
+
+const {
+ctx,
+width,
+height
+}=obj;
+
+
+const max=
+Math.max(...values,1);
+
+const left=45;
+
+const right=15;
+
+const top=25;
+
+const bottom=35;
+
+const chartWidth=
+width-left-right;
+
+const chartHeight=
+height-top-bottom;
+
+
+ctx.strokeStyle="#333";
+
+ctx.beginPath();
+
+ctx.moveTo(left,top);
+
+ctx.lineTo(left,height-bottom);
+
+ctx.lineTo(width-right,height-bottom);
+
+ctx.stroke();
+
+
+const points=[];
+
+
+values.forEach(
+(value,i)=>{
+
+const x=
+left+
+(
+i/
+Math.max(
+values.length-1,
+1
+)
+)*
+chartWidth;
+
+const y=
+height-bottom-
+(
+value/max
+)*
+chartHeight;
+
+points.push([x,y]);
+
+});
+
+
+ctx.strokeStyle="#c47b24";
+
+ctx.lineWidth=3;
+
+ctx.beginPath();
+
+points.forEach(
+(point,i)=>{
+
+if(i===0)
+ctx.moveTo(
+point[0],
+point[1]
+);
+
+else
+ctx.lineTo(
+point[0],
+point[1]
+);
+
+});
+
+ctx.stroke();
+
+
+points.forEach(
+(point,i)=>{
+
+ctx.fillStyle="#b87333";
+
+ctx.beginPath();
+
+ctx.arc(
+point[0],
+point[1],
+4,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+
+ctx.fillStyle="#888";
+
+ctx.font="11px Arial";
+
+ctx.textAlign="center";
+
+ctx.fillText(
+labels[i],
+point[0],
+height-12
+);
+
+if(values[i]>0){
+
+ctx.fillStyle="#ddd";
+
+ctx.fillText(
+Math.round(values[i]),
+point[0],
+point[1]-9
+);
+
+}
+
+});
+
+}
+
+
+/* =====================================================
+   PIE CHART
+===================================================== */
+
+function drawPieChart(
+id,
+labels,
+values
+){
+
+const obj=
+prepareCanvas(id);
+
+if(!obj)return;
+
+const {
+ctx,
+width,
+height
+}=obj;
+
+
+const total=
+values.reduce(
+(a,b)=>a+b,
+0
+);
+
+
+if(total<=0){
+
+ctx.fillStyle="#777";
+
+ctx.font="15px Arial";
+
+ctx.textAlign="center";
+
+ctx.fillText(
+"No expense data",
+width/2,
+height/2
+);
+
+return;
+
+}
+
+
+const colors=[
+"#b87333",
+"#8b451f",
+"#c47b24",
+"#6f3d1d",
+"#a05220",
+"#d29b61",
+"#704214",
+"#996633"
+];
+
+
+let start=-Math.PI/2;
+
+
+const cx=
+width*.35;
+
+const cy=
+height*.5;
+
+const radius=
+Math.min(
+width*.25,
+height*.35
+);
+
+
+values.forEach(
+(value,i)=>{
+
+const angle=
+(value/total)*
+Math.PI*2;
+
+ctx.beginPath();
+
+ctx.moveTo(cx,cy);
+
+ctx.arc(
+cx,
+cy,
+radius,
+start,
+start+angle
+);
+
+ctx.closePath();
+
+ctx.fillStyle=
+colors[i%colors.length];
+
+ctx.fill();
+
+start+=angle;
+
+});
+
+
+ctx.font="12px Arial";
+
+ctx.textAlign="left";
+
+
+labels.forEach(
+(label,i)=>{
+
+const y=
+35+i*24;
+
+ctx.fillStyle=
+colors[i%colors.length];
+
+ctx.fillRect(
+width*.62,
+y-10,
+12,
+12
+);
+
+ctx.fillStyle="#ccc";
+
+ctx.fillText(
+label+
+" "+money(values[i]),
+width*.62+18,
+y
+);
+
+});
+
+}
+
+
+/* =====================================================
+   DRAW ALL CHARTS
+===================================================== */
+
+function drawCharts(){
+
+if(!document.getElementById("expenses"))
+return;
+
+
+/* 7 DAY */
+
+const days=[];
+
+const values=[];
+
+for(let i=6;i>=0;i--){
+
+const d=
+new Date();
+
+d.setDate(
+d.getDate()-i
+);
+
+const date=
+d.getFullYear()+
+"-"+
+String(d.getMonth()+1)
+.padStart(2,"0")+
+"-"+
+String(d.getDate())
+.padStart(2,"0");
+
+
+days.push(
+d.toLocaleDateString(
+"en-IN",
+{
+day:"2-digit",
+month:"short"
+}
+)
+);
+
+
+values.push(
+expenses
+.filter(e=>e.date===date)
+.reduce(
+(sum,e)=>sum+Number(e.amount),
+0
+)
+);
+
+}
+
+
+drawBarChart(
+"weekChart",
+days,
+values
+);
+
+
+/* CATEGORY */
+
+const categoryTotals={};
+
+expenses
+.filter(
+e=>e.date.startsWith(
+currentMonth()
+)
+)
+.forEach(e=>{
+
+categoryTotals[e.category]=
+(categoryTotals[e.category]||0)+
+Number(e.amount);
+
+});
+
+
+const categoryLabels=
+Object.keys(categoryTotals);
+
+const categoryValues=
+Object.values(categoryTotals);
+
+
+drawPieChart(
+"categoryChart",
+categoryLabels,
+categoryValues
+);
+
+
+/* 12 MONTHS */
+
+const monthLabels=[];
+
+const monthValues=[];
+
+
+for(let i=11;i>=0;i--){
+
+const d=new Date();
+
+d.setMonth(
+d.getMonth()-i
+);
+
+const month=
+d.getFullYear()+
+"-"+
+String(d.getMonth()+1)
+.padStart(2,"0");
+
+
+monthLabels.push(
+d.toLocaleDateString(
+"en-IN",
+{
+month:"short"
+}
+)
+);
+
+
+monthValues.push(
+expenses
+.filter(
+e=>e.date.startsWith(month)
+)
+.reduce(
+(sum,e)=>sum+Number(e.amount),
+0
+)
+);
+
+}
+
+
+drawLineChart(
+"monthChart",
+monthLabels,
+monthValues
+);
+
+
+/* ACCOUNT */
+
+const accountLabels=
+people.map(
+p=>p.name.substring(0,10)
+);
+
+const accountValues=
+people.map(
+p=>
+Number(p.given||0)-
+Number(p.taken||0)
+);
+
+
+drawBarChart(
+"accountChart",
+accountLabels,
+accountValues,
+"#62d5ff"
+);
 
 }
 
@@ -2705,798 +4108,661 @@ async function sharePerson(id){
 
 function addNote(){
 
-    document.getElementById("noteId")
-    .value="";
+document.getElementById("noteId").value="";
 
-    document.getElementById("nTitle")
-    .value="";
+document.getElementById("nTitle").value="";
 
-    document.getElementById("nText")
-    .value="";
+document.getElementById("nText").value="";
 
-    document.getElementById("nLink")
-    .value="";
+document.getElementById("nLink").value="";
 
-    document.getElementById("nImage")
-    .value="";
+document.getElementById("nImage").value="";
 
-    document.getElementById("preview")
-    .innerHTML="";
+document.getElementById("preview").innerHTML="";
 
-    document.getElementById("noteTitle")
-    .textContent="Add Note";
+document.getElementById("noteTitle")
+.textContent="Add Note";
 
-    document
-    .getElementById("noteModal")
-    .classList.remove("hide");
+document
+.getElementById("noteModal")
+.classList.remove("hide");
 
 }
 
 
 function saveNote(){
 
-    const title=
-    document
-    .getElementById("nTitle")
-    .value.trim();
+const title=
+document
+.getElementById("nTitle")
+.value.trim();
+
+if(!title){
+
+alert("Please enter a title.");
+
+return;
+
+}
+
+const id=
+document.getElementById("noteId")
+.value;
+
+const old=
+notes.find(
+n=>n.id===id
+);
+
+const file=
+document
+.getElementById("nImage")
+.files[0];
 
 
-    if(!title){
+function finish(image){
 
-        alert("Please enter a title.");
+const note={
 
-        return;
+id:id||makeID(),
 
-    }
+title:title,
 
+text:
+document.getElementById("nText").value,
 
-    const noteID=
-    document.getElementById("noteId")
-    .value;
+link:
+document.getElementById("nLink").value,
 
+image:
+image||
+(old?.image||"")
 
-    const old=
-    notes.find(
-        n=>n.id===noteID
-    );
-
-
-    const file=
-    document
-    .getElementById("nImage")
-    .files[0];
+};
 
 
-    function finish(image){
+if(id){
 
-        const note={
+notes=
+notes.map(
+n=>n.id===id?note:n
+);
 
-            id:
-            noteID||
-            makeID(),
+}else{
 
-            title:title,
+notes.push(note);
 
-            text:
-            document
-            .getElementById("nText")
-            .value,
-
-            link:
-            document
-            .getElementById("nLink")
-            .value,
-
-            image:
-            image||
-            (old?.image||"")
-
-        };
+}
 
 
-        if(noteID){
+saveData();
 
-            notes=
-            notes.map(
-                n=>
-                n.id===noteID
-                ?note
-                :n
-            );
+renderNotes();
 
-        }
+closeModal("noteModal");
 
-        else{
+toast("Note saved!");
 
-            notes.push(note);
-
-        }
+}
 
 
-        saveData();
+if(file){
 
-        renderNotes();
+const reader=
+new FileReader();
 
-        closeModal("noteModal");
+reader.onload=
+()=>{
+finish(reader.result);
+};
 
-        toast("Note saved!");
+reader.readAsDataURL(file);
 
-    }
+}else{
 
+finish("");
 
-    if(file){
-
-        const reader=
-        new FileReader();
-
-        reader.onload=
-        ()=>{
-            finish(
-                reader.result
-            );
-        };
-
-        reader.readAsDataURL(file);
-
-    }
-
-    else{
-
-        finish("");
-
-    }
+}
 
 }
 
 
 function editNote(id){
 
-    const n=
-    notes.find(
-        note=>note.id===id
-    );
+const n=
+notes.find(
+note=>note.id===id
+);
 
-    if(!n)return;
+if(!n)return;
 
+document.getElementById("noteId").value=n.id;
 
-    document.getElementById("noteId")
-    .value=n.id;
+document.getElementById("nTitle").value=n.title;
 
-    document.getElementById("nTitle")
-    .value=n.title;
+document.getElementById("nText").value=n.text;
 
-    document.getElementById("nText")
-    .value=n.text;
+document.getElementById("nLink").value=n.link;
 
-    document.getElementById("nLink")
-    .value=n.link;
+document.getElementById("nImage").value="";
 
-    document.getElementById("nImage")
-    .value="";
+document.getElementById("preview").innerHTML=
+n.image
+?`<img src="${n.image}" style="width:100%">`
+:"";
 
+document.getElementById("noteTitle")
+.textContent="Edit Note";
 
-    document.getElementById("preview")
-    .innerHTML=
-    n.image
-    ?
-    `<img src="${n.image}" style="width:100%">`
-    :
-    "";
-
-
-    document.getElementById("noteTitle")
-    .textContent="Edit Note";
-
-
-    document
-    .getElementById("noteModal")
-    .classList.remove("hide");
+document
+.getElementById("noteModal")
+.classList.remove("hide");
 
 }
 
 
 function deleteNote(id){
 
-    if(
-        !confirm(
-            "Delete this note?"
-        )
-    )
-    return;
+if(!confirm("Delete this note?"))
+return;
 
+notes=
+notes.filter(
+n=>n.id!==id
+);
 
-    notes=
-    notes.filter(
-        n=>n.id!==id
-    );
+saveData();
 
+renderNotes();
 
-    saveData();
-
-    renderNotes();
-
-    toast("Note deleted.");
+toast("Note deleted.");
 
 }
 
 
 function renderNotes(){
 
-    const list=
-    document.getElementById("notesList");
+const list=
+document.getElementById("notesList");
 
-    list.innerHTML="";
-
-
-    notes.forEach(n=>{
-
-        const card=
-        document.createElement("div");
-
-        card.className="note";
+list.innerHTML="";
 
 
-        card.innerHTML=`
+notes.forEach(n=>{
 
-            <h3>
-                ${safe(n.title)}
-            </h3>
+const card=
+document.createElement("div");
 
-
-            ${
-                n.text
-                ?
-                `<p>${safe(n.text)}</p>`
-                :
-                ""
-            }
+card.className="note";
 
 
-            ${
-                n.link
-                ?
-                `
-                <p>
+card.innerHTML=`
 
-                    <a
-                    href="${safe(n.link)}"
-                    target="_blank"
-                    rel="noopener">
+<h3>
+${safe(n.title)}
+</h3>
 
-                    ${safe(n.link)}
+${
+n.text
+?
+`<p>${safe(n.text)}</p>`
+:""
+}
 
-                    </a>
+${
+n.link
+?
+`<p>
+<a
+href="${safe(n.link)}"
+target="_blank"
+rel="noopener">
+${safe(n.link)}
+</a>
+</p>`
+:""
+}
 
-                </p>
-                `
-                :
-                ""
-            }
+${
+n.image
+?
+`<img src="${n.image}">`
+:""
+}
 
+<br>
 
-            ${
-                n.image
-                ?
-                `<img src="${n.image}">`
-                :
-                ""
-            }
+<div class="actions">
 
+<button
+class="btn dark"
+onclick="editNote('${n.id}')">
+EDIT
+</button>
 
-            <br>
+<button
+class="btn red"
+onclick="deleteNote('${n.id}')">
+DELETE
+</button>
 
+</div>
 
-            <div class="actions">
-
-                <button
-                class="btn dark"
-                onclick="editNote('${n.id}')">
-
-                EDIT
-
-                </button>
-
-
-                <button
-                class="btn red"
-                onclick="deleteNote('${n.id}')">
-
-                DELETE
-
-                </button>
-
-            </div>
-
-        `;
+`;
 
 
-        list.appendChild(card);
+list.appendChild(card);
 
-    });
+});
 
 
-    document.getElementById("noNotes")
-    .style.display=
-    notes.length
-    ?
-    "none"
-    :
-    "block";
+document.getElementById("noNotes")
+.style.display=
+notes.length
+?"none"
+:"block";
 
 }
 
 
 /* =====================================================
-   TODO - ADD
+   TODO
 ===================================================== */
 
 function addTask(){
 
-    const now=
-    new Date();
+const now=new Date();
 
+document.getElementById("taskId").value="";
 
-    document.getElementById("taskId")
-    .value="";
+document.getElementById("taskName").value="";
 
+document.getElementById("taskDate").value=
+todayString();
 
-    document.getElementById("taskName")
-    .value="";
+document.getElementById("taskTime").value=
+now.toTimeString().substring(0,5);
 
-
-    document.getElementById("taskDate")
-    .value=
-    now.toISOString()
-    .split("T")[0];
-
-
-    document.getElementById("taskTime")
-    .value=
-    now.toTimeString()
-    .substring(0,5);
-
-
-    document
-    .getElementById("taskModal")
-    .classList.remove("hide");
+document
+.getElementById("taskModal")
+.classList.remove("hide");
 
 }
 
-
-/* =====================================================
-   TODO - EDIT
-===================================================== */
 
 function editTask(id){
 
-    const task=
-    tasks.find(
-        t=>t.id===id
-    );
+const task=
+tasks.find(
+t=>t.id===id
+);
 
+if(!task)return;
 
-    if(!task)return;
+document.getElementById("taskId").value=task.id;
 
+document.getElementById("taskName").value=task.name;
 
-    document.getElementById("taskId")
-    .value=task.id;
+document.getElementById("taskDate").value=task.date;
 
+document.getElementById("taskTime").value=task.time;
 
-    document.getElementById("taskName")
-    .value=task.name;
-
-
-    document.getElementById("taskDate")
-    .value=task.date;
-
-
-    document.getElementById("taskTime")
-    .value=task.time;
-
-
-    document
-    .getElementById("taskModal")
-    .classList.remove("hide");
+document
+.getElementById("taskModal")
+.classList.remove("hide");
 
 }
 
-
-/* =====================================================
-   TODO - SAVE
-===================================================== */
 
 function saveTask(){
 
-    const name=
-    document
-    .getElementById("taskName")
-    .value.trim();
+const name=
+document
+.getElementById("taskName")
+.value.trim();
+
+if(!name){
+
+alert("Please enter a task.");
+
+return;
+
+}
+
+const id=
+document.getElementById("taskId").value;
 
 
-    if(!name){
+if(id){
 
-        alert("Please enter a task.");
+tasks=
+tasks.map(
+t=>{
 
-        return;
+if(t.id===id){
 
-    }
+return{
 
+...t,
 
-    const taskID=
-    document
-    .getElementById("taskId")
-    .value;
+name:name,
 
+date:
+document.getElementById("taskDate").value,
 
-    if(taskID){
+time:
+document.getElementById("taskTime").value
 
-        tasks=
-        tasks.map(
-            t=>{
+};
 
-                if(t.id===taskID){
+}
 
-                    return{
+return t;
 
-                        ...t,
+}
+);
 
-                        name:name,
+}else{
 
-                        date:
-                        document
-                        .getElementById("taskDate")
-                        .value,
+tasks.push({
 
-                        time:
-                        document
-                        .getElementById("taskTime")
-                        .value
+id:makeID(),
 
-                    };
+name:name,
 
-                }
+date:
+document.getElementById("taskDate").value,
 
-                return t;
+time:
+document.getElementById("taskTime").value,
 
-            }
-        );
+done:false
 
-    }
-
-    else{
-
-        tasks.push({
-
-            id:makeID(),
-
-            name:name,
-
-            date:
-            document
-            .getElementById("taskDate")
-            .value,
-
-            time:
-            document
-            .getElementById("taskTime")
-            .value,
-
-            done:false
-
-        });
-
-    }
-
-
-    saveData();
-
-    renderTasks();
-
-    closeModal("taskModal");
-
-    toast("Task saved!");
+});
 
 }
 
 
-/* =====================================================
-   TODO - TOGGLE
-===================================================== */
+saveData();
+
+renderTasks();
+
+closeModal("taskModal");
+
+toast("Task saved!");
+
+}
+
 
 function toggleTask(id){
 
-    const task=
-    tasks.find(
-        t=>t.id===id
-    );
+const task=
+tasks.find(
+t=>t.id===id
+);
 
+if(!task)return;
 
-    if(!task)return;
+task.done=!task.done;
 
+saveData();
 
-    task.done=
-    !task.done;
-
-
-    saveData();
-
-    renderTasks();
+renderTasks();
 
 }
 
-
-/* =====================================================
-   TODO - DELETE
-===================================================== */
 
 function deleteTask(id){
 
-    if(
-        !confirm(
-            "Delete this task?"
-        )
-    )
-    return;
+if(!confirm("Delete this task?"))
+return;
 
+tasks=
+tasks.filter(
+t=>t.id!==id
+);
 
-    tasks=
-    tasks.filter(
-        t=>t.id!==id
-    );
+saveData();
 
+renderTasks();
 
-    saveData();
-
-    renderTasks();
-
-    toast("Task deleted.");
+toast("Task deleted.");
 
 }
 
-
-/* =====================================================
-   TODO - RENDER
-===================================================== */
 
 function renderTasks(){
 
-    const list=
-    document.getElementById("tasks");
+const list=
+document.getElementById("tasks");
 
-    list.innerHTML="";
-
-
-    tasks.sort(
-        (a,b)=>
-        (a.date+a.time)
-        .localeCompare(
-            b.date+b.time
-        )
-    );
+list.innerHTML="";
 
 
-    tasks.forEach(task=>{
-
-        const div=
-        document.createElement("div");
-
-
-        div.className=
-        "task"+
-        (
-            task.done
-            ?
-            " completed"
-            :
-            ""
-        );
+tasks.sort(
+(a,b)=>
+(a.date+a.time)
+.localeCompare(
+b.date+b.time
+)
+);
 
 
-        div.innerHTML=`
+tasks.forEach(task=>{
 
-            <input
-            type="checkbox"
-            ${task.done?"checked":""}
-            onchange="toggleTask('${task.id}')">
+const div=
+document.createElement("div");
 
-
-            <div class="task-main">
-
-                <div class="task-title">
-
-                    ${safe(task.name)}
-
-                </div>
+div.className=
+"task"+
+(task.done?" completed":"");
 
 
-                <div class="task-date">
+div.innerHTML=`
 
-                    ${task.date}
-                    •
-                    ${task.time}
+<input
+type="checkbox"
+${task.done?"checked":""}
+onchange="toggleTask('${task.id}')">
 
-                </div>
+<div class="task-main">
 
-            </div>
+<div class="task-title">
 
+${safe(task.name)}
 
-            <div class="actions">
+</div>
 
-                <button
-                class="btn dark"
-                onclick="editTask('${task.id}')">
+<div class="task-date">
 
-                EDIT
+${task.date}
+•
+${task.time}
 
-                </button>
+</div>
 
+</div>
 
-                <button
-                class="btn red"
-                onclick="deleteTask('${task.id}')">
+<div class="actions">
 
-                DELETE
+<button
+class="btn dark"
+onclick="editTask('${task.id}')">
 
-                </button>
+EDIT
 
-            </div>
+</button>
 
-        `;
+<button
+class="btn red"
+onclick="deleteTask('${task.id}')">
 
+DELETE
 
-        list.appendChild(div);
+</button>
 
-    });
+</div>
 
-
-    document.getElementById("noTasks")
-    .style.display=
-    tasks.length
-    ?
-    "none"
-    :
-    "block";
+`;
 
 
-    updateProgress();
+list.appendChild(div);
+
+});
+
+
+document.getElementById("noTasks")
+.style.display=
+tasks.length
+?"none"
+:"block";
+
+
+updateProgress();
 
 }
 
-
-/* =====================================================
-   TODO - PROGRESS
-===================================================== */
 
 function updateProgress(){
 
-    const total=
-    tasks.length;
+const total=
+tasks.length;
+
+const remaining=
+tasks.filter(
+task=>!task.done
+).length;
 
 
-    const remaining=
-    tasks.filter(
-        task=>!task.done
-    ).length;
+let percentage=0;
+
+if(total>0){
+
+percentage=
+Math.round(
+(remaining/total)*100
+);
+
+}
 
 
-    let percentage=0;
+document.getElementById("percent")
+.textContent=
+percentage+"%";
 
 
-    if(total>0){
+const bar=
+document.getElementById("bar");
 
-        percentage=
-        Math.round(
-            (remaining/total)*100
-        );
+bar.style.width=
+percentage+"%";
 
-    }
-
-
-    document.getElementById("percent")
-    .textContent=
-    percentage+"%";
+bar.className="bar";
 
 
-    const bar=
-    document.getElementById("bar");
+if(total===0){
+
+bar.classList.add("green");
+
+document.getElementById("progressText")
+.textContent="No tasks";
+
+return;
+
+}
 
 
-    bar.style.width=
-    percentage+"%";
+if(percentage===0){
 
+bar.classList.add("green");
 
-    bar.className="bar";
+document.getElementById("progressText")
+.textContent=
+"Everything completed 🟢";
 
+}
 
-    if(total===0){
+else if(percentage<=50){
 
-        bar.classList.add("green");
+bar.classList.add("yellow");
 
-        document.getElementById(
-            "progressText"
-        )
-        .textContent=
-        "No tasks";
+document.getElementById("progressText")
+.textContent=
+"50% or less work remains 🟡";
 
-        return;
+}
 
-    }
+else{
 
+bar.classList.add("redbar");
 
-    if(percentage===0){
+document.getElementById("progressText")
+.textContent=
+"More than 50% work remains 🔴";
 
-        bar.classList.add("green");
-
-        document.getElementById(
-            "progressText"
-        )
-        .textContent=
-        "Everything completed 🟢";
-
-    }
-
-    else if(percentage<=50){
-
-        bar.classList.add("yellow");
-
-        document.getElementById(
-            "progressText"
-        )
-        .textContent=
-        "50% or less work remains 🟡";
-
-    }
-
-    else{
-
-        bar.classList.add("redbar");
-
-        document.getElementById(
-            "progressText"
-        )
-        .textContent=
-        "More than 50% work remains 🔴";
-
-    }
+}
 
 }
 
 
 /* =====================================================
-   CLOSE MODAL
+   CLOSE MODALS
 ===================================================== */
 
 function closeModal(id){
 
-    document
-    .getElementById(id)
-    .classList.add("hide");
+document
+.getElementById(id)
+.classList.add("hide");
 
 }
 
 
 /* =====================================================
-   CLICK OUTSIDE MODAL TO CLOSE
+   CLOSE WHEN CLICKING OUTSIDE
 ===================================================== */
 
 document
 .querySelectorAll(".modal")
 .forEach(modal=>{
 
-    modal.addEventListener(
-        "click",
-        function(e){
+modal.addEventListener(
+"click",
+e=>{
 
-            if(e.target===modal){
+if(e.target===modal){
 
-                modal.classList.add("hide");
+modal.classList.add("hide");
 
-            }
+}
 
-        }
-    );
+}
+);
 
 });
+
+
+/* =====================================================
+   WINDOW RESIZE
+===================================================== */
+
+window.addEventListener(
+"resize",
+()=>{
+
+if(
+document
+.getElementById("expenses")
+.classList
+.contains("active")
+){
+
+drawCharts();
+
+}
+
+}
+);
 
 
 /* =====================================================
@@ -3508,6 +4774,8 @@ renderPeople();
 renderNotes();
 
 renderTasks();
+
+renderExpenses();
 
 </script>
 
